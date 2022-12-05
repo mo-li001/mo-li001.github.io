@@ -1,0 +1,1609 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！ | 壹拾陆</title><meta name="keywords" content="Linux"><meta name="author" content="壹拾陆"><meta name="copyright" content="壹拾陆"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！ A    命令 描述    access 用于检查调用程序是否可以访问指定的文件，用于检查文件是否存在   accton 用于打开或关闭记帐进程或更改信息进程记帐文件   aclocal 用于从configure.in文件自动生成aclocal.m4文件   acpi 用于显示电池状态和其他 ACPI 信息   ac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！">
+<meta property="og:url" content="https://mo-li001.github.io/posts/12728704.html">
+<meta property="og:site_name" content="壹拾陆">
+<meta property="og:description" content="本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！ A    命令 描述    access 用于检查调用程序是否可以访问指定的文件，用于检查文件是否存在   accton 用于打开或关闭记帐进程或更改信息进程记帐文件   aclocal 用于从configure.in文件自动生成aclocal.m4文件   acpi 用于显示电池状态和其他 ACPI 信息   ac">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-31T12:41:14.000Z">
+<meta property="article:modified_time" content="2022-10-23T15:27:21.000Z">
+<meta property="article:author" content="壹拾陆">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mo-li001.github.io/posts/12728704"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-10-23 23:27:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-23T15:27:21.000Z" title="更新于 2022-10-23 23:27:21">2022-10-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%94%B6%E5%BD%95/">收录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！</strong></p>
+<p><strong>A</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>access</td>
+<td>用于检查调用程序是否可以访问指定的文件，用于检查文件是否存在</td>
+</tr>
+<tr>
+<td>accton</td>
+<td>用于打开或关闭记帐进程或更改信息进程记帐文件</td>
+</tr>
+<tr>
+<td>aclocal</td>
+<td>用于从configure.in文件自动生成aclocal.m4文件</td>
+</tr>
+<tr>
+<td>acpi</td>
+<td>用于显示电池状态和其他 ACPI 信息</td>
+</tr>
+<tr>
+<td>acpi_available</td>
+<td>测试 ACPI（高级配置和电源接口）子系统是否可用</td>
+</tr>
+<tr>
+<td>acpid</td>
+<td>提供智能电源管理，用于通知用户空间程序有关 ACPI 事件的信息</td>
+</tr>
+<tr>
+<td>addr2line</td>
+<td>用于将地址转换为文件名和行号</td>
+</tr>
+<tr>
+<td>agetty</td>
+<td>Linux 版本的 getty，是一个运行在主机上的 Unix 程序，用于管理物理或虚拟终端以允许多用户访问</td>
+</tr>
+<tr>
+<td>alias</td>
+<td>指示 shell 在执行命令时将一个字符串替换为另一个字符串</td>
+</tr>
+<tr>
+<td>amixer</td>
+<td>ALSA(Advanced Linux Sound Architecture) 声卡驱动程序的命令行混音器</td>
+</tr>
+<tr>
+<td>aplay</td>
+<td>用于 ALSA（高级 Linux 声音架构）声卡驱动程序的命令行音频播放器。</td>
+</tr>
+<tr>
+<td>aplaymidi</td>
+<td>用于播放标准 MIDI（乐器数字接口）文件，通过将 MIDI 文件的内容发送到 ALSA（高级 Linux 声音架构）MIDI 端口</td>
+</tr>
+<tr>
+<td>apropos</td>
+<td>当用户不记得确切的命令但知道一些与定义其用途或功能的命令相关的关键字时，可以帮助用户</td>
+</tr>
+<tr>
+<td>apt</td>
+<td>为包管理系统提供高级 CLI（命令行界面），旨在作为最终用户的界面，与更专业的 APT 工具（如 apt-cache 和 apt-get）</td>
+</tr>
+<tr>
+<td>apt-get</td>
+<td>一个命令行工具，有助于在 Linux 中处理包</td>
+</tr>
+<tr>
+<td>aptitude</td>
+<td>开放高度内置的接口与机器的包管理器交互</td>
+</tr>
+<tr>
+<td>ar</td>
+<td>用于从档案中创建、修改和提取文件</td>
+</tr>
+<tr>
+<td>arch</td>
+<td>用于打印计算机架构</td>
+</tr>
+<tr>
+<td>arp</td>
+<td>操纵系统的 ARP 缓存，允许完整转储 ARP 缓存</td>
+</tr>
+<tr>
+<td>aspell</td>
+<td>在 Linux 中用作拼写检查器</td>
+</tr>
+<tr>
+<td>atd</td>
+<td>一个作业调度程序守护进程，运行调度以供以后执行的作业</td>
+</tr>
+<tr>
+<td>atrm</td>
+<td>用于删除指定的作业，要删除一个作业，它的作业号在命令中传递</td>
+</tr>
+<tr>
+<td>atq</td>
+<td>显示用户安排的待处理作业列表</td>
+</tr>
+<tr>
+<td>autoconf</td>
+<td>在 Linux 中用于生成配置脚本</td>
+</tr>
+<tr>
+<td>autoheader</td>
+<td>用于创建 C “#define” 或任何其他模板头的模板文件以供 configure 使用</td>
+</tr>
+<tr>
+<td>automake</td>
+<td>用于自动生成符合 GNU 编码标准的 Makefile.in 文件</td>
+</tr>
+<tr>
+<td>autoreconf</td>
+<td>用于为类 Unix 系统创建可自动构建的源代码</td>
+</tr>
+<tr>
+<td>autoupdate</td>
+<td>用于将我们 Linux 系统中的 configure.in 文件更新为较新的 Autoconf。</td>
+</tr>
+<tr>
+<td>awk</td>
+<td>一种用于操作数据和生成报告的脚本语言</td>
+</tr>
+</tbody></table>
+<p><strong>B</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>banner</td>
+<td>用于将大写的 ASCII 字符串打印到标准输出</td>
+</tr>
+<tr>
+<td>basename</td>
+<td>从文件名中去除目录信息和后缀，即打印文件名 NAME 并删除任何前导目录组件</td>
+</tr>
+<tr>
+<td>batch</td>
+<td>用于从标准输入或指定文件中读取命令并在系统负载水平允许时执行它们，即当平均负载低于 1.5 时</td>
+</tr>
+<tr>
+<td>bc</td>
+<td>用于命令行计算器</td>
+</tr>
+<tr>
+<td>bg</td>
+<td>用于在后台放置前台作业</td>
+</tr>
+<tr>
+<td>biff</td>
+<td>unix 的邮件通知系统，当新邮件到达时在命令行通知用户并告诉它来自谁</td>
+</tr>
+<tr>
+<td>bind</td>
+<td>用于设置 Readline 键绑定和变量</td>
+</tr>
+<tr>
+<td>bison</td>
+<td>一个类似于 yacc 的解析器生成器</td>
+</tr>
+<tr>
+<td>break</td>
+<td>用于终止for循环、while循环和until循环的执行</td>
+</tr>
+<tr>
+<td>builtin</td>
+<td>用于运行内置的 shell，向它传递参数（args），以及获取退出状态</td>
+</tr>
+<tr>
+<td>bzcmp</td>
+<td>用于对 bzip2 压缩文件调用 cmp 实用程序</td>
+</tr>
+<tr>
+<td>bzdiff</td>
+<td>用于比较bzip2压缩文件</td>
+</tr>
+<tr>
+<td>bzgrep</td>
+<td>用于在 bzip2 压缩文件中搜索模式或表达式</td>
+</tr>
+<tr>
+<td>bzip2</td>
+<td>用于压缩和解压文件</td>
+</tr>
+<tr>
+<td>bzless</td>
+<td>在启动之前不必读取整个输入文件，因此对于大文件，启动得更快</td>
+</tr>
+<tr>
+<td>bzmore</td>
+<td>用作 CRT 查看 bzip2 压缩文件的过滤器，这些文件以 .bz2 后缀保存</td>
+</tr>
+</tbody></table>
+<p><strong>C</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cal</td>
+<td>用于查看特定月份或全年的日历，默认情况下，它显示当前月份的日历作为输出</td>
+</tr>
+<tr>
+<td>case</td>
+<td>当我们不得不在单个变量上使用多个 if&#x2F;elif 时，这是最好的选择</td>
+</tr>
+<tr>
+<td>cat</td>
+<td>从文件中读取数据并将其内容作为输出</td>
+</tr>
+<tr>
+<td>cc</td>
+<td>用于编译 C 语言代码并创建可执行文件</td>
+</tr>
+<tr>
+<td>ccrypt</td>
+<td>一个用于数据加密和解密的命令行工具</td>
+</tr>
+<tr>
+<td>cd</td>
+<td>称为更改目录命令。它用于更改当前工作目录</td>
+</tr>
+<tr>
+<td>cfdisk</td>
+<td>通过提供基于文本的“图形”界面来显示或操作磁盘分区表</td>
+</tr>
+<tr>
+<td>chage</td>
+<td>用于查看和修改用户密码过期信息</td>
+</tr>
+<tr>
+<td>chattr</td>
+<td>一个文件系统命令，用于更改目录中文件的属性</td>
+</tr>
+<tr>
+<td>chfn</td>
+<td>更改用户名和其他详细信息</td>
+</tr>
+<tr>
+<td>chgrp</td>
+<td>用于更改文件或目录的组所有权</td>
+</tr>
+<tr>
+<td>chkconfig</td>
+<td>用于列出所有可用服务并查看或更新其运行级别设置</td>
+</tr>
+<tr>
+<td>chmod</td>
+<td>用于改变文件的访问模式</td>
+</tr>
+<tr>
+<td>chown</td>
+<td>用于更改文件所有者或组</td>
+</tr>
+<tr>
+<td>chpasswd</td>
+<td>用于一次更改多个用户的密码</td>
+</tr>
+<tr>
+<td>chroot</td>
+<td>用于更改根目录</td>
+</tr>
+<tr>
+<td>chrt</td>
+<td>用于操作进程的实时属性</td>
+</tr>
+<tr>
+<td>chsh</td>
+<td>用于更改用户的登录shell（当前登录shell）</td>
+</tr>
+<tr>
+<td>chvt</td>
+<td>用于在可用的不同 TTY（TeleTYpewriter）终端之间切换</td>
+</tr>
+<tr>
+<td>cksum</td>
+<td>用于向标准输出显示一个 CRC（循环冗余校验）值、文件的字节大小和文件名</td>
+</tr>
+<tr>
+<td>clear</td>
+<td>用于清除终端屏幕</td>
+</tr>
+<tr>
+<td>cmp</td>
+<td>用于逐字节比较两个文件，帮助您找出两个文件是否相同</td>
+</tr>
+<tr>
+<td>col</td>
+<td>用于过滤掉反向换行，col 实用程序只是从标准输入读取并写入标准输出</td>
+</tr>
+<tr>
+<td>colcrt</td>
+<td>用于格式化文本处理器输出，以便可以在阴极射线管显示器上查看</td>
+</tr>
+<tr>
+<td>colrm</td>
+<td>从文件中删除选定的列</td>
+</tr>
+<tr>
+<td>column</td>
+<td>用于在列中显示文件的内容</td>
+</tr>
+<tr>
+<td>comm</td>
+<td>逐行比较两个已排序的文件并写入标准输出，共同的线条和独特的线条</td>
+</tr>
+<tr>
+<td>compress</td>
+<td>用于减小文件大小，压缩后，文件将可用，并添加 .Z 扩展名</td>
+</tr>
+<tr>
+<td>continue</td>
+<td>用于在 for、while 和 until 循环中跳过当前迭代</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>用于复制文件或一组文件或目录</td>
+</tr>
+<tr>
+<td>cpio</td>
+<td>cpio 代表“复制输入，复制输出”，它用于处理诸如 *.cpio 或 *.tar 之类的存档文件，此命令可以将文件复制到存档或从存档复制文件</td>
+</tr>
+<tr>
+<td>cpp</td>
+<td>C 编译器会自动使用它在编译前转换程序</td>
+</tr>
+<tr>
+<td>cron</td>
+<td>由类似 Linux 的操作系统提供的软件实用程序，可在预定时间自动执行计划任务</td>
+</tr>
+<tr>
+<td>crontab</td>
+<td>定时任务的命令列表</td>
+</tr>
+<tr>
+<td>csplit</td>
+<td>用于根据用户的需要将任何文件拆分为多个部分</td>
+</tr>
+<tr>
+<td>ctags</td>
+<td>快速访问文件（例如快速查看函数的定义）</td>
+</tr>
+<tr>
+<td>cupsd</td>
+<td>CUPS（通用单元打印系统）的一种调度程序，实现了基于Internet打印协议的打印系统</td>
+</tr>
+<tr>
+<td>curl</td>
+<td>使用任何支持的协议将数据传输到服务器或从服务器传输数据的工具</td>
+</tr>
+<tr>
+<td>cut</td>
+<td>用于从文件的每一行中切出部分并将结果写入标准输出</td>
+</tr>
+<tr>
+<td>cvs</td>
+<td>用于存储文件的历史记录，每当文件损坏或出现任何问题时，“cvs”帮助我们返回到以前的版本并恢复我们的文件</td>
+</tr>
+</tbody></table>
+<p><strong>D</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>date</td>
+<td>用于显示系统日期和时间。它还用于设置系统的日期和时间</td>
+</tr>
+<tr>
+<td>dc</td>
+<td>用于计算算术表达式。它以后缀表达式的形式计算表达式</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>Unix 和类 Unix 操作系统的命令行实用程序，其主要目的是转换和复制文件</td>
+</tr>
+<tr>
+<td>declare</td>
+<td>用于声明shell变量和函数，设置它们的属性并显示它们的值</td>
+</tr>
+<tr>
+<td>depmod</td>
+<td>用于生成内核模块及其关联映射文件的依赖描述列表</td>
+</tr>
+<tr>
+<td>df</td>
+<td>用于显示有关文件系统的有关总空间和可用空间的信息</td>
+</tr>
+<tr>
+<td>diff</td>
+<td>用于通过逐行比较文件来显示文件中的差异</td>
+</tr>
+<tr>
+<td>diff3</td>
+<td>用于逐行比较三个文件</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>用于列出目录的内容</td>
+</tr>
+<tr>
+<td>dirname</td>
+<td>用于从 NAME 中删除尾部的斜线“&#x2F;”并打印剩余部分</td>
+</tr>
+<tr>
+<td>dirs</td>
+<td>用于显示当前记住的目录列表</td>
+</tr>
+<tr>
+<td>disable</td>
+<td>用于停止打印机或类</td>
+</tr>
+<tr>
+<td>dmesg</td>
+<td>用于检查内核环形缓冲区并打印内核的消息缓冲区</td>
+</tr>
+<tr>
+<td>dmidecode</td>
+<td>当用户想要以可读格式检索 Linux 系统的处理器、RAM(DIMM)、BIOS 详细信息等系统硬件相关信息时使用</td>
+</tr>
+<tr>
+<td>domainname</td>
+<td>用于返回主机的网络信息系统（NIS）域名</td>
+</tr>
+<tr>
+<td>dos2unix</td>
+<td>将 DOS 文本文件转换为 UNIX 格式</td>
+</tr>
+<tr>
+<td>dosfsck</td>
+<td>诊断 MS-DOS 文件系统的问题并尝试修复它们</td>
+</tr>
+<tr>
+<td>dstat</td>
+<td>用于从系统的组件（例如网络连接、IO 设备或 CPU 等）中检索信息或统计信息。</td>
+</tr>
+<tr>
+<td>du</td>
+<td>用于跟踪占用过多硬盘空间的文件和目录</td>
+</tr>
+<tr>
+<td>dump</td>
+<td>用于将文件系统备份到某个存储设备</td>
+</tr>
+<tr>
+<td>dumpe2fs</td>
+<td>用于打印设备上存在的文件系统的超级块和块组信息</td>
+</tr>
+<tr>
+<td>dumpkeys</td>
+<td>用于转储键盘转换表</td>
+</tr>
+</tbody></table>
+<p><strong>E</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>echo</td>
+<td>用于显示作为参数传递的文本&#x2F;字符串行</td>
+</tr>
+<tr>
+<td>ed</td>
+<td>用于启动 ed 文本编辑器，它是一个基于行的文本编辑器，具有最小的界面，这使得处理文本文件的复杂性降低，即创建、编辑、显示和操作文件</td>
+</tr>
+<tr>
+<td>egrep</td>
+<td>将模式视为扩展的正则表达式并打印出与模式匹配的行</td>
+</tr>
+<tr>
+<td>eject</td>
+<td>使用软件弹出可移动媒体（通常是 CD-ROM、软盘、磁带或 JAZ 或 ZIP 磁盘）</td>
+</tr>
+<tr>
+<td>emacs</td>
+<td>一个具有简单用户界面的编辑器。此外，此编辑器中没有插入模式。它只有编辑模式。</td>
+</tr>
+<tr>
+<td>enable</td>
+<td>用于启动打印机或类</td>
+</tr>
+<tr>
+<td>env</td>
+<td>用于打印环境变量。它还用于在自定义环境中运行实用程序或命令</td>
+</tr>
+<tr>
+<td>eval</td>
+<td>用于将参数作为 shell 命令执行的内置命令</td>
+</tr>
+<tr>
+<td>ex</td>
+<td>Linux 中的文本编辑器，也称为 vi 编辑器的行编辑器模式</td>
+</tr>
+<tr>
+<td>exec</td>
+<td>用于从 bash 本身执行命令</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>用于退出当前运行的shell</td>
+</tr>
+<tr>
+<td>expa</td>
+<td>将制表符转换为文件中的空格，当未指定文件时，它会从标准输入中读取</td>
+</tr>
+<tr>
+<td>expect</td>
+<td>此命令或脚本语言适用于需要用户输入的脚本，通过提供输入来自动执行任务</td>
+</tr>
+<tr>
+<td>export</td>
+<td>是 bash shell BUILTINS 命令，这意味着它是 shell 的一部分，标记了要导出到子进程的环境变量</td>
+</tr>
+<tr>
+<td>expr</td>
+<td>评估给定的表达式并显示其相应的输出</td>
+</tr>
+</tbody></table>
+<p><strong>F</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>factor</td>
+<td>用于打印给定数字的质因数，从命令行给出或从标准输入读取</td>
+</tr>
+<tr>
+<td>fc</td>
+<td>用于列出、编辑或重新执行先前输入到交互式 shell 中的命令</td>
+</tr>
+<tr>
+<td>fc-cache</td>
+<td>扫描字体目录并为使用 fontconfig 进行字体处理的应用程序构建字体缓存</td>
+</tr>
+<tr>
+<td>fc-list</td>
+<td>用于列出可用的字体和字体样式，使用格式选项，可以过滤和整理所有字体的列表</td>
+</tr>
+<tr>
+<td>fdisk</td>
+<td>Format disk 是 Linux 中一个对话框驱动的命令，用于创建和操作磁盘分区表</td>
+</tr>
+<tr>
+<td>fg</td>
+<td>用于将后台作业置于前台</td>
+</tr>
+<tr>
+<td>fgrep</td>
+<td>用于搜索文件中的固定字符串</td>
+</tr>
+<tr>
+<td>file</td>
+<td>用于确定文件的类型，.file 类型可以是人类可读的（例如 ‘ASCII text’）或 MIME 类型（例如 ‘text&#x2F;plain; charset&#x3D;us-ascii’）</td>
+</tr>
+<tr>
+<td>find</td>
+<td>用于查找文件和目录并对其进行后续操作</td>
+</tr>
+<tr>
+<td>finger</td>
+<td>这是一个用户信息查找命令，提供所有登录用户的详细信息。</td>
+</tr>
+<tr>
+<td>fmt</td>
+<td>用作简化和优化文本文件的格式化程序</td>
+</tr>
+<tr>
+<td>fold</td>
+<td>将输入文件中的每一行包装起来以适应指定的宽度并将其打印到标准输出</td>
+</tr>
+<tr>
+<td>for</td>
+<td>用于对列表中存在的每个元素重复执行一组命令</td>
+</tr>
+<tr>
+<td>free</td>
+<td>显示可用空间总量以及系统中使用的内存量和交换内存量，以及内核使用的缓冲区</td>
+</tr>
+<tr>
+<td>Fun</td>
+<td>用于在终端上绘制各种类型的图案</td>
+</tr>
+<tr>
+<td>function</td>
+<td>用于创建函数或方法</td>
+</tr>
+</tbody></table>
+<p><strong>G</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>g++</td>
+<td>用于源代码的预处理、编译、汇编和链接以生成可执行文件</td>
+</tr>
+<tr>
+<td>gawk</td>
+<td>用于模式扫描和处理语言</td>
+</tr>
+<tr>
+<td>gcc</td>
+<td>GNU Compiler Collections 主要用于编译 C 和 C++ 语言。它也可用于编译 Objective C 和 Objective C++</td>
+</tr>
+<tr>
+<td>gdb</td>
+<td>GNU Debugger 工具有助于调试用 C、C++、Ada、Fortran 等编写的程序。</td>
+</tr>
+<tr>
+<td>getent</td>
+<td>用于获取许多称为数据库的重要文本文件中的条目</td>
+</tr>
+<tr>
+<td>gpasswd</td>
+<td>用于管理 &#x2F;etc&#x2F;group 和 &#x2F;etc&#x2F;gshadow</td>
+</tr>
+<tr>
+<td>grep</td>
+<td>在文件中搜索特定的字符模式，并显示包含该模式的所有行</td>
+</tr>
+<tr>
+<td>groupadd</td>
+<td>用于创建新的用户组</td>
+</tr>
+<tr>
+<td>groupdel</td>
+<td>用于删除现有组</td>
+</tr>
+<tr>
+<td>groupmod</td>
+<td>用于修改或更改 Linux 系统上现有的组</td>
+</tr>
+<tr>
+<td>groups</td>
+<td>组是用户的集合。组使管理具有相同安全性和访问权限的用户变得容易</td>
+</tr>
+<tr>
+<td>grpck</td>
+<td>验证组信息的完整性。它检查 &#x2F;etc&#x2F;group 和 &#x2F;etc&#x2F;gshadow 中的所有条目是否具有正确的格式并包含有效数据</td>
+</tr>
+<tr>
+<td>grpconv</td>
+<td>用于转换为阴影组。grpconv 命令从组中创建一个 gshadow 和一个可选的现有 gshadow</td>
+</tr>
+<tr>
+<td>gs</td>
+<td>此命令调用 Ghostscript，是 Adobe Systems PostScript 和可移植文档格式 (PDF) 语言的解释器</td>
+</tr>
+<tr>
+<td>gunzip</td>
+<td>用于在 Linux 中压缩或扩展文件或文件列表</td>
+</tr>
+<tr>
+<td>gzexe</td>
+<td>用于压缩可执行文件，也用于自动解压和执行文件</td>
+</tr>
+<tr>
+<td>gzip</td>
+<td>此命令压缩文件。每个单个文件都被压缩成一个文件。</td>
+</tr>
+</tbody></table>
+<p><strong>H</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>halt</td>
+<td>用于指示硬件停止所有 CPU 功能，会重新启动或停止系统。</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>用于维护最近执行的程序的哈希表</td>
+</tr>
+<tr>
+<td>hdparm</td>
+<td>用于获取有关硬盘的统计信息、更改写入间隔、声音管理和 DMA 设置</td>
+</tr>
+<tr>
+<td>Head</td>
+<td>打印给定输入的前 N 个数据</td>
+</tr>
+<tr>
+<td>help</td>
+<td>显示有关 shell 内置命令的信息</td>
+</tr>
+<tr>
+<td>hexdump</td>
+<td>用于过滤和显示指定的文件，或以人类可读的指定格式的标准输入</td>
+</tr>
+<tr>
+<td>history</td>
+<td>用于查看之前执行的命令</td>
+</tr>
+<tr>
+<td>host</td>
+<td>用于 DNS（域名系统）查找操作</td>
+</tr>
+<tr>
+<td>hostid</td>
+<td>用于以十六进制格式显示 Host 的 ID</td>
+</tr>
+<tr>
+<td>hostname</td>
+<td>用于获取DNS（域名系统）名称并设置系统的主机名或NIS（网络信息系统）域名。</td>
+</tr>
+<tr>
+<td>hostnamectl</td>
+<td>提供适当的 API 用于控制 Linux 系统主机名并更改其相关设置</td>
+</tr>
+<tr>
+<td>htop</td>
+<td>允许用户以交互方式实时监控系统的重要资源或服务器进程</td>
+</tr>
+<tr>
+<td>hwclock</td>
+<td>用于访问硬件时钟的实用程序，也称为实时时钟 (RTC)</td>
+</tr>
+</tbody></table>
+<p><strong>I</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iconv</td>
+<td>用于将某种编码中的某些文本转换为另一种编码</td>
+</tr>
+<tr>
+<td>id</td>
+<td>用于找出当前用户或服务器中任何其他用户的用户名和组名以及数字 ID（UID 或组 ID）</td>
+</tr>
+<tr>
+<td>if</td>
+<td>用于根据条件执行命令</td>
+</tr>
+<tr>
+<td>ifconfig</td>
+<td>用于配置内核常驻网络接口。</td>
+</tr>
+<tr>
+<td>iftop</td>
+<td>系统管理员用来查看带宽相关统计数据的网络分析工具</td>
+</tr>
+<tr>
+<td>ifup</td>
+<td>启动网络接口，允许传输和接收数据</td>
+</tr>
+<tr>
+<td>import</td>
+<td>用于捕获我们拥有的任何活动页面的屏幕截图，并将输出作为图像文件</td>
+</tr>
+<tr>
+<td>info</td>
+<td>阅读 info 格式的文档，提供命令的详细信息</td>
+</tr>
+<tr>
+<td>insmod</td>
+<td>用于将模块插入内核</td>
+</tr>
+<tr>
+<td>install</td>
+<td>用于复制文件和设置属性</td>
+</tr>
+<tr>
+<td>iostat</td>
+<td>用于监控设备和分区的系统输入&#x2F;输出统计信息</td>
+</tr>
+<tr>
+<td>iotop</td>
+<td>用于显示和监控磁盘 IO 使用情况的详细信息，甚至可以获取进程现有 IO 使用情况的表格</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>用于执行多项网络管理任务</td>
+</tr>
+<tr>
+<td>ipcrm</td>
+<td>用于删除一些 IPC（进程间通信）资源。它消除了系统中的 IPC 对象及其相关数据结构</td>
+</tr>
+<tr>
+<td>ipcs</td>
+<td>显示有关调用进程对其具有读访问权限的进程间通信设施的信息</td>
+</tr>
+<tr>
+<td>iptables</td>
+<td>用于为 IPv4 的 Netfilter 防火墙设置和维护表，包含在 Linux 内核中</td>
+</tr>
+<tr>
+<td>iptables-save</td>
+<td>将当前的 iptables 规则保存在用户指定的文件中，以后用户需要时可以使用</td>
+</tr>
+<tr>
+<td>iwconfig</td>
+<td>用于显示参数，以及从 &#x2F;proc&#x2F;net&#x2F;wireless 中提取的无线统计信息</td>
+</tr>
+</tbody></table>
+<p><strong>J</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>join</td>
+<td>用于根据两个文件中存在的关键字段连接两个文件的行</td>
+</tr>
+<tr>
+<td>journalctl</td>
+<td>用于查看 systemd、kernal 和 journal 日志</td>
+</tr>
+</tbody></table>
+<p><strong>K</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>kill</td>
+<td>用于手动终止进程。kill 命令向终止进程的进程发送信号</td>
+</tr>
+</tbody></table>
+<p><strong>L</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>last</td>
+<td>用于显示自创建文件 &#x2F;var&#x2F;log&#x2F;wtmp 以来登录和退出的所有用户的列表</td>
+</tr>
+<tr>
+<td>less</td>
+<td>用于每次读取一页（一屏）文本文件的内容</td>
+</tr>
+<tr>
+<td>let</td>
+<td>用于计算 shell 变量的算术表达式</td>
+</tr>
+<tr>
+<td>ln</td>
+<td>用于在文件之间创建链接</td>
+</tr>
+<tr>
+<td>locate</td>
+<td>用于按名称查找文件</td>
+</tr>
+<tr>
+<td>look</td>
+<td>显示以给定字符串开头的行</td>
+</tr>
+<tr>
+<td>lsblk</td>
+<td>用于显示有关块设备的详细信息，这些块设备（除了 ram 磁盘）基本上是那些代表连接到 PC 的设备的文件。</td>
+</tr>
+<tr>
+<td>lshw</td>
+<td>用于从&#x2F;proc目录下的各种文件中生成系统硬件配置的详细信息</td>
+</tr>
+<tr>
+<td>lsmod</td>
+<td>用于显示 Linux 内核中模块的状态。它导致加载模块的列表</td>
+</tr>
+<tr>
+<td>lsof</td>
+<td>提供打开的文件列表</td>
+</tr>
+<tr>
+<td>lsusb</td>
+<td>用于显示有关 USB 总线及其连接的设备的信息</td>
+</tr>
+</tbody></table>
+<p><strong>M</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mailq</td>
+<td>Linux 中的此命令打印邮件队列，即邮件队列中的消息列表</td>
+</tr>
+<tr>
+<td>man</td>
+<td>用于显示我们可以在终端上运行的任何命令的用户手册</td>
+</tr>
+<tr>
+<td>md5sum</td>
+<td>使用 MD5（消息摘要算法 5）验证数据完整性</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>允许用户创建目录。这个命令可以一次创建多个目录</td>
+</tr>
+<tr>
+<td>modinfo</td>
+<td>用于显示有关 Linux 内核模块的信息</td>
+</tr>
+<tr>
+<td>more</td>
+<td>用于在命令提示符下查看文本文件，在文件较大的情况下一次显示一屏（例如日志文件）</td>
+</tr>
+<tr>
+<td>mount</td>
+<td>用于将设备上找到的文件系统挂载到以“&#x2F;”为根的大树结构（Linux 文件系统）</td>
+</tr>
+<tr>
+<td>mpstat</td>
+<td>用于报告处理器相关的统计信息。</td>
+</tr>
+<tr>
+<td>mv</td>
+<td>用于在 UNIX 等文件系统中将一个或多个文件或目录从一处移动到另一处</td>
+</tr>
+</tbody></table>
+<p><strong>N</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nc(netcat)</td>
+<td>它是功能强大的网络工具、安全工具或网络监控工具之一。</td>
+</tr>
+<tr>
+<td>netstat</td>
+<td>显示各种网络相关信息，如网络连接、路由表、接口统计、伪装连接、组播成员等。</td>
+</tr>
+<tr>
+<td>nmcli</td>
+<td>用于控制 NetworkManager。nmcli commnad 还可用于显示网络设备状态、创建、编辑、激活&#x2F;停用和删除网络连接</td>
+</tr>
+<tr>
+<td>nslookup</td>
+<td>一种用于查询域名系统 (DNS) 以获取域名或 IP 地址映射或任何其他特定 DNS 记录的网络管理工具</td>
+</tr>
+</tbody></table>
+<p><strong>O</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>od</td>
+<td>用于将输入的内容以八进制格式为默认格式进行不同格式的转换</td>
+</tr>
+</tbody></table>
+<p><strong>P</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>passwd</td>
+<td>用于更改用户帐户密码</td>
+</tr>
+<tr>
+<td>paste</td>
+<td>用于水平连接文件（并行合并），方法是输出由来自每个指定文件的行组成的行，以制表符作为分隔符分隔，到标准输出</td>
+</tr>
+<tr>
+<td>pidof</td>
+<td>用于找出特定运行程序的进程 ID</td>
+</tr>
+<tr>
+<td>ping</td>
+<td>用于检查主机和服务器&#x2F;主机之间的网络连通性</td>
+</tr>
+<tr>
+<td>pinky</td>
+<td>一个用户信息查找命令，提供所有登录用户的详细信息。</td>
+</tr>
+<tr>
+<td>pmap</td>
+<td>用于显示进程的内存映射。内存映射指示内存是如何分布的</td>
+</tr>
+<tr>
+<td>poweroff</td>
+<td>发送一个 ACPI 信号，指示系统关闭电源</td>
+</tr>
+<tr>
+<td>printf</td>
+<td>用于在终端窗口上显示给定的字符串、数字或任何其他格式说明符</td>
+</tr>
+<tr>
+<td>ps</td>
+<td>用于列出当前正在运行的进程及其 PID 以及一些其他信息，这取决于不同的选项</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>打印工作目录的路径，从根开始</td>
+</tr>
+</tbody></table>
+<p><strong>R</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ranlib</td>
+<td>用于生成索引归档</td>
+</tr>
+<tr>
+<td>rcp</td>
+<td>用于将文件从一台计算机复制到另一台计算机</td>
+</tr>
+<tr>
+<td>read</td>
+<td>将指定文件描述符中的总字节数读入缓冲区</td>
+</tr>
+<tr>
+<td>readelf</td>
+<td>用于获取 ELF(Executable and Linkable Format) 文件的信息</td>
+</tr>
+<tr>
+<td>readlink</td>
+<td>用于打印解析的符号链接或规范文件名</td>
+</tr>
+<tr>
+<td>reboot</td>
+<td>指示系统重新启动或重新启动</td>
+</tr>
+<tr>
+<td>rename</td>
+<td>用于根据正则表达式 perlexpr 重命名命名文件</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>用于初始化终端。一旦程序终止，终端处于异常状态，这很有用</td>
+</tr>
+<tr>
+<td>restore</td>
+<td>用于从使用转储创建的备份恢复文件</td>
+</tr>
+<tr>
+<td>return</td>
+<td>用于退出 shell 函数。</td>
+</tr>
+<tr>
+<td>rev</td>
+<td>用于按字符反转行</td>
+</tr>
+<tr>
+<td>rm</td>
+<td>用于从 UNIX 等文件系统中删除文件、目录、符号链接等对象</td>
+</tr>
+<tr>
+<td>rmdir</td>
+<td>用于在 Linux 中从文件系统中删除空目录</td>
+</tr>
+<tr>
+<td>rmmod</td>
+<td>用于从内核中删除模块</td>
+</tr>
+<tr>
+<td>route</td>
+<td>当您想使用 IP&#x2F;内核路由表时使用</td>
+</tr>
+<tr>
+<td>rsync</td>
+<td>两台主机或机器之间同步文件和目录</td>
+</tr>
+</tbody></table>
+<p><strong>S</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sar</td>
+<td>用于监控 Linux 系统的资源，如 CPU 使用率、内存使用率、I&#x2F;O 设备消耗等。</td>
+</tr>
+<tr>
+<td>scp</td>
+<td>用于以安全的方式在服务器之间复制文件。</td>
+</tr>
+<tr>
+<td>screen</td>
+<td>提供从单个 ssh 会话启动和使用多个 shell 会话的能力</td>
+</tr>
+<tr>
+<td>script</td>
+<td>用于制作打字稿或记录所有终端活动</td>
+</tr>
+<tr>
+<td>scriptreplay</td>
+<td>用于重放脚本命令记录的日志文件中存储的 typescript&#x2F;terminal_activity</td>
+</tr>
+<tr>
+<td>sdiff</td>
+<td>用于比较两个文件，然后将结果以并排格式写入标准输出</td>
+</tr>
+<tr>
+<td>sed</td>
+<td>用于查找、过滤、文本替换、替换和文本操作，如插入、删除搜索等。</td>
+</tr>
+<tr>
+<td>select</td>
+<td>用于创建一个编号菜单，用户可以从中选择一个选项</td>
+</tr>
+<tr>
+<td>seq</td>
+<td>用于以 INCREMENT 的步骤生成从 FIRST 到 LAST 的数字</td>
+</tr>
+<tr>
+<td>setsid</td>
+<td>用于在新会话中运行程序</td>
+</tr>
+<tr>
+<td>shift</td>
+<td>将命令行参数移动&#x2F;移动到左一个位置。</td>
+</tr>
+<tr>
+<td>showkey</td>
+<td>将每个按下的键的扫描码或键码或“ascii”码打印到标准输出</td>
+</tr>
+<tr>
+<td>shred</td>
+<td>用于从硬盘中彻底删除文件</td>
+</tr>
+<tr>
+<td>shutdown</td>
+<td>用于以安全的方式关闭系统</td>
+</tr>
+<tr>
+<td>sleep</td>
+<td>用于创建虚拟作业。虚拟作业有助于延迟执行</td>
+</tr>
+<tr>
+<td>source</td>
+<td>用于读取和执行文件的内容（通常是一组命令），在当前 shell 脚本中作为参数传递</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>用于对文件进行排序，按特定顺序排列记录</td>
+</tr>
+<tr>
+<td>split</td>
+<td>用于将大文件拆分成小文件</td>
+</tr>
+<tr>
+<td>ssh</td>
+<td>用于安全连接到远程服务器&#x2F;系统的协议</td>
+</tr>
+<tr>
+<td>strace</td>
+<td>它是 Linux 最强大的进程监控、诊断、教学工具之一。</td>
+</tr>
+<tr>
+<td>stty</td>
+<td>用于更改和打印终端线路设置</td>
+</tr>
+<tr>
+<td>sudo</td>
+<td>用作某些仅允许超级用户运行的命令的前缀</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>用于查找校验和并计算文件中的块数</td>
+</tr>
+<tr>
+<td>sync</td>
+<td>用于将缓存写入同步到持久存储</td>
+</tr>
+<tr>
+<td>systemctl</td>
+<td>用于检查和控制“systemd”系统和服务管理器的状态</td>
+</tr>
+</tbody></table>
+<p><strong>T</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tac</td>
+<td>用于反向连接和打印文件</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>打印给定输入的最后 N 个数据</td>
+</tr>
+<tr>
+<td>tar</td>
+<td>用于创建存档并提取存档文件</td>
+</tr>
+<tr>
+<td>tee</td>
+<td>读取标准输入并将其写入标准输出和一个或多个文件</td>
+</tr>
+<tr>
+<td>time</td>
+<td>用于执行命令，并在命令终止时打印执行命令所花费的实时、用户 CPU 时间和系统 CPU 时间的摘要</td>
+</tr>
+<tr>
+<td>top</td>
+<td>提供运行系统的动态实时视图</td>
+</tr>
+<tr>
+<td>touch</td>
+<td>用于创建、更改和修改文件的时间戳</td>
+</tr>
+<tr>
+<td>tr</td>
+<td>用于翻译或删除字符</td>
+</tr>
+<tr>
+<td>tracepath</td>
+<td>用于跟踪到目的地的路径，发现沿此路径的 MTU</td>
+</tr>
+<tr>
+<td>traceroute</td>
+<td>打印数据包到达主机的路由</td>
+</tr>
+<tr>
+<td>tree</td>
+<td>一个递归目录列表程序，可生成深度缩进的文件列表</td>
+</tr>
+<tr>
+<td>tty</td>
+<td>显示与终端相关的信息，打印连接到标准输入的终端的文件名</td>
+</tr>
+<tr>
+<td>type</td>
+<td>用于描述如果用作命令，它的参数将如何被翻译</td>
+</tr>
+</tbody></table>
+<p><strong>U</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>uname</td>
+<td>显示有关系统的信息</td>
+</tr>
+<tr>
+<td>unexpand</td>
+<td>将每个空格转换为制表符，将生成的输出写入标准输出</td>
+</tr>
+<tr>
+<td>uniq</td>
+<td>用于报告或过滤掉文件中的重复行</td>
+</tr>
+<tr>
+<td>unix2dos</td>
+<td>将 Unix 文本文件转换为 DOS 格式</td>
+</tr>
+<tr>
+<td>until</td>
+<td>用于执行一组命令，只要“直到”命令中的最后一个命令的退出状态不为零</td>
+</tr>
+<tr>
+<td>uptime</td>
+<td>用于找出系统活动（运行）多长时间</td>
+</tr>
+<tr>
+<td>useradd</td>
+<td>用于将用户帐户添加到您的系统</td>
+</tr>
+<tr>
+<td>usermod</td>
+<td>用于在 Linux 中通过命令行更改用户的属性</td>
+</tr>
+<tr>
+<td>username</td>
+<td>获取用户名及其配置</td>
+</tr>
+<tr>
+<td>users</td>
+<td>用于显示当前登录到当前主机的用户的用户名</td>
+</tr>
+<tr>
+<td>userdel</td>
+<td>用于删除用户帐户和相关文件</td>
+</tr>
+</tbody></table>
+<p><strong>V</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vi</td>
+<td>它是 UNIX 操作系统自带的默认编辑器，称为可视化编辑器。</td>
+</tr>
+<tr>
+<td>vmstat</td>
+<td>系统的性能监控命令，可以监控有关进程、内存、分页、块 IO、磁盘和 CPU 调度的信息</td>
+</tr>
+<tr>
+<td>vnstat</td>
+<td>由系统管理员用于监控网络参数，例如带宽消耗或流入或流出的某些流量</td>
+</tr>
+</tbody></table>
+<p><strong>W</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>w</td>
+<td>用于显示谁登录以及他们在做什么</td>
+</tr>
+<tr>
+<td>wall</td>
+<td>在所有当前登录用户的终端上显示消息、文件内容或其他标准输入</td>
+</tr>
+<tr>
+<td>watch</td>
+<td>用于定期执行程序，全屏显示输出</td>
+</tr>
+<tr>
+<td>wc</td>
+<td>用于找出文件参数中指定的文件中的行数、字数、字节数和字符数</td>
+</tr>
+<tr>
+<td>wget</td>
+<td>用于从服务器下载文件，即使用户没有登录系统，也可以在后台工作，不妨碍当前进程</td>
+</tr>
+<tr>
+<td>whatis</td>
+<td>用于获取单行手册页描述</td>
+</tr>
+<tr>
+<td>which</td>
+<td>用于通过在路径环境变量中搜索来定位与给定命令关联的可执行文件</td>
+</tr>
+<tr>
+<td>while</td>
+<td>用于只要 COMMAND 返回 true 就重复执行一组命令</td>
+</tr>
+<tr>
+<td>who</td>
+<td>用于获取有关当前登录用户的信息到系统</td>
+</tr>
+<tr>
+<td>whoami</td>
+<td>调用该命令时显示当前用户的用户名</td>
+</tr>
+<tr>
+<td>write</td>
+<td>通过将线路从一个用户的终端复制到其他用户，允许用户与其他用户通信</td>
+</tr>
+</tbody></table>
+<p><strong>X</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>xargs</td>
+<td>用于从标准输入构建和执行命令。它将从标准输入收到的输入转换为命令的参数</td>
+</tr>
+<tr>
+<td>xdg-open</td>
+<td>用于在用户的首选应用程序中打开文件或 URL</td>
+</tr>
+</tbody></table>
+<p><strong>Y</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>yes</td>
+<td>用于打印给定 STRING 的连续输出流。如果未提及 STRING，则打印 ‘y’</td>
+</tr>
+</tbody></table>
+<p><strong>Z</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>zdiff</td>
+<td>用于对通过 gzip 压缩的文件调用 diff 程序</td>
+</tr>
+<tr>
+<td>zdump</td>
+<td>用于打印指定区域中的当前时间，或者您可以说在命令行中命名的每个区域名称中打印当前时间</td>
+</tr>
+<tr>
+<td>zgrep</td>
+<td>用于从给定的文件中搜索表达式，即使它被压缩</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>Unix 的压缩和文件打包实用程序，每个文件都存储在扩展名为 .zip 的单个 .zip {.zip-filename} 文件中</td>
+</tr>
+</tbody></table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io">壹拾陆</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io/posts/12728704.html">https://mo-li001.github.io/posts/12728704.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mo-li001.github.io" target="_blank">壹拾陆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/d3b0ff52.html"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数据库事务的四种隔离级别</div></div></a></div><div class="next-post pull-right"><a href="/posts/5d473c35.html"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第二章· Redis管理实战</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/abc41134.html" title="没写好"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">没写好</div></div></a></div><div><a href="/posts/9f353bc9.html" title="Devops"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Devops</div></div></a></div><div><a href="/posts/f5f9fa9b.html" title="Docker"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Docker</div></div></a></div><div><a href="/posts/34d20e28.html" title="ELK"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK</div></div></a></div><div><a href="/posts/8005.html" title="ELK快速部署"><img class="cover" src="https://tuchuangs.com/imgs/2022/09/18/074f3836d4f471b8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK快速部署</div></div></a></div><div><a href="/posts/9bdc030a.html" title="HAproxy"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">HAproxy</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/99081826.html" title="很强，3万字把华为HCIA知识点全部总结了！">很强，3万字把华为HCIA知识点全部总结了！</a><time datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b0318225.html" title="浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f962716d.html" title="使用system-config-kickstart生成kickstart文件">使用system-config-kickstart生成kickstart文件</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/12ac960a.html" title="Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件">Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cefcf133.html" title="zabbix5.0 percona_mysql_template模板文件">zabbix5.0 percona_mysql_template模板文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

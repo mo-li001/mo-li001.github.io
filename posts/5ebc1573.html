@@ -1,0 +1,1024 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>dba-redis | 壹拾陆</title><meta name="keywords" content="Linux"><meta name="author" content="壹拾陆"><meta name="copyright" content="壹拾陆"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Redis第1章 Redis介绍1.1 Redis 是什么Redis是一种基于键值对的NoSQL数据库，与很多键值对数据库不同，redis中的值可以有string,hash,list,set,zset.geo等多种数据结构和算法组成. 因为Redis会将所有的数据都放在内存中所以他的读写性能非常惊人. 不仅如此，Redis还可以将内存中的数据利用快照和日志的形式保存到硬盘上 Redis还提供了键过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dba-redis">
+<meta property="og:url" content="https://mo-li001.github.io/posts/5ebc1573.html">
+<meta property="og:site_name" content="壹拾陆">
+<meta property="og:description" content="Redis第1章 Redis介绍1.1 Redis 是什么Redis是一种基于键值对的NoSQL数据库，与很多键值对数据库不同，redis中的值可以有string,hash,list,set,zset.geo等多种数据结构和算法组成. 因为Redis会将所有的数据都放在内存中所以他的读写性能非常惊人. 不仅如此，Redis还可以将内存中的数据利用快照和日志的形式保存到硬盘上 Redis还提供了键过">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-31T12:41:14.000Z">
+<meta property="article:modified_time" content="2022-10-23T15:27:21.000Z">
+<meta property="article:author" content="壹拾陆">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mo-li001.github.io/posts/5ebc1573"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'dba-redis',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-23 23:27:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">dba-redis</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-23T15:27:21.000Z" title="更新于 2022-10-23 23:27:21">2022-10-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="dba-redis"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1f54y1p7Rk?p=478&vd_source=629395ac7befa1625191c3f496068941">Redis</a></h1><h1 id="第1章-Redis介绍"><a href="#第1章-Redis介绍" class="headerlink" title="第1章 Redis介绍"></a>第1章 Redis介绍</h1><h2 id="1-1-Redis-是什么"><a href="#1-1-Redis-是什么" class="headerlink" title="1.1 Redis 是什么"></a>1.1 Redis 是什么</h2><p>Redis是一种基于键值对的NoSQL数据库，与很多键值对数据库不同，redis中的值可以有string,hash,list,set,zset.geo等多种数据结构和算法组成.</p>
+<p>因为Redis会将所有的数据都放在内存中所以他的读写性能非常惊人.</p>
+<p>不仅如此，Redis还可以将内存中的数据利用快照和日志的形式保存到硬盘上</p>
+<p>Redis还提供了键过期，发布订阅，事务，流水线等附加功能.</p>
+<h2 id="1-2-Redis-重要特性"><a href="#1-2-Redis-重要特性" class="headerlink" title="1.2 Redis 重要特性"></a>1.2 Redis 重要特性</h2><p>1.速度快</p>
+<p>​	Redis所有的数据都存放在内存中</p>
+<p>​	Redis使用C语言实现</p>
+<p>​	Redis使用单线程架构</p>
+<p>2.基于键值对的数据结构服务器</p>
+<p>​	5种数据结构：字符串，哈希，列表，集合，有序集合</p>
+<p>3.丰富的功能</p>
+<p>​	提供了键过期功能，可以实现缓存</p>
+<p>​	提供了发布订阅功能，可以实现消息系统</p>
+<p>​	提供了pipeline 功能。客户端可以将一批命令一次性传到Redis，减少了网络开销</p>
+<p>4.简单稳定</p>
+<p>​	源码很少，3.0版本以后5万行左右.</p>
+<p>​	使用单线程模型法。是的Redis服务端处理模型变得简单.</p>
+<p>​	不依赖操作系统的中的类库</p>
+<p>5.客户端语言多</p>
+<p>​	java,PHP,python C.C++,Nodejs等</p>
+<p>6.持久化</p>
+<p>​	RDB和AOF</p>
+<p>7.主从复制</p>
+<p>8.高可用和分布式</p>
+<p>​	哨兵</p>
+<p>​	集群</p>
+<h2 id="1-3-Redis-应用场景"><a href="#1-3-Redis-应用场景" class="headerlink" title="1.3 Redis 应用场景"></a>1.3 Redis 应用场景</h2><p>1.缓存-键过期时间</p>
+<p>​	缓存 session会话</p>
+<p>​	缓存用户信息，找不到再去mysql查，查到然后回写到redis</p>
+<p>2.排行榜-列表&amp;有序集合</p>
+<p>​	热度排名排行榜</p>
+<p>​	发布时间排行榜</p>
+<p>3.计数器应用-天然支持计数器</p>
+<p>​	帖子浏览数</p>
+<p>​	视频播放次数</p>
+<p>​	商品浏览数</p>
+<p>4.社交网络集合</p>
+<p>​	踩&#x2F;赞。粉丝，共同好友&#x2F;喜好，推送，打标签</p>
+<p>5.消息队列系统-发布订阅</p>
+<p>​	配合elk实现日志收集</p>
+<p>特点：</p>
+<p>1.支持6种数据类型，字符串，哈希，列表，集合，有序集合</p>
+<p>2.速度非常快，所有数据存放在内存中</p>
+<p>3.持久化存储，快照或日志</p>
+<h1 id="第2章Redis-安装部署"><a href="#第2章Redis-安装部署" class="headerlink" title="第2章Redis 安装部署"></a>第2章Redis 安装部署</h1><h2 id="2-1目录规划"><a href="#2-1目录规划" class="headerlink" title="2.1目录规划"></a>2.1目录规划</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## redis 下载目录</span></span></span><br><span class="line">/data/soft/</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## redis 安装目录</span></span></span><br><span class="line">/opt/redis_cluster/redis_&#123;PORT&#125;/&#123;conf,logs,pid&#125;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## redis 数据目录</span></span></span><br><span class="line">/data/redis_cluster/redis_&#123;PORT&#125;/redis_&#123;PORT&#125;.rdb</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## redis 运维脚本</span></span></span><br><span class="line">/root/scripts/redis_shell.sh</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2安装命令"><a href="#2-2安装命令" class="headerlink" title="2.2安装命令"></a>2.2安装命令</h2><p>安装编译工具</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc* tcl tcl-devel</span><br><span class="line">yum -y install make</span><br></pre></td></tr></table></figure>
+
+<p>安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 编辑 hosts 文件</span></span></span><br><span class="line">[root@db01 ~]# tail -3 /etc/hosts</span><br><span class="line">10.0.0.51 db01</span><br><span class="line">10.0.0.52 db02</span><br><span class="line">10.0.0.53 db03</span><br><span class="line">mkdir -p /data/soft</span><br><span class="line">mkdir -p /data/redis_cluster/redis_6379</span><br><span class="line">mkdir -p /opt/redis_cluster/redis_6379/&#123;conf,pid,logs&#125;</span><br><span class="line">cd /data/soft/</span><br><span class="line">wget http://download.redis.io/releases/redis-3.2.9.tar.gz</span><br><span class="line">tar zxf redis-3.2.9.tar.gz -C /opt/redis_cluster/</span><br><span class="line">ln -s /opt/redis_cluster/redis-3.2.9/ /opt/redis_cluster/redis</span><br><span class="line">cd /opt/redis_cluster/redis</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后的可执行文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">redis-benchmark</span><br><span class="line">redis-check-aof</span><br><span class="line">redis-check-rdb</span><br><span class="line">redis-cli    #客户端连接工具</span><br><span class="line">redis-sentinel    #哨兵服务端</span><br><span class="line">redis-server    #服务端</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="2-3配置文件说明"><a href="#2-3配置文件说明" class="headerlink" title="2.3配置文件说明"></a>2.3配置文件说明</h2><p>编辑配置文件vim &#x2F;opt&#x2F;redis_cluster&#x2F;redis_6379&#x2F;conf&#x2F;redis_6379.conf</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 以守护进程模式启动</span></span></span><br><span class="line">daemonize yes</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 绑定的主机地址</span></span></span><br><span class="line">bind 10.0.0.51 127.0.0.1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 监听端口</span></span></span><br><span class="line">port 6379</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## pid 文件和 log 文件的保存地址</span></span></span><br><span class="line">pidfile /opt/redis_cluster/redis_6379/pid/redis_6379.pid</span><br><span class="line">logfile /opt/redis_cluster/redis_6379/logs/redis_6379.log</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 设置数据库的数量，默认数据库为0</span></span></span><br><span class="line">databases 16</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 指定本地持久化文件的文件名，默认是dump.rdb</span></span></span><br><span class="line">dbfilename redis_6379.rdb</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 本地数据库的目录</span></span></span><br><span class="line">dir /data/redis_cluster/redis_6379</span><br></pre></td></tr></table></figure>
+
+<p>利用官方脚本生成配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/redis_cluster/redis/utils/install_server.sh</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="2-4启动关闭服务"><a href="#2-4启动关闭服务" class="headerlink" title="2.4启动关闭服务"></a>2.4启动关闭服务</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 启动</span></span></span><br><span class="line">[root@db01 ~]# redis-server /opt/redis_cluster/redis_6379/conf/redis_6379.conf</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## 关闭</span></span></span><br><span class="line">[root@db01 ~]# redis-cli -h db01 shutdown</span><br></pre></td></tr></table></figure>
+
+
+
+<p>连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h db01 </span><br></pre></td></tr></table></figure>
+
+<p>启动：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server /opt/redis_cluster/redis_6379/conf/redis_6379.conf</span><br></pre></td></tr></table></figure>
+
+<p>关闭</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli shutdown</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="第3章Redis基本操作命令"><a href="#第3章Redis基本操作命令" class="headerlink" title="第3章Redis基本操作命令"></a>第3章Redis基本操作命令</h1><h2 id="3-1全局命令"><a href="#3-1全局命令" class="headerlink" title="3.1全局命令"></a>3.1全局命令</h2><p>1.查看所有命键</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Keys *</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">十分危险的命令，线上禁止使用</span></span><br></pre></td></tr></table></figure>
+
+<p>2.查看键的总数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Dbsize</span><br><span class="line"># dbsize 命令在计算键总数时不会遍历所有键，而是直接获取Redis内置的键总数变量.</span><br></pre></td></tr></table></figure>
+
+<p>3.检查键是否存在</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Exists key</span><br><span class="line"># 如果键存在则返回 1，不存在则返回 0</span><br></pre></td></tr></table></figure>
+
+<p>4.删除键</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Del key [key ...]</span><br><span class="line"># 通用命令，无论值是什么数据结构类型，del命令都可以将其删除.</span><br></pre></td></tr></table></figure>
+
+<p>5.键过期</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Expire key seconds</span><br><span class="line"># Redis支持对键添加过期时间，当超过过期时间后，会自动删除键.</span><br><span class="line"># 通过 ttl 命令观察键的剩余时间</span><br><span class="line">大于等于 0 的证书：键剩余过期时间</span><br><span class="line">-1：键没设置过期时间</span><br><span class="line">-2：键不存在</span><br></pre></td></tr></table></figure>
+
+<p>6.键的数据类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Type key</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="3-2字符串"><a href="#3-2字符串" class="headerlink" title="3.2字符串"></a>3.2字符串</h2><p>Redis并不是简单地 key-value 存储，实际上他是一个数据结构服务器。支持不同类型的值.</p>
+<p>Redis Strings</p>
+<p>这是最简单的Redis类型，如果你只用这种类型，Redis就像一个持久化的memcache服务器（注：memcache的数据仅保存在内存中，服务器重启后。数据将丢失）</p>
+<p>操作命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通常用 SET command 和 GET command 来设置和获取字符串值</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; set key1 value1</span><br><span class="line">OK</span><br><span class="line">db01:6379&gt; get key1</span><br><span class="line">&quot;valuel&quot;</span><br><span class="line">db01:6379&gt; keys *</span><br><span class="line">1)&quot;key1&quot;</span><br></pre></td></tr></table></figure>
+
+<p>操作命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INCR命令将字符串值解析成整型.将其加1，最后结果保存为新的字符串，类似命令：INCRBY,DECR,DECRBY</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; set key2 100</span><br><span class="line">OK</span><br><span class="line">db01:6379&gt; get key2</span><br><span class="line">&quot;100&quot;</span><br><span class="line">db01:6379&gt; incr key2</span><br><span class="line">(integer) 101</span><br><span class="line">db01:6379&gt; get key2</span><br><span class="line">&quot;101&quot;</span><br><span class="line">db01:6379&gt; incrby key2 10</span><br><span class="line">(integer) 111</span><br><span class="line">db01:6379&gt; get key2</span><br><span class="line">&quot;111&quot;</span><br></pre></td></tr></table></figure>
+
+<p>操作命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MSET 和 MGET 可以一次存储或获取多个key对应的值.</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; mset key3 v3 key4 v4 key5 v5</span><br><span class="line">OK</span><br><span class="line">db01:6379&gt; mget key3 key4 key5</span><br><span class="line">1)&quot;v3&quot;</span><br><span class="line">2)&quot;v4&quot;</span><br><span class="line">3)&quot;v5&quot;</span><br></pre></td></tr></table></figure>
+
+<p>操作命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EXISTS 命令返回 1 或 0 标识给定key的值是否存在.</span><br><span class="line">使用DEL命令可以删除 key 对应的值，</span><br><span class="line">DEL命令返回1或0标识是被删除（值存在）或者没被删除（key对应的值不存在）.</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; exists key5</span><br><span class="line">(integer) 1</span><br><span class="line">db01:6379&gt; del key5</span><br><span class="line">(integer) 1</span><br><span class="line">db01:6379&gt; exists key5</span><br><span class="line">(integer) 0</span><br><span class="line">db01:6379&gt; del key5</span><br><span class="line">(integer) 0</span><br></pre></td></tr></table></figure>
+
+<p>操作命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Type 命令可以返回 key 对应的存储类型</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; set key5 v5</span><br><span class="line">OK</span><br><span class="line">db01:6379&gt; type key5</span><br><span class="line">string</span><br></pre></td></tr></table></figure>
+
+<p>操作命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以对 key 设置一个超时时间，当这个时间到达后被删除</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">db01:<span class="number">6379</span>&gt; getrreys</span><br><span class="line"><span class="string">&quot;v5&quot;</span></span><br><span class="line">db01:<span class="number">6379</span>&gt; ttl <span class="title function_">key5</span></span><br><span class="line"><span class="params">(integer)</span> -1</span><br><span class="line">db01:6379&gt; expire key5 10</span><br><span class="line"><span class="params">(integer)</span> 1</span><br><span class="line">db01:6379&gt; ttl <span class="title function_">key5</span></span><br><span class="line"><span class="params">(integer)</span> 6</span><br><span class="line">db01:6379&gt; ttl <span class="title function_">key5</span></span><br><span class="line"><span class="params">(integer)</span> 5</span><br><span class="line">db01:6379&gt; ttl <span class="title function_">key5</span></span><br><span class="line"><span class="params">(integer)</span> 2</span><br><span class="line">db01:6379&gt; ttl <span class="title function_">key5</span></span><br><span class="line"><span class="params">(integer)</span> -2</span><br><span class="line">db01:6379&gt; ttl <span class="title function_">key5</span></span><br><span class="line"><span class="params">(integer)</span> -2</span><br><span class="line"></span><br><span class="line">1 #永不过期</span><br><span class="line">-2 #键不存在</span><br></pre></td></tr></table></figure>
+
+<p>操作命令：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PERSIST 命令去除超时时间</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db01:<span class="number">6379</span>&gt; <span class="built_in">set</span> key5 v5 ex <span class="number">10</span></span><br><span class="line">OK</span><br><span class="line">db01:<span class="number">6379</span>&gt; ttl <span class="title function_">key5</span></span><br><span class="line"><span class="params">(integer)</span> 8</span><br><span class="line">db01:6379&gt; ttl <span class="title function_">key5</span></span><br><span class="line"><span class="params">(integer)</span> 6</span><br><span class="line">db01:6379&gt; persist <span class="title function_">key5</span></span><br><span class="line"><span class="params">(integer)</span> 1</span><br><span class="line">db01:6379&gt; ttl <span class="title function_">key5</span></span><br><span class="line"><span class="params">(integer)</span> -1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="3-3列表"><a href="#3-3列表" class="headerlink" title="3.3列表"></a>3.3列表</h2><p>操作命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LPUSH 命令可向 list 的左边（头部）添加一个新元素</span><br><span class="line">RPUSH 命令可向 list 的右边（尾部）添加一个新元素.</span><br><span class="line">最后 LRANGE 可以从 list 中取出一定范围的元素</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">db01:<span class="number">6379</span><span class="operator">&gt;</span> rpush list1 A</span><br><span class="line">(<span class="type">integer</span>) <span class="number">1</span></span><br><span class="line">db01:<span class="number">6379</span><span class="operator">&gt;</span> rpush list1 B</span><br><span class="line">(<span class="type">integer</span>) <span class="number">2</span></span><br><span class="line">db01:<span class="number">6379</span><span class="operator">&gt;</span> lpush list1 top1</span><br><span class="line">(<span class="type">integer</span>) <span class="number">3</span></span><br><span class="line">db01:<span class="number">6379</span><span class="operator">&gt;</span> lrange list1 <span class="number">0</span> <span class="number">-1</span></span><br><span class="line"><span class="number">1</span>) &quot;top1&quot;</span><br><span class="line"><span class="number">2</span>) &quot;A&quot;</span><br><span class="line"><span class="number">3</span>) &quot;B&quot;</span><br><span class="line">db01:<span class="number">6379</span><span class="operator">&gt;</span> lrange list1 <span class="number">1</span> <span class="number">-1</span></span><br><span class="line"><span class="number">1</span>) &quot;A&quot;</span><br><span class="line"><span class="number">2</span>) &quot;B&quot;</span><br><span class="line">db01:<span class="number">6379</span><span class="operator">&gt;</span> lrange list1 <span class="number">2</span> <span class="number">-1</span></span><br><span class="line"><span class="number">1</span>) &quot;B&quot;</span><br></pre></td></tr></table></figure>
+
+<p>操作命令：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pop,从list中删除元素并同时返回删除的值，可以在左边或右边操作.</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db01:<span class="number">6379</span><span class="operator">&gt;</span> rpop list1</span><br><span class="line">&quot;B&quot;</span><br><span class="line">db01:<span class="number">6379</span><span class="operator">&gt;</span> lrange list1 <span class="number">0</span> <span class="number">-1</span></span><br><span class="line"><span class="number">1</span>) &quot;top1&quot;</span><br><span class="line"><span class="number">2</span>) &quot;A&quot;</span><br><span class="line">db01:<span class="number">6379</span><span class="operator">&gt;</span> lpop list1</span><br><span class="line">&quot;top1&quot;</span><br><span class="line">db01:<span class="number">6379</span><span class="operator">&gt;</span> lrange list1 <span class="number">0</span> <span class="number">-1</span></span><br><span class="line"><span class="number">1</span>) &quot;A&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-4哈希"><a href="#3-4哈希" class="headerlink" title="3.4哈希"></a>3.4哈希</h2><p>操作命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Hash 看起来就像一个&#x27;hash&#x27;的样子.由键值对组成</span><br><span class="line">HMSET 指令设置 hash 中的多个域</span><br><span class="line">HGET 取回单个域.</span><br><span class="line">HMGET 取回一系列的值</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; hmset user:1000 username zhangya age 27 job it</span><br><span class="line">OK</span><br><span class="line">db01:6379&gt; hget user:1000 username</span><br><span class="line">&quot;zhangya&quot;</span><br><span class="line">db01:6379&gt; hmget user:1000 username age job</span><br><span class="line">1) &quot;zhangya&quot;</span><br><span class="line">2) &quot;27&quot;</span><br><span class="line">3) &quot;it&quot;</span><br><span class="line">db01:6379&gt; hgetall user:1000</span><br><span class="line">1) &quot;username&quot;</span><br><span class="line">2) &quot;zhangya&quot;</span><br><span class="line">3) &quot;age&quot;</span><br><span class="line">4) &quot;27&quot;</span><br><span class="line">5) &quot;job&quot;</span><br><span class="line">6) &quot;it&quot;</span><br><span class="line">db01:6379&gt; hmset user:1000 qq 526195417</span><br><span class="line">OK</span><br><span class="line">db01:6379&gt; hgetall user:1000</span><br><span class="line">1) &quot;username&quot;</span><br><span class="line">2) &quot;zhangya&quot;</span><br><span class="line">3) &quot;age&quot;</span><br><span class="line">4) &quot;27&quot;</span><br><span class="line">5) &quot;joh&quot;</span><br><span class="line">6) &quot;it&quot;</span><br><span class="line">7) &quot;qq&quot;</span><br><span class="line">8) &quot;526195417&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="3-5集合"><a href="#3-5集合" class="headerlink" title="3.5集合"></a>3.5集合</h2><p>操作命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">集合是字符串的无序排列,</span><br><span class="line">SADD 指令把新的元素添加到 set 中</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; sadd set1 1 2 3</span><br><span class="line">(integer) 3</span><br><span class="line">db01:6379&gt; smembers set1</span><br><span class="line">1) &quot;1&quot;</span><br><span class="line">2) &quot;2&quot;</span><br><span class="line">3) &quot;3&quot;</span><br></pre></td></tr></table></figure>
+
+<p>和 list 类型不同，set集合不允许出现重复的元素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; sadd set1 1 4</span><br><span class="line">(integer) 1</span><br><span class="line">db01:6379&gt; smembers set1</span><br><span class="line">1) &quot;1&quot;</span><br><span class="line">2) &quot;2&quot;</span><br><span class="line">3) &quot;3&quot;</span><br><span class="line">4) &quot;4&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Srem用来删除指定的值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; srem set1 2 4</span><br><span class="line">(integer) 2</span><br><span class="line">db01:6379&gt; smembers set1</span><br><span class="line">1) &quot;1&quot;</span><br><span class="line">2) &quot;3&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Sdiff 计算集合的差异成员</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; sadd set1 1 2 3 4</span><br><span class="line">(integer) 2</span><br><span class="line">db01:6379&gt; sadd set2 1 4 5</span><br><span class="line">(integer) 3</span><br><span class="line">db01:6379&gt; sdiff set1 set2</span><br><span class="line">1) &quot;2&quot;</span><br><span class="line">2) &quot;3&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Sinter 计算集合的交集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; sinter set1 set2</span><br><span class="line">1) &quot;1&quot;</span><br><span class="line">2) &quot;4&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Sunion 计算集合并集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db01:6379&gt; sunion set1 set2</span><br><span class="line">1) &quot;1&quot;</span><br><span class="line">2) &quot;2&quot;</span><br><span class="line">3) &quot;3&quot;</span><br><span class="line">4) &quot;4&quot;</span><br><span class="line">5) &quot;5&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="第4章Redis持久化"><a href="#第4章Redis持久化" class="headerlink" title="第4章Redis持久化"></a>第4章Redis持久化</h1><h2 id="4-1持久化的两种方式介绍"><a href="#4-1持久化的两种方式介绍" class="headerlink" title="4.1持久化的两种方式介绍"></a>4.1持久化的两种方式介绍</h2><p>RDB持久化优缺点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">可以在指定的时间间隔内生成数据集的 时间点快照(point-in-time snapshot)。</span><br><span class="line">优点：速度快，适合于用做备份，主从复制也是基于RDB持久化功能实现的。</span><br><span class="line">缺点：会有数据丢失</span><br></pre></td></tr></table></figure>
+
+<p>rdb持久化核心配置参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /data/6379/redis.conf</span><br><span class="line">dir /data/6379</span><br><span class="line">dbfilename dump.rdb</span><br><span class="line">    save 900 1    #900秒（15分钟）内有1个更改</span><br><span class="line">    save 300 10    #300秒（5分钟）内有10个更改</span><br><span class="line">    save 60 10000    #60秒内有10000个更改</span><br></pre></td></tr></table></figure>
+
+<p>AOF 持久化(append-only log file)&#x2F;优缺点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">记录服务器执行的所有写操作命令，并在服务器启动时，通过重新执行这些命令来还原数据集。</span><br><span class="line">AOF 文件中的命令全部以 Redis 协议的格式来保存，新命令会被追加到文件的末尾。</span><br><span class="line">优点：可以最大程度保证数据不丢</span><br><span class="line">缺点：日志记录量级比较大</span><br></pre></td></tr></table></figure>
+
+<p>AOF持久化配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">appendfilename &quot;appendonly.aof&quot;</span><br><span class="line">appendonly yes    #是否打开aof日志功能</span><br><span class="line">appendfsync always    #每1个命令，都立即同步到aof</span><br><span class="line">appendfsync everysec    #每秒写1次</span><br><span class="line">appendfsync no    #写入工作交给操作系统，由操作系统判断缓冲区大小，统一写入到aof.</span><br></pre></td></tr></table></figure>
+
+<p>配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">appendonly yes</span><br><span class="line">appendfilename &quot;appendonly.aof&quot;</span><br><span class="line">appendfsync everysec</span><br><span class="line">no-appendfsync-on-rewrite no</span><br><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line">auto-aof-rewrite-min-size 64mb</span><br><span class="line">aof-load-truncated yes</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">持久化</span><br><span class="line"></span><br><span class="line">rdb</span><br><span class="line">优点：恢复速度快，空间小</span><br><span class="line">缺点：可能会丢失</span><br><span class="line"></span><br><span class="line">aof</span><br><span class="line">优点：数据安全，不容易丢失</span><br><span class="line">缺点：恢复速度慢，空间大</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">架构：</span><br><span class="line">主从复制</span><br><span class="line">哨兵</span><br><span class="line">集群</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">热更新</span><br><span class="line">CONFIG GET *</span><br><span class="line">127.0.0.1:6379&gt; CONFIG GET save</span><br><span class="line">1) &quot;save&quot;</span><br><span class="line">2) &quot;&quot;</span><br><span class="line">127.0.0.1:6379&gt; CONFIG SET save &quot;60 100 300 10 600 1&quot;</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; CONFIG GET save</span><br><span class="line">1) &quot;save&quot;</span><br><span class="line">2) &quot;60 100 300 10 600 1&quot;</span><br><span class="line"></span><br><span class="line">隐藏条件：</span><br><span class="line">1.如果同时有AOF和RDB存在，重启的时候，载入的是AOF文件</span><br><span class="line">2.shutdown</span><br><span class="line">  - bgsave</span><br><span class="line">  - shutdown</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-2面试题"><a href="#4-2面试题" class="headerlink" title="4.2面试题"></a>4.2面试题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis持久化方式有哪些?有什么区别?</span><br><span class="line">rdb：基于快照的持久化，速度更快，一般用作备份，主从复制也是依赖于rdb持久化功能</span><br><span class="line">aof：以追加的方式记录redis操作日志的文件。可以最大程度的保证redis数据安全，类似于mysql的binlog</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="第5章-Redis-安全认证"><a href="#第5章-Redis-安全认证" class="headerlink" title="第5章 Redis 安全认证"></a>第5章 Redis 安全认证</h1><p>redis默认开启了保护模式，只允许本地回环地址登录并访问数据库。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">禁止 protected-mode</span><br><span class="line">protected-mode yes/no  (保护模式，是否只允许本地访问）</span><br></pre></td></tr></table></figure>
+
+<p>(1)Bind:指定IP进行监听</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# vim /opt/redis_cluster/redis_6379/conf/redis_6379.conf</span><br><span class="line">bind 10.0.0.51 127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<p>(2)增加 requirepass {password}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# vim /opt/redis_cluster/redis_6379/conf/redis_6379.conf</span><br><span class="line">requirepass 123456</span><br></pre></td></tr></table></figure>
+
+<p>验证方法一：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# redis-cli -a 123456</span><br><span class="line">127.0.0.1:6379&gt; set k1 v1</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p>验证方法二：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# redis-cli</span><br><span class="line">127.0.0.1:6379&gt; auth 123456</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="第6章-Redis-主从复制"><a href="#第6章-Redis-主从复制" class="headerlink" title="第6章 Redis 主从复制"></a>第6章 Redis 主从复制</h1><h2 id="6-1主从复制介绍"><a href="#6-1主从复制介绍" class="headerlink" title="6.1主从复制介绍"></a>6.1主从复制介绍</h2><p>主从复制介绍</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在分布式系统中为了解决单点问题，通常会把数据复制多个副本到其他机器，满足故障恢复和负载均衡等求.</span><br><span class="line">Redis也是如此，提供了复制功能.</span><br><span class="line">复制功能是高可用Redis的基础，后面的哨兵和集群都是在复制的基础上实现高可用的.</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-2配置命令"><a href="#6-2配置命令" class="headerlink" title="6.2配置命令"></a>6.2配置命令</h2><h3 id="6-2-1建立复制"><a href="#6-2-1建立复制" class="headerlink" title="6.2.1建立复制"></a>6.2.1建立复制</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每个从节点只能有一个主节点，主节点可以有多个从节点.</span><br></pre></td></tr></table></figure>
+
+<p>配置复制的方式有三种：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.在配置文件中加入slaveof &#123;masterHost&#125; &#123;masterPort&#125; 随redis启动生效.</span><br><span class="line">2.在redis-server启动命令后加入-slaveof &#123;masterHost&#125; &#123;masterPort&#125; 生效.</span><br><span class="line">3.直接使用命令：slaveof &#123;masterHost&#125; &#123;masterPort&#125; 生效.</span><br></pre></td></tr></table></figure>
+
+<p>查看复制状态信息命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Info replication</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-2-2断开复制"><a href="#6-2-2断开复制" class="headerlink" title="6.2.2断开复制"></a>6.2.2断开复制</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Slaveof命令不但可以建立复制，还可以在从节点执行slave of no one来断开与主节点复制关系.</span><br></pre></td></tr></table></figure>
+
+<p>断开复制主要流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.断开与主节点复制关系</span><br><span class="line">2.从节点晋升为主节点</span><br><span class="line">从节点断开复制后不会抛弃原有数据，只是无法再获取主节点上的数据变化。</span><br><span class="line">通过 slaveof 命令还可以实现切主操作，所谓切主是指把当前从节点对主节点的复制切换到另一个主节点.</span><br><span class="line">执行 slaveof &#123;newMasterIp&#125; &#123;newMasterPort&#125;命令即可.</span><br></pre></td></tr></table></figure>
+
+<p>切主操作流程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.断开与旧主节点的复制关系</span><br><span class="line">2.与新主节点建立复制关系</span><br><span class="line">3.删除从节点当前所有数据</span><br><span class="line">4.对新主节点进行复制操作</span><br><span class="line">提示：线上操作一定要小心，因为切主后会清空之前所有的数据.</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>mysql开启主从复制步骤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.打开binlog，建立复制授权用户</span><br><span class="line">2.server id不同</span><br><span class="line">3.主库数据导出 mysqldump xtrabackup</span><br><span class="line">--master-data=2</span><br><span class="line">--singxZxdasd-xasd=1</span><br><span class="line">4.从库数据导入</span><br><span class="line">5.配置主从参数</span><br><span class="line">6.yes延迟</span><br></pre></td></tr></table></figure>
+
+
+
+<p>redis主从复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.从库向主库发起同步请求</span><br><span class="line">2.主库接收到从库的同步请求</span><br><span class="line">3.主库开始bgsave生成rdb文件</span><br><span class="line">4.主库生成完之后，保存到磁盘成功</span><br><span class="line">5.主库将RDB文件发送给从库</span><br><span class="line">6.从库接收主库的RDB文件</span><br><span class="line">7.从库清空自己所有的数据</span><br><span class="line">8.将接受的RDB文件载入到内存中</span><br><span class="line"></span><br><span class="line">危险操作：</span><br><span class="line">1.如果主库不小心同步了空的从库，会导致主库数据全部丢失</span><br><span class="line"></span><br><span class="line">谨慎的操作流程：</span><br><span class="line">1.在配置文件里配置slaveof参数，不要热更新配置</span><br></pre></td></tr></table></figure>
+
+
+
+<p>视频操作： 开启主从复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 redis_6379]# vim /opt/redis_cluster/redis_6379/conf/redis_6379.conf</span><br><span class="line">slaveof 10.0.0.112 6379</span><br></pre></td></tr></table></figure>
+
+
+
+<p>模拟的场景：</p>
+<p>1.备份了数据</p>
+<p>2.但是主库不小心同步了空的从库</p>
+<p>3.主库恢复数据</p>
+<p>所有节点都操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"># 杀掉redis</span><br><span class="line">pkill redis</span><br><span class="line"># 清空数据</span><br><span class="line">rm -rf /data/redis cluster/redis 6379/*</span><br><span class="line"># 配置文件</span><br><span class="line">cat &gt; /opt/redis_cluster/redis_6379/conf/redis_6379.conf &lt;&lt;EOF</span><br><span class="line">### 以守护进程模式启动</span><br><span class="line">daemonize yes</span><br><span class="line">### 绑定的主机地址</span><br><span class="line">bind 10.0.0.111 127.0.0.1</span><br><span class="line">### 监听端口</span><br><span class="line">port 6379</span><br><span class="line">### pid 文件和 log 文件的保存地址</span><br><span class="line">pidfile /opt/redis_cluster/redis_6379/pid/redis_6379.pid</span><br><span class="line">logfile /opt/redis_cluster/redis_6379/logs/redis_6379.log</span><br><span class="line">### 设置数据库的数量，默认数据库为0</span><br><span class="line">databases 16</span><br><span class="line">### 指定本地持久化文件的文件名，默认是dump.rdb</span><br><span class="line">dbfilename redis_6379.rdb</span><br><span class="line">### 本地数据库的目录</span><br><span class="line">dir /data/redis_cluster/redis_6379</span><br><span class="line">save 60 100    #60秒（1分钟）内有100个更改</span><br><span class="line">save 300 10    #300秒（5分钟）内有10个更改</span><br><span class="line">save 60 1    #60秒内有1个更改</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">#启动服务</span><br><span class="line">redis-server /opt/redis_cluster/redis_6379/conf/redis_6379.conf</span><br><span class="line"></span><br><span class="line">#db01主库上执行</span><br><span class="line">for i in &#123;0..2000&#125;;do redis-cli set k_$&#123;i&#125; v_$&#123;i&#125;; echo &quot;$&#123;i&#125; is ok&quot;;done</span><br><span class="line"></span><br><span class="line">#主库生成rdb数据</span><br><span class="line">进入到redis里</span><br><span class="line">redis-cli</span><br><span class="line">bgsave</span><br><span class="line"></span><br><span class="line">#备份数据</span><br><span class="line">cd /data/redis_cluster/redis_6379/</span><br><span class="line">cp redis_6379.rdb redis_6379.rdb.bak</span><br><span class="line"></span><br><span class="line">#模拟操作失误，同步了从库</span><br><span class="line">###注意：不要复制提示符</span><br><span class="line">[root@db01 ~]# redis-cli</span><br><span class="line">127.0.0.1:6379&gt; SLAVEOF 10.0.0.52 6379</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">#模拟恢复</span><br><span class="line">1.停掉db01的redis服务</span><br><span class="line">redis-cli shutdown</span><br><span class="line">2.检查redis是否真的停止了</span><br><span class="line">ps -ef|grep redis</span><br><span class="line">3.注释掉配置文件里的slaveof</span><br><span class="line">4.恢复备份的数据</span><br><span class="line">cd /data/redis_cluster/redis_6379</span><br><span class="line">cp redis_6379.rdb.bak redis_6379.rdb</span><br><span class="line">5.启动服务</span><br><span class="line">redis-server /opt/redis_cluster/redis_6379/conf/redis_6379.conf</span><br><span class="line">6.检查数据是否恢复了</span><br><span class="line">redis-cli</span><br><span class="line">keys *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#模拟主库故障</span><br><span class="line">##db02上操作：</span><br><span class="line">redis-cli</span><br><span class="line">SLAVEOF 10.0.0.51 6379</span><br><span class="line"></span><br><span class="line">##查看db02日志</span><br><span class="line">[root@db02 ~]# tail -f /opt/redis_cluster/redis_6379/logs/redis_6379.log</span><br><span class="line"></span><br><span class="line">##关闭db01</span><br><span class="line">redis-cli shutdown</span><br><span class="line"></span><br><span class="line">##从库如何接管</span><br><span class="line">从库db9=02 slaveof no one取消复制关系</span><br><span class="line">redis-cli -h db02 -p 6379 slaveof no one</span><br><span class="line"></span><br><span class="line">##db02备份从库数据</span><br><span class="line">cd /data/redis_cluster/redis_6379</span><br><span class="line">cp redis_6379.rdb redis_6379.rdb.bak</span><br><span class="line"></span><br><span class="line">##db01旧主库修复上线</span><br><span class="line">redis-server /opt/redis_cluster/redis_6379/conf/redis_6379.conf</span><br><span class="line">SLAVEOF 10.0.0.52 6379</span><br><span class="line">keys *</span><br><span class="line"></span><br><span class="line">##负载均衡关闭后端负载，防止数据写入</span><br><span class="line"></span><br><span class="line">##修复后的db01从库重新升级为主库</span><br><span class="line">SLAVEOF no one</span><br><span class="line"></span><br><span class="line">##代码修改为主库db01的IP，负载均衡重新挂载后端服务</span><br><span class="line"></span><br><span class="line">##db02重新生成主从关系</span><br><span class="line">SLAVEOF 10.0.0.51 6379</span><br><span class="line"></span><br><span class="line">##确认数据同步正常</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="第7章-Redis-Sentinel（哨兵）"><a href="#第7章-Redis-Sentinel（哨兵）" class="headerlink" title="第7章 Redis Sentinel（哨兵）"></a>第7章 Redis Sentinel（哨兵）</h1><h2 id="7-1哨兵介绍"><a href="#7-1哨兵介绍" class="headerlink" title="7.1哨兵介绍"></a>7.1哨兵介绍</h2><p>Sentinel介绍</p>
+<p>Redis的主从模式下，主节点一旦发生故障不能提供服务，需要人工干预，将从节点晋升为主节点，同时还需要修改客户端配置。对于很多应用场景这种方式无法接受。</p>
+<p>Sentinel(哨兵)架构解决了redis主从人工干预的问题。</p>
+<p>Redis Sentinel是redis的高可用实现方案，实际生产环境中，对提高整个系统可用性非常有帮助的。</p>
+<h2 id="7-2哨兵主要功能"><a href="#7-2哨兵主要功能" class="headerlink" title="7.2哨兵主要功能"></a>7.2哨兵主要功能</h2><p>Redis Sentinel是一个分布式系统，Redis Sentinel为Redis提供高可用性。可以在没有人为干预的情况下阻止某种类型的故障。</p>
+<p>Redis 的 Sentinel系统用于管理多个Redis服务器(instance)该系统执行以下三个任务：</p>
+<p>1.监控（Monitoring）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sentinel会不断地定期检查你的主服务器和从服务器是否运作正常。</span><br></pre></td></tr></table></figure>
+
+<p>2.提醒（Notification）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当被监控的某个Redis服务器出现问题时，Sentinel可以通过API 向管理员或者其他应用程序发送通知。</span><br></pre></td></tr></table></figure>
+
+<p>3.自动故障迁移(Automatic failover)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当一个主服务器不能正常工作时，Sentinel会开始一次自动故障迁移操作，它会将失效主服务器的其中一个从服务器升级为新的主服务器，并让失效主服务器的其他从服务器改为复制新的主服务器；当客户端试图连接失效的主服务器时，集群也会向客户端返回新主服务器的地址，使得集群可以使用新主服务器代替失效服务器</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-3目录规划"><a href="#7-3目录规划" class="headerlink" title="7.3目录规划"></a>7.3目录规划</h2><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>IP</th>
+<th>端囗</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Master</td>
+<td>10.0.0.51</td>
+<td>6379</td>
+</tr>
+<tr>
+<td>Sentinel-01</td>
+<td>10.0.0.51</td>
+<td>26379</td>
+</tr>
+<tr>
+<td>Master</td>
+<td>10.0.0.52</td>
+<td>6379</td>
+</tr>
+<tr>
+<td>Sentinel-01</td>
+<td>10.0.0.52</td>
+<td>26379</td>
+</tr>
+<tr>
+<td>Master</td>
+<td>10.0.0.53</td>
+<td>6379</td>
+</tr>
+<tr>
+<td>Sentinel-01</td>
+<td>10.0.0.53</td>
+<td>26379</td>
+</tr>
+</tbody></table>
+<h2 id="7-4安装配置命令"><a href="#7-4安装配置命令" class="headerlink" title="7.4安装配置命令"></a>7.4安装配置命令</h2><p>哨兵是基于主从复制，所以需要先部署好主从复制</p>
+<p>手工操作步骤如下：</p>
+<p>1.先配置和创建好1台服务器的节点和哨兵</p>
+<p>2.使用rsync传输到另外2台机器</p>
+<p>3.修改另外两台机器的IP地址</p>
+<h3 id="7-4-1-db01命令"><a href="#7-4-1-db01命令" class="headerlink" title="7.4.1 db01命令"></a>7.4.1 db01命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/redis_cluster/redis_26379</span><br><span class="line">mkdir -p /opt/redis_cluster/redis_26379/&#123;conf,pid,logs&#125;</span><br><span class="line">cat &gt; /opt/redis_cluster/redis_26379/conf/redis_26379.conf &lt;&lt;EOF</span><br><span class="line">bind $(hostname -i)</span><br><span class="line">port 26379</span><br><span class="line">daemonize yes</span><br><span class="line">logfile /opt/redis_cluster/redis_26379/logs/redis_26379.log</span><br><span class="line">dir /data/redis_cluster/redis_26379</span><br><span class="line">sentinel monitor mymaster 10.0.0.51 6379 2</span><br><span class="line">sentinel down-after-milliseconds mymaster 3000</span><br><span class="line">sentinel parallel-syncs mymaster 1</span><br><span class="line">sentinel failover-timeout mymaster 18000</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-4-2-db02命令"><a href="#7-4-2-db02命令" class="headerlink" title="7.4.2 db02命令"></a>7.4.2 db02命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/redis_cluster/redis_26379</span><br><span class="line">mkdir -p /opt/redis_cluster/redis_26379/&#123;conf,pid,logs&#125;</span><br><span class="line">cat &gt; /opt/redis_cluster/redis_26379/conf/redis_26379.conf &lt;&lt;EOF</span><br><span class="line">bind $(hostname -i)</span><br><span class="line">port 26379</span><br><span class="line">daemonize yes</span><br><span class="line">logfile /opt/redis_cluster/redis_26379/logs/redis_26379.log</span><br><span class="line">dir /data/redis_cluster/redis_26379</span><br><span class="line">sentinel monitor mymaster 10.0.0.51 6379 2</span><br><span class="line">sentinel down-after-milliseconds mymaster 3000</span><br><span class="line">sentinel parallel-syncs mymaster 1</span><br><span class="line">sentinel failover-timeout mymaster 18000</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-4-3-db03命令"><a href="#7-4-3-db03命令" class="headerlink" title="7.4.3 db03命令"></a>7.4.3 db03命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/redis_cluster/redis_26379</span><br><span class="line">mkdir -p /opt/redis_cluster/redis_26379/&#123;conf,pid,logs&#125;</span><br><span class="line">cat &gt; /opt/redis_cluster/redis_26379/conf/redis_26379.conf &lt;&lt;EOF</span><br><span class="line">bind $(hostname -i)</span><br><span class="line">port 26379</span><br><span class="line">daemonize yes</span><br><span class="line">logfile /opt/redis_cluster/redis_26379/logs/redis_26379.log</span><br><span class="line">dir /data/redis_cluster/redis_26379</span><br><span class="line">sentinel monitor mymaster 10.0.0.51 6379 2</span><br><span class="line">sentinel down-after-milliseconds mymaster 3000</span><br><span class="line">sentinel parallel-syncs mymaster 1</span><br><span class="line">sentinel failover-timeout mymaster 18000</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-4-4-配置文件解释"><a href="#7-4-4-配置文件解释" class="headerlink" title="7.4.4 配置文件解释"></a>7.4.4 配置文件解释</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sentinel monitor mymaster 10.0.0.51 6379 2</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">mymaster主节点别名主节点ip和端口，判断主节点失败，两个sentinel节点同意</span></span><br><span class="line">sentinel down-after-milliseconds mymaster 30000</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">选项指定了 Sentinel 认为服务器已经断线所需的毫秒数。</span></span><br><span class="line">sentinel parallel-syncs mymaster 1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">向新的主节点发起复制操作的从节点个数，1轮询发起复制</span></span><br><span class="line">sentinel failover-timeout mymaster 180000</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">故障转移超时时间</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-4-5-db02-x2F-db03命令"><a href="#7-4-5-db02-x2F-db03命令" class="headerlink" title="7.4.5 db02&#x2F;db03命令"></a>7.4.5 db02&#x2F;db03命令</h3><p>db01</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rsync -avz /opt/* db02:/opt/</span><br><span class="line">rsync -avz /opt/* db03:/opt/</span><br></pre></td></tr></table></figure>
+
+<p>db02</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/redis_cluster/redis_26379</span><br><span class="line">cd /opt/redis_cluster/redis</span><br><span class="line">make install</span><br><span class="line">sed -i &#x27;s#bind 10.0.0.51#bind 10.0.0.52#g&#x27; /opt/redis_cluster/redis_6379/conf/redis_6379.conf</span><br><span class="line">sed -i &#x27;s#bind 10.0.0.51#bind 10.0.0.52#g&#x27; /opt/redis_cluster/redis_26379/conf/redis_26379.conf</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-4-6-配置主从关系"><a href="#7-4-6-配置主从关系" class="headerlink" title="7.4.6 配置主从关系"></a>7.4.6 配置主从关系</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@db02 ~]# redis-cli</span><br><span class="line">127.0.0.1:6379&gt; SLAVEOF 10.0.0.111 6379</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">[root@db03 ~]# redis-cli</span><br><span class="line">127.0.0.1:6379&gt; SLAVEOF 10.0.0.111 6379</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-4-7-启动哨兵"><a href="#7-4-7-启动哨兵" class="headerlink" title="7.4.7 启动哨兵"></a>7.4.7 启动哨兵</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# redis-sentinel /opt/redis_cluster/redis_26379/conf/redis_26379.conf</span><br><span class="line">[root@db02 ~]# redis-sentinel /opt/redis_cluster/redis_26379/conf/redis_26379.conf</span><br><span class="line">[root@db03 ~]# redis-sentinel /opt/redis_cluster/redis_26379/conf/redis_26379.conf</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>视频操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">哨兵</span><br><span class="line">安装步骤：</span><br><span class="line">mkdir -p /data/redis_cluster/redis_26379</span><br><span class="line">mkdir -p /opt/redis_cluster/redis_26379/&#123;conf,pid,logs&#125;</span><br><span class="line">cat &gt; /opt/redis_cluster/redis_26379/conf/redis_26379.conf&lt;&lt;EOF</span><br><span class="line">bind $(hostname -i)</span><br><span class="line">port 26379</span><br><span class="line">daemonize yes</span><br><span class="line">logfile /opt/redis_cluster/redis_26379/logs/redis_26379.log</span><br><span class="line">dir /data/redis_cluster/redis_26379</span><br><span class="line">sentinel monitor mymaster 10.0.0.51 6379 2</span><br><span class="line">sentinel down-after-milliseconds mymaster 3000</span><br><span class="line">sentinel parallel-syncs mymaster 1</span><br><span class="line">sentinel failover-timeout mymaster 1800</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">主从关系：</span><br><span class="line">从库执行：</span><br><span class="line">SLAVEOF 10.0.0.51 6379</span><br><span class="line"></span><br><span class="line">启动哨兵：</span><br><span class="line">redis-sentinel /opt/redis_cluster/redis_26379/conf/redis_26379.conf</span><br><span class="line"></span><br><span class="line">检查服务</span><br><span class="line">ps -ef|grep redis</span><br><span class="line"></span><br><span class="line">查看配置文件</span><br><span class="line">cat /opt/redis_cluster/redis_26379/conf/redis_26379.conf</span><br><span class="line"></span><br><span class="line">注意：</span><br><span class="line">不要自己去改动哨兵的配置文件</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="7-5-配置文件的变化"><a href="#7-5-配置文件的变化" class="headerlink" title="7.5 配置文件的变化"></a>7.5 配置文件的变化</h2><p>启动哨兵前配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@db03 ~]# cat /opt/redis_cluster/redis_26379/conf/redis_26379.conf</span><br><span class="line">bind 10.0.0.113</span><br><span class="line">port 26379</span><br><span class="line">daemonize yes</span><br><span class="line">logfile /opt/redis_cluster/redis_26379/logs/redis_26379.log</span><br><span class="line">dir /data/redis_cluster/redis_26379</span><br><span class="line">sentinel monitor mymaster 10.0.0.111 6379 2</span><br><span class="line">sentinel down-after-milliseconds mymaster 3000</span><br><span class="line">sentinel parallel-syncs mymaster 1</span><br><span class="line">sentinel failover-timeout mymaster 18000</span><br></pre></td></tr></table></figure>
+
+<p>启动哨兵后配置变化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@db03 ~]# cat /opt/redis_cluster/redis_26379/conf/redis_26379.conf</span><br><span class="line">bind 10.0.0.113</span><br><span class="line">port 26379</span><br><span class="line">daemonize yes</span><br><span class="line">logfile &quot;/opt/redis_cluster/redis_26379/logs/redis_26379.log&quot;</span><br><span class="line">dir &quot;/data/redis_cluster/redis_26379&quot;</span><br><span class="line">sentinel myid 030e77fc7bf79bc51c8a2b7978918074f4be1e25</span><br><span class="line">sentinel monitor mymaster 10.0.0.113 6379 2</span><br><span class="line">sentinel down-after-milliseconds mymaster 3000</span><br><span class="line">sentinel failover-timeout mymaster 18000</span><br><span class="line"># Generated by CONFIG REWRITE</span><br><span class="line">sentinel config-epoch mymaster 1</span><br><span class="line">sentinel leader-epoch mymaster 1</span><br><span class="line">sentinel known-slave mymaster 10.0.0.112 6379</span><br><span class="line">sentinel known-slave mymaster 10.0.0.111 6379</span><br><span class="line">sentinel known-sentinel mymaster 10.0.0.112 26379 e27b0e0e2e39272a3d5c136648fb1228ee7ce461</span><br><span class="line">sentinel known-sentinel mymaster 10.0.0.111 26379 3db2900446b08e9d36ca10df012a60ec414aac47</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="7-6-哨兵常用操作API"><a href="#7-6-哨兵常用操作API" class="headerlink" title="7.6 哨兵常用操作API"></a>7.6 哨兵常用操作API</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Info Sentinel</span><br><span class="line">Sentinel masters</span><br><span class="line">Sentinel master &lt;master name&gt;</span><br><span class="line">Sentinel slaves &lt;master name&gt;</span><br><span class="line">Sentinel sentinels &lt;master name&gt;</span><br><span class="line">Sentinel get-master-addr-by-name &lt;master name&gt;</span><br><span class="line">Sentinel failover &lt;master name&gt;</span><br><span class="line">Sentinel flushconfig</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="7-7-模拟故障转移"><a href="#7-7-模拟故障转移" class="headerlink" title="7.7 模拟故障转移"></a>7.7 模拟故障转移</h2><p>停掉其中1个节点，然后观察其他节点的日志变化</p>
+<p>故障转移后配置文件变化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Redis Sentinel存在多个从节点时，如果想将指定的从节点晋升为主节点，可以将其他从节点的slavepriority配置为0,但是需要注意failover后,将slave-priority调回原值.</span><br><span class="line">1.查询命令：CONFIG GET slave-priority</span><br><span class="line">2.设置命令：CONFIG SET slave-priority 0</span><br><span class="line">3.主动切换：Sentinel failover mymaster</span><br></pre></td></tr></table></figure>
+
+<p>操作过程：</p>
+<p>db02&#x2F;db03操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h db02 -p 6379 CONFIG SET slave-priority 0</span><br><span class="line">redis-cli -h db03 -p 6379 CONFIG SET slave-priority 0</span><br></pre></td></tr></table></figure>
+
+<p>db01操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h db01 -p 26379 Sentinel failover mymaster</span><br></pre></td></tr></table></figure>
+
+
+
+<p>视频操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">0.杀掉哨兵</span><br><span class="line">1.主从复制先做好</span><br><span class="line">db02和db03复制db01</span><br><span class="line"></span><br><span class="line">哨兵故障恢复</span><br><span class="line">1.先启动db01</span><br><span class="line">redis-server /opt/redis_cluster/redis_6379/conf/redis_6379.conf</span><br><span class="line"></span><br><span class="line">2.启动哨兵</span><br><span class="line">reds-sentinel /opt/redis_cluster/redis_26379/conf/redis_26379.conf</span><br><span class="line"></span><br><span class="line">3.设置权重</span><br><span class="line">db01调大权重</span><br><span class="line">CONFIG SET slave-priority 150</span><br><span class="line"></span><br><span class="line">4.重新发起选举</span><br><span class="line">在db01上的26379节点执行</span><br><span class="line">redis-cli -h 10.0.0.51 -p 26379 Sentinel failover mymaster</span><br><span class="line"></span><br><span class="line">5.观察主从复制是否正常</span><br><span class="line">redis-cli</span><br><span class="line">CONFIG GET slaveof</span><br><span class="line"></span><br><span class="line">6.db01恢复权重</span><br><span class="line">CONFIG SET slave-priority 100</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="总结回顾"><a href="#总结回顾" class="headerlink" title="总结回顾"></a>总结回顾</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">回顾总结：</span><br><span class="line">1.redis五种数据结构和应用场景</span><br><span class="line">- 字符串    优惠券过期 帖子浏览数计数</span><br><span class="line">- 哈希    mysql缓存，对应表关系</span><br><span class="line">- 集合    兴趣爱好标签 共同好友 共同爱好 精确广告投放</span><br><span class="line">- 列表    排行榜</span><br><span class="line"></span><br><span class="line">2.持久化</span><br><span class="line">       优点                 缺点</span><br><span class="line">rdb    恢复快，占用空间小      可能会丢数据</span><br><span class="line">aof    安全性高              恢复速度慢，占用空间大</span><br><span class="line"></span><br><span class="line">3.安全性</span><br><span class="line">- 绑定内网IP</span><br><span class="line">- 修改默认端口</span><br><span class="line">- 增加密码认证</span><br><span class="line">- 定时备份RDB文件</span><br><span class="line"></span><br><span class="line">4.主从复制</span><br><span class="line">- 防火墙放开端口</span><br><span class="line">- slaveof MASTER_IP PORT</span><br><span class="line">- slaveof no one</span><br><span class="line">- config get slaveof</span><br><span class="line">- 从库发送同步请求,主库生成RDB并发送给从库(同步过程看日志)</span><br><span class="line">- 谨慎操作，先备份，不要热更新slaveof，不要同步反了</span><br><span class="line"></span><br><span class="line">5.哨兵</span><br><span class="line">- 防火墙放开端口</span><br><span class="line">- 解决主从复制需要人工介入的问题</span><br><span class="line">- 先做好主从架构</span><br><span class="line">- 在配置哨兵并启动</span><br><span class="line">- 哨兵有自己专用的命令</span><br><span class="line">- 哨兵也是一个redis节点</span><br><span class="line">- 哨兵的配置文件不要手动去修改</span><br><span class="line">- 修复上线步骤：先调低其他节点的权重为0，执行重新选举，修改会默认的权重</span><br><span class="line"></span><br><span class="line">6.集群redis cluster</span><br><span class="line"></span><br><span class="line">7.redis运维工具</span><br><span class="line"></span><br><span class="line">8.redis生产故障</span><br><span class="line"></span><br><span class="line">9.redis面试</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="第8章-Redis-Cluster"><a href="#第8章-Redis-Cluster" class="headerlink" title="第8章 Redis Cluster"></a>第8章 Redis Cluster</h1><h2 id="8-1-集群介绍"><a href="#8-1-集群介绍" class="headerlink" title="8.1 集群介绍"></a>8.1 集群介绍</h2><p>Redis Cluster 是 redis 的分布式解决方案，在 3.0 版本正式推出</p>
+<p>当遇到单机、内存、并发、流量等瓶颈时，可以采用 Cluster 架构方案达到负载均衡目的。</p>
+<p>Redis Cluster之前的分布式方案有两种：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1)客户端分区方案，优点分区逻辑可控，缺点是需要自己处理数据路由，高可用和故障转移等。</span><br><span class="line">2)代理方案，优点是简化客户端分布式逻辑和升级维护便利，缺点加重架构部署和性能消耗。</span><br></pre></td></tr></table></figure>
+
+<p>官方提供的Redis Cluster集群方案，很好的解决了集群方面的问题</p>
+<p>哨兵的不足</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.配置复杂</span><br><span class="line">- ansible利用模块和模板</span><br><span class="line"></span><br><span class="line">2.中断时间长</span><br><span class="line">- 调整参数</span><br><span class="line"></span><br><span class="line">3.资源利用率低，只有一台主库对外提供服务</span><br><span class="line"></span><br><span class="line">4.3台只能挂1台</span><br><span class="line">- 调整参数</span><br><span class="line"></span><br><span class="line">5.依赖于redis数据节点</span><br><span class="line"></span><br><span class="line">6.主库压力比较大，性能有瓶颈</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">集群redis cluster</span><br><span class="line">1.槽位分配slot</span><br><span class="line">2.65534个槽位</span><br><span class="line">3.每一个槽都得分配到位，有一个槽没分配，整个集群不可用</span><br><span class="line">4.序号不一定要连续，最重要的是每个节点的槽位数量要大致相同，允许2%的误差</span><br><span class="line">5.集群通讯端口为配置文件里的port加10000,比如6380，通讯端口就是16380</span><br><span class="line">6.故障转移切换全自动，不需要人工干预</span><br><span class="line">7.集群配置文件动态更新，千万千万千万我求你了baby不需要手动更改</span><br><span class="line">8.代码连接redis集群需要插件驱动支持</span><br><span class="line">9.集群内消息传递是同步的</span><br><span class="line">10.集群内的所有已经发现的节点配置文件是自动更新的</span><br><span class="line">11.hash分配算法是足够随机和足够平均的足够稳定</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">顺序插入1000条数据测试</span><br><span class="line">for i in &#123;1..1000&#125;;do redis-cli -c -h db01 -p 6380 set 58NB_$&#123;i&#125; 58V5_$&#123;i&#125;;done</span><br><span class="line"></span><br><span class="line">分配槽位</span><br><span class="line">redis-cli -h 10.0.0.51 -p 6380 cluster addslots &#123;0..5461&#125;</span><br><span class="line">redis-cli -h 10.0.0.52 -p 6380 cluster addslots &#123;5462..10922&#125;</span><br><span class="line">redis-cli -h 10.0.0.53 -p 6380 cluster addslots &#123;10923..16383&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-2-数据分布"><a href="#8-2-数据分布" class="headerlink" title="8.2 数据分布"></a>8.2 数据分布</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">分布式数据库首先要解决把整个数据库集按照分区规则映射到多个节点的问题，即把数据集划分到多个节点上，每个节点负责整体数据的一个子集，需要关注的是数据分片规则，Redis Cluster采用哈希分片规则。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="8-3目录规划"><a href="#8-3目录规划" class="headerlink" title="8.3目录规划"></a>8.3目录规划</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># redis安装目录</span><br><span class="line">/opt/redis_cluster/redis_&#123;PORT&#125;/&#123;conf,logs,pid&#125;</span><br><span class="line"># redis数据目录</span><br><span class="line">/data/redis_cluster/redis_&#123;PORT&#125;/redis_&#123;PORT&#125;.rdb</span><br><span class="line"># redis运维脚本</span><br><span class="line">/root/scripts/redis_shell.sh</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="8-4-集群拓扑"><a href="#8-4-集群拓扑" class="headerlink" title="8.4 集群拓扑"></a>8.4 集群拓扑</h2><h2 id="8-5-手动搭建部署集群"><a href="#8-5-手动搭建部署集群" class="headerlink" title="8.5 手动搭建部署集群"></a>8.5 手动搭建部署集群</h2><p>思路：</p>
+<ol>
+<li><p>部署一台服务器上的2个集群节点</p>
+</li>
+<li><p>发送完成后修改其他主机的IP地址</p>
+</li>
+<li><p>使用 ansible 批量部署</p>
+</li>
+</ol>
+<p>实现命令：</p>
+<p>db01操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /opt/redis_cluster/redis_&#123;6380,6381&#125;/&#123;conf,logs,pid&#125;</span><br><span class="line">mkdir –p /data/redis_cluster/redis_&#123;6380,6381&#125;</span><br><span class="line">cat &gt;/opt/redis_cluster/redis_6380/conf/redis_6380.conf&lt;&lt;EOF</span><br><span class="line">bind 10.0.0.111</span><br><span class="line">port 6380</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile &quot;/opt/redis_cluster/redis_6380/pid/redis_6380.pid&quot;</span><br><span class="line">logfile &quot;/opt/redis_cluster/redis_6380/logs/redis_6380.log&quot;</span><br><span class="line">dbfilename &quot;redis_6380.rdb&quot;</span><br><span class="line">dir &quot;/data/redis_cluster/redis_6380/&quot;</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_6380.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">EOF</span><br><span class="line">cat &gt;/opt/redis_cluster/redis_6381/conf/redis_6381.conf&lt;&lt;EOF</span><br><span class="line">bind 10.0.0.111</span><br><span class="line">port 6381</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile &quot;/opt/redis_cluster/redis_6381/pid/redis_6381.pid&quot;</span><br><span class="line">logfile &quot;/opt/redis_cluster/redis_6381/logs/redis_6381.log&quot;</span><br><span class="line">dbfilename &quot;redis_6381.rdb&quot;</span><br><span class="line">dir &quot;/data/redis_cluster/redis_6381/&quot;</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_6381.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">EOF</span><br><span class="line">redis-server /opt/redis_cluster/redis_6380/conf/redis_6380.conf</span><br><span class="line">redis-server /opt/redis_cluster/redis_6381/conf/redis_6381.conf</span><br></pre></td></tr></table></figure>
+
+<p>db02操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /opt/redis_cluster/redis_&#123;6380,6381&#125;/&#123;conf,logs,pid&#125;</span><br><span class="line">mkdir –p /data/redis_cluster/redis_&#123;6380,6381&#125;</span><br><span class="line">cat &gt;/opt/redis_cluster/redis_6380/conf/redis_6380.conf&lt;&lt;EOF</span><br><span class="line">bind 10.0.0.112</span><br><span class="line">port 6380</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile &quot;/opt/redis_cluster/redis_6380/pid/redis_6380.pid&quot;</span><br><span class="line">logfile &quot;/opt/redis_cluster/redis_6380/logs/redis_6380.log&quot;</span><br><span class="line">dbfilename &quot;redis_6380.rdb&quot;</span><br><span class="line">dir &quot;/data/redis_cluster/redis_6380/&quot;</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_6380.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">EOF</span><br><span class="line">cat &gt;/opt/redis_cluster/redis_6381/conf/redis_6381.conf&lt;&lt;EOF</span><br><span class="line">bind 10.0.0.112</span><br><span class="line">port 6381</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile &quot;/opt/redis_cluster/redis_6381/pid/redis_6381.pid&quot;</span><br><span class="line">logfile &quot;/opt/redis_cluster/redis_6381/logs/redis_6381.log&quot;</span><br><span class="line">dbfilename &quot;redis_6381.rdb&quot;</span><br><span class="line">dir &quot;/data/redis_cluster/redis_6381/&quot;</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_6381.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">EOF</span><br><span class="line">redis-server /opt/redis_cluster/redis_6380/conf/redis_6380.conf</span><br><span class="line">redis-server /opt/redis_cluster/redis_6381/conf/redis_6381.conf</span><br></pre></td></tr></table></figure>
+
+<p>db03操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /opt/redis_cluster/redis_&#123;6380,6381&#125;/&#123;conf,logs,pid&#125;</span><br><span class="line">mkdir –p /data/redis_cluster/redis_&#123;6380,6381&#125;</span><br><span class="line">cat &gt;/opt/redis_cluster/redis_6380/conf/redis_6380.conf&lt;&lt;EOF</span><br><span class="line">bind 10.0.0.113</span><br><span class="line">port 6380</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile &quot;/opt/redis_cluster/redis_6380/pid/redis_6380.pid&quot;</span><br><span class="line">logfile &quot;/opt/redis_cluster/redis_6380/logs/redis_6380.log&quot;</span><br><span class="line">dbfilename &quot;redis_6380.rdb&quot;</span><br><span class="line">dir &quot;/data/redis_cluster/redis_6380/&quot;</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_6380.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">EOF</span><br><span class="line">cat &gt;/opt/redis_cluster/redis_6381/conf/redis_6381.conf&lt;&lt;EOF</span><br><span class="line">bind 10.0.0.113</span><br><span class="line">port 6381</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile &quot;/opt/redis_cluster/redis_6381/pid/redis_6381.pid&quot;</span><br><span class="line">logfile &quot;/opt/redis_cluster/redis_6381/logs/redis_6381.log&quot;</span><br><span class="line">dbfilename &quot;redis_6381.rdb&quot;</span><br><span class="line">dir &quot;/data/redis_cluster/redis_6381/&quot;</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_6381.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">save 60 100</span><br><span class="line">save 300 10</span><br><span class="line">save 600 1</span><br><span class="line">EOF</span><br><span class="line">redis-server /opt/redis_cluster/redis_6380/conf/redis_6380.conf</span><br><span class="line">redis-server /opt/redis_cluster/redis_6381/conf/redis_6381.conf</span><br></pre></td></tr></table></figure>
+
+<p>检查</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -ef|grep redis</span><br><span class="line">netstat -lntup|grep redis</span><br></pre></td></tr></table></figure>
+
+<p>当把所有节点都启动后查看进程会有cluster的字样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# ps -ef|grep redis</span><br><span class="line">root       1801      1  0 15:55 ?        00:00:00 redis-server 10.0.0.111:6380 [cluster]</span><br><span class="line">root       1805      1  0 15:55 ?        00:00:00 redis-server 10.0.0.111:6381 [cluster]</span><br><span class="line">root       1827   1446  0 16:04 pts/0    00:00:00 grep --color=auto redis</span><br></pre></td></tr></table></figure>
+
+<p>但是登录后执行CLUSTER NODES命令会发现只有每个节点自己的ID，目前集群内的节点还没有互相发现，所以搭建redis集群我们第一步要做的就是让集群内的节点互相发现.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# redis-cli -h 10.0.0.111 -p 6380</span><br><span class="line">10.0.0.111:6380&gt; CLUSTER NODES</span><br><span class="line">78ba3150adba5292f8c739ca35a4f95d780b022f :6380 myself,master - 0 0 0 connected</span><br></pre></td></tr></table></figure>
+
+<p>在执行节点发现命令之前我们先查看一下集群的数据目录会发现有生成集群的配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# tree /data/redis_cluster/redis_638*</span><br><span class="line">/data/redis_cluster/redis_6380</span><br><span class="line">└── nodes_6380.conf</span><br><span class="line">/data/redis_cluster/redis_6381</span><br><span class="line">└── nodes_6381.conf</span><br></pre></td></tr></table></figure>
+
+<p>查看后发现只有自己的节点内容，等节点全部发现后会把所发现的节点ID写入这个文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# redis-cli -h 10.0.0.111 -p 6380</span><br><span class="line">10.0.0.111:6380&gt; CLUSTER nodes</span><br><span class="line">78ba3150adba5292f8c739ca35a4f95d780b022f :6380 myself,master - 0 0 0 connected</span><br><span class="line">10.0.0.111:6380&gt; </span><br><span class="line">[root@db01 ~]# cat /data/redis_cluster/redis_6380/nodes_6380.conf </span><br><span class="line">78ba3150adba5292f8c739ca35a4f95d780b022f :0 myself,master - 0 0 0 connected</span><br><span class="line">vars currentEpoch 0 lastVoteEpoch 0</span><br></pre></td></tr></table></figure>
+
+<p>集群模式的Redis除了原有的配置文件之外又加了一份集群配置文件.当集群内节点信息发生变化，如添加节点，节点下线，故障转移等节点会自动保存集群状态到配置文件.</p>
+<p>需要注意的是，Redis自动维护集群配置文件，不需要手动修改，防止节点重启时产生错乱.</p>
+<p>节点发现使用命令：CLUSTER MEET {IP} {PORT}</p>
+<p>提示：在集群内任意一台机器执行此命令就可以</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# sh redis_shell.sh login 6380</span><br><span class="line">10.0.0.51:6380&gt; CLUSTER MEET 10.0.0.51 6381</span><br><span class="line">OK</span><br><span class="line">10.0.0.51:6380&gt; CLUSTER MEET 10.0.0.52 6380</span><br><span class="line">OK</span><br><span class="line">10.0.0.51:6380&gt; CLUSTER MEET 10.0.0.53 6380</span><br><span class="line">OK</span><br><span class="line">10.0.0.51:6380&gt; CLUSTER MEET 10.0.0.52 6381</span><br><span class="line">OK</span><br><span class="line">10.0.0.51:6380&gt; CLUSTER MEET 10.0.0.53 6381</span><br><span class="line">OK</span><br><span class="line">10.0.0.111:6380&gt; CLUSTER NODES</span><br><span class="line">a376b8e961dde93e8c73250bc41a789d845acdea 10.0.0.112:6381 master - 0 1662802573774 3 connected</span><br><span class="line">78ba3150adba5292f8c739ca35a4f95d780b022f 10.0.0.111:6380 myself,master - 0 0 2 connected</span><br><span class="line">e64bfe41a4353aa63ad74c65d41744e9dcc02de1 10.0.0.112:6380 master - 0 1662802574792 4 connected</span><br><span class="line">73f40f51b130836f0d93dd17f03407af7a25dc6f 10.0.0.111:6381 master - 0 1662802575818 1 connected</span><br><span class="line">ec9dfa57eccefdb979d8b50e84ccd285a21b90f0 10.0.0.113:6381 master - 0 1662802576838 0 connected</span><br><span class="line">18dd29c569d923af70c2fdee5ad9b03f8b1467d9 10.0.0.113:6380 master - 0 1662802577863 5 connected</span><br></pre></td></tr></table></figure>
+
+<p>检查</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">10.0.0.111:6380&gt; CLUSTER INFO</span><br><span class="line">cluster_state:fail</span><br><span class="line">cluster_slots_assigned:0</span><br><span class="line">cluster_slots_ok:0</span><br><span class="line">cluster_slots_pfail:0</span><br><span class="line">cluster_slots_fail:0</span><br><span class="line">cluster_known_nodes:6</span><br><span class="line">cluster_size:0</span><br><span class="line">cluster_current_epoch:5</span><br><span class="line">cluster_my_epoch:2</span><br><span class="line">cluster_stats_messages_sent:1231</span><br><span class="line">cluster_stats_messages_received:1231</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="8-5-1-Redis-Cluster-通讯流程"><a href="#8-5-1-Redis-Cluster-通讯流程" class="headerlink" title="8.5.1 Redis Cluster 通讯流程"></a>8.5.1 Redis Cluster 通讯流程</h3><p>在分布式存储中需要提供维护节点元数据信息的机制，所谓元数据是指：节点负责哪些数据，是否出现故障灯状态信息，redis集群采用Gossip（流言）协议，Gossip协议工作原理就是节点彼此不断交换信息，一段时间后所有的节点都会知道集群完整信息，这种方式类似流言传播。</p>
+<p>通信过程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1)集群中的每一个节点都会单独开辟一个 Tcp通道，用于节点之间彼此通信，通信端口在基础端口上加10000.</span><br><span class="line">2)每个节点在固定周期内通过特定规则选择结构节点发送ping消息</span><br><span class="line">3)接收到ping消息的节点用pong消息作为响应。集群中每个节点通过一定规则挑选要通信的节点，每个节点可能知道全部节点，也可能仅知道部分节点，只要这些节点彼此可以正常通信，最终他们会打成一致的状态，当节点出现故障，新节点加入，主从角色变化等，它能够给不断的ping/pong消息，从而达到同步目的。</span><br></pre></td></tr></table></figure>
+
+<p>通讯消息类型：</p>
+<p>Gossip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Gossip协议职责就是信息交换，信息交换的载体就是节点间彼此发送Gossip消息。</span><br><span class="line">常见Gossip消息分为：ping、pong、meet、fail等</span><br></pre></td></tr></table></figure>
+
+<p>meet</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">meet消息：用于通知新节点加入，消息发送者通知接受者加入到当前集群，meet消息通信正常完成后，接收节</span><br><span class="line">点会加入到集群中并进行ping、pong消息交换</span><br></pre></td></tr></table></figure>
+
+<p>ping</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping消息：集群内交换最频繁的消息，集群内每个节点每秒想多个其他节点发送ping消息，用于检测节点是否在线和交换彼此信息。</span><br></pre></td></tr></table></figure>
+
+<p>pong</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pong消息：当接收到ping，meet消息时，作为相应消息回复给发送方确认消息正常通信，节点也可以向集群内广播自身的pong消息来通知整个集群对自身状态进行更新。</span><br></pre></td></tr></table></figure>
+
+<p>fail</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fail消息：当节点判定集群内另一个节点下线时，回向集群内广播一个fail消息，其他节点收到fail消息之后把对应节点更新为下线状态。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="8-5-2-Redis-Cluster-手动分配槽位"><a href="#8-5-2-Redis-Cluster-手动分配槽位" class="headerlink" title="8.5.2 Redis Cluster 手动分配槽位"></a>8.5.2 Redis Cluster 手动分配槽位</h3><p>虽然节点之间已经互相发现了，但是此时集群还是不可用的状态，因为并没有给节点分配槽位，而且必须是所有的槽位都分配完毕后整个集群才是可用的状态.</p>
+<p>反之，也就是说只要有一个槽位没有分配，那么整个集群就是不可用的.</p>
+<p>测试命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# sh redis_shell.sh login 6380</span><br><span class="line">10.0.0.111:6380&gt; set k1 v1</span><br><span class="line">(error) CLUSTERDOWN Hash slot not served</span><br><span class="line">10.0.0.111:6380&gt; CLUSTER INFO</span><br><span class="line">cluster_state:fail</span><br><span class="line">cluster_slots_assigned:0</span><br><span class="line">cluster_slots_ok:0</span><br><span class="line">cluster_slots_pfail:0</span><br><span class="line">cluster_slots_fail:0</span><br><span class="line">cluster_known_nodes:6</span><br><span class="line">cluster_size:0</span><br><span class="line">cluster_current_epoch:5</span><br><span class="line">cluster_my_epoch:2</span><br><span class="line">cluster_stats_messages_sent:1231</span><br><span class="line">cluster_stats_messages_received:1231</span><br></pre></td></tr></table></figure>
+
+<p>前面说了，我们虽然有6个节点，但是真正负责数据写入的只有3个节点。其他3个节点只是作为主节点的从节点，也就是说，只需要分配期中三个节点的槽位就可以了</p>
+<p>分配槽位的方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">分配槽位需要在每个主节点上来配置，此时有2种方法执行：</span><br><span class="line">1.分别登录到每个主节点的客户端来执行命令</span><br><span class="line">2.在其中一台机器上用redis客户端远程登录到其他机器的主节点上执行命令</span><br></pre></td></tr></table></figure>
+
+<p>每个节点执行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# redis-cli -h db01 -p 6380 cluster addslots &#123;0..5461&#125;</span><br><span class="line">OK</span><br><span class="line">[root@db01 ~]# redis-cli -h db02 -p 6380 cluster addslots &#123;5462..10922&#125;</span><br><span class="line">OK</span><br><span class="line">[root@db01 ~]# redis-cli -h db03 -p 6380 cluster addslots &#123;10923..16383&#125;</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p>分配完所有槽位之后我们再查看一下集群的节点状态和集群状态</p>
+<p>可以看到三个节点都分配了槽位，而且集群的状态是OK的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10.0.0.111:6380&gt; CLUSTER ADDSLOTS 0 5000</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="8-5-3-手动配置集群高可用"><a href="#8-5-3-手动配置集群高可用" class="headerlink" title="8.5.3 手动配置集群高可用"></a>8.5.3 手动配置集群高可用</h3><p>虽然这时候集群是可用的了，但是整个集群只要有一台机器坏掉了，那么整个集群都是不可用的.</p>
+<p>所以这时候需要用到其他三个节点分别作为现在三个主节点的从节点，以应对集群主节点故障时可以进行自动切换以保证集群持续可用.</p>
+<p>注意：</p>
+<p>1.不要让复制节点复制本机器的主节点，因为如果那样的话机器挂了集群还是不可用状态，所以复制节点要复制其他服务器的主节点.</p>
+<p>2.使用redis-trid 工具自动分配的时候会出现复制节点和主节点在同一台机器上的情况，需要注意</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line">1.关闭所有节点</span><br><span class="line">2.删除所有数据</span><br><span class="line">3.启动所有节点</span><br><span class="line">4.重新发现节点</span><br><span class="line">5.分配槽位</span><br><span class="line"></span><br><span class="line">pkill redis</span><br><span class="line">rm -rf /data/redis_cluster/redis_6380/*</span><br><span class="line">rm -rf /data/redis_cluster/redis_6381/*</span><br><span class="line">sh redis_shell.sh start 6380</span><br><span class="line">sh redis_shell.sh start 6381</span><br><span class="line"></span><br><span class="line">redis-cli -h db01 -p 6380 cluster addslots &#123;0..5461&#125;</span><br><span class="line">redis-cli -h db02 -p 6380 cluster addslots &#123;5462..10922&#125;</span><br><span class="line">redis-cli -h db03 -p 6380 cluster addslots &#123;10923..16383&#125;</span><br><span class="line"></span><br><span class="line">[root@db01 ~]# sh redis_shell.sh login 6380</span><br><span class="line">CLUSTER MEET 10.0.0.111 6381</span><br><span class="line">CLUSTER MEET 10.0.0.112 6380</span><br><span class="line">CLUSTER MEET 10.0.0.113 6380</span><br><span class="line">CLUSTER MEET 10.0.0.112 6381</span><br><span class="line">CLUSTER MEET 10.0.0.113 6381</span><br><span class="line">CLUSTER NODES</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1.把集群信息保存到txt文本里以作备用</span><br><span class="line">10.0.0.111:6380&gt; CLUSTER NODES</span><br><span class="line">626b8d037edc999a66dd63f786a56be5b79f3d12 10.0.0.111:6380 myself,master - 0 0 2 connected</span><br><span class="line">98f5ed97f9bbbbe95100f8e2f0081f510fb5cb05 10.0.0.112:6380 master - 0 1662817683321 0 connected</span><br><span class="line">5fd3c9b6c7878b89315ed4ae1856ea920522f371 10.0.0.113:6381 master - 0 1662817682299 4 connected</span><br><span class="line">48c5dd8b50551e698adf88ea55b8eef28d5139f2 10.0.0.112:6381 master - 0 1662817680260 3 connected</span><br><span class="line">1f577aa194affd0f98d072248c21af9582e7e885 10.0.0.113:6380 master - 0 1662817684339 5 connected</span><br><span class="line">06a3b31e896d81d6206137f69d10092feea16895 10.0.0.111:6381 master - 0 1662817681277 1 connected</span><br><span class="line"></span><br><span class="line">[root@db01 ~]# sh redis_shell.sh login 6381</span><br><span class="line">10.0.0.111:6381&gt; CLUSTER REPLICATE 98f5ed97f9bbbbe95100f8e2f0081f510fb5cb05</span><br><span class="line">OK</span><br><span class="line">10.0.0.111:6381&gt; CLUSTER NODES</span><br><span class="line">06a3b31e896d81d6206137f69d10092feea16895 10.0.0.111:6381 myself,slave 98f5ed97f9bbbbe95100f8e2f0081f510fb5cb05 0 0 1 connected</span><br><span class="line">98f5ed97f9bbbbe95100f8e2f0081f510fb5cb05 10.0.0.112:6380 master - 0 1662817903259 0 connected</span><br><span class="line">48c5dd8b50551e698adf88ea55b8eef28d5139f2 10.0.0.112:6381 master - 0 1662817898161 3 connected</span><br><span class="line">5fd3c9b6c7878b89315ed4ae1856ea920522f371 10.0.0.113:6381 master - 0 1662817899181 4 connected</span><br><span class="line">1f577aa194affd0f98d072248c21af9582e7e885 10.0.0.113:6380 master - 0 1662817900201 5 connected</span><br><span class="line">626b8d037edc999a66dd63f786a56be5b79f3d12 10.0.0.111:6380 master - 0 1662817902240 2 connected</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">集群高可用</span><br><span class="line">1.先查看节点信息，并保存</span><br><span class="line">[root@db01 ~]# redis-cli -c -h db01 -p 6381 cluster nodes</span><br><span class="line">2.删除所有的6381的信息</span><br><span class="line">3.删除不需要的信息</span><br><span class="line">4.用三剑客过滤</span><br><span class="line">[root@db01 ~]# redis-cli -c -h db01 -p 6381 cluster nodes|grep -v &quot;6381&quot;|awk &#x27;&#123;print $1,$2&#125;&#x27;</span><br><span class="line">8fc07c0e59ac7b09b4b58330bb4c0538cd2abf58 10.0.0.111:6380</span><br><span class="line">d2b584674c84a928b35f40587c638eed7705a24c 10.0.0.113:6380</span><br><span class="line">190e68ecd6e8e00c6f785d7fff25aa7b11befb4f 10.0.0.112:6380</span><br><span class="line">5.先在txt文本里敲，先别在shell里</span><br><span class="line">redis-cli -c -h db01 -p 6381 cluster replicate d2b584674c84a928b35f40587c638eed7705a24c</span><br><span class="line">redis-cli -c -h db02 -p 6381 cluster replicate 190e68ecd6e8e00c6f785d7fff25aa7b11befb4f</span><br><span class="line">redis-cli -c -h db03 -p 6381 cluster replicate 8fc07c0e59ac7b09b4b58330bb4c0538cd2abf58</span><br><span class="line">redis-cli -c -h db01 -p 6380 cluster info</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 停掉db01 6380</span><br><span class="line">[root@db01 ~]# sh redis_shell.sh stop 6380</span><br><span class="line"># 查看切换成功</span><br><span class="line">[root@db01 ~]# redis-cli -c -h db01 -p 6381 cluster nodes</span><br><span class="line"># 启动db01 6380</span><br><span class="line">[root@db01 ~]# sh redis_shell.sh start 6380</span><br><span class="line"># 恢复db01 6380为master</span><br><span class="line">[root@db01 ~]# redis-cli -c -h db01 -p 6380 cluster failover</span><br><span class="line">OK</span><br><span class="line"># 查看切换成功</span><br><span class="line">[root@db01 ~]# redis-cli -c -h db01 -p 6380 cluster nodes</span><br><span class="line">ad20be50060bcd7f90183a509eff300ab6bfd877 10.0.0.112:6381 slave 190e68ecd6e8e00c6f785d7fff25aa7b11befb4f 0 1662821389080 4 connected</span><br><span class="line">78784ccd35d89e3630c661e5c44840b7010332cc 10.0.0.111:6381 slave d2b584674c84a928b35f40587c638eed7705a24c 0 1662821387036 5 connected</span><br><span class="line">190e68ecd6e8e00c6f785d7fff25aa7b11befb4f 10.0.0.112:6380 master - 0 1662821386016 2 connected 5462-10922</span><br><span class="line">8fc07c0e59ac7b09b4b58330bb4c0538cd2abf58 10.0.0.111:6380 myself,master - 0 0 7 connected 0-5461</span><br><span class="line">d2b584674c84a928b35f40587c638eed7705a24c 10.0.0.113:6380 master - 0 1662821388055 5 connected 10923-16383</span><br><span class="line">f7a65dd3965d4cee8e3567cb96909c0150400bdc 10.0.0.113:6381 master - 0 1662821383973 6 connected</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">工具部署集群</span><br><span class="line"></span><br><span class="line">全部节点执行</span><br><span class="line">pkill redis</span><br><span class="line">rm -rf /data/redis_cluster/redis_6380/*</span><br><span class="line">rm -rf /data/redis_cluster/redis_6381/*</span><br><span class="line">sh redis_shell.sh start 6380</span><br><span class="line">sh redis_shell.sh start 6381</span><br><span class="line"></span><br><span class="line">db01执行</span><br><span class="line">cd /opt/redis_cluster/redis/src/</span><br><span class="line">./redis-trib.rb create --replicas 1 10.0.0.111:6380 10.0.0.112:6380 10.0.0.113:6380 10.0.0.111:6381 10.0.0.112:6381 10.0.0.113:6381</span><br><span class="line">./redis-trib.rb check 10.0.0.111:6380</span><br><span class="line">./redis-trib.rb rebalance 10.0.0.111:6380</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">工具部署有bug，会到导致db03自己复制自己，需要手动修改</span><br><span class="line">[root@db01 ~]# redis-cli -c -h db01 -p 6380 cluster nodes</span><br><span class="line">445dcd7e24c24662cc68e89385f8378888f1ae10 10.0.0.113:6381 slave ee02f3380c4f07b87e77a247592748a1cb81e1a2 0 1662823828856 6 connected</span><br><span class="line">6c432057f9c684a6320a2ec12a3f6ebf76117e39 10.0.0.111:6381 slave 1192af1a61bc5be9fed8b85f4813a39d49cf437d 0 1662823827837 4 connected</span><br><span class="line">1192af1a61bc5be9fed8b85f4813a39d49cf437d 10.0.0.112:6380 master - 0 1662823826819 2 connected 5461-10922</span><br><span class="line">4bc26e3f09f9bf999a39ead9f044004aa3065618 10.0.0.112:6381 slave 031c8c2b261ef0f463bc82b949f4808898fc1d8a 0 1662823830900 5 connected</span><br><span class="line">ee02f3380c4f07b87e77a247592748a1cb81e1a2 10.0.0.113:6380 master - 0 1662823829877 3 connected 10923-16383</span><br><span class="line">031c8c2b261ef0f463bc82b949f4808898fc1d8a 10.0.0.111:6380 myself,master - 0 0 1 connected 0-5460</span><br><span class="line"></span><br><span class="line"># db01 6381复制db02 6380</span><br><span class="line">[root@db01 ~]# redis-cli -c -h db01 -p 6381 cluster replicate 1192af1a61bc5be9fed8b85f4813a39d49cf437d</span><br><span class="line">OK</span><br><span class="line"># db02 6381复制db03 6380</span><br><span class="line">[root@db01 ~]# redis-cli -c -h db02 -p 6381 cluster replicate ee02f3380c4f07b87e77a247592748a1cb81e1a2</span><br><span class="line">OK</span><br><span class="line"># db03 6381复制db01 6380</span><br><span class="line">[root@db01 ~]# redis-cli -c -h db03 -p 6381 cluster replicate 031c8c2b261ef0f463bc82b949f4808898fc1d8a</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">[root@db01 ~]# redis-cli -c -h db01 -p 6380 cluster nodes</span><br><span class="line">445dcd7e24c24662cc68e89385f8378888f1ae10 10.0.0.113:6381 slave 031c8c2b261ef0f463bc82b949f4808898fc1d8a 0 1662824240605 6 connected</span><br><span class="line">6c432057f9c684a6320a2ec12a3f6ebf76117e39 10.0.0.111:6381 slave 1192af1a61bc5be9fed8b85f4813a39d49cf437d 0 1662824239587 4 connected</span><br><span class="line">1192af1a61bc5be9fed8b85f4813a39d49cf437d 10.0.0.112:6380 master - 0 1662824238569 2 connected 5461-10922</span><br><span class="line">4bc26e3f09f9bf999a39ead9f044004aa3065618 10.0.0.112:6381 slave ee02f3380c4f07b87e77a247592748a1cb81e1a2 0 1662824241626 5 connected</span><br><span class="line">ee02f3380c4f07b87e77a247592748a1cb81e1a2 10.0.0.113:6380 master - 0 1662824242034 3 connected 10923-16383</span><br><span class="line">031c8c2b261ef0f463bc82b949f4808898fc1d8a 10.0.0.111:6380 myself,master - 0 0 1 connected 0-5460</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">工具搭建失败</span><br><span class="line">1.没有安装gem和ruby环境</span><br><span class="line">2.所有节点必须数据为空才并且没有分配任何槽位才能用脚本创建集群</span><br><span class="line">3.必须所有节点全部都启动并且能连接到每个节点才能用脚本创建集群</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">reid集群回顾</span><br><span class="line">1.3.0版本以后推出的集群功能，推荐3.2版本以上的</span><br><span class="line">2.16384个槽位，误差在2%之间</span><br><span class="line">3.槽的序号无关，重点是槽的数量</span><br><span class="line">4.先发现集群meet</span><br><span class="line">5.配置文件信息是共享的，你不要手动修改</span><br><span class="line">6.分配槽位，必须所有的槽位都分配完毕</span><br><span class="line">7.理清复制关系，画图，按照图示执行复制命令</span><br><span class="line">8.查看集群状态是否为ok</span><br><span class="line">9.批量插入key，测试是否平均分配</span><br><span class="line">10.测试高可用，关闭任意主节点，是否会自动故障转移</span><br><span class="line">11.修复主节点之后，执行主从关系切换</span><br><span class="line">12.做实验尽量贴近生产环境，尽量使用和生产环境一样的数量样本</span><br><span class="line">13.评估和记录同步和故障转移完成的时间</span><br><span class="line">14.画好图，做好文档，实验环境搭建好，随时可以演示</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="8-5-4-测试集群"><a href="#8-5-4-测试集群" class="headerlink" title="8.5.4 测试集群"></a>8.5.4 测试集群</h3><p>这一次我们采用在一台机器上使用redis客户端远程操作集群其他节点</p>
+<p>注意：</p>
+<p>1.需要执行命令的是每个服务器的从节点</p>
+<p>2.注意主从的ID不要搞混了.</p>
+<p>执行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ]# redis-cli -h db01 -p 6381 CLUSTER REPLICATE 5cb6895305520e6a0aa4198a6ea5f2c087530b41</span><br><span class="line">OK</span><br><span class="line">[root@db01 ~]# redis-cli -h db02 -p 6381 CLUSTER REPLICATE aa9da67a594dfb357195f12ca4c44001804ee470</span><br><span class="line">OK</span><br><span class="line">[root@db01 &quot;]# redis-cli -h db03 -p 6381 CLUSTER REPLICATE d03cb38d612802aead8f727b1726a3359c241818</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-6-Redis-Cluster测试集群"><a href="#8-6-Redis-Cluster测试集群" class="headerlink" title="8.6 Redis Cluster测试集群"></a>8.6 Redis Cluster测试集群</h2><p>我们使用常规插入redis数据的方式往集群里写入数据看看会发生什么</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# redis-cli -h db01 -p 6380 set k1 v1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="8-7-Redis-Cluster-ASK路由介绍"><a href="#8-7-Redis-Cluster-ASK路由介绍" class="headerlink" title="8.7 Redis Cluster ASK路由介绍"></a>8.7 Redis Cluster ASK路由介绍</h2><p>在集群模式下，Redis接受任何键相关命令时首先会计算键对应的槽，再根据槽找出所对应的节点</p>
+<p>如果节点是自身，则处理键命令；</p>
+<p>否则回复MOVED重定向错误，通知客户端请求正确的节点，这个过程称为Mover重定向</p>
+<p>知道了ask路由后，我们使用 -c 选项批量插入一些数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# cat input_key.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">for i in $(seq 1 1000)</span><br><span class="line">do</span><br><span class="line">  redis-cli -c -h db01 -p 6380 set k_$&#123;i&#125; v_$&#123;i&#125; &amp;&amp; echo &quot;set k_$&#123;i&#125; is ok&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>写入后我们同样使用 -c 选项来读取刚才插入的键值，然后查看下redis会不会帮我们路由到正确的节点上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# redis-cli -c -h db01 -p 6380</span><br><span class="line">db01:6380&gt; get k_1</span><br><span class="line">&quot;v_1&quot;</span><br><span class="line">db01:6380&gt; get k_100</span><br><span class="line">-&gt; Redirected to slot [5541] located at 10.0.0.52:6380</span><br><span class="line">&quot;v_100&quot;</span><br><span class="line">10.0.0.52:6380&gt; get k_1000</span><br><span class="line">-&gt; Redirected to slot [79] located at 10.0.0.51:6380</span><br><span class="line">&quot;v_1000&quot;</span><br><span class="line">10.0.0.51:6380&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="8-8-模拟故障转移"><a href="#8-8-模拟故障转移" class="headerlink" title="8.8 模拟故障转移"></a>8.8 模拟故障转移</h2><p>至此，我们已经手动的把一个redis高可用的集群部署完毕了，但是还没有模拟过故障</p>
+<p>这里我们就模拟故障，停掉期中一台主机的redis节点，然后查看一下集群的变化</p>
+<p>我们使用暴力的 kill -9 杀掉 db02 上的 redis 集群节点，然后观察节点状态</p>
+<p>理想情况应该是 db01上的 6381 从节点升级为主节点</p>
+<p>在db01上查看集群节点状态</p>
+<p>虽然我们已经测试了故障切换的功能，但是节点修复后还是需要重新上线</p>
+<p>所以这里测试节点重新上线后的操作</p>
+<p>重新启动db02的6380，然后观察日志</p>
+<p>这时假如我们想让修复后的节点重新上线，可以在想变成主库的从库执行CLUSTER FAILOVER命令</p>
+<p>这里我们在db02的6380上执行</p>
+<h2 id="8-9-使用工具搭建部署-Redis-Cluster"><a href="#8-9-使用工具搭建部署-Redis-Cluster" class="headerlink" title="8.9 使用工具搭建部署 Redis Cluster"></a>8.9 使用工具搭建部署 Redis Cluster</h2><p>手动搭建集群便于理解集群创建的流程和细节，不过手动搭建集群需要很多步骤，当集群节点众多时，必然会加大搭建集群的复杂度和运维成本，因此官方提供了 redis-trib.rb 的工具方便我们快速搭建集群。</p>
+<p>redis-trib.rb 是采用 Ruby 实现的 redis 集群管理工具，内部通过 Cluster 相关命令帮我们简化集群创建、检查、槽迁移和均衡等常见运维操作，使用前要安装 ruby 依赖环境</p>
+<p>安装命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br><span class="line">yum install rubygems</span><br><span class="line">gem sources --remove https://rubvgems.org/</span><br><span class="line">gem sources -a http://mirrors.aliyun.com/rubygems/</span><br><span class="line">gem update - system</span><br><span class="line">gem install redis -v 3.3.5</span><br></pre></td></tr></table></figure>
+
+<p>我们可以停掉所有的节点，然后清空数据，恢复成一个全新的集群，所有机器执行命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pkill redis</span><br><span class="line">rm -rf /data/redis_cluster/redis_6380/*</span><br><span class="line">rm -rf /data/redis_cluster/redis_6381/*</span><br></pre></td></tr></table></figure>
+
+<p>全部清空之后启动所有的节点，所有机器执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sh redis_shell.sh start 6380</span><br><span class="line">sh redis_shell.sh start 6381</span><br></pre></td></tr></table></figure>
+
+<p>db01执行创建集群命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/redis_cluster/redis/src/</span><br><span class="line">./redis-trib.rb create --replicas 1 10.0.0.51:6380 10.0.0.52:6380 10.0.0.53:6380 10.0.0.51:6381 10.0.0.52:6381 10.0.0.53:6381</span><br></pre></td></tr></table></figure>
+
+<p>检查集群完整性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./redis-trib.rb check 10.0.0.51:6380</span><br></pre></td></tr></table></figure>
+
+<p>检查槽位分配误差</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 src]# ./redis-trib.rb rebalance 10.0.0.111:6380</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="8-10-工具扩容节点"><a href="#8-10-工具扩容节点" class="headerlink" title="8.10 工具扩容节点"></a>8.10 工具扩容节点</h2><p>Redis 集群的扩容操作可分为以下几个步骤</p>
+<p>1)准备新节点</p>
+<p>2)加入集群</p>
+<p>3)迁移槽和数据</p>
+<p>扩容流程图：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.16384个槽</span><br><span class="line">2.其他主节点迁移槽位到新节点</span><br><span class="line">3.配置新的主从关系</span><br><span class="line">4.插入KEY测试</span><br><span class="line">5.meet发现集群</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">1.恢复集群默认配置</span><br><span class="line">- 前提条件，没有数据，没有分配槽位</span><br><span class="line">db01:6391&gt; CLUSTER RESET</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">#在db01上创建新节点</span><br><span class="line">mkdir -p /opt/redis_cluster/redis_&#123;6390,6391&#125;/&#123;conf,logs,pid&#125;</span><br><span class="line">mkdir -p /data/redis_cluster/redis_&#123;6390,6391&#125;</span><br><span class="line">cd /opt/redis_cluster/</span><br><span class="line">cp redis_6380/conf/redis_6380.conf redis_6390/conf/redis_6390.conf</span><br><span class="line">cp redis_6380/conf/redis_6380.conf redis_6391/conf/redis_6391.conf</span><br><span class="line">sed -i &#x27;s#6380#6390#g&#x27; redis_6390/conf/redis_6390.conf</span><br><span class="line">sed -i &#x27;s#6380#6391#g&#x27; redis_6391/conf/redis_6391.conf</span><br><span class="line"></span><br><span class="line">#在db01上启动新节点</span><br><span class="line">bash redis_shell.sh start 6390</span><br><span class="line">bash redis_shell.sh start 6391</span><br><span class="line"></span><br><span class="line">#使用工具发现节点并重新分配槽位</span><br><span class="line">cd /opt/redis_cluster/redis/src/</span><br><span class="line">./redis-trib.rb add-node 10.0.0.51:6390 10.0.0.51:6380</span><br><span class="line">./redis-trib.rb add-node 10.0.0.51:6391 10.0.0.51:6380</span><br><span class="line">./redis-trib.rb reshard 10.0.0.51:6380</span><br><span class="line"></span><br><span class="line">#输入需要迁移多少个槽位</span><br><span class="line">4096</span><br><span class="line">yes</span><br><span class="line">########输入db01的6390的ID#########</span><br><span class="line">all</span><br><span class="line">yes</span><br><span class="line"></span><br><span class="line">#重新做主从关系</span><br><span class="line">先做db03的6381复制db01的6390</span><br><span class="line">再做db01的6391复制db01的6380</span><br><span class="line"></span><br><span class="line">#确认和测试</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们在db01上创建2个新节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /opt/redis_cluster/redis_&#123;6390,6391&#125;/&#123;conf,logs,pid&#125;</span><br><span class="line">mkdir -p /data/redis_cluster/redis_&#123;6390,6391&#125;</span><br><span class="line">cd /opt/redis_cluster/</span><br><span class="line">cp redis_6380/conf/redis_6380.conf redis_6390/conf/redis_6390.conf</span><br><span class="line">cp redis_6380/conf/redis_6380.conf redis_6391/conf/redis_6391.conf</span><br><span class="line">sed -i &#x27;s#6380#6390#g&#x27; redis_6390/conf/redis_6390.conf</span><br><span class="line">sed -i &#x27;s#6380#6391#g&#x27; redis_6391/conf/redis_6391.conf</span><br></pre></td></tr></table></figure>
+
+<p>启动节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash redis_shell.sh start 6390</span><br><span class="line">bash redis_shell.sh start 6391</span><br></pre></td></tr></table></figure>
+
+<p>发现节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -c -h db01 -p 6380 cluster meet 10.0.0.51 6390</span><br><span class="line">redis-cli -c -h db01 -p 6380 cluster meet 10.0.0.51 6391</span><br></pre></td></tr></table></figure>
+
+<p>在db01上使用工具扩容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/redis_cluster/redis/src/</span><br><span class="line">./redis-trib.rb add-node 10.0.0.51:6390 10.0.0.51:6380</span><br><span class="line">./redis-trib.rb add-node 10.0.0.51:6391 10.0.0.51:6380</span><br><span class="line">./redis-trib.rb reshard 10.0.0.51:6380</span><br></pre></td></tr></table></figure>
+
+<p>打印出进群每个节点信息后，reshard命令需要确认迁移的槽数量，这里我们输入4096个：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">How many slots do you want to move (from 1 to 16384)? 4096</span><br></pre></td></tr></table></figure>
+
+<p>输入6390的节点ID作为目标节点，也就是要扩容的节点，目标节点只能指定一个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">What is the receiving node ID? XXXXXXXX</span><br></pre></td></tr></table></figure>
+
+<p>之后输入源节点的ID,这里分别输入每个主节点的6380的ID最后输入done,或者直接输入all</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Source node #1:all</span><br></pre></td></tr></table></figure>
+
+<p>迁移完成后命令会自动退出，这时候我们查看一下集群的状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./redis-trib.rb rebalance 10.0.0.51:6380</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">问题：</span><br><span class="line">1.主从关系不对</span><br><span class="line">2.没分配槽位直接做了主从</span><br><span class="line">3.出现错误可以尝试使用工具的fix的功能</span><br><span class="line">cd /opt/redis_cluster/redis/src/</span><br><span class="line">./redis-trib.rb fix 10.0.0.51:6380</span><br><span class="line">4.快速重做一个4主4从的集群</span><br><span class="line">  - 停掉所有节点的redis服务</span><br><span class="line">    pkill redis</span><br><span class="line">  - 删除所有节点的数据</span><br><span class="line">    rm -rf /data/redis_cluster/redis_6380/*</span><br><span class="line">    rm -rf /data/redis_cluster/redis_6381/*</span><br><span class="line">    rm -rf /data/redis_cluster/redis_6390/*</span><br><span class="line">    rm -rf /data/redis_cluster/redis_6391/*</span><br><span class="line">  - 启动所有节点</span><br><span class="line">    sh redis_shell.sh start 6380</span><br><span class="line">    sh redis_shell.sh start 6381</span><br><span class="line">    sh redis_shell.sh start 6390</span><br><span class="line">    sh redis_shell.sh start 6391</span><br><span class="line">  - 利用工具创建集群</span><br><span class="line">    ./redis-trib.rb create --replicas 1 10.0.0.51:6380 10.0.0.51:6390 10.0.0.52:6380 10.0.0.53:6380 10.0.0.51:6381 10.0.0.51:6391 10.0.0.52:6381 10.0.0.53:6381</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="8-11-工具收缩节点"><a href="#8-11-工具收缩节点" class="headerlink" title="8.11 工具收缩节点"></a>8.11 工具收缩节点</h2><p>流程说明</p>
+<p>1).首先需要确定下线节点是否有负责的槽。</p>
+<p>如果是，需要把槽迁移到其他节点，保证节点下线后整个集群槽节点映射的完整性.</p>
+<p>2).当下线节点不再负责槽或者本身是从节点时。</p>
+<p>就可以通知集群内其他节点忘记下线节点，当所有的节点忘记该节点后可以正常关闭.</p>
+<p>这里我们准备将刚才新添加的节点下线，也就是6390和6391</p>
+<p>收缩和扩容迁移的方向相反，6390变为源节点，其他节点变为目标节点，源节点把自己负责的4096个槽均匀的迁移到其他节点上.</p>
+<p>由于redis-trib.rb reshard命令只能有一个目标节点，因此需要执行3次reshard命令，分别迁移1365,1365,1366个槽.</p>
+<p>操作命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/redis_cluster/redis/src/</span><br><span class="line">./redis-trib.rb reshard 10.0.0.51:6380</span><br><span class="line">How many slots do you want to move (from 1 to 16384)? 1365</span><br><span class="line">输入6380的id</span><br><span class="line">输入6390的id</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">收缩节点：</span><br><span class="line">#进入脚本目录</span><br><span class="line">cd /opt/redis_cluster/redis/src/</span><br><span class="line">./redis-trib.rb reshard 10.0.0.51:6391</span><br><span class="line"></span><br><span class="line">#输入要迁移的槽数</span><br><span class="line">1365</span><br><span class="line"></span><br><span class="line">#输入接收的节点的ID</span><br><span class="line">XXXXX</span><br><span class="line"></span><br><span class="line">#确认</span><br><span class="line">yes</span><br><span class="line"></span><br><span class="line">#输入源节点的ID</span><br><span class="line">1.XXXXX</span><br><span class="line">2.done</span><br><span class="line"></span><br><span class="line">#输入确认</span><br><span class="line">yes</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="8-12-忘记节点"><a href="#8-12-忘记节点" class="headerlink" title="8.12 忘记节点"></a>8.12 忘记节点</h2><p>由于我们的集群是做了高可用的，所以当主节点下线的时候从节点也会顶上，所以最好我们先下线从节点，然后在下线主节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/redis_cluster/redis/src/</span><br><span class="line">./redis-trib.rb del-node 10.0.0.51:6391 ID</span><br><span class="line">./redis-trib.rb del-node 10.0.0.51:6390 ID</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 /opt/redis_cluster/redis/src]# ./redis-trib.rb del-node 10.0.0.51:6390 3be528d0558ba4284c17601c8e4cda2a743ca7c5</span><br><span class="line">&gt;&gt;&gt; Removing node 3be528d0558ba4284c17601c8e4cda2a743ca7c5 from cluster 10.0.0.51:6390</span><br><span class="line">&gt;&gt;&gt; Sending CLUSTER FORGET messages to the cluster....</span><br><span class="line">&gt;&gt;&gt; SHUTDOWN the node.</span><br><span class="line"></span><br><span class="line">工具删除节点</span><br><span class="line">1.从库可以直接删除</span><br><span class="line">2.主库必须是没有槽位并且没有数据</span><br><span class="line">命令：</span><br><span class="line">./redis-trib.rb del-node IP:PORT ID</span><br><span class="line"></span><br><span class="line">[root@db01 /opt/redis cluster/redis/src]# ./redis-trib.rb del-node 10.0.0.51:6380 01eab3c9f767c88fdbc94f3a7e39ee65ce30baa1</span><br><span class="line">&gt;&gt;&gt; Removing node 0leab3c9f767c88fdbc94f3a7e39ee65ce30baal from cluster 10.0.0.51:6380</span><br><span class="line">[ERR] Node 10.0.0.51:6380 is not empty! Reshard data away and try again.</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="第9章Redis集群常用命令"><a href="#第9章Redis集群常用命令" class="headerlink" title="第9章Redis集群常用命令"></a>第9章Redis集群常用命令</h2><p>集群(cluster)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CLUSTER INFO  打印集群的信息</span><br><span class="line">CLUSTER NODES  列出集群当前已知的所有节点(node)，以及这些节点的相关信息。</span><br></pre></td></tr></table></figure>
+
+<p>节点(node)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CLUSTER MEET &lt;ip&gt; &lt;port&gt; 将 ip 和 port 所指定的节点添加到集群当中，让它成为集群的一份子。</span><br><span class="line">CLUSTER FORGET &lt;node_id&gt; 从集群中移除 node_id 指定的节点。</span><br><span class="line">CLUSTER REPLICATE &lt;node_id&gt; 将当前节点设置为 node_id 指定的节点的从节点。</span><br><span class="line">CLUSTER SAVECONFIG 将节点的配置文件保存到硬盘里面。</span><br></pre></td></tr></table></figure>
+
+<p>槽(slot)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CLUSTER ADDSLOTS &lt;slot&gt; [slot ... ] 将一个或多个槽(slot)指派(assign)给当前节点。</span><br><span class="line">CLUSTER DELSLOTS &lt;slot&gt; [slot ... ] 移除一个或多个槽对当前节点的指派。</span><br><span class="line">CLUSTER FLUSHSLOTS 移除指派给当前节点的所有槽，让当前节点变成一个没有指派任何槽的节点。</span><br><span class="line">CLUSTER SETSLOT &lt;slot&gt; NODE &lt;node_id&gt; 将槽 slot 指派给 node_id 指定的节点,如果槽已经指派给另一个节点，那么先让另一个节点删除该槽&gt;，然后再进行指派。</span><br><span class="line">CLUSTER SETSLOT &lt;slot&gt; MIGRATING &lt;node_id&gt; 将本节点的槽 slot 迁移到 node_id 指定的节点中。</span><br><span class="line">CLUSTER SETSLOT &lt;slot&gt; IMPORTING &lt;node_id&gt; 从 node_id 指定的节点中导入槽 slot 到本节点。</span><br><span class="line">CLUSTER SETSLOT &lt;slot&gt; STABLE 取消对槽 slot 的导入(import)或者迁移(migrate)。</span><br></pre></td></tr></table></figure>
+
+<p>键(key)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CLUSTER KEYSLOT &lt;key&gt; 计算键 key 应该被放置在哪个槽上。</span><br><span class="line">CLUSTER COUNTKEYSINSLOT &lt;slot&gt; 返回槽 slot 目前包含的键值对数量。</span><br><span class="line">CLUSTER GETKEYSINSLOT &lt;slot&gt; &lt;count&gt; 返回 count 个 slot 槽中的键。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="第10章-Redis运维工具"><a href="#第10章-Redis运维工具" class="headerlink" title="第10章 Redis运维工具"></a>第10章 Redis运维工具</h1><h2 id="10-1-运维脚本"><a href="#10-1-运维脚本" class="headerlink" title="10.1 运维脚本"></a>10.1 运维脚本</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# cat redis_shell.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">USAG() &#123;</span><br><span class="line">  echo &quot;sh $0 &#123;start|stop|restart|login|ps|tail&#125; PORT&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [ &quot;$#&quot; = 1 ]</span><br><span class="line">then</span><br><span class="line">  REDIS_PORT=&#x27;6379&#x27;</span><br><span class="line">elif</span><br><span class="line">  [ &quot;$#&quot; = 2 -a -z &quot;$(echo &quot;$2&quot;|sed &#x27;s#[0-9]##g&#x27;)&quot; ]</span><br><span class="line">then</span><br><span class="line">  REDIS_PORT=&quot;$2&quot;</span><br><span class="line">else</span><br><span class="line">  USAG</span><br><span class="line">  exit 0</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">REDIS_IP=$(hostname -I|awk &#x27;&#123;print $1&#125;&#x27;)</span><br><span class="line">PATH_DIR=/opt/redis_cluster/redis_$&#123;REDIS_PORT&#125;/</span><br><span class="line">PATH_CONF=/opt/redis_cluster/redis_$&#123;REDIS_PORT&#125;/conf/redis_$&#123;REDIS_PORT&#125;.conf</span><br><span class="line">PATH_LOG=/opt/redis_cluster/redis_$&#123;REDIS_PORT&#125;/logs/redis_$&#123;REDIS_PORT&#125;.log</span><br><span class="line"></span><br><span class="line">CMD_START() &#123;</span><br><span class="line">  redis-server $&#123;PATH_CONF&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CMD_SHUTDOWN() &#123;</span><br><span class="line">  redis-cli -c -h $&#123;REDIS_IP&#125; -p $&#123;REDIS_PORT&#125; shutdown</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CMD_LOGIN() &#123;</span><br><span class="line">  redis-cli -c -h $&#123;REDIS_IP&#125; -p $&#123;REDIS_PORT&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CMD_PS() &#123;</span><br><span class="line">  ps -ef|grep redis</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CMD_TAIL() &#123;</span><br><span class="line">  tail -f $&#123;PATH_LOG&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">case $1 in</span><br><span class="line">  start)</span><br><span class="line">    CMD_START</span><br><span class="line">    CMD_PS</span><br><span class="line">    ;;</span><br><span class="line">  stop)</span><br><span class="line">    CMD_SHUTDOWN</span><br><span class="line">    CMD_PS</span><br><span class="line">    ;;</span><br><span class="line">  restart)</span><br><span class="line">    CMD_SHUTDOWN</span><br><span class="line">    CMD_START</span><br><span class="line">    CMD_PS</span><br><span class="line">    ;;</span><br><span class="line">  login)</span><br><span class="line">    CMD_LOGIN</span><br><span class="line">    ;;</span><br><span class="line">  ps)</span><br><span class="line">    CMD_PS</span><br><span class="line">    ;;</span><br><span class="line">  tail)</span><br><span class="line">    CMD_TAIL</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    USAG</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="10-2-数据导入导出工具"><a href="#10-2-数据导入导出工具" class="headerlink" title="10.2 数据导入导出工具"></a>10.2 数据导入导出工具</h2><p><a target="_blank" rel="noopener" href="https://www.oschina.net/p/redis-migrate-tool">https://www.oschina.net/p/redis-migrate-tool</a></p>
+<p>需求背景</p>
+<p>刚切换到redis集群的时候肯定会面临数据导入的问题，所以这里推荐使用redis-migrate-tool 工具来导入单节点数据到集群里</p>
+<p>官方地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.oschina.net/p/redis-migrate-tool</span><br></pre></td></tr></table></figure>
+
+<p>安装工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/redis_cluster/</span><br><span class="line">git clone https://github.com/vipshop/redis-migrate-tool.git</span><br><span class="line">cd redis-migrate-tool/</span><br><span class="line">autoreconf -fvi</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>创建配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# cat redis_6379_to_6380.conf</span><br><span class="line">[source]</span><br><span class="line">type: single</span><br><span class="line">servers:</span><br><span class="line">- 10.0.0.51:6379</span><br><span class="line"></span><br><span class="line">[target]</span><br><span class="line">type: redis cluster</span><br><span class="line">servers:</span><br><span class="line">- 10.0.0.51:6380</span><br><span class="line"></span><br><span class="line">[common]</span><br><span class="line">listen: 0.0.0.0:8888</span><br><span class="line">source_safe: true</span><br></pre></td></tr></table></figure>
+
+<p>生成测试数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# cat input_key.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">for i in $(seq 1 1000)</span><br><span class="line">do</span><br><span class="line">    redis-cli -c -h db01 -p 6379 set k_$&#123;i&#125; v_$&#123;i&#125; &amp;&amp; echo &quot;set k_$&#123;i&#125; is ok&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>执行导入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# redis-migrate-tool -c redis_6379_to_6380.conf</span><br></pre></td></tr></table></figure>
+
+<p>数据校验</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# redis-migrate-tool -c redis_6379_to_6380.conf -C redis_check</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="10-3分析键值大小"><a href="#10-3分析键值大小" class="headerlink" title="10.3分析键值大小"></a>10.3分析键值大小</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">需求背景</span><br><span class="line">redis的内存使用太大键值太多，不知道哪些键值占用的容量比较大，而且在线分析会影响性能。</span><br><span class="line">安装工具</span><br><span class="line">yum install python-pip gcc python-devel</span><br><span class="line">cd /opt/</span><br><span class="line">git clone https://github.com/sripathikrishnan/redis-rdb-tools</span><br><span class="line">cd redis-rdb-tools</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+
+<p>使用方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /data/redis_cluster/redis_6380/</span><br><span class="line">rdb -c memory redis_6380.rdb -f redis_6380.rdb.csv</span><br></pre></td></tr></table></figure>
+
+<p>分析 rdb 并导出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F &#x27;,&#x27; &#x27;&#123;print $4,$2,$3,$1&#125;&#x27; redis_6380.rdb.csv |sort &gt; 6380.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">需求背景</span><br><span class="line">redis的内存使用太大键值太多，不知道哪些键值占用的容量比较大，而且在线分析会影响性能。</span><br><span class="line"></span><br><span class="line">安装工具</span><br><span class="line">yum install python-pip gcc python-devel -y</span><br><span class="line">pip install --upgrade pip</span><br><span class="line">pip install rdbtools</span><br><span class="line"></span><br><span class="line">报错安装</span><br><span class="line">yum install libtool -y</span><br><span class="line"></span><br><span class="line">使用方法</span><br><span class="line">cd /data/redis_cluster/redis_6379/</span><br><span class="line">rdb -c memory redis_6379.rdb -f 6379_memory.csv</span><br><span class="line"></span><br><span class="line">分析rdb</span><br><span class="line">awk -F &#x27;,&#x27; &#x27;&#123;print $4,$2,$3,$1&#125;&#x27; redis_6380.rdb.csv |sort &gt; 6380.txt</span><br><span class="line">awk -F &#x27;,&#x27; &#x27;&#123;print $4,$3&#125;&#x27; 6379_memory.csv |sort -rn |head -10</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="10-4监控过期键"><a href="#10-4监控过期键" class="headerlink" title="10.4监控过期键"></a>10.4监控过期键</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">需求背景</span><br><span class="line">因为开发重复提交，导致电商网站优惠卷过期时间失效</span><br><span class="line">问题分析</span><br><span class="line">如果一个键已经设置了过期时间，这时候在 set 这个键，过期时间就会取消</span><br><span class="line">解决思路</span><br><span class="line">如何在不影响机器性能的前提下批量获取需要监控键过期时间</span><br><span class="line">1.Keys *  查出来匹配的键名。然后循环读取 ttl 时间</span><br><span class="line">2.scan *  范围查询键名。然后循环读取 ttl 时间</span><br><span class="line">Keys  重操作，会影响服务器性能，除非是不提供服务的从节点</span><br><span class="line">Scan  负担小，但是需要去多次才能取完，需要写脚本</span><br></pre></td></tr></table></figure>
+
+<p>脚本内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat 01get_key.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">key_num=0</span><br><span class="line">&gt; key_name.log</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>redis回顾</p>
+<p>1.redis应用场景</p>
+<ul>
+<li>字符串<ul>
+<li>ttl过期时间<ul>
+<li>session会话</li>
+<li>优惠券过期</li>
+</ul>
+</li>
+<li>计数器<ul>
+<li>帖子浏览数，视频播放次数</li>
+</ul>
+</li>
+<li>文本</li>
+</ul>
+</li>
+<li>列表<ul>
+<li>排行榜</li>
+</ul>
+</li>
+<li>哈希<ul>
+<li>映射mysql数据作为缓存层</li>
+</ul>
+</li>
+<li>集合<ul>
+<li>兴趣标签，共同好友，广告精确投放</li>
+</ul>
+</li>
+</ul>
+<p>2.持久化</p>
+<ul>
+<li>rdb<ul>
+<li>占用空间小，恢复速度快</li>
+<li>可能会丢数据</li>
+</ul>
+</li>
+<li>aof<ul>
+<li>数据安全，1秒和每次命令都记录</li>
+<li>占用空间大，恢复速度慢</li>
+</ul>
+</li>
+</ul>
+<p>3.安全</p>
+<ul>
+<li>防火墙开放相应端囗号</li>
+<li>修改默认端囗号</li>
+<li>绑定内网IP</li>
+<li>密码认证</li>
+<li>定时备份RDB文件</li>
+</ul>
+<p>4.架构</p>
+<ul>
+<li>主从<ul>
+<li>安装部署主从节点</li>
+<li>复制配置参数：slaveof IP PORT</li>
+<li>停止复制：slaveof no one</li>
+<li>复制流程</li>
+</ul>
+</li>
+<li>哨兵<ul>
+<li>安装部署主从节点和哨兵节点</li>
+<li>哨兵配置文件<ul>
+<li>sentinel monitor mymaster 10.0.0.51 6379 2<br>sentinel down-after-milliseconds mymaster 3000<br>sentinel parallel-syncs mymaster 1<br>sentinel failover-timeout mymaster 18000</li>
+<li>配置文件不需要手动修改</li>
+<li>哨兵之间会共享集群信息</li>
+</ul>
+</li>
+<li>启动主从节点和哨兵节点</li>
+<li>测试关闭主节点，哨兵能不能自动故障切换</li>
+<li>手动修复上线</li>
+</ul>
+</li>
+<li>集群<ul>
+<li>安装部署主从节点</li>
+<li>配置集群配置文件<ul>
+<li>cluster-enabled yes<br>cluster-config-file nodes_6380.conf<br>cluster-node-timeout 15000</li>
+</ul>
+</li>
+<li>启动所有节点</li>
+<li>用工具建立集群<ul>
+<li>.&#x2F;redis-trib.rb create –replicas 1 10.0.0.111:6380 10.0.0.112:6380 10.0.0.113:6380 10.0.0.111:6381 10.0.0.112:6381 10.0.0.113:6381</li>
+</ul>
+</li>
+<li>调整主从关系<ul>
+<li>画图</li>
+</ul>
+</li>
+<li>测试关闭主节点后从库是否会接替主库继续工作</li>
+<li>恢复上线，主从关系手动切换<ul>
+<li>CLUSTER FAILOVER</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>5.运维工具</p>
+<ul>
+<li>启动脚本</li>
+<li>数据导入导出工具</li>
+<li>分析键值大小工具</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">redis</span><br><span class="line">1.redis的特点</span><br><span class="line">2.redis应用场景</span><br><span class="line">3.redis五种数据类型</span><br><span class="line">4.主从复制</span><br><span class="line">5.哨兵</span><br><span class="line">6.集群</span><br><span class="line">7.工具使用</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io">壹拾陆</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io/posts/5ebc1573.html">https://mo-li001.github.io/posts/5ebc1573.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mo-li001.github.io" target="_blank">壹拾陆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/b9535d1f.html"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Mysql入门到高级</div></div></a></div><div class="next-post pull-right"><a href="/posts/fc24f34b.html"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">linux2</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/abc41134.html" title="没写好"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">没写好</div></div></a></div><div><a href="/posts/9f353bc9.html" title="Devops"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Devops</div></div></a></div><div><a href="/posts/f5f9fa9b.html" title="Docker"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Docker</div></div></a></div><div><a href="/posts/34d20e28.html" title="ELK"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK</div></div></a></div><div><a href="/posts/8005.html" title="ELK快速部署"><img class="cover" src="https://tuchuangs.com/imgs/2022/09/18/074f3836d4f471b8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK快速部署</div></div></a></div><div><a href="/posts/9bdc030a.html" title="HAproxy"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">HAproxy</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis"><span class="toc-text">Redis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC1%E7%AB%A0-Redis%E4%BB%8B%E7%BB%8D"><span class="toc-text">第1章 Redis介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Redis-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">1.1 Redis 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Redis-%E9%87%8D%E8%A6%81%E7%89%B9%E6%80%A7"><span class="toc-text">1.2 Redis 重要特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Redis-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">1.3 Redis 应用场景</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC2%E7%AB%A0Redis-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2"><span class="toc-text">第2章Redis 安装部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E7%9B%AE%E5%BD%95%E8%A7%84%E5%88%92"><span class="toc-text">2.1目录规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4"><span class="toc-text">2.2安装命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="toc-text">2.3配置文件说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4%E5%90%AF%E5%8A%A8%E5%85%B3%E9%97%AD%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.4启动关闭服务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0Redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-text">第3章Redis基本操作命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1%E5%85%A8%E5%B1%80%E5%91%BD%E4%BB%A4"><span class="toc-text">3.1全局命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">3.2字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3%E5%88%97%E8%A1%A8"><span class="toc-text">3.3列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4%E5%93%88%E5%B8%8C"><span class="toc-text">3.4哈希</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5%E9%9B%86%E5%90%88"><span class="toc-text">3.5集合</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC4%E7%AB%A0Redis%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">第4章Redis持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1%E6%8C%81%E4%B9%85%E5%8C%96%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E4%BB%8B%E7%BB%8D"><span class="toc-text">4.1持久化的两种方式介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-text">4.2面试题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC5%E7%AB%A0-Redis-%E5%AE%89%E5%85%A8%E8%AE%A4%E8%AF%81"><span class="toc-text">第5章 Redis 安全认证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC6%E7%AB%A0-Redis-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-text">第6章 Redis 主从复制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%BB%8B%E7%BB%8D"><span class="toc-text">6.1主从复制介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4"><span class="toc-text">6.2配置命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-1%E5%BB%BA%E7%AB%8B%E5%A4%8D%E5%88%B6"><span class="toc-text">6.2.1建立复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-2%E6%96%AD%E5%BC%80%E5%A4%8D%E5%88%B6"><span class="toc-text">6.2.2断开复制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC7%E7%AB%A0-Redis-Sentinel%EF%BC%88%E5%93%A8%E5%85%B5%EF%BC%89"><span class="toc-text">第7章 Redis Sentinel（哨兵）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1%E5%93%A8%E5%85%B5%E4%BB%8B%E7%BB%8D"><span class="toc-text">7.1哨兵介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2%E5%93%A8%E5%85%B5%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-text">7.2哨兵主要功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3%E7%9B%AE%E5%BD%95%E8%A7%84%E5%88%92"><span class="toc-text">7.3目录规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4"><span class="toc-text">7.4安装配置命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-1-db01%E5%91%BD%E4%BB%A4"><span class="toc-text">7.4.1 db01命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-2-db02%E5%91%BD%E4%BB%A4"><span class="toc-text">7.4.2 db02命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-3-db03%E5%91%BD%E4%BB%A4"><span class="toc-text">7.4.3 db03命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-4-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%A7%A3%E9%87%8A"><span class="toc-text">7.4.4 配置文件解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-5-db02-x2F-db03%E5%91%BD%E4%BB%A4"><span class="toc-text">7.4.5 db02&#x2F;db03命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-6-%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%E5%85%B3%E7%B3%BB"><span class="toc-text">7.4.6 配置主从关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-7-%E5%90%AF%E5%8A%A8%E5%93%A8%E5%85%B5"><span class="toc-text">7.4.7 启动哨兵</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-5-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E5%8F%98%E5%8C%96"><span class="toc-text">7.5 配置文件的变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-6-%E5%93%A8%E5%85%B5%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9CAPI"><span class="toc-text">7.6 哨兵常用操作API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-7-%E6%A8%A1%E6%8B%9F%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB"><span class="toc-text">7.7 模拟故障转移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E5%9B%9E%E9%A1%BE"><span class="toc-text">总结回顾</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC8%E7%AB%A0-Redis-Cluster"><span class="toc-text">第8章 Redis Cluster</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-%E9%9B%86%E7%BE%A4%E4%BB%8B%E7%BB%8D"><span class="toc-text">8.1 集群介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83"><span class="toc-text">8.2 数据分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3%E7%9B%AE%E5%BD%95%E8%A7%84%E5%88%92"><span class="toc-text">8.3目录规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-4-%E9%9B%86%E7%BE%A4%E6%8B%93%E6%89%91"><span class="toc-text">8.4 集群拓扑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-5-%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2%E9%9B%86%E7%BE%A4"><span class="toc-text">8.5 手动搭建部署集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-5-1-Redis-Cluster-%E9%80%9A%E8%AE%AF%E6%B5%81%E7%A8%8B"><span class="toc-text">8.5.1 Redis Cluster 通讯流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-5-2-Redis-Cluster-%E6%89%8B%E5%8A%A8%E5%88%86%E9%85%8D%E6%A7%BD%E4%BD%8D"><span class="toc-text">8.5.2 Redis Cluster 手动分配槽位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-5-3-%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%9B%86%E7%BE%A4%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="toc-text">8.5.3 手动配置集群高可用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-5-4-%E6%B5%8B%E8%AF%95%E9%9B%86%E7%BE%A4"><span class="toc-text">8.5.4 测试集群</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-6-Redis-Cluster%E6%B5%8B%E8%AF%95%E9%9B%86%E7%BE%A4"><span class="toc-text">8.6 Redis Cluster测试集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-7-Redis-Cluster-ASK%E8%B7%AF%E7%94%B1%E4%BB%8B%E7%BB%8D"><span class="toc-text">8.7 Redis Cluster ASK路由介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-8-%E6%A8%A1%E6%8B%9F%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB"><span class="toc-text">8.8 模拟故障转移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-9-%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2-Redis-Cluster"><span class="toc-text">8.9 使用工具搭建部署 Redis Cluster</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-10-%E5%B7%A5%E5%85%B7%E6%89%A9%E5%AE%B9%E8%8A%82%E7%82%B9"><span class="toc-text">8.10 工具扩容节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-11-%E5%B7%A5%E5%85%B7%E6%94%B6%E7%BC%A9%E8%8A%82%E7%82%B9"><span class="toc-text">8.11 工具收缩节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-12-%E5%BF%98%E8%AE%B0%E8%8A%82%E7%82%B9"><span class="toc-text">8.12 忘记节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC9%E7%AB%A0Redis%E9%9B%86%E7%BE%A4%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">第9章Redis集群常用命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC10%E7%AB%A0-Redis%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7"><span class="toc-text">第10章 Redis运维工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-%E8%BF%90%E7%BB%B4%E8%84%9A%E6%9C%AC"><span class="toc-text">10.1 运维脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7"><span class="toc-text">10.2 数据导入导出工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3%E5%88%86%E6%9E%90%E9%94%AE%E5%80%BC%E5%A4%A7%E5%B0%8F"><span class="toc-text">10.3分析键值大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-4%E7%9B%91%E6%8E%A7%E8%BF%87%E6%9C%9F%E9%94%AE"><span class="toc-text">10.4监控过期键</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/99081826.html" title="很强，3万字把华为HCIA知识点全部总结了！">很强，3万字把华为HCIA知识点全部总结了！</a><time datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b0318225.html" title="浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f962716d.html" title="使用system-config-kickstart生成kickstart文件">使用system-config-kickstart生成kickstart文件</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/12ac960a.html" title="Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件">Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cefcf133.html" title="zabbix5.0 percona_mysql_template模板文件">zabbix5.0 percona_mysql_template模板文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第二章· Redis管理实战 | 壹拾陆</title><meta name="keywords" content="Linux"><meta name="author" content="壹拾陆"><meta name="copyright" content="壹拾陆"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第二章· Redis管理实战   曾老湿·2018-10-27·167 次阅读   数据类型管理实战   曾志高翔, 江湖人称曾老大。多年互联网运维工作经验，曾负责过大规模集群架构自动化运维管理工作。擅长Web集群架构与自动化运维，曾负责国内某大型金融公司运维工作。个人博客:”DBA老司机带你删库跑路”笔者QQ:133411023、253097001笔者交流群：198571640笔者微信：z133">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章· Redis管理实战">
+<meta property="og:url" content="https://mo-li001.github.io/posts/5d473c35.html">
+<meta property="og:site_name" content="壹拾陆">
+<meta property="og:description" content="第二章· Redis管理实战   曾老湿·2018-10-27·167 次阅读   数据类型管理实战   曾志高翔, 江湖人称曾老大。多年互联网运维工作经验，曾负责过大规模集群架构自动化运维管理工作。擅长Web集群架构与自动化运维，曾负责国内某大型金融公司运维工作。个人博客:”DBA老司机带你删库跑路”笔者QQ:133411023、253097001笔者交流群：198571640笔者微信：z133">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-31T12:41:14.000Z">
+<meta property="article:modified_time" content="2022-10-23T15:27:21.000Z">
+<meta property="article:author" content="壹拾陆">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mo-li001.github.io/posts/5d473c35"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第二章· Redis管理实战',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-10-23 23:27:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第二章· Redis管理实战</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-23T15:27:21.000Z" title="更新于 2022-10-23 23:27:21">2022-10-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%94%B6%E5%BD%95/">收录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第二章· Redis管理实战"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>第二章· Redis管理实战  </p>
+<p>曾老湿·2018-10-27·167 次阅读  </p>
+<p>数据类型<br>管理实战  </p>
+<p>曾志高翔, 江湖人称曾老大。多年互联网运维工作经验，曾负责过大规模集群架构自动化运维管理工作。擅长Web集群架构与自动化运维，曾负责国内某大型金融公司运维工作。<br>个人博客:”DBA老司机带你删库跑路”<br>笔者QQ:133411023、253097001<br>笔者交流群：198571640<br>笔者微信：z133411023  </p>
+<p>数据类型  </p>
+<p>String： 字符串类型<br>Hash： 哈希类型<br>List： 列表类型<br>Set： 集合类型<br>Sorted set： 顺序集合类型  </p>
+<p>管理实战<br>通用操作  </p>
+<p>#查看所有的key<br>127.0.0.1:6379&gt; KEYS *  </p>
+<ol>
+<li>“age”  </li>
+<li>“name”</li>
+</ol>
+<p>#判断key是否存在<br>127.0.0.1:6379&gt; EXISTS name<br>(integer) 1<br>#变更key名<br>127.0.0.1:6379&gt; RENAME age nianling<br>#查看key的类型<br>127.0.0.1:6379&gt; type name<br>string<br>#删除key<br>127.0.0.1:6379&gt; del name<br>(integer) 1<br>#以秒为单位设置生存时间<br>127.0.0.1:6379&gt; EXPIRE name 10<br>(integer) 1<br>#以毫秒为单位设置生存时间<br>127.0.0.1:6379&gt; PEXPIRE name 10000<br>(integer) 1<br>#取消剩余生存时间<br>127.0.0.1:6379&gt; PERSIST name  </p>
+<p>(integer) 1  </p>
+<p>strings（字符）类型操作  </p>
+<p>应用场景：  </p>
+<p>常规计数：微博数、粉丝数、直播平台  </p>
+<p>增：  </p>
+<p>#设置key<br>127.0.0.1:6379&gt; set name zls<br>OK<br>#设置多个key<br>127.0.0.1:6379&gt; mset name zls age 18 sex m<br>OK<br>#设置值、取值同时进行<br>127.0.0.1:6379&gt; GETSET name zls<br>(nil)<br>127.0.0.1:6379&gt; GETSET name zls<br>“zls”<br>#设置值同时设置生存时间<br>127.0.0.1:6379&gt; set name zls ex 10<br>OK<br>#数量递归增加<br>127.0.0.1:6379&gt; incr num<br>(integer) 1<br>#指定增加数值<br>127.0.0.1:6379&gt; incrby num 2<br>(integer) 8<br>#数量递减<br>127.0.0.1:6379&gt; DECR num<br>(integer) -1<br>#指定递减数<br>127.0.0.1:6379&gt; DECRBY num 2<br>(integer) -3<br>#浮点增加<br>127.0.0.1:6379&gt; incrbyfloat float 0.6  </p>
+<p>“0.6”  </p>
+<p>删：  </p>
+<p>#删除已有key  </p>
+<p>127.0.0.1:6379&gt; DEL num  </p>
+<p>改：  </p>
+<p>#追加(若该键不存在，则创建)<br>127.0.0.1:6379&gt; APPEND name bgx<br>(integer) 6<br>#查看追加内容<br>127.0.0.1:6379&gt; get name<br>“zlsbgx”<br>#修改第N个字符串<br>127.0.0.1:6379&gt; SETRANGE name 3 a<br>(integer) 6<br>#查看结果<br>127.0.0.1:6379&gt; get name  </p>
+<p>“zlsagx”  </p>
+<p>查：  </p>
+<p>#获取key值<br>127.0.0.1:6379&gt; get name<br>“zls”<br>#查看string类型的长度<br>127.0.0.1:6379&gt; STRLEN name<br>(integer) 6<br>#查看指定长度的string类型<br>127.0.0.1:6379&gt; GETRANGE name 0 4<br>“zlsag”<br>#以秒查询key剩余生存时间<br>127.0.0.1:6379&gt; ttl name<br>(integer) 8<br>#以毫秒查询key剩余生存时间<br>127.0.0.1:6379&gt; pttl name<br>(integer) 44016<br>#获取多个key值<br>127.0.0.1:6379&gt; mget name age sex  </p>
+<ol>
+<li><p>“zls”  </p>
+</li>
+<li><p>“18”  </p>
+</li>
+<li><p>“m”</p>
+</li>
+</ol>
+<p>应用场景实现:  </p>
+<p>#粉丝数量增加，每点一次关注，都执行以下命令一次<br>127.0.0.1:6379&gt; incr num<br>(integer) 1<br>#取消关注则执行以下命令一次<br>127.0.0.1:6379&gt; DECR num<br>(integer) -1<br>#显示粉丝数量<br>127.0.0.1:6379&gt; get num<br>“6”<br>#暗箱操作，刷粉丝<br>127.0.0.1:6379&gt; incrby num 10000  </p>
+<p>(integer) 10006  </p>
+<p>hash（字典）类型操作  </p>
+<p>应用场景：  </p>
+<p>存储部分变更的数据，如用户信息，商品信息等。<br>最接近表结构的一种类型。  </p>
+<p>增：  </p>
+<p>#创建car的price值<br>127.0.0.1:6379&gt; hset car price 500<br>(integer) 1<br>#创建car的name值<br>127.0.0.1:6379&gt; hset car name BMW<br>(integer) 1<br>#创建car的date值<br>127.0.0.1:6379&gt; hset car date 1982<br>(integer) 1<br>#设置多个哈希key(类似于MySQL的一个表中的一行数据)<br>127.0.0.1:6379&gt; hmset teacher name zls age 18 sex m<br>OK<br>127.0.0.1:6379&gt; hmset teacher name bgx age 80 sex f  </p>
+<p>OK  </p>
+<p>删：  </p>
+<p>#删除hash类型中的一个值<br>127.0.0.1:6379&gt; HDEL teacher name<br>(integer) 1<br>#删除整个hash类型key<br>127.0.0.1:6379&gt; DEL teacher  </p>
+<p>(integer) 1  </p>
+<p>改：  </p>
+<p>#修改hash类型值 增加1<br>127.0.0.1:6379&gt; hincrby myhash num 1  </p>
+<p>(integer) 1  </p>
+<p>查：  </p>
+<p>#获取car的name值<br>127.0.0.1:6379&gt; hget car name<br>“BMW”<br>#获取key的全部value和值（运维常用）<br>127.0.0.1:6379&gt; hgetall car  </p>
+<ol>
+<li>“price”  </li>
+<li>“500”  </li>
+<li>“name”  </li>
+<li>“BMW”  </li>
+<li>“date”  </li>
+<li>“1982”</li>
+</ol>
+<p>#获取key中部分值<br>127.0.0.1:6379&gt; HMGET teacher name sex  </p>
+<ol>
+<li><p>“zls”  </p>
+</li>
+<li><p>“m”</p>
+</li>
+</ol>
+<p>List（列表）类型操作  </p>
+<p>应用场景：  </p>
+<p>消息队列系统  </p>
+<p>比如sina微博：在redis中我们的最新微博ID使用了常驻缓存，这是一直更新的。<br>但是做了限制不能超过5000个ID，因此获取ID的函数会一只询问redis。<br>系统不会像传统方式那样“刷新”缓存，redis实例中的信息永远是一致的。<br>SQL数据库（或是硬盘上的其他类型数据）只是在用户需要获取“很远”的数据时才会被触发，而主页或第一个评论页是不会麻烦到硬盘上的数据库了。  </p>
+<p>增：  </p>
+<p>#将一个值或者多个值插入列表的表头(若key不存在，则添加key并依次添加)<br>127.0.0.1:6379&gt; lpush list zls<br>(integer) 1<br>127.0.0.1:6379&gt; lpush list bgx<br>(integer) 2<br>127.0.0.1:6379&gt; lpush list oldboy<br>(integer) 3<br>127.0.0.1:6379&gt; lpush list alex<br>(integer) 4<br>#一行添加<br>127.0.0.1:6379&gt; lpush teacher zls bgx oldboy alex<br>(integer) 4<br>#追加一个value值，若key不存在，则不创建<br>127.0.0.1:6379&gt; LPUSHX teacher1 zls<br>(integer) 0<br>#在bgx前面添加zls<br>127.0.0.1:6379&gt; linsert teacher before bgx zls<br>(integer) 6<br>#在尾部添加key<br>127.0.0.1:6379&gt; rpush teacher wang5<br>(integer) 7<br>#将teacher的尾部元素弹出，再插入到teacher1的头部<br>127.0.0.1:6379&gt; rpoplpush teacher teacher1<br>“wang5”<br>#查看一个列表内有多少行<br>127.0.0.1:6379&gt; llen list  </p>
+<p>(integer) 4  </p>
+<p>删：  </p>
+<p>#删除key<br>127.0.0.1:6379&gt; del teacher<br>(integer) 1<br>#从头部开始找,按先后顺序,值为a的元素,删除数量为2个,若存在第3个,则不删除<br>127.0.0.1:6379&gt; lrem teacher 2 zls<br>(integer) 2<br>#从头开始,索引为0,1,2的3个元素,其余全部删除改<br>127.0.0.1:6379&gt; ltrim teacher 0 2  </p>
+<p>OK  </p>
+<p>改：  </p>
+<p>#从头开始, 将索引为1的元素值,设置为新值 e,若索引越界,则返回错误信息<br>127.0.0.1:6379&gt; lset teacher 1 test<br>OK<br>#将 teacher 中的尾部元素移到其头部<br>127.0.0.1:6379&gt; rpoplpush teacher teacher  </p>
+<p>“oldboy”  </p>
+<p>查：  </p>
+<p>#列表头部弹出，弹一行少一行<br>127.0.0.1:6379&gt; lpop teacher<br>“zls”<br>#列表尾部<br>127.0.0.1:6379&gt; rpop teacher<br>“wang5”<br>#查询索引（头部开始）<br>127.0.0.1:6379&gt; lindex list 0<br>“bgx”<br>#查询索引（尾部第一个）<br>127.0.0.1:6379&gt; lindex list -1<br>“alex”<br>#范围查询索引<br>127.0.0.1:6379&gt; lrange list 0 1  </p>
+<ol>
+<li><p>“bgx”  </p>
+</li>
+<li><p>“oldboy”</p>
+</li>
+</ol>
+<p>微博、微信朋友圈场景实现:  </p>
+<p>#发朋友圈<br>127.0.0.1:6379&gt; LPUSH wechat “monday,bgx is a bad man”<br>(integer) 1<br>127.0.0.1:6379&gt; LPUSH wechat “Tuesday,zls is a nice boy”<br>(integer) 2<br>127.0.0.1:6379&gt; LPUSH wechat “Wednesday,alex is a loser”<br>(integer) 3  </p>
+<p>#查看朋友圈内容<br>127.0.0.1:6379&gt; LRANGE wechat 0 -1  </p>
+<ol>
+<li><p>“Wednesday,zls is a nice boy”  </p>
+</li>
+<li><p>“Tuesday,zls is a nice boy”  </p>
+</li>
+<li><p>“monday,zls is a nice boy”</p>
+</li>
+</ol>
+<p>Set（集合）类型操作  </p>
+<p>应用场景：  </p>
+<p>在微博应用中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合。Redis还为集合提供了求交集、并集、差集等操作，可以非常方便的实现如共同关注、共同喜好、二度好友等功能，对上面的所有集合操作，你还可以使用不同的命令选择将结果返回给客户端还是存集到一个新的集合中。  </p>
+<p>增：  </p>
+<p>#若key不存在,创建该键及与其关联的set,依次插入bgx、lidao、xiaomimei若key存在,则插入value中,若bgx在zls_fans中已经存在,则插入了lidao和xiaomimei两个新成员。<br>127.0.0.1:6379&gt; sadd zls_fans bgx lidao xiaomimei  </p>
+<p>(integer) 3  </p>
+<p>删：  </p>
+<p>#尾部的b被移出,事实上b并不是之前插入的第一个或最后一个成员<br>127.0.0.1:6379&gt; spop zls_fans<br>“bgx”<br>#若值不存在, 移出存在的值,并返回剩余值得数量<br>127.0.0.1:6379&gt; SREM zls_fans lidao oldboy alex  </p>
+<p>(integer) 1  </p>
+<p>改：  </p>
+<p>#将小迷妹从 zls_fans 移到 bgx_fans<br>127.0.0.1:6379&gt; SMOVE zls_fans bgx_fans xiaomimei  </p>
+<p>(integer) 1  </p>
+<p>查：  </p>
+<p>#判断xiaomimei是否已经存在，返回值为 1 表示存在<br>127.0.0.1:6379&gt; SISMEMBER zls_fans xiaomimei<br>(integer) 0<br>127.0.0.1:6379&gt; SISMEMBER bgx_fans xiaomimei<br>(integer) 1<br>#查看set中的内容<br>127.0.0.1:6379&gt; SMEMBERS zls_fans  </p>
+<ol>
+<li>“xiaomimei”  </li>
+<li>“bgx”  </li>
+<li>“lidao”</li>
+</ol>
+<p>#获取Set 集合中元素的数量<br>127.0.0.1:6379&gt; scard zls_fans<br>(integer) 0<br>127.0.0.1:6379&gt; scard bgx_fans<br>(integer) 1<br>#随机的返回某一成员<br>127.0.0.1:6379&gt; srandmember bgx_fans<br>“xiaomimei”  </p>
+<p>#创建三个集合<br>127.0.0.1:6379&gt; sadd zls_fans bgx lidao xiaomimei<br>(integer) 3<br>127.0.0.1:6379&gt; sadd bgx_fans zls lidao xiaomimei<br>(integer) 2<br>127.0.0.1:6379&gt; sadd lidao_fans 0<br>(integer) 1  </p>
+<p>#1和2得到一个结果,拿这个集合和3比较,获得每个独有的值<br>127.0.0.1:6379&gt; sdiff zls_fans bgx_fans lidao_fans  </p>
+<ol>
+<li>“bgx”</li>
+</ol>
+<p>#3个集和比较,获取独有的元素,并存入diffkey 关联的Set中<br>127.0.0.1:6379&gt; sdiffstore diffkey zls_fans bgx_fans lidao_fans<br>(integer) 1<br>#获得3个集合中都有的元素<br>127.0.0.1:6379&gt; sinter zls_fans bgx_fans lidao_fans<br>(empty list or set) &#x2F;&#x2F;因为这里没有交集，所以返回一个空集合<br>#把交集存入interkey 关联的Set中<br>127.0.0.1:6379&gt; sinterstore interkey bgx_fans lidao_fans<br>(integer) 0 &#x2F;&#x2F; 因为这里没有交集，所以存入的值为0<br>#获取3个集合中的成员的并集<br>127.0.0.1:6379&gt; sunion zls_fans bgx_fans lidao_fans  </p>
+<ol>
+<li>“bgx”  </li>
+<li>“xiaomimei”  </li>
+<li>“zls”  </li>
+<li>“lidao”  </li>
+<li>“0”</li>
+</ol>
+<p>#把并集存入unionkey 关联的Set中<br>127.0.0.1:6379&gt; sunionstore unionkey zls_fans bgx_fans lidao_fans  </p>
+<p>(integer) 5  </p>
+<p>Sorted-Set（有序集合）类型操作  </p>
+<p>应用场景：  </p>
+<p>排行榜应用，取TOP N操作<br>这个需求与上面需求的不同之处在于，前面操作以时间为权重，这个是以某个条件为权重，比如按顶的次数排序，这时候就需要我们的sorted set出马了，将你要排序的值设置成sorted set的score，将具体的数据设置成相应的value，每次只需要执行一条ZADD命令即可。  </p>
+<p>增：  </p>
+<p>#添加两个分数分别是 2 和 3 的两个成员<br>127.0.0.1:6379&gt; zadd myzset 2 “two” 3 “three”  </p>
+<p>(integer) 2  </p>
+<p>删：  </p>
+<p>#删除多个成员变量,返回删除的数量<br>127.0.0.1:6379&gt; zrem myzset one two  </p>
+<p>(integer) 1  </p>
+<p>改：  </p>
+<p>#将成员 one 的分数增加 2，并返回该成员更新后的分数<br>127.0.0.1:6379&gt; zincrby myzset 2 one  </p>
+<p>“2”  </p>
+<p>查：  </p>
+<p>#返回所有成员和分数,不加WITHSCORES,只返回成员<br>127.0.0.1:6379&gt; zrange myzset 0 -1 WITHSCORES  </p>
+<ol>
+<li>“one”  </li>
+<li>“2”  </li>
+<li>“three”  </li>
+<li>“3”</li>
+</ol>
+<p>#获取成员one在Sorted-Set中的位置索引值。0表示第一个位置<br>127.0.0.1:6379&gt; zrank myzset one<br>(integer) 0<br>#获取 myzset 键中成员的数量<br>127.0.0.1:6379&gt; zcard myzset<br>(integer) 2<br>#获取分数满足表达式 1 &lt;&#x3D; score &lt;&#x3D; 2 的成员的数量<br>127.0.0.1:6379&gt; zcount myzset 1 2<br>(integer) 1<br>#获取成员 three 的分数<br>127.0.0.1:6379&gt; zscore myzset three<br>“3”<br>#获取分数满足表达式 1 &lt; score &lt;&#x3D; 2 的成员<br>127.0.0.1:6379&gt; zrangebyscore myzset 1 2  </p>
+<ol>
+<li>“one”</li>
+</ol>
+<p>#-inf 表示第一个成员，+inf最后一个成员<br>#limit限制关键字<br>#2 3 是索引号<br>zrangebyscore myzset -inf +inf limit 2 3 返回索引是2和3的成员<br>#删除分数 1&lt;&#x3D; score &lt;&#x3D; 2 的成员，并返回实际删除的数量<br>127.0.0.1:6379&gt; zremrangebyscore myzset 1 2<br>(integer) 1<br>#删除位置索引满足表达式 0 &lt;&#x3D; rank &lt;&#x3D; 1 的成员<br>127.0.0.1:6379&gt; zremrangebyrank myzset 0 1<br>(integer) 1<br>#按位置索引从高到低,获取所有成员和分数<br>127.0.0.1:6379&gt; zrevrange myzset 0 -1 WITHSCORES<br>#原始成员:位置索引从小到大<br>one 0<br>two 1<br>#执行顺序:把索引反转<br>位置索引:从大到小<br>one 1<br>two 0<br>#输出结果:<br>two<br>one<br>#获取位置索引,为1,2,3的成员<br>127.0.0.1:6379&gt; zrevrange myzset 1 3<br>(empty list or set)<br>#相反的顺序:从高到低的顺序<br>#获取分数 3&gt;&#x3D;score&gt;&#x3D;0的成员并以相反的顺序输出<br>127.0.0.1:6379&gt; zrevrangebyscore myzset 3 0<br>(empty list or set)<br>#获取索引是1和2的成员,并反转位置索引<br>127.0.0.1:6379&gt; zrevrangebyscore myzset 4 0 limit 1 2  </p>
+<p>(empty list or set)  </p>
+<p>赏<br>知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议<br>Redis<br>0<br>Previous Post<br>第一章· Redis入门部署及持久化介绍<br>Next Post<br>第三章· Redis消息队列<br>查看评论 - NOTHING  </p>
+<p>Copyright © 曾老湿 2010<br>京ICP备18053124号-1  </p>
+<p>Blog DriverZeng by 曾老湿  </p>
+<p>Ringtone (MetroGnome Remix) - MetroGnome</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io">壹拾陆</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io/posts/5d473c35.html">https://mo-li001.github.io/posts/5d473c35.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mo-li001.github.io" target="_blank">壹拾陆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/12728704.html"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！</div></div></a></div><div class="next-post pull-right"><a href="/posts/e029aafa.html"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">二进制安装k8s</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/abc41134.html" title="没写好"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">没写好</div></div></a></div><div><a href="/posts/9f353bc9.html" title="Devops"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Devops</div></div></a></div><div><a href="/posts/f5f9fa9b.html" title="Docker"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Docker</div></div></a></div><div><a href="/posts/34d20e28.html" title="ELK"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK</div></div></a></div><div><a href="/posts/8005.html" title="ELK快速部署"><img class="cover" src="https://tuchuangs.com/imgs/2022/09/18/074f3836d4f471b8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK快速部署</div></div></a></div><div><a href="/posts/9bdc030a.html" title="HAproxy"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">HAproxy</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/99081826.html" title="很强，3万字把华为HCIA知识点全部总结了！">很强，3万字把华为HCIA知识点全部总结了！</a><time datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b0318225.html" title="浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f962716d.html" title="使用system-config-kickstart生成kickstart文件">使用system-config-kickstart生成kickstart文件</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/12ac960a.html" title="Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件">Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cefcf133.html" title="zabbix5.0 percona_mysql_template模板文件">zabbix5.0 percona_mysql_template模板文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

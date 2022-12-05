@@ -1,0 +1,794 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>zabbix | 壹拾陆</title><meta name="keywords" content="Linux"><meta name="author" content="壹拾陆"><meta name="copyright" content="壹拾陆"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="角色 主机名 eth0 配置    Zabbix服务端 zbx 10.0.0.111 1C1G(实际推荐1C2G)   Zabbix服务端 web01 10.0.0.112 1C1G   Zabbix服务端 db01 10.0.0.113 1C1G   1.nginx环境123456789cat &gt;&gt; &#x2F;etc&#x2F;yum.repos.d&#x2F;nginx.repo&lt;&lt;EOF[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zabbix">
+<meta property="og:url" content="https://mo-li001.github.io/posts/8fb4d8df.html">
+<meta property="og:site_name" content="壹拾陆">
+<meta property="og:description" content="角色 主机名 eth0 配置    Zabbix服务端 zbx 10.0.0.111 1C1G(实际推荐1C2G)   Zabbix服务端 web01 10.0.0.112 1C1G   Zabbix服务端 db01 10.0.0.113 1C1G   1.nginx环境123456789cat &gt;&gt; &#x2F;etc&#x2F;yum.repos.d&#x2F;nginx.repo&lt;&lt;EOF[">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-24T01:43:57.000Z">
+<meta property="article:modified_time" content="2022-10-24T01:47:20.000Z">
+<meta property="article:author" content="壹拾陆">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mo-li001.github.io/posts/8fb4d8df"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'zabbix',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-24 09:47:20'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">zabbix</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-24T01:43:57.000Z" title="发表于 2022-10-24 09:43:57">2022-10-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-24T01:47:20.000Z" title="更新于 2022-10-24 09:47:20">2022-10-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%AD%A3%E6%96%87/">正文</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="zabbix"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>主机名</th>
+<th>eth0</th>
+<th>配置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Zabbix服务端</td>
+<td>zbx</td>
+<td>10.0.0.111</td>
+<td>1C1G(实际推荐1C2G)</td>
+</tr>
+<tr>
+<td>Zabbix服务端</td>
+<td>web01</td>
+<td>10.0.0.112</td>
+<td>1C1G</td>
+</tr>
+<tr>
+<td>Zabbix服务端</td>
+<td>db01</td>
+<td>10.0.0.113</td>
+<td>1C1G</td>
+</tr>
+</tbody></table>
+<h1 id="1-nginx环境"><a href="#1-nginx环境" class="headerlink" title="1.nginx环境"></a>1.nginx环境</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; /etc/yum.repos.d/nginx.repo&lt;&lt;EOF</span><br><span class="line">[nginx-stable]</span><br><span class="line">name=nginx stable repo</span><br><span class="line">baseurl=http://nginx.org/packages/centos/$releasever/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=https://nginx.org/keys/nginx_signing.key</span><br><span class="line">module_hotfixes=true</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>安装nginx</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install nginx</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="2、​php"><a href="#2、​php" class="headerlink" title="2、​php"></a>2、​php</h1><p>安装 EPEL 软件包：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release -y</span><br></pre></td></tr></table></figure>
+
+<p>安装 remi 源：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://dl.fedoraproject.org/pub/epel/</span></span><br><span class="line">yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y</span><br></pre></td></tr></table></figure>
+
+<p>安装 yum 扩展包：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install yum-utils -y</span><br></pre></td></tr></table></figure>
+
+<p>启用 remi 仓库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --enable remi-php72 -y</span><br><span class="line">yum update -y</span><br></pre></td></tr></table></figure>
+
+<p>安装 php-fpm 和一些其他模块</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install php72-php-cli php72-php-fpm php72-php-gd php72-php-mbstring php72-php-bcmath php72-php-xml php72-php-ldap php72-php-mysqlnd -y</span><br></pre></td></tr></table></figure>
+
+<p>安装结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# rpm -qa |egrep &#x27;nginx|php72&#x27;</span><br><span class="line">php72-runtime-2.0-1.el7.remi.x86_64</span><br><span class="line">php72-php-mysqlnd-7.2.34-13.el7.remi.x86_64</span><br><span class="line">php72-php-cli-7.2.34-13.el7.remi.x86_64</span><br><span class="line">nginx-1.20.1-9.el7.x86_64</span><br><span class="line">php72-php-json-7.2.34-13.el7.remi.x86_64</span><br><span class="line">php72-php-pdo-7.2.34-13.el7.remi.x86_64</span><br><span class="line">php72-php-gd-7.2.34-13.el7.remi.x86_64</span><br><span class="line">php72-php-bcmath-7.2.34-13.el7.remi.x86_64</span><br><span class="line">php72-php-fpm-7.2.34-13.el7.remi.x86_64</span><br><span class="line">php72-php-mbstring-7.2.34-13.el7.remi.x86_64</span><br><span class="line">nginx-filesystem-1.20.1-9.el7.noarch</span><br><span class="line">php72-php-common-7.2.34-13.el7.remi.x86_64</span><br><span class="line">php72-php-ldap-7.2.34-13.el7.remi.x86_64</span><br><span class="line">php72-php-xml-7.2.34-13.el7.remi.x86_64</span><br><span class="line"></span><br><span class="line">[root@zbx ~]# php72 -v</span><br><span class="line">PHP 7.2.34 (cli) (built: Sep 27 2022 19:10:24) ( NTS )</span><br><span class="line">Copyright (c) 1997-2018 The PHP Group</span><br><span class="line">Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="3、nginx-php"><a href="#3、nginx-php" class="headerlink" title="3、nginx+php"></a>3、nginx+php</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable nginx php72-php-fpm</span><br><span class="line">systemctl start nginx php72-php-fpm</span><br></pre></td></tr></table></figure>
+
+<p>nginx配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; /etc/nginx/conf.d/zabbix.conf&lt;&lt;&#x27;EOF&#x27;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  zbx.oldboylinux.cn;</span><br><span class="line">        root         /code/zabbix;</span><br><span class="line">        location / &#123;</span><br><span class="line">            index index.php;</span><br><span class="line">        &#125;</span><br><span class="line">        location ~ \.php$ &#123;</span><br><span class="line">            fastcgi_pass  127.0.0.1:9000;</span><br><span class="line">            fastcgi_index  index.php;</span><br><span class="line">            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</span><br><span class="line">            include    fastcgi_params;</span><br><span class="line">        &#125;        </span><br><span class="line">    &#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>检查重载nginx </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# nginx -t</span><br><span class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /etc/nginx/nginx.conf test is successful</span><br><span class="line">[root@zbx ~]# systemctl reload nginx</span><br></pre></td></tr></table></figure>
+
+<p>php 配置</p>
+<p>修改php用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# sed -ri &#x27;/^(user|group)/s#apache#nginx#g&#x27; /etc/opt/remi/php72/php-fpm.d/www.conf</span><br><span class="line">[root@zbx ~]# egrep &#x27;^(user|group)&#x27; /etc/opt/remi/php72/php-fpm.d/www.conf</span><br><span class="line">user = nginx</span><br><span class="line">group = nginx</span><br></pre></td></tr></table></figure>
+
+<p>创建php会话保持目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# grep &#x27;/var/opt/remi/php72/lib/php/session&#x27; /etc/opt/remi/php72/php-fpm.d/www.conf</span><br><span class="line">php_value[session.save_path]    = /var/opt/remi/php72/lib/php/session</span><br><span class="line">[root@zbx ~]# mkdir -p /var/opt/remi/php72/lib/php/session</span><br><span class="line">[root@zbx ~]# chown nginx.nginx /var/opt/remi/php72/lib/php/session</span><br><span class="line">[root@zbx ~]# systemctl reload php72-php-fpm.service</span><br></pre></td></tr></table></figure>
+
+<p>php+nginx测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /code/zabbix</span><br><span class="line">chown nginx.nginx /code/zabbix</span><br></pre></td></tr></table></figure>
+
+<p>创建php测试页</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; /code/zabbix/info.php&lt;&lt;&#x27;EOF&#x27;</span><br><span class="line">&lt;?php</span><br><span class="line">  phpinfo();</span><br><span class="line">?&gt;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>浏览器访问<code>zbx.oldboylinux.cn/info.php</code></p>
+<h1 id="4、数据库"><a href="#4、数据库" class="headerlink" title="4、数据库"></a>4、数据库</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# yum install -y mariadb-server</span><br><span class="line">[root@zbx ~]# mysql_secure_installation</span><br><span class="line">Y Y Y Y Y</span><br><span class="line">[root@zbx ~]# mysql -uroot -p1</span><br><span class="line">MariaDB [(none)]&gt; select user,host from mysql.user;</span><br><span class="line">MariaDB [(none)]&gt; show databases;</span><br><span class="line">MariaDB [(none)]&gt; create database zabbix charset utf8 collate utf8_bin;</span><br><span class="line">MariaDB [(none)]&gt; grant all on zabbix.* to &#x27;zabbix&#x27;@&#x27;localhost&#x27; identified by &#x27;1&#x27;;</span><br><span class="line">MariaDB [(none)]&gt; grant all on zabbix.* to &#x27;zabbix&#x27;@&#x27;10.0.0.%&#x27; identified by &#x27;1&#x27;;</span><br><span class="line">MariaDB [(none)]&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| zabbix             |</span><br><span class="line">+--------------------+</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; select user,host from mysql.user;</span><br><span class="line">+--------+-----------+</span><br><span class="line">| user   | host      |</span><br><span class="line">+--------+-----------+</span><br><span class="line">| zabbix | 10.0.0.%  |</span><br><span class="line">| root   | 127.0.0.1 |</span><br><span class="line">| root   | ::1       |</span><br><span class="line">| root   | localhost |</span><br><span class="line">| zabbix | localhost |</span><br><span class="line">+--------+-----------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="5、zabbix-服务端"><a href="#5、zabbix-服务端" class="headerlink" title="5、zabbix-服务端"></a>5、zabbix-服务端</h1><p>安装zabbix yum源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh https://mirrors.tuna.tsinghua.edu.cn/zabbix/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>替换zabbix源路径</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;s#http://repo.zabbix.com#https://mirrors.tuna.tsinghua.edu.cn/zabbix#g&#x27; /etc/yum.repos.d/zabbix.repo</span><br></pre></td></tr></table></figure>
+
+<p>查看yum源的配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# cat /etc/yum.repos.d/zabbix.repo</span><br><span class="line">[zabbix]</span><br><span class="line">name=Zabbix Official Repository - $basearch</span><br><span class="line">baseurl=http://repo.zabbix.com/zabbix/5.0/rhel/7/$basearch/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line"></span><br><span class="line">[zabbix-frontend]</span><br><span class="line">name=Zabbix Official Repository frontend - $basearch</span><br><span class="line">baseurl=http://repo.zabbix.com/zabbix/5.0/rhel/7/$basearch/frontend</span><br><span class="line">enabled=0</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line"></span><br><span class="line">[zabbix-debuginfo]</span><br><span class="line">name=Zabbix Official Repository debuginfo - $basearch</span><br><span class="line">baseurl=http://repo.zabbix.com/zabbix/5.0/rhel/7/$basearch/debuginfo/</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line">gpgcheck=1</span><br><span class="line"></span><br><span class="line">[zabbix-non-supported]</span><br><span class="line">name=Zabbix Official Repository non-supported - $basearch</span><br><span class="line">baseurl=http://repo.zabbix.com/non-supported/rhel/7/$basearch/</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX</span><br><span class="line">gpgcheck=1</span><br></pre></td></tr></table></figure>
+
+<p>安装 zabbix-server</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# yum install -y zabbix-server-mysql zabbix-agent2</span><br></pre></td></tr></table></figure>
+
+<p>zabbix 数据库导入数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# zcat /usr/share/doc/zabbix-server-mysql-5.0.28/create.sql.gz |mysql -uzabbix -p1 zabbix</span><br></pre></td></tr></table></figure>
+
+<p>zabbix 服务端 配置连接数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# vim /etc/zabbix/zabbix_server.conf</span><br><span class="line">DBHost=localhost</span><br><span class="line">DBPassword=1</span><br><span class="line">[root@zbx ~]# grep -n &#x27;^DB&#x27; /etc/zabbix/zabbix_server.conf</span><br><span class="line">91:DBHost=localhost</span><br><span class="line">100:DBName=zabbix</span><br><span class="line">116:DBUser=zabbix</span><br><span class="line">124:DBPassword=1</span><br></pre></td></tr></table></figure>
+
+<p>修改后 zabbix 服务端开启的功能（不用修改）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# grep &#x27;^[a-Z]&#x27; /etc/zabbix/zabbix_server.conf</span><br><span class="line">LogFile=/var/log/zabbix/zabbix_server.log</span><br><span class="line">LogFileSize=0</span><br><span class="line">PidFile=/var/run/zabbix/zabbix_server.pid</span><br><span class="line">SocketDir=/var/run/zabbix</span><br><span class="line">DBHost=localhost</span><br><span class="line">DBName=zabbix</span><br><span class="line">DBUser=zabbix</span><br><span class="line">DBPassword=1</span><br><span class="line">SNMPTrapperFile=/var/log/snmptrap/snmptrap.log</span><br><span class="line">Timeout=4</span><br><span class="line">AlertScriptsPath=/usr/lib/zabbix/alertscripts</span><br><span class="line">ExternalScripts=/usr/lib/zabbix/externalscripts</span><br><span class="line">LogSlowQueries=3000</span><br><span class="line">StatsAllowedIP=127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<p>启动 zabbix-server</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable zabbix-server</span><br><span class="line">systemctl start zabbix-server</span><br><span class="line">ss -lntup |grep zabbix</span><br><span class="line">ps -ef |grep zabbix</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="6、zabbix前端页面准备"><a href="#6、zabbix前端页面准备" class="headerlink" title="6、zabbix前端页面准备"></a>6、zabbix前端页面准备</h1><p><code>https://www.zabbix.com/cn/download_sources</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">使用源码包</span></span><br><span class="line">[root@zbx ~]# wget https://cdn.zabbix.com/zabbix/sources/stable/5.0/zabbix-5.0.28.tar.gz</span><br><span class="line">[root@zbx ~]# tar xf zabbix-5.0.28.tar.gz</span><br><span class="line">[root@zbx ~]# cd zabbix-5.0.28</span><br><span class="line">[root@zbx zabbix-5.0.28]# cp -a ui/* /code/zabbix/</span><br><span class="line">[root@zbx zabbix-5.0.28]# chown -R nginx.nginx /code/zabbix/</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="7、安装zabbix-zabbix前端页面连接数据库与zabbix-server"><a href="#7、安装zabbix-zabbix前端页面连接数据库与zabbix-server" class="headerlink" title="7、安装zabbix(zabbix前端页面连接数据库与zabbix-server)"></a>7、安装zabbix(zabbix前端页面连接数据库与zabbix-server)</h1><p>php最后的配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Minimum required size of PHP post is 16M (configuration option &quot;post_max_size&quot;).</span><br><span class="line">Minimum required limit on execution time of PHP scripts is 300 (configuration option &quot;max_execution_time&quot;).</span><br><span class="line">Minimum required limit on input parse time for PHP scripts is 300 (configuration option &quot;max_input_time&quot;).</span><br><span class="line">Time zone for PHP is not set (configuration parameter &quot;date.timezone&quot;).</span><br></pre></td></tr></table></figure>
+
+<p>修改配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# vim /etc/opt/remi/php72/php.ini</span><br><span class="line">[root@zbx ~]# egrep -n &#x27;^(max_|date.timezone|post_max)&#x27; /etc/opt/remi/php72/php.ini</span><br><span class="line">385:max_execution_time = 300</span><br><span class="line">395:max_input_time = 300</span><br><span class="line">674:post_max_size = 16M</span><br><span class="line">830:max_file_uploads = 20</span><br><span class="line">905:date.timezone = Asia/Shanghai</span><br></pre></td></tr></table></figure>
+
+<p>重载服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl reload php72-php-fpm.service</span><br><span class="line">systemctl restart php72-php-fpm.service</span><br></pre></td></tr></table></figure>
+
+<p>浏览器访问<code>zbx.oldboylinux.cn</code>，用户：Admin，密码：zabbix</p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210112212675.png" alt="image-20221011221158574"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210112214592.png" alt="image-20221011221403530"></p>
+<p>问题</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Zabbix server	Zabbix agent is not available (<span class="keyword">for</span> 3m)</span><br></pre></td></tr></table></figure>
+
+<p>启动zabbix-agent2</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable zabbix-agent2.service</span><br><span class="line">systemctl start zabbix-agent2.service</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="Zabbix-agent-vs-agent2"><a href="#Zabbix-agent-vs-agent2" class="headerlink" title="Zabbix agent vs agent2"></a>Zabbix agent vs agent2</h1><table>
+<thead>
+<tr>
+<th></th>
+<th>zabbix agent</th>
+<th>zabbix agent2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开发语言</td>
+<td>C语言</td>
+<td>Go语言，和C语言</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>独立进程方式运行</td>
+<td>1个进程多线程技术运行，减少资源消耗占用较少tcp资源，能够承受更高并发</td>
+</tr>
+</tbody></table>
+<h1 id="Zabbix-Agent-2-监控流程"><a href="#Zabbix-Agent-2-监控流程" class="headerlink" title="Zabbix Agent[2]监控流程"></a>Zabbix Agent[2]监控流程</h1><p>Linux安装与配置客户端</p>
+<p>web添加与配置主机</p>
+<p>:one:Liunx:在客户端安装zabbix-agent2(rpm)</p>
+<p>:two:Liunx:修改配置文件指定Server为zabbix服务端</p>
+<p>:three:web页面:配置–&gt;主机中添加主机与关联模板</p>
+<p>:four:web页面:添加后检测与检查数据</p>
+<h2 id="zabbix服务端与客户端配置详解"><a href="#zabbix服务端与客户端配置详解" class="headerlink" title="zabbix服务端与客户端配置详解"></a>zabbix服务端与客户端配置详解</h2><p>zabbix 服务端 说明</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# rpm -qa |grep zabbix</span><br><span class="line">zabbix-server-mysql-5.0.28-1.el7.x86_64    #zabbix yum源配置文件</span><br><span class="line">zabbix-agent2-5.0.28-1.el7.x86_64    #server</span><br><span class="line">zabbix-release-5.0-1.el7.noarch    #agent2</span><br></pre></td></tr></table></figure>
+
+
+
+<p>zabbix服务端</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# rpm -ql zabbix-server-mysql</span><br><span class="line">/etc/logrotate.d/zabbix-server    #日志切割</span><br><span class="line">/etc/zabbix/zabbix_server.conf    #zabbix服务端配置文件</span><br><span class="line">/usr/lib/systemd/system/zabbix-server.service    #systemctl start/stop/restart 调用配置文件</span><br><span class="line">/usr/lib/tmpfiles.d/zabbix-server.conf    #备份</span><br><span class="line">/usr/lib/zabbix/alertscripts    #报警使用的脚本  存放处</span><br><span class="line">/usr/lib/zabbix/externalscripts</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="监控客户端"><a href="#监控客户端" class="headerlink" title="监控客户端"></a>监控客户端</h2><p>安装zabbix-agent2</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@web01 ~]# rpm -ivh https://mirrors.tuna.tsinghua.edu.cn/zabbix/zabbix/5.0/rhel/7/x86_64/zabbix-agent2-5.0.28-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<p>启动zabbix-agent2</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable zabbix-agent2.service</span><br><span class="line">systemctl start zabbix-agent2.service</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@web01 ~]# vim /etc/zabbix/zabbix_agent2.conf</span><br><span class="line">[root@web01 ~]# grep &#x27;^[a-Z]&#x27; /etc/zabbix/zabbix_agent2.conf</span><br><span class="line">Server=10.0.0.111    #改为zabbix server的ip</span><br><span class="line">[root@web01 ~]# systemctl restart zabbix-agent2.service</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# yum install -y zabbix-get</span><br><span class="line">[root@zbx ~]# zabbix_get -s 10.0.0.112 -p 10050 -k system.hostname</span><br><span class="line">web01</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121032535.png" alt="image-20221012103255385"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121034173.png" alt="image-20221012103459116"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121038201.png" alt="image-20221012103824121"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121039721.png" alt="image-20221012103941644"></p>
+<p>问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get value from agent failed: cannot connect to [[10.0.0.113]:10050]: [111] Connection refused</span><br></pre></td></tr></table></figure>
+
+<p>db01安装zabbix-agent2</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# rpm -ivh https://mirrors.tuna.tsinghua.edu.cn/zabbix/zabbix/5.0/rhel/7/x86_64/zabbix-agent2-5.0.28-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<p>配置zabbix-agent2</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# vim /etc/zabbix/zabbix_agent2.conf</span><br><span class="line">Server=10.0.0.111</span><br></pre></td></tr></table></figure>
+
+<p>启动 zabbix-agent2</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# systemctl start zabbix-agent2.service &amp;&amp; systemctl enable zabbix-agent2.service</span><br></pre></td></tr></table></figure>
+
+<p>zbx使用zabbix_get获取主机名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# zabbix_get -s 10.0.0.113 -p 10050 -k system.hostname</span><br><span class="line">db01</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Zabbix中文乱码问题"><a href="#Zabbix中文乱码问题" class="headerlink" title="Zabbix中文乱码问题"></a>Zabbix中文乱码问题</h2><p>解决zabbix默认图形乱码问题</p>
+<p>修改zabbix字体</p>
+<p>Windows下目录<strong>C:\Windows\Fonts</strong>寻找字体</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /code/zabbix/assets/fonts/</span><br><span class="line"><span class="comment">#上传一个中文的ttf字体  替换  zabbix自用的字体即可.</span></span><br><span class="line"><span class="built_in">cp</span> /code/zabbix/assets/fonts/DejaVuSans.ttf&#123;,.bak&#125;</span><br><span class="line"><span class="built_in">cp</span> msyh.ttc /code/zabbix/assets/fonts/DejaVuSans.ttf</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="自定义监控项流程"><a href="#自定义监控项流程" class="headerlink" title="自定义监控项流程"></a>自定义监控项流程</h1><p>:one:Zabbix客户端，创建key（键值）与调试（自定义监控的核心）</p>
+<p>​	书写监控命令&#x2F;脚本</p>
+<p>​	调试Debug命令与脚本</p>
+<p>​	写入到zabbix客户端配置文件中 UserParameter&#x3D;key,command或脚本  与调试  zabbix_get</p>
+<p>:two:Zabbix服务端web页面-点点点</p>
+<p>​	Web页面添加&#x2F;修改模板</p>
+<p>​	Web页面分组</p>
+<p>​	:three:Web页面监控项-zabbix服务端是否可以获取数据</p>
+<p>​	:four:Web页面触发器 trigger-什么时候报警</p>
+<p>​	:five:Web页面图形</p>
+<h2 id="zbx-自定义监控"><a href="#zbx-自定义监控" class="headerlink" title="zbx-自定义监控"></a>zbx-自定义监控</h2><h3 id="1-需求：检查当前机器是否root远程登录"><a href="#1-需求：检查当前机器是否root远程登录" class="headerlink" title="1.需求：检查当前机器是否root远程登录"></a>1.需求：检查当前机器是否root远程登录</h3><ul>
+<li>:a:zbx-agent: web01 命令行<ul>
+<li>书写满足要求的命令</li>
+</ul>
+</li>
+<li>:b:zbx-server web页面<ul>
+<li>命令行创建的键值与<strong>监控项</strong>关联起来</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-1-Linux：命令"><a href="#1-1-Linux：命令" class="headerlink" title="1.1 Linux：命令"></a>1.1 Linux：命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">who |awk &#x27;$1==&quot;root&quot;&#x27; |wc -l  #数字大于1 表示有root远程登录.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-Linux：创建键值-zbx-server识别）"><a href="#1-2-Linux：创建键值-zbx-server识别）" class="headerlink" title="1.2 Linux：创建键值(zbx-server识别）"></a>1.2 Linux：创建键值(zbx-server识别）</h4><ul>
+<li>key键值：zbx服务端内置，用户创建的命令，可以被zabbix服务端识别。服务端执行对应的键值就会获取对应的数据。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在客户端配置文件中按照要求的格式书写即可.</span></span><br><span class="line">[root@web01 ~]# vim /etc/zabbix/zabbix_agent2.d/web.conf</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">UserParameter=键值名字,对应的命令或脚本</span></span><br><span class="line">UserParameter=root.login, who |awk &#x27;$1==&quot;root&quot;&#x27; |wc -l</span><br><span class="line">[root@web01 ~]# systemctl restart zabbix-agent2</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-3-Linux：测试-zbx-服务端"><a href="#1-3-Linux：测试-zbx-服务端" class="headerlink" title="1.3 Linux：测试-zbx-服务端"></a>1.3 Linux：测试-zbx-服务端</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# zabbix_get -s 10.0.0.112 -p 10050 -k root.login</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-4-web：创建监控项"><a href="#1-4-web：创建监控项" class="headerlink" title="1.4 web：创建监控项"></a>1.4 web：创建监控项</h4><p>更新间隔：线上环境推荐1m，不太重要10m 或1h</p>
+<p>监控项：zbx服务端向客户端获取数据的一个方式    监控项与键值关联</p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121308419.png" alt="image-20221012130812319"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121308280.png" alt="image-20221012130818226"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121313834.png" alt="image-20221012131315748"></p>
+<p>历史数据：每个间隔获取的数据，不太推荐保留过长</p>
+<p>趋势数据：每个小时，或者更长时间获取一次历史数据的平均值    可以长期保存</p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121315496.png" alt="image-20221012131542418"></p>
+<p>11：测试键值是否可用<code>.zabbix_get</code></p>
+<p>12：测试监控项(php调用键值)</p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121317491.png" alt="image-20221012131743405"></p>
+<h4 id="1-5-web：创建触发器"><a href="#1-5-web：创建触发器" class="headerlink" title="1.5 web：创建触发器"></a>1.5 web：创建触发器</h4><p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121333929.png" alt="image-20221012133339828"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">报警的条件：root登录的数量大于2</span><br><span class="line"></span><br><span class="line">&#123;web01:root.login.last()&#125;    &gt;        2</span><br><span class="line">获取数据                      条件    条件对应的值(阈值)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;主机名:键值.函数功能&#125;</span><br><span class="line">函数功能：对应的不同的数据的处理方法</span><br><span class="line">比如 last() 最新的值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">比如 sum() 求和</span><br><span class="line">min()  最小值</span><br><span class="line">max()  最大值</span><br><span class="line">avg()  平均值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">分析：</span><br><span class="line">&#123;web01:system.uptime.last()&#125;&lt;10m #重启</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121333453.png" alt="image-20221012133348388"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121336762.png" alt="image-20221012133654668"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121337954.png" alt="image-20221012133756900"></p>
+<h4 id="1-6-web：创建图形"><a href="#1-6-web：创建图形" class="headerlink" title="1.6 web：创建图形"></a>1.6 web：创建图形</h4><p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121343762.png" alt="image-20221012134339670"></p>
+<h3 id="2-创建模板：添加监控项，触发器，图形"><a href="#2-创建模板：添加监控项，触发器，图形" class="headerlink" title="2.创建模板：添加监控项，触发器，图形"></a>2.创建模板：添加监控项，触发器，图形</h3><h4 id="2-1-创建模板"><a href="#2-1-创建模板" class="headerlink" title="2.1 创建模板"></a>2.1 创建模板</h4><p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121521551.png" alt="image-20221012152146465"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121531858.png" alt="image-20221012153134787"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121526553.png" alt="image-20221012152648458"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121526447.png" alt="image-20221012152653368"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121526289.png" alt="image-20221012152657195"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121536809.png" alt="image-20221012153606718"></p>
+<h4 id="2-2-模板关联主机"><a href="#2-2-模板关联主机" class="headerlink" title="2.2 模板关联主机"></a>2.2 模板关联主机</h4><p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121544705.png" alt="image-20221012154437612"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121544752.png" alt="image-20221012154441661"></p>
+<p>问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unknown metric root.login</span><br></pre></td></tr></table></figure>
+
+<p>web01拷贝配置文件到db01</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@web01 ~]# scp /etc/zabbix/zabbix_agent2.d/web.conf 10.0.0.113:/etc/zabbix/zabbix_agent2.d/</span><br></pre></td></tr></table></figure>
+
+<p>db01重启zabbix-agent2</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# systemctl restart zabbix-agent2</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="监控报警"><a href="#监控报警" class="headerlink" title="监控报警"></a>监控报警</h1><h2 id="告警分类"><a href="#告警分类" class="headerlink" title="告警分类"></a>告警分类</h2><table>
+<thead>
+<tr>
+<th>报警方式</th>
+<th>企业应用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发邮件        个人邮箱</td>
+<td>企业邮箱，免费使用</td>
+</tr>
+<tr>
+<td>企业微信-告警应用（机器人）</td>
+<td>需要使用企业微信，免费</td>
+</tr>
+<tr>
+<td>OA系统（钉钉）</td>
+<td>与阿里云，免费</td>
+</tr>
+<tr>
+<td>短信</td>
+<td>0.045元&#x2F;条左右（阿里云短信服务）收费</td>
+</tr>
+<tr>
+<td>电话</td>
+<td>收费</td>
+</tr>
+<tr>
+<td>第三方报警工具&#x2F;平台：onealert（省事）</td>
+<td>只需要配置onealert的平台信息，免费使用（限制），收费</td>
+</tr>
+</tbody></table>
+<h2 id="邮件报警"><a href="#邮件报警" class="headerlink" title="邮件报警"></a>邮件报警</h2><h3 id="1）全流程"><a href="#1）全流程" class="headerlink" title="1）全流程"></a>1）全流程</h3><p>:one:个人邮箱&#x2F;企业邮箱</p>
+<p>:two:开启个人邮箱  smtp功能  获取授权码</p>
+<p>:three:<strong>发件人：</strong>配置zabbix <strong>报警媒介类型</strong></p>
+<p>:four:<strong>收件人：</strong>配置用户接收报警</p>
+<p>:five:<strong>什么时候发邮件：</strong>配置动作</p>
+<h3 id="2）个人邮箱准备（略）"><a href="#2）个人邮箱准备（略）" class="headerlink" title="2）个人邮箱准备（略）"></a>2）个人邮箱准备（略）</h3><p>配置个人邮箱</p>
+<h3 id="3）配置发件人"><a href="#3）配置发件人" class="headerlink" title="3）配置发件人"></a>3）配置发件人</h3><p>配置发件人-报警媒介</p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121601187.png" alt="image-20221012160151029"></p>
+<p>告警邮件内容：Messages template</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">信息类型是：问题（发生故障）</span></span><br><span class="line"></span><br><span class="line">主题： 故障名称: &#123;EVENT.NAME&#125;</span><br><span class="line"></span><br><span class="line">消息：</span><br><span class="line">故障始于时间: &#123;EVENT.TIME&#125;  日期: &#123;EVENT.DATE&#125;</span><br><span class="line">故障名称: &#123;EVENT.NAME&#125;</span><br><span class="line">故障主机: &#123;HOST.NAME&#125;</span><br><span class="line">严重程度: &#123;EVENT.SEVERITY&#125;</span><br><span class="line">额外信息: &#123;EVENT.OPDATA&#125;</span><br><span class="line">故障ID: &#123;EVENT.ID&#125;</span><br><span class="line">触发器地址: &#123;TRIGGER.URL&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">信息类型是：Problem recov  故障解决的时候</span></span><br><span class="line"></span><br><span class="line">主题： 故障解决 in &#123;EVENT.DURATION&#125;: &#123;EVENT.NAME&#125;</span><br><span class="line"></span><br><span class="line">消息：</span><br><span class="line">故障已经解决 时间：&#123;EVENT.RECOVERY.TIME&#125;  日期：&#123;EVENT.RECOVERY.DATE&#125;</span><br><span class="line">故障名称：&#123;EVENT.NAME&#125;</span><br><span class="line">故障持续时间：&#123;EVENT.DURATION&#125;</span><br><span class="line">故障主机：&#123;HOST.NAME&#125;</span><br><span class="line">故障级别：&#123;EVENT.SEVERITY&#125;</span><br><span class="line">故障ID：&#123;EVENT.ID&#125;</span><br><span class="line">&#123;TRIGGER.URL&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121608600.png" alt="image-20221012160840506"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121609933.png" alt="image-20221012160926854"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121615176.png" alt="image-20221012161512055"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121632247.png" alt="image-20221012163228149"></p>
+<h2 id="微信报警"><a href="#微信报警" class="headerlink" title="微信报警"></a>微信报警</h2><h3 id="1）全流程-1"><a href="#1）全流程-1" class="headerlink" title="1）全流程"></a>1）全流程</h3><p>微信报警，短信，电话，钉钉自定义脚本报警</p>
+<p>通过脚本(py,shell)，调用对方api接口（输入接口需要的信息，访问与使用api接口）</p>
+<p>:one:企业微信</p>
+<p>:two:企业微信id和告警机器人id</p>
+<p>:three:使用脚本(shell&#x2F;python)调用企业微信api接口：python  输入  收件人  信息</p>
+<p>:four:发件人：报警媒介</p>
+<p>:five:收件人：个人  媒体类型</p>
+<p>:six:动作：已经完成</p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210121633888.png" alt="image-20221012163311800"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210122022668.png" alt="image-20221012202210470"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210122022504.png" alt="image-20221012202218403"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">企业ID: ww5f8e5ba98e978c67</span><br><span class="line">AgentId(机器人id): 1000002</span><br><span class="line">Secret(机器人的密码): 7-Z-guGF6WEVfXVeTYBZv7cTTBKCJfmW1NAYkyLp8Zg</span><br></pre></td></tr></table></figure>
+
+<p>查看脚本目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx fonts]# rpm -ql zabbix-server-mysql |grep script</span><br><span class="line">/usr/lib/zabbix/alertscripts</span><br><span class="line">/usr/lib/zabbix/externalscripts</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="报错：No-module-named-requests"><a href="#报错：No-module-named-requests" class="headerlink" title="报错：No module named requests"></a>报错：No module named requests</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# python /usr/lib/zabbix/alertscripts/wechat.py</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/usr/lib/zabbix/alertscripts/wechat.py&quot;, line 7, in &lt;module&gt;</span><br><span class="line">    import requests</span><br><span class="line">ImportError: No module named requests</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">python是通过各种模块实现目标与需求.</span></span><br><span class="line"></span><br><span class="line">requests  #实现客户---&gt;服务端发出  http请求  curl/wget</span><br><span class="line"></span><br><span class="line">yum/apt</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装python模块</span></span><br><span class="line">yum install -y python-pip</span><br><span class="line">pip install requests -i https://mirrors.aliyun.com/pypi/simple/</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="执行报错pip-install-request"><a href="#执行报错pip-install-request" class="headerlink" title="执行报错pip install request"></a>执行报错<code>pip install request</code></h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Cynthialearn/article/details/124754685">参考</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# pip install requests</span><br><span class="line">Collecting requests</span><br><span class="line">  Using cached https://files.pythonhosted.org/packages/a5/61/a867851fd5ab77277495a8709ddda0861b28163c4613b011bc00228cc724/requests-2.28.1.tar.gz</span><br><span class="line">    Complete output from command python setup.py egg_info:</span><br><span class="line">    </span><br><span class="line">    ==========================</span><br><span class="line">    Unsupported Python version</span><br><span class="line">    ==========================</span><br><span class="line">    This version of Requests requires at least Python 3.7, but</span><br><span class="line">    you&#x27;re trying to install it on Python 2.7. To resolve this,</span><br><span class="line">    consider upgrading to a supported Python version.</span><br><span class="line">    </span><br><span class="line">    If you can&#x27;t upgrade your Python version, you&#x27;ll need to</span><br><span class="line">    pin to an older version of Requests (&lt;2.28).</span><br><span class="line">    </span><br><span class="line">    ----------------------------------------</span><br><span class="line">Command &quot;python setup.py egg_info&quot; failed with error code 1 in /tmp/pip-build-VYNkl5/requests/</span><br><span class="line">You are using pip version 8.1.2, however version 22.2.2 is available.</span><br><span class="line">You should consider upgrading via the &#x27;pip install --upgrade pip&#x27; command.</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">升级pip:</span></span><br><span class="line">wget https://bootstrap.pypa.io/pip/2.7/get-pip.py</span><br><span class="line">python get-pip.py</span><br><span class="line">pip -V</span><br></pre></td></tr></table></figure>
+
+
+
+<p>企业微信告警无法使用</p>
+<p>报错</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;errcode&quot;:60020,&quot;errmsg&quot;:&quot;not allow to access from your ip, hint: [1665572950354960143799549], from ip: 119.130.57.47, more info at https://open.work.weixin.qq.com/devtool/query?e=60020&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>企业微信文档</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://developer.work.weixin.qq.com/community/announcement/detail?content_id=16334603338859177543</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40228200/article/details/123796231">告警脚本</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47274990/article/details/117448379">python</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx alertscripts]<span class="comment"># vim weixin.py</span></span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#-*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment">#comment: zabbix接入微信报警脚本</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level = logging.DEBUG, <span class="built_in">format</span> = <span class="string">&#x27;%(asctime)s, %(filename)s, %(levelname)s, %(message)s&#x27;</span>,</span><br><span class="line">	datefmt = <span class="string">&#x27;%a, %d %b %Y %H:%M:%S&#x27;</span>,</span><br><span class="line">	filename = os.path.join(<span class="string">&#x27;/tmp&#x27;</span>,<span class="string">&#x27;weixin.log&#x27;</span>),</span><br><span class="line">	filemode = <span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">corpid=<span class="string">&#x27;ww48f74fc8ed3a07ba&#x27;</span> <span class="comment">#企业ID</span></span><br><span class="line">appsecret=<span class="string">&#x27;iV9ljCjBVm2BvFWd-t0rZGTakxaH2izz7degTA41naI&#x27;</span>  <span class="comment">#secret</span></span><br><span class="line">agentid=<span class="number">1000002</span>  <span class="comment">#AgentID</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取accesstoken</span></span><br><span class="line">token_url=<span class="string">&#x27;https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=&#x27;</span> + corpid + <span class="string">&#x27;&amp;corpsecret=&#x27;</span> + appsecret</span><br><span class="line">req=requests.get(token_url)</span><br><span class="line">accesstoken=req.json()[<span class="string">&#x27;access_token&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#发送消息</span></span><br><span class="line">msgsend_url=<span class="string">&#x27;https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=&#x27;</span> + accesstoken</span><br><span class="line"></span><br><span class="line">touser=sys.argv[<span class="number">1</span>]</span><br><span class="line">subject=sys.argv[<span class="number">2</span>]</span><br><span class="line">toparty=<span class="string">&#x27;3|4|5|6&#x27;</span></span><br><span class="line">message=sys.argv[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">params=&#123;</span><br><span class="line">        <span class="string">&quot;touser&quot;</span>: touser,</span><br><span class="line">        <span class="string">&quot;toparty&quot;</span>: toparty,</span><br><span class="line">        <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">        <span class="string">&quot;agentid&quot;</span>: agentid,</span><br><span class="line">        <span class="string">&quot;text&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;content&quot;</span>: message</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;safe&quot;</span>:<span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">req=requests.post(msgsend_url, data=json.dumps(params))</span><br><span class="line"></span><br><span class="line">logging.info(<span class="string">&#x27;sendto:&#x27;</span> + touser + <span class="string">&#x27;;;subject:&#x27;</span> + subject + <span class="string">&#x27;;;message:&#x27;</span> + message)</span><br><span class="line">[root@zbx alertscripts]<span class="comment"># chmod +x weixin.py </span></span><br><span class="line">[root@zbx alertscripts]<span class="comment"># python weixin.py Ye &#x27;ceshi&#x27; &#x27;ceshi&#x27;</span></span><br><span class="line">语法格式：python 脚本名 要发生给谁 <span class="string">&#x27;标题&#x27;</span> <span class="string">&#x27;内容&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">web页面  发件人：报警媒介类型</span></span><br><span class="line">&#123;ALERT.SENDTO&#125;  #发给谁</span><br><span class="line">&#123;ALERT.SUBJECT&#125;  #报警标题</span><br><span class="line">&#123;ALERT.MESSAGE&#125;  #报警内容</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">故障目前已经解决时间：&#123;EVENT.RE COVERY.TIME&#125;  日期&#123;EVENT.RECOVERY.DATE&#125;</span><br><span class="line">故障名称：&#123;EVENT.NAME&#125;</span><br><span class="line">故障经历多久：&#123;EVENT.DURATION&#125;</span><br><span class="line">故障主机：&#123;HOST.NAME&#125;</span><br><span class="line">故障级别：&#123;EVENT.SEVERITY&#125;</span><br><span class="line">故障ID：&#123;EVENT.ID&#125;</span><br><span class="line">&#123;TRIGGER.URL&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">web页面 收件人：接收用户</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">web页面 配置--&gt;动作</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>shell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx alertscripts]# vim weixin.sh</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">CorpID=&quot;wwd5932acb806b41850c&quot;  # 你的企业id</span><br><span class="line">Secret=&quot;BbUbI_g_4zwvgYjlRinxBu5V_xK8R1VRT-QiNLYW5O0&quot;  #你的SecretID</span><br><span class="line">GURL=&quot;https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$CorpID&amp;corpsecret=$Secret&quot;</span><br><span class="line">Token=$(/usr/bin/curl -s -G $GURL |awk -F\&quot;: &#x27;&#123;print $4&#125;&#x27;|awk -F\&quot; &#x27;&#123;print $2&#125;&#x27;)</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">echo</span> <span class="variable">$Token</span></span></span><br><span class="line">PURL=&quot;https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=$Token&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function body()&#123;</span><br><span class="line">        local int agentid=1000002    # 你的agentdid</span><br><span class="line">        local UserID=&quot;@all&quot;                 # 发送的用户ID</span><br><span class="line">        local PartyID=1                  # 部门ID</span><br><span class="line">        local Msg=$(echo &quot;$@&quot; | cut -d&quot; &quot; -f3-)  # 发送给所有人</span><br><span class="line">        printf &#x27;&#123;\n&#x27;</span><br><span class="line">        printf &#x27;\t&quot;touser&quot;: &quot;&#x27;&quot;$UserID&quot;\&quot;&quot;,\n&quot;</span><br><span class="line">        printf &#x27;\t&quot;toparty&quot;: &quot;&#x27;&quot;$PartyID&quot;\&quot;&quot;,\n&quot;</span><br><span class="line">        printf &#x27;\t&quot;msgtype&quot;: &quot;text&quot;,\n&#x27;</span><br><span class="line">        printf &#x27;\t&quot;agentid&quot;: &quot;&#x27;&quot;$agentid&quot;\&quot;&quot;,\n&quot;</span><br><span class="line">        printf &#x27;\t&quot;text&quot;: &#123;\n&#x27;</span><br><span class="line">        printf &#x27;\t\t&quot;content&quot;: &quot;&#x27;&quot;$Msg&quot;\&quot;&quot;\n&quot;</span><br><span class="line">        printf &#x27;\t&#125;,\n&#x27;</span><br><span class="line">        printf &#x27;\t&quot;safe&quot;:&quot;0&quot;\n&#x27;</span><br><span class="line">        printf &#x27;&#125;\n&#x27;</span><br><span class="line">&#125;</span><br><span class="line">/usr/bin/curl --data-ascii &quot;$(body $1 $2 $3)&quot; $PURL</span><br><span class="line">[root@zbx alertscripts]# chmod +x weixin.sh</span><br><span class="line">[root@zbx alertscripts]# ./weixin.sh test</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Zabbix客户端概述"><a href="#Zabbix客户端概述" class="headerlink" title="Zabbix客户端概述"></a>Zabbix客户端概述</h2><table>
+<thead>
+<tr>
+<th>zabbix客户端</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Zabbix-agent2(最常用)</td>
+<td>适用于几乎所有情况，支持自定义监控，linux,windows,android&#x2F;ios</td>
+</tr>
+<tr>
+<td>SNMP客户端</td>
+<td>Simple Network Management Protocal  <strong>简单网络管理协议</strong>  监控网络设备</td>
+</tr>
+<tr>
+<td>JMX</td>
+<td>Java-gateway 监控java app(tomcat),<strong>未来推荐自定义监控(zabbix_agents2 + jmap&#x2F;jstats)</strong></td>
+</tr>
+<tr>
+<td>IPMI</td>
+<td>监控硬件(物理服务器,联想(IBM X86架构ThinkServer),华为,浪潮,Dell,IBM,HP)<strong>直接使用自定义监控(ipmitool + megacli)</strong></td>
+</tr>
+</tbody></table>
+<h2 id="snmp监控网络设备"><a href="#snmp监控网络设备" class="headerlink" title="snmp监控网络设备"></a>snmp监控网络设备</h2><ul>
+<li>应用：<ul>
+<li><strong>监控网络设备（常用）</strong></li>
+<li>也支持监控可以启动SNMP功能的设备（windows,linux,打印机……）</li>
+</ul>
+</li>
+</ul>
+<h3 id="1）监控网络设备"><a href="#1）监控网络设备" class="headerlink" title="1）监控网络设备"></a>1）监控网络设备</h3><p>:one:启动 设备的SNMP功能（网络设备）</p>
+<p>:two:zabbix服务端进行测试 能否获取到 网络设备的信息</p>
+<p>:three:web添加主机，监控项……</p>
+<h4 id="a-启动snmp"><a href="#a-启动snmp" class="headerlink" title="a.启动snmp"></a>a.启动snmp</h4><table>
+<thead>
+<tr>
+<th>snmp版本</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v3</td>
+<td>通过用户名和密码 访问 snmp信息</td>
+</tr>
+<tr>
+<td>v2c</td>
+<td>通过 团体名id 访问设备 访问 snmp信息</td>
+</tr>
+<tr>
+<td>V1</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>zabbix-server检查 网络设备状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">yum install -y net-snmp-utils</span><br><span class="line"></span><br><span class="line">COMIMUNITY</span><br><span class="line"></span><br><span class="line">[rootgm03 ~]<span class="comment"># snmpwalk -c oldboykx -v 2c 192.168.13.1 SysDesc</span></span><br><span class="line">SNMPv2-MIB::sysDescr.0 = STRING: H3C Product Version ERHMG2-MNW100-R1117</span><br><span class="line">H3C ERHMG2</span><br><span class="line">Copyright(c) 2014-2018 New H3C Technologies Co., Ltd. All rights reserved.</span><br><span class="line">[root@m03 ~]<span class="comment"># snmpwalk -c oldboykx -v 2c 192.168.13.1 sysdesc</span></span><br><span class="line">SNMPv2-MIB::sysDescr.0 = STRING: H3C Product Version ERHMG2-MNW100-R1117</span><br><span class="line">H3C ERHMG2</span><br><span class="line">Copyright(c) 2014-2018 New H3C Technologies Co., Ltd. All rights reserved.</span><br><span class="line"></span><br><span class="line">snmpwalk 命令 使用get方式访问网络设备</span><br><span class="line">-c 团体名称  <span class="comment">#v2c版本使用 团体名称</span></span><br><span class="line">-v 指定snmp版本  <span class="comment">#v2c v3</span></span><br><span class="line">ip地址</span><br><span class="line">指令（获取网络设备的信息）  名称方式/oid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#oid Object ID 事务id 给世间万物设置独一无二的id号</span></span><br><span class="line">[root@m03 /tmp]<span class="comment"># snmpwalk -c oldboykx -v 2c 192.168.13.1 sysdesc</span></span><br><span class="line">[root@m03 /tmp]<span class="comment"># snmpwalk -c oldboykx -v 2c 192.168.13.1 sysUptime</span></span><br><span class="line">DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (48733900) 4 days, 17:08:59.00</span><br><span class="line">[root@m03/tmp]<span class="comment">#</span></span><br><span class="line">[root@m03/tmp]<span class="comment">#</span></span><br><span class="line">[root@m03 /tmp]<span class="comment"># snmpwalk -c oldboykx -v 2c 192.168.13.1 IfNumber</span></span><br><span class="line">IF-MIB::ifNumber.0 = INTEGER:19</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="4-6-zabbix客户端常见类型"><a href="#4-6-zabbix客户端常见类型" class="headerlink" title="4.6 zabbix客户端常见类型"></a>4.6 zabbix客户端常见类型</h4><table>
+<thead>
+<tr>
+<th>zabbix客户端</th>
+<th>特点概述</th>
+<th>主要应用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Zabbix-agent2(最常用)</td>
+<td>通用的客户端，支持自定义监控配合命令与脚本</td>
+<td>用于几乎所有情况，linux,windows,android&#x2F;ios,</td>
+</tr>
+<tr>
+<td>SNMP客户端</td>
+<td>Simple Network Management Protocal  <strong>简单网络管理协议</strong></td>
+<td><strong>监控网络设备</strong>（可以监控linux&#x2F;windows…..)</td>
+</tr>
+<tr>
+<td>JMX</td>
+<td>Java-gateway 监控java app(tomcat),<strong>未来推荐自定义监控(zabbix_agents2 + jmap&#x2F;jstats)</strong></td>
+<td>监控java app(tomcat)<br/>推荐<strong>自定义监控</strong></td>
+</tr>
+<tr>
+<td>IPMI</td>
+<td>监控硬件(物理服务器,联想(IBM X86架构ThinkServer),华为,浪潮,Dell,IBM,HP)<strong>直接使用自定义监控(ipmitool + megacli)</strong></td>
+<td>监控硬件<br/>应用推荐：直接使用自定义监控(ipmitool + megacli )</td>
+</tr>
+</tbody></table>
+<h3 id="5-自动化"><a href="#5-自动化" class="headerlink" title="5.自动化"></a>5.自动化</h3><p>自动添加主机</p>
+<p>公司拥有多个机房（北京，上海，南极）</p>
+<h4 id="5-1-自动添加主机"><a href="#5-1-自动添加主机" class="headerlink" title="5.1 自动添加主机"></a>5.1 自动添加主机</h4><p>自动发现</p>
+<p>自动注册</p>
+<table>
+<thead>
+<tr>
+<th>自动添加策略</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>自动发现</td>
+<td><strong>服务端主动扫描</strong>局域网所有的机器，有新的则添加</td>
+<td>配置简单方便效率不高</td>
+</tr>
+<tr>
+<td>自动注册</td>
+<td><strong>客户端主动</strong>向服务端注册，服务端只需要等待与验证即可</td>
+<td>配置有点点复杂，效率高</td>
+</tr>
+</tbody></table>
+<h3 id="12-2-自动发现"><a href="#12-2-自动发现" class="headerlink" title="12.2 自动发现"></a>12.2 自动发现</h3><p>1）环境准备</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>db01</td>
+<td>10.0.0.51&#x2F;172.16.1.51</td>
+<td>zabbix客户端,server指向.72</td>
+</tr>
+<tr>
+<td>nfs01</td>
+<td>10.0.0.31&#x2F;172.16.1.31</td>
+<td>zabbix客户端,server指向.72</td>
+</tr>
+<tr>
+<td>backup</td>
+<td>10.0.0.41&#x2F;172.16.1.41</td>
+<td>zabbix客户端,server指向.72</td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#01.3台机器部署好zabbixx客户端</span></span><br><span class="line"><span class="comment">#02.修改Server为172.16.1.72</span></span><br><span class="line"><span class="comment">#03.启动并开机自启动</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2）部署流程"><a href="#2）部署流程" class="headerlink" title="2）部署流程"></a>2）部署流程</h4><p>:one:配置自动发现<strong>规则-发现主机</strong></p>
+<p>:two:启动自动发现<strong>动作</strong>-发现主机后关联模板，添加主机，加入主机组，启用</p>
+<p>配置<strong>自动发现规则</strong></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210122039459.png" alt="image-20221012203942363"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210122103703.png" alt="image-20221012210352607"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210122103634.png" alt="image-20221012210358554"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210122104948.png" alt="image-20221012210402869"></p>
+<h3 id="12-3-自动注册"><a href="#12-3-自动注册" class="headerlink" title="12.3 自动注册"></a>12.3 自动注册</h3><h4 id="1）环境准备"><a href="#1）环境准备" class="headerlink" title="1）环境准备"></a>1）环境准备</h4><p>关闭自动发现 <strong>规则</strong></p>
+<p>关闭 自动发现 动作</p>
+<p>自动发现的主机 删除</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>web01</td>
+<td>10.0.0.112</td>
+<td>zabbix客户端,server指向.111</td>
+</tr>
+<tr>
+<td>db01</td>
+<td>10.0.0.113</td>
+<td>zabbix客户端,server指向.111</td>
+</tr>
+</tbody></table>
+<h4 id="2）部署流程-1"><a href="#2）部署流程-1" class="headerlink" title="2）部署流程"></a>2）部署流程</h4><p>:one:修改zabbix<strong>客户端配置文件</strong>: ServerActive&#x3D;服务端ip 和Hostname&#x3D;……</p>
+<p>:two:web页面，<strong>动作</strong>–&gt;自动注册 autoreg……</p>
+<h5 id="a-修改客户端配置文件"><a href="#a-修改客户端配置文件" class="headerlink" title="a.修改客户端配置文件"></a>a.修改客户端配置文件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">自动注册：</span></span><br><span class="line">配置zabbix-agent</span><br><span class="line">Server=10.0.0.111</span><br><span class="line">ServerActive=10.0.0.111   #主动模式 服务端ip地址</span><br><span class="line">Hostname=web01    #主机名，独一无二</span><br><span class="line">HostMetadata=web01    #主机名的元数据（属性）  主机名  使用HostMetadataItem=system.hostname</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Hostname自动获取</span></span><br><span class="line"></span><br><span class="line">HostnameItem=system.hostname    #自动获取主机名 这个 与Hostname 二选一</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">HostMetadata自动获取</span></span><br><span class="line">HostMetadataItem=system.hostname    #自动获取主机的元数据(主机名)  这个与HostMeatadata 二选一</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">完整的 客户端配置文件</span></span><br><span class="line">[root@db01 ~]# grep &#x27;^[a-Z]&#x27; /etc/zabbix/zabbix_agent2.conf</span><br><span class="line">PidFile=/var/run/zabbix/zabbix_agent2.pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@db01 ~]# egrep &#x27;^Server|^Host&#x27; /etc/zabbix/zabbix_agent2.conf</span><br><span class="line">Server=10.0.0.111</span><br><span class="line">ServerActive=10.0.0.111</span><br><span class="line">HostnameItem=system.hostname</span><br><span class="line">HostMetadataItem=system.uname</span><br><span class="line">[root@db01 ~]# systemctl restart zabbix-agent</span><br></pre></td></tr></table></figure>
+
+<p>web01</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@web01 ~]# vim /etc/zabbix/zabbix_agent2.conf</span><br><span class="line">ServerActive=10.0.0.111</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Hostname=Zabbix server</span></span><br><span class="line">HostnameItem=system.hostname</span><br><span class="line">HostMetadataItem=system.uname</span><br><span class="line">[root@web01 ~]# egrep &#x27;^Server|^Host&#x27; /etc/zabbix/zabbix_agent2.conf</span><br><span class="line">Server=10.0.0.111</span><br><span class="line">ServerActive=10.0.0.111</span><br><span class="line">HostnameItem=system.hostname</span><br><span class="line">HostMetadataItem=system.uname</span><br><span class="line">[root@web01 ~]# systemctl restart zabbix-agent2</span><br></pre></td></tr></table></figure>
+
+<p>db01</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# vim /etc/zabbix/zabbix_agent2.conf</span><br><span class="line">ServerActive=10.0.0.111</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Hostname=Zabbix server</span></span><br><span class="line">HostnameItem=system.hostname</span><br><span class="line">HostMetadataItem=system.uname</span><br><span class="line">[root@db01 ~]# egrep &#x27;^Server|^Host&#x27; /etc/zabbix/zabbix_agent2.conf</span><br><span class="line">Server=10.0.0.111</span><br><span class="line">ServerActive=10.0.0.111</span><br><span class="line">HostnameItem=system.hostname</span><br><span class="line">HostMetadataItem=system.uname</span><br><span class="line">[root@db01 ~]# systemctl restart zabbix-agent2</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210122135811.png" alt="image-20221012213512708"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210122135834.png" alt="image-20221012213516750"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210122135069.png" alt="image-20221012213519980"></p>
+<h2 id="ansible批量监控主机"><a href="#ansible批量监控主机" class="headerlink" title="ansible批量监控主机"></a>ansible批量监控主机</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# vim /etc/ansible/hosts</span><br><span class="line">[web]</span><br><span class="line">10.0.0.112</span><br><span class="line"></span><br><span class="line">[db]</span><br><span class="line">10.0.0.113</span><br><span class="line">[root@zbx ansible]# ssh-copy-id -i ~/.ssh/id_rsa.pub root@10.0.0.112</span><br><span class="line">[root@zbx ansible]# ssh-copy-id -i ~/.ssh/id_rsa.pub root@10.0.0.113</span><br><span class="line">[root@zbx ansible]# ansible -i hosts all -a &#x27;rpm -ivh https://mirrors.tuna.tsinghua.edu.cn/zabbix/zabbix/5.0/rhel/7/x86_64/zabbix-agent2-5.0.28-1.el7.x86_64.rpm&#x27;</span><br><span class="line">[root@zbx ansible]# vim zabbix_agent2.conf </span><br><span class="line">Server=10.0.0.111</span><br><span class="line">ServerActive=10.0.0.111</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Hostname=Zabbix server</span></span><br><span class="line">HostnameItem=system.hostname</span><br><span class="line">HostMetadataItem=system.uname</span><br><span class="line">[root@zbx ansible]# egrep &#x27;^Server|^Host&#x27; zabbix_agent2.conf </span><br><span class="line">Server=10.0.0.111</span><br><span class="line">ServerActive=10.0.0.111</span><br><span class="line">HostnameItem=system.hostname</span><br><span class="line">HostMetadataItem=system.uname</span><br><span class="line">[root@zbx ansible]# ansible -i hosts all -m copy -a &#x27;src=zabbix_agent2.conf dest=/etc/zabbix/zabbix_agent2.conf backup=yes&#x27;</span><br><span class="line">[root@zbx ansible]# ansible -i hosts all -m systemd -a &#x27;name=zabbix-agent2 enabled=yes state=restarted&#x27;</span><br><span class="line">[root@zbx ansible]# ansible -i hosts all -m shell -a &#x27;systemctl is-active zabbix-agent2&#x27;</span><br><span class="line">[root@zbx ansible]# ansible -i hosts all -m shell -a &#x27;ps -ef |grep zabbix&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="监控负载均衡"><a href="#监控负载均衡" class="headerlink" title="监控负载均衡"></a>监控负载均衡</h2><p>tcp自定义: <code>ss  -ant |grep -i &#39;estab&#39; |awk &#39;$3~/:80$/&#39;</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@web01 conf.d]# cat /etc/nginx/conf.d/default.conf </span><br><span class="line">server &#123;</span><br><span class="line">    listen     80 default_server;</span><br><span class="line">    server_name localhost;</span><br><span class="line">    location / &#123;</span><br><span class="line">      index index.html;</span><br><span class="line">    &#125;</span><br><span class="line">    location /nginx_status &#123;</span><br><span class="line">      stub_status;</span><br><span class="line">      #allow</span><br><span class="line">      #deny</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[root@web01 conf.d]# curl 10.0.0.112/nginx_status</span><br><span class="line">Active connections: 1 </span><br><span class="line">server accepts handled requests</span><br><span class="line"> 1 1 1 </span><br><span class="line">Reading: 0 Writing: 1 Waiting: 0</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141108845.png" alt="image-20221014110753695"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141109161.png" alt="image-20221014110946046"></p>
+<h2 id="端口进程"><a href="#端口进程" class="headerlink" title="端口进程"></a>端口进程</h2><p>找出系统内置的键值使用</p>
+<p>添加监控项</p>
+<p>添加触发器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# zabbix_get -s 10.0.0.112 -k net.tcp.port[,80]</span><br><span class="line">1</span><br><span class="line">[root@zbx ~]# zabbix_get -s 10.0.0.112 -k proc.num[nginx]</span><br><span class="line">2</span><br><span class="line">[root@zbx ~]# zabbix_get -s web01 -k net.tcp.port[,80]</span><br><span class="line">1</span><br><span class="line">[root@zbx ~]# zabbix_get -s web01 -k proc.num[]</span><br><span class="line">103</span><br><span class="line">[root@zbx ~]# zabbix_get -s web01 -k proc.num[nginx]</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="监控php状态"><a href="#监控php状态" class="headerlink" title="监控php状态"></a>监控php状态</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">[root@web01 conf.d]# vim /etc/nginx/conf.d/default.conf</span><br><span class="line">server &#123;</span><br><span class="line">  listen 80 default_server;</span><br><span class="line">  server_name localhost;</span><br><span class="line">  charset utf8;</span><br><span class="line">  access_log /var/log/nginx/default-access.log main;</span><br><span class="line">  error_log /var/log/nginx/default-error.log error;</span><br><span class="line">  location /nginx_status &#123;</span><br><span class="line">    stub_status ;</span><br><span class="line">  &#125;</span><br><span class="line">  location /php_status &#123;</span><br><span class="line">    fastcgi_pass  127.0.0.1:9000;</span><br><span class="line">    fastcgi_index  index.php;</span><br><span class="line">    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</span><br><span class="line">    include    fastcgi_params;</span><br><span class="line">  &#125;</span><br><span class="line">  location ~ \.php$ &#123;</span><br><span class="line">    fastcgi_pass  127.0.0.1:9000;</span><br><span class="line">    fastcgi_index index.php;</span><br><span class="line">    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</span><br><span class="line">    include    fastcgi_params;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[root@web01 ~]# vim /etc/php-fpm.d/www.conf</span><br><span class="line">pm.status_path = /php_status</span><br><span class="line"></span><br><span class="line">[root@web01 ~]# nginx -t</span><br><span class="line">[root@web01 ~]# php-fpm -t</span><br><span class="line">[root@web01 ~]# systemctl restart nginx php-fpm</span><br><span class="line"></span><br><span class="line">[root@web01 ~]# curl 10.0.0.112/nginx_status</span><br><span class="line">Active connections: 1 </span><br><span class="line">server accepts handled requests</span><br><span class="line"> 4 4 2 </span><br><span class="line">Reading: 0 Writing: 1 Waiting: 0 </span><br><span class="line">[root@web01 ~]# curl 10.0.0.112/php_status</span><br><span class="line">pool:                 www</span><br><span class="line">process manager:      dynamic</span><br><span class="line">start time:           14/Oct/2022:10:28:56 +0800</span><br><span class="line">start since:          69</span><br><span class="line">accepted conn:        1</span><br><span class="line">listen queue:         0</span><br><span class="line">max listen queue:     0</span><br><span class="line">listen queue len:     128</span><br><span class="line">idle processes:       4</span><br><span class="line">active processes:     1</span><br><span class="line">total processes:      5</span><br><span class="line">max active processes: 1</span><br><span class="line">max children reached: 0</span><br><span class="line">slow requests:        0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141109656.png" alt="image-20221014110905562"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141109226.png" alt="image-20221014110916113"></p>
+<h2 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h2><p>percona-mysql……</p>
+<p>zabbix内置模板：Template DB MySQL by Zabbix agent 2</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">php脚本获取数据库指标</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">xml模板文件</span></span><br><span class="line">[root@db01 ~]# wget https://www.percona.com/downloads/percona-monitoring-plugins/percona-monitoring-plugins-1.1.8/binary/redhat/7/x86_64/percona-zabbix-templates-1.1.8-1.noarch.rpm</span><br><span class="line">[root@db01 ~]# rpm -ivh percona-zabbix-templates-1.1.8-1.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>模板需要调用php脚本，安装php</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# cat &gt;&gt; /etc/yum.repos.d/php.repo&lt;&lt;&#x27;EOF&#x27;</span><br><span class="line">[php]</span><br><span class="line">name = php Repository</span><br><span class="line">baseurl = http://us-east.repo.webtatic.com/yum/el7/x86_64/</span><br><span class="line">gpgcheck = 0</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">[root@db01 ~]# yum -y install php72w php72w-cli php72w-common php72w-devel php72w-embedded php72w-gd php72w-mcrypt php72w-mbstring php72w-pdo php72w-xml php72w-fpm php72w-mysqlnd php72w-opcache php72w-pecl-memcached php72w-pecl-redis php72w-pecl-mongodb</span><br></pre></td></tr></table></figure>
+
+<p>拷贝<code>userparameter_percona_mysql.conf</code>到<code>/etc/zabbix/zabbix_agent2.d/</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# rpm -ql percona-zabbix-templates</span><br><span class="line">/var/lib/zabbix/percona</span><br><span class="line">/var/lib/zabbix/percona/scripts</span><br><span class="line">/var/lib/zabbix/percona/scripts/get_mysql_stats_wrapper.sh</span><br><span class="line">/var/lib/zabbix/percona/scripts/ss_get_mysql_stats.php</span><br><span class="line">/var/lib/zabbix/percona/templates</span><br><span class="line">/var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf</span><br><span class="line">/var/lib/zabbix/percona/templates/zabbix_agent_template_percona_mysql_server_ht_2.0.9-sver1.1.8.xml</span><br><span class="line">[root@db01 ~]# cp /var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf /etc/zabbix/zabbix_agent2.d/</span><br></pre></td></tr></table></figure>
+
+<p>修改配置<code>/var/lib/zabbix/percona/scripts/ss_get_mysql_stats.php</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# vim /var/lib/zabbix/percona/scripts/ss_get_mysql_stats.php</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">mysql_user = <span class="string">&#x27;yyr&#x27;</span>;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">mysql_pass = <span class="string">&#x27;1&#x27;</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>生产环境 需要一个对数据库有只读权限的用户即可。  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; grant select,show on *.* to yyr@&#x27;localhost&#x27; identified by &#x27;1&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>查看数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# zabbix_get -s 10.0.0.113 -k MySQL.State-login</span><br><span class="line">0</span><br><span class="line">[root@zbx ~]# zabbix_get -s 10.0.0.113 -k MySQL.pool-size</span><br><span class="line">8191</span><br></pre></td></tr></table></figure>
+
+<p>用自带模板会报时间格式的错误，需要下载新的模板</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# wget http://jaminzhang.github.io/soft-conf/Zabbix/zbx_percona_mysql_template.xml</span><br><span class="line">[root@db01 ~]# sz zbx_percona_mysql_template.xml</span><br></pre></td></tr></table></figure>
+
+<p>导入模板</p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141137120.png" alt="image-20221014113719006"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141137591.png" alt="image-20221014113742492"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141139355.png" alt="image-20221014113933244"></p>
+<h2 id="Grafana增强展示"><a href="#Grafana增强展示" class="headerlink" title="Grafana增强展示"></a>Grafana增强展示</h2><p>zbx部署grafana</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# wget --no-check-certificate -P /server/tools https://mirrors.tuna.tsinghua.edu.cn/grafana/yum/rpm/grafana-7.3.5-1.x86_64.rpm</span><br><span class="line">[root@zbx ~]# yum localinstall -y /server/tools/grafana-7.3.5-1.x86_64.rpm</span><br><span class="line">[root@zbx ~]# systemctl start grafana-server</span><br><span class="line">[root@zbx ~]# systemctl enable grafana-server</span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/grafana-server.service to /usr/lib/systemd/system/grafana-server.service.</span><br><span class="line">[root@zbx ~]# ss -lntup|grep grafana</span><br><span class="line">tcp    LISTEN     0      128    [::]:3000               [::]:*                   users:((&quot;grafana-server&quot;,pid=8119,fd=8))</span><br></pre></td></tr></table></figure>
+
+<p>浏览器访问zbx.oldboylinux.cn:3000，用户 admin，密码 admin</p>
+<p>添加插件zabbix</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# grafana-cli plugins list-remote |grep zabbix</span><br><span class="line">id: alexanderzobnin-zabbix-app version: 4.1.5</span><br><span class="line">[root@zbx ~]# grafana-cli plugins install alexanderzobnin-zabbix-app</span><br><span class="line">installing alexanderzobnin-zabbix-app @ 4.1.5</span><br><span class="line">from: https://grafana.com/api/plugins/alexanderzobnin-zabbix-app/versions/4.1.5/download</span><br><span class="line">into: /var/lib/grafana/plugins</span><br><span class="line"></span><br><span class="line">✔ Installed alexanderzobnin-zabbix-app successfully </span><br><span class="line"></span><br><span class="line">Restart grafana after installing plugins . &lt;service grafana-server restart&gt;</span><br><span class="line"></span><br><span class="line">[root@zbx ~]# du -sh /var/lib/grafana/plugins/alexanderzobnin-zabbix-app/</span><br><span class="line">59M	/var/lib/grafana/plugins/alexanderzobnin-zabbix-app/</span><br><span class="line">[root@zbx ~]# systemctl restart grafana-server</span><br></pre></td></tr></table></figure>
+
+
+
+<p>搜索开启zabbix</p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141343319.png" alt="image-20221014134314158"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@zbx ~]# curl -v -H Host:zbx.oldboylinux.cn http://10.0.0.111/api_jsonrpc.php</span><br><span class="line">* About to connect() to 10.0.0.111 port 80 (#0)</span><br><span class="line">*   Trying 10.0.0.111...</span><br><span class="line">* Connected to 10.0.0.111 (10.0.0.111) port 80 (#0)</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">GET /api_jsonrpc.php HTTP/1.1</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">User-Agent: curl/7.29.0</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">Accept: */*</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">Host:zbx.oldboylinux.cn</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">&lt; HTTP/1.1 412 Precondition Failed</span></span><br><span class="line">&lt; Server: nginx/1.20.1</span><br><span class="line">&lt; Date: Fri, 14 Oct 2022 05:47:04 GMT</span><br><span class="line">&lt; Content-Type: text/html; charset=UTF-8</span><br><span class="line">&lt; Transfer-Encoding: chunked</span><br><span class="line">&lt; Connection: keep-alive</span><br><span class="line">&lt; X-Powered-By: PHP/7.2.34</span><br><span class="line">&lt; Access-Control-Allow-Origin: *</span><br><span class="line">&lt; Access-Control-Allow-Headers: Content-Type</span><br><span class="line">&lt; Access-Control-Allow-Methods: POST</span><br><span class="line">&lt; Access-Control-Max-Age: 1000</span><br><span class="line">&lt; </span><br><span class="line">* Connection #0 to host 10.0.0.111 left intact</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141353763.png" alt="image-20221014135359642"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141354011.png" alt="image-20221014135413828"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141354927.png" alt="image-20221014135416840"></p>
+<p><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202210141354938.png" alt="image-20221014135419771"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io">壹拾陆</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io/posts/8fb4d8df.html">https://mo-li001.github.io/posts/8fb4d8df.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mo-li001.github.io" target="_blank">壹拾陆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/c7058740.html"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Redis缓存技术</div></div></a></div><div class="next-post pull-right"><a href="/posts/56750.html"><img class="next-cover" src="https://tuchuangs.com/imgs/2022/09/18/074f3836d4f471b8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">使用 Github Pages 和 Hexo 搭建自己的独立博客</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/abc41134.html" title="没写好"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">没写好</div></div></a></div><div><a href="/posts/9f353bc9.html" title="Devops"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Devops</div></div></a></div><div><a href="/posts/f5f9fa9b.html" title="Docker"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Docker</div></div></a></div><div><a href="/posts/34d20e28.html" title="ELK"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK</div></div></a></div><div><a href="/posts/8005.html" title="ELK快速部署"><img class="cover" src="https://tuchuangs.com/imgs/2022/09/18/074f3836d4f471b8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK快速部署</div></div></a></div><div><a href="/posts/9bdc030a.html" title="HAproxy"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">HAproxy</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-nginx%E7%8E%AF%E5%A2%83"><span class="toc-text">1.nginx环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E2%80%8Bphp"><span class="toc-text">2、​php</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81nginx-php"><span class="toc-text">3、nginx+php</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">4、数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81zabbix-%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-text">5、zabbix-服务端</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E3%80%81zabbix%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E5%87%86%E5%A4%87"><span class="toc-text">6、zabbix前端页面准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7%E3%80%81%E5%AE%89%E8%A3%85zabbix-zabbix%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8Ezabbix-server"><span class="toc-text">7、安装zabbix(zabbix前端页面连接数据库与zabbix-server)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zabbix-agent-vs-agent2"><span class="toc-text">Zabbix agent vs agent2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Zabbix-Agent-2-%E7%9B%91%E6%8E%A7%E6%B5%81%E7%A8%8B"><span class="toc-text">Zabbix Agent[2]监控流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#zabbix%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3"><span class="toc-text">zabbix服务端与客户端配置详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%91%E6%8E%A7%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">监控客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zabbix%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="toc-text">Zabbix中文乱码问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7%E9%A1%B9%E6%B5%81%E7%A8%8B"><span class="toc-text">自定义监控项流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#zbx-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7"><span class="toc-text">zbx-自定义监控</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%9C%80%E6%B1%82%EF%BC%9A%E6%A3%80%E6%9F%A5%E5%BD%93%E5%89%8D%E6%9C%BA%E5%99%A8%E6%98%AF%E5%90%A6root%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95"><span class="toc-text">1.需求：检查当前机器是否root远程登录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-Linux%EF%BC%9A%E5%91%BD%E4%BB%A4"><span class="toc-text">1.1 Linux：命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-Linux%EF%BC%9A%E5%88%9B%E5%BB%BA%E9%94%AE%E5%80%BC-zbx-server%E8%AF%86%E5%88%AB%EF%BC%89"><span class="toc-text">1.2 Linux：创建键值(zbx-server识别）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-Linux%EF%BC%9A%E6%B5%8B%E8%AF%95-zbx-%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-text">1.3 Linux：测试-zbx-服务端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-web%EF%BC%9A%E5%88%9B%E5%BB%BA%E7%9B%91%E6%8E%A7%E9%A1%B9"><span class="toc-text">1.4 web：创建监控项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-web%EF%BC%9A%E5%88%9B%E5%BB%BA%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-text">1.5 web：创建触发器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-web%EF%BC%9A%E5%88%9B%E5%BB%BA%E5%9B%BE%E5%BD%A2"><span class="toc-text">1.6 web：创建图形</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%EF%BC%9A%E6%B7%BB%E5%8A%A0%E7%9B%91%E6%8E%A7%E9%A1%B9%EF%BC%8C%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%8C%E5%9B%BE%E5%BD%A2"><span class="toc-text">2.创建模板：添加监控项，触发器，图形</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF"><span class="toc-text">2.1 创建模板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E6%A8%A1%E6%9D%BF%E5%85%B3%E8%81%94%E4%B8%BB%E6%9C%BA"><span class="toc-text">2.2 模板关联主机</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%91%E6%8E%A7%E6%8A%A5%E8%AD%A6"><span class="toc-text">监控报警</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%8A%E8%AD%A6%E5%88%86%E7%B1%BB"><span class="toc-text">告警分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6"><span class="toc-text">邮件报警</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E5%85%A8%E6%B5%81%E7%A8%8B"><span class="toc-text">1）全流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89%E4%B8%AA%E4%BA%BA%E9%82%AE%E7%AE%B1%E5%87%86%E5%A4%87%EF%BC%88%E7%95%A5%EF%BC%89"><span class="toc-text">2）个人邮箱准备（略）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%89%E9%85%8D%E7%BD%AE%E5%8F%91%E4%BB%B6%E4%BA%BA"><span class="toc-text">3）配置发件人</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6"><span class="toc-text">微信报警</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E5%85%A8%E6%B5%81%E7%A8%8B-1"><span class="toc-text">1）全流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%EF%BC%9ANo-module-named-requests"><span class="toc-text">报错：No module named requests</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E6%8A%A5%E9%94%99pip-install-request"><span class="toc-text">执行报错pip install request</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zabbix%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A6%82%E8%BF%B0"><span class="toc-text">Zabbix客户端概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#snmp%E7%9B%91%E6%8E%A7%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87"><span class="toc-text">snmp监控网络设备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E7%9B%91%E6%8E%A7%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87"><span class="toc-text">1）监控网络设备</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-%E5%90%AF%E5%8A%A8snmp"><span class="toc-text">a.启动snmp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-6-zabbix%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%B1%BB%E5%9E%8B"><span class="toc-text">4.6 zabbix客户端常见类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="toc-text">5.自动化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E4%B8%BB%E6%9C%BA"><span class="toc-text">5.1 自动添加主机</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0"><span class="toc-text">12.2 自动发现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B"><span class="toc-text">2）部署流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-3-%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C"><span class="toc-text">12.3 自动注册</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">1）环境准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B-1"><span class="toc-text">2）部署流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-%E4%BF%AE%E6%94%B9%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">a.修改客户端配置文件</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ansible%E6%89%B9%E9%87%8F%E7%9B%91%E6%8E%A7%E4%B8%BB%E6%9C%BA"><span class="toc-text">ansible批量监控主机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%91%E6%8E%A7%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-text">监控负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B"><span class="toc-text">端口进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%91%E6%8E%A7php%E7%8A%B6%E6%80%81"><span class="toc-text">监控php状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql"><span class="toc-text">Mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grafana%E5%A2%9E%E5%BC%BA%E5%B1%95%E7%A4%BA"><span class="toc-text">Grafana增强展示</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/99081826.html" title="很强，3万字把华为HCIA知识点全部总结了！">很强，3万字把华为HCIA知识点全部总结了！</a><time datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b0318225.html" title="浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f962716d.html" title="使用system-config-kickstart生成kickstart文件">使用system-config-kickstart生成kickstart文件</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/12ac960a.html" title="Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件">Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cefcf133.html" title="zabbix5.0 percona_mysql_template模板文件">zabbix5.0 percona_mysql_template模板文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

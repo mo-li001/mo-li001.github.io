@@ -1,0 +1,1395 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>很强，3万字把华为HCIA知识点全部总结了！ | 壹拾陆</title><meta name="keywords" content="无"><meta name="author" content="壹拾陆"><meta name="copyright" content="壹拾陆"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="很强，3万字把华为HCIA知识点全部总结了！1 功能记录1.1 路由器 网络边源使用路由器，因为大部分交换机无法做NAT  1.2 网络1.2.1 广域网(WAN) 和互联网的区别互联网开放，而广域网不开放 1.2.2 受传输距离限制怎么传到那么远的地方使用远距离传输介质，如光设备(传输网) 1.2.3 衡量网络的主要指标 带宽(bandwidth) – 单位 bps  延迟(delay)  可用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="很强，3万字把华为HCIA知识点全部总结了！">
+<meta property="og:url" content="https://mo-li001.github.io/posts/99081826.html">
+<meta property="og:site_name" content="壹拾陆">
+<meta property="og:description" content="很强，3万字把华为HCIA知识点全部总结了！1 功能记录1.1 路由器 网络边源使用路由器，因为大部分交换机无法做NAT  1.2 网络1.2.1 广域网(WAN) 和互联网的区别互联网开放，而广域网不开放 1.2.2 受传输距离限制怎么传到那么远的地方使用远距离传输介质，如光设备(传输网) 1.2.3 衡量网络的主要指标 带宽(bandwidth) – 单位 bps  延迟(delay)  可用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-05T05:17:54.876Z">
+<meta property="article:modified_time" content="2022-11-17T09:42:18.656Z">
+<meta property="article:author" content="壹拾陆">
+<meta property="article:tag" content="无">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mo-li001.github.io/posts/99081826"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '很强，3万字把华为HCIA知识点全部总结了！',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-17 17:42:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">很强，3万字把华为HCIA知识点全部总结了！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-17T09:42:18.656Z" title="更新于 2022-11-17 17:42:18">2022-11-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/default/">default</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="很强，3万字把华为HCIA知识点全部总结了！"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="很强，3万字把华为HCIA知识点全部总结了！"><a href="#很强，3万字把华为HCIA知识点全部总结了！" class="headerlink" title="很强，3万字把华为HCIA知识点全部总结了！"></a>很强，3万字把华为HCIA知识点全部总结了！</h1><h1 id="1-功能记录"><a href="#1-功能记录" class="headerlink" title="1 功能记录"></a>1 功能记录</h1><h2 id="1-1-路由器"><a href="#1-1-路由器" class="headerlink" title="1.1 路由器"></a>1.1 路由器</h2><ul>
+<li>网络边源使用路由器，因为大部分交换机无法做NAT</li>
+</ul>
+<h2 id="1-2-网络"><a href="#1-2-网络" class="headerlink" title="1.2 网络"></a>1.2 网络</h2><h3 id="1-2-1-广域网-WAN-和互联网的区别"><a href="#1-2-1-广域网-WAN-和互联网的区别" class="headerlink" title="1.2.1 广域网(WAN) 和互联网的区别"></a>1.2.1 广域网(WAN) 和互联网的区别</h3><p>互联网开放，而广域网不开放</p>
+<h3 id="1-2-2-受传输距离限制怎么传到那么远的地方"><a href="#1-2-2-受传输距离限制怎么传到那么远的地方" class="headerlink" title="1.2.2 受传输距离限制怎么传到那么远的地方"></a>1.2.2 受传输距离限制怎么传到那么远的地方</h3><p>使用远距离传输介质，如光设备(传输网)</p>
+<h3 id="1-2-3-衡量网络的主要指标"><a href="#1-2-3-衡量网络的主要指标" class="headerlink" title="1.2.3 衡量网络的主要指标"></a>1.2.3 衡量网络的主要指标</h3><ul>
+<li><p>带宽(bandwidth) – 单位 bps</p>
+</li>
+<li><p>延迟(delay)</p>
+</li>
+<li><p>可用性(Availability)</p>
+</li>
+<li><p>扩展性(Scalability)</p>
+</li>
+<li><p>可靠性(Reliability)</p>
+</li>
+</ul>
+<h3 id="1-2-4-以太网"><a href="#1-2-4-以太网" class="headerlink" title="1.2.4 以太网"></a>1.2.4 以太网</h3><p>是一种应用最普遍的局域网技术</p>
+<h3 id="1-2-5-为何交换机接口无法配置IP地址"><a href="#1-2-5-为何交换机接口无法配置IP地址" class="headerlink" title="1.2.5 为何交换机接口无法配置IP地址?"></a>1.2.5 为何交换机接口无法配置IP地址?</h3><p>因为华为的VRP(华为网络操作系统)端口分了Route Port 和 Switch Port， 交换端口Switch Port无法配置IP地址</p>
+<h2 id="1-3-物理层"><a href="#1-3-物理层" class="headerlink" title="1.3 物理层"></a>1.3 物理层</h2><h3 id="1-3-1-单模光纤和多模光纤的区别"><a href="#1-3-1-单模光纤和多模光纤的区别" class="headerlink" title="1.3.1 单模光纤和多模光纤的区别"></a>1.3.1 单模光纤和多模光纤的区别</h3><p>_单模光纤_的英文标识为SF(黄色)：传输距离远(数十千米)，速率快</p>
+<p>_多模光纤的_英文标识为MF(桔色)：传输距离近(千米内)，速率慢，容许不同模式的光</p>
+<h3 id="1-3-2-光模块"><a href="#1-3-2-光模块" class="headerlink" title="1.3.2 光模块"></a>1.3.2 光模块</h3><ul>
+<li><p>SFP 小型可插拔型封装</p>
+</li>
+<li><p>eSFP 增强型SFP</p>
+</li>
+<li><p>SFP+ 速率提升</p>
+</li>
+<li><p>XFP X罗马数字10 ， 10G光模块</p>
+</li>
+<li><p>QSFP+ 四通道小型可热插拔光模块。</p>
+</li>
+<li><p>CFP 高速可热插拔，支持数据通信和电信传输两大应用的新型光模块标准</p>
+</li>
+</ul>
+<h3 id="1-3-3-光衰"><a href="#1-3-3-光衰" class="headerlink" title="1.3.3 光衰"></a>1.3.3 光衰</h3><p>一般指光通量，允许光衰最大值-40DB，不能大于-25DB</p>
+<h2 id="1-4-经验"><a href="#1-4-经验" class="headerlink" title="1.4 经验"></a>1.4 经验</h2><h3 id="1-4-1-排错"><a href="#1-4-1-排错" class="headerlink" title="1.4.1 排错"></a>1.4.1 排错</h3><p>在排除网络错误时只看配置没有用，要结合拓扑和日志综合分析</p>
+<h1 id="2-网络基础笔记"><a href="#2-网络基础笔记" class="headerlink" title="2. 网络基础笔记"></a>2. 网络基础笔记</h1><h2 id="2-1-数据链路层"><a href="#2-1-数据链路层" class="headerlink" title="2.1 数据链路层"></a>2.1 数据链路层</h2><h3 id="2-1-1-OSI七层模型"><a href="#2-1-1-OSI七层模型" class="headerlink" title="2.1.1 OSI七层模型"></a>2.1.1 OSI七层模型</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+<th>单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>物理层</td>
+<td>比特流传输</td>
+<td>Bit</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>提供介质访问、链路管理等</td>
+<td>Frame(帧)</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>定义端到端的包传输</td>
+<td>Packet(包)</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>建立主机端到端连接</td>
+<td>Segment(段)</td>
+</tr>
+<tr>
+<td>会话层</td>
+<td>建立、维护和管理会话</td>
+<td>PDU(协议数据单元)</td>
+</tr>
+<tr>
+<td>表示层</td>
+<td>处理数据格式、数据加密等</td>
+<td>PDU(协议数据单元)</td>
+</tr>
+<tr>
+<td>应用层</td>
+<td>应用程序间的通信</td>
+<td>PDU(协议数据单元)</td>
+</tr>
+</tbody></table>
+<p>个人理解：这个模型是一个抽象的概念，相当于一个设计图纸，蓝图；如同汽车的一个设计图纸，便于批量生产，只不过网络根据这来设计一些层次上的东西</p>
+<h3 id="2-1-2-以太2型帧和802-3帧的区别"><a href="#2-1-2-以太2型帧和802-3帧的区别" class="headerlink" title="2.1.2 以太2型帧和802.3帧的区别"></a>2.1.2 以太2型帧和802.3帧的区别</h3><ul>
+<li><p>以太2型(Ethrnet_II) 通常用于业务数据，里面包含了上层网络层传输层的信息，如type字段有0x0800–ip，0806–ARP</p>
+</li>
+<li><p>IEEE802.3 用于交换机之间一些控制协议，如CDP(思科发现协议)，生成树的BPDU</p>
+</li>
+</ul>
+<h3 id="2-1-3-交换机转发机制"><a href="#2-1-3-交换机转发机制" class="headerlink" title="2.1.3 交换机转发机制"></a>2.1.3 交换机转发机制</h3><h4 id="2-1-3-1-行为"><a href="#2-1-3-1-行为" class="headerlink" title="2.1.3.1 行为"></a>2.1.3.1 行为</h4><ul>
+<li><p>泛洪：</p>
+</li>
+<li><p>接收到广播帧(目的MAC地址为十六进制的FFFFFFFFFFFF) —————— 会触发泛洪</p>
+</li>
+<li><p>未知单播帧(即在MAC地址表查找不到目的MAC，然后将会泛洪出去) —————— 会触发泛洪</p>
+</li>
+<li><p>向所有接口转发</p>
+</li>
+<li><p>转发</p>
+</li>
+<li><p>丢弃</p>
+</li>
+</ul>
+<h3 id="2-1-4-MAC地址表形成"><a href="#2-1-4-MAC地址表形成" class="headerlink" title="2.1.4 MAC地址表形成"></a>2.1.4 MAC地址表形成</h3><ul>
+<li><p>可以通过源MAC地址学习并绑定端口而自动建立</p>
+</li>
+<li><p>可以手动配置</p>
+</li>
+</ul>
+<h3 id="2-1-5-MAC地址表震荡-漂移"><a href="#2-1-5-MAC地址表震荡-漂移" class="headerlink" title="2.1.5 MAC地址表震荡(漂移)"></a>2.1.5 MAC地址表震荡(漂移)</h3><ul>
+<li><p>本质：一个终端的MAC地址同一个时间只能从一个接口学习到</p>
+</li>
+<li><p>过程：若是从其他接口也学习到，后学习到的将会覆盖原有的表项，甚至出现反复，造成震荡</p>
+</li>
+<li><p>诱因：出现环路，形成广播风暴</p>
+</li>
+</ul>
+<h3 id="2-1-6-链路层发现协议"><a href="#2-1-6-链路层发现协议" class="headerlink" title="2.1.6 链路层发现协议"></a>2.1.6 链路层发现协议</h3><ul>
+<li><p>LLDP 用于发现其他设备</p>
+</li>
+<li><p>思科默认开启CDP(只能发现思科的设备)</p>
+</li>
+</ul>
+<h3 id="2-1-7-帧校验序列-FCS"><a href="#2-1-7-帧校验序列-FCS" class="headerlink" title="2.1.7 帧校验序列(FCS)"></a>2.1.7 帧校验序列(FCS)</h3><p>俗名：帧尾</p>
+<p>用来校验帧，在抓包工具中无法看到</p>
+<h2 id="2-2-网络层"><a href="#2-2-网络层" class="headerlink" title="2.2 网络层"></a>2.2 网络层</h2><ul>
+<li>三层无广播风暴</li>
+</ul>
+<h3 id="2-2-1-IP地址"><a href="#2-2-1-IP地址" class="headerlink" title="2.2.1 IP地址"></a>2.2.1 IP地址</h3><h4 id="2-2-1-1-子网划分"><a href="#2-2-1-1-子网划分" class="headerlink" title="2.2.1.1 子网划分"></a>2.2.1.1 子网划分</h4><ul>
+<li><p>为解决地址划分产生的地址浪费而生</p>
+</li>
+<li><p>以子网掩码为中心，根据每个子网的主机数目来确定主机的位数</p>
+</li>
+<li><p>1 代表网络位(二进制形式)</p>
+</li>
+<li><p>0 代表主机位(二进制形式)</p>
+</li>
+<li><p>公式：</p>
+</li>
+<li><p>子网数目 &#x3D; 2的M次方(M代表子网位数) &#x2F;&#x2F; 即二进制网络位1的个数</p>
+</li>
+<li><p>主机数目 &#x3D; 2的N次方-2(N代表主机位数) &#x2F;&#x2F; <strong>减掉的是网络地址和广播地址</strong></p>
+</li>
+<li><p>主机位为全1的地址是广播地址</p>
+</li>
+<li><p>主机位为全0的地址是网络地址</p>
+</li>
+<li><p>运算例子：</p>
+<p>202.100.1.5&#x2F;30</p>
+<p>5 0000 0101 其主机位全部换成0：0000 0100&#x3D;4</p>
+<p>其主机位全部换成1：0000 0111&#x3D;7</p>
+<p>故而网络地址是：202.100.1.4&#x2F;30</p>
+<p>广播地址是：202.100.1.7&#x2F;30</p>
+<p>可用子网：</p>
+<p>子网掩码 30 网络位 30 - 24 &#x3D; 6 2^6 &#x3D; 64</p>
+<p>故 64 个可用子网</p>
+<p>可用主机位：</p>
+<p>32 - 30 &#x3D; 2 2^2-2 &#x3D; 2</p>
+<p>故 2 个可用主机</p>
+</li>
+</ul>
+<h4 id="2-2-1-2-ABC-类默认掩码"><a href="#2-2-1-2-ABC-类默认掩码" class="headerlink" title="2.2.1.2 ABC 类默认掩码"></a>2.2.1.2 ABC 类默认掩码</h4><p><strong>&#x2F;8 &#x2F;16 &#x2F;24</strong></p>
+<p>拓展：D 类 是组播地址 E 类 作为保留</p>
+<h4 id="2-2-1-3-常用特殊ip地址"><a href="#2-2-1-3-常用特殊ip地址" class="headerlink" title="2.2.1.3 常用特殊ip地址"></a>2.2.1.3 常用特殊ip地址</h4><ul>
+<li><p>0.0.0.0&#x2F;0 代表所有网络，常用于指定默认路由</p>
+</li>
+<li><p>子网掩码 &#x2F;32 的地址是主机地址</p>
+</li>
+<li><p>子网掩码 &#x2F;31 的地址可以在地址匮乏的情况下配置在环回接口或者点到点接口</p>
+</li>
+</ul>
+<h4 id="2-2-1-4-可变长子网掩码-VLSM-Variable-Length-Subnet-Mask"><a href="#2-2-1-4-可变长子网掩码-VLSM-Variable-Length-Subnet-Mask" class="headerlink" title="2.2.1.4 可变长子网掩码(VLSM Variable Length Subnet Mask)"></a>2.2.1.4 可变长子网掩码(VLSM Variable Length Subnet Mask)</h4><p>通过扩展子网掩码的网络位来减少主机位，以便减少地址资源浪费</p>
+<h3 id="2-2-2-IP报文"><a href="#2-2-2-IP报文" class="headerlink" title="2.2.2 IP报文"></a>2.2.2 IP报文</h3><ul>
+<li><p>标准头部大小20字节</p>
+</li>
+<li><p>MTU(最大传输单元) 在Ethernet中为1500字节， 是二层以上(不包含二层)承载的总大小</p>
+</li>
+</ul>
+<h4 id="2-2-2-1-重要字段"><a href="#2-2-2-1-重要字段" class="headerlink" title="2.2.2.1 重要字段"></a>2.2.2.1 重要字段</h4><ul>
+<li><p>Total Length IP报文头部长度 + 上一层的 总字节长度</p>
+</li>
+<li><p>Identification 区分分片，相同代表同一个报文</p>
+</li>
+<li><p>Flags</p>
+</li>
+<li><p>保留位</p>
+</li>
+<li><p>DF 1–表示不分片 0–表示分片</p>
+</li>
+<li><p>MF 1–表示更多片 0–表示最后一片</p>
+</li>
+<li><p>Fragment Offset 片偏移</p>
+</li>
+<li><p>TTL(Time to Live) 生存时间， 三层的防环</p>
+</li>
+</ul>
+<h2 id="2-3-传输层"><a href="#2-3-传输层" class="headerlink" title="2.3 传输层"></a>2.3 传输层</h2><h3 id="2-3-1-常用协议端口"><a href="#2-3-1-常用协议端口" class="headerlink" title="2.3.1 常用协议端口"></a>2.3.1 常用协议端口</h3><table>
+<thead>
+<tr>
+<th>TCP</th>
+<th>FTP</th>
+<th>20&#x2F;21</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SSH</td>
+<td>22</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Telnet</td>
+<td>23</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>80</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>443</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>两者皆有</td>
+<td>DNS</td>
+<td>53</td>
+</tr>
+<tr>
+<td>UDP</td>
+<td>TFTP</td>
+<td>69</td>
+</tr>
+<tr>
+<td>SNMP</td>
+<td>161</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="2-3-2-TCP"><a href="#2-3-2-TCP" class="headerlink" title="2.3.2 TCP"></a>2.3.2 TCP</h3><ul>
+<li><p>标准头部大小20字节</p>
+</li>
+<li><p>端口大的一端主动发起请求</p>
+</li>
+<li><p>建立连接需要通过三次握手：主要参与报文的标志位 SYN ACK</p>
+</li>
+<li><p>SYN ——&gt;</p>
+</li>
+<li><p>&lt;——–SYN, ACK</p>
+</li>
+<li><p>ACK ——-&gt;</p>
+</li>
+<li><p>断开需要四次报文交互：主要参与报文标志位 FIN ACK</p>
+</li>
+<li><p>FIN, ACK ——-&gt;</p>
+</li>
+<li><p>&lt;———–ACK</p>
+</li>
+<li><p>&lt;———–FIN, ACK</p>
+</li>
+<li><p>ACK ———&gt;</p>
+</li>
+<li><p>报文重要字段：</p>
+</li>
+<li><p>序列号(seq)：丢失检测，乱序重排</p>
+</li>
+</ul>
+<h2 id="2-4-交换网络"><a href="#2-4-交换网络" class="headerlink" title="2.4 交换网络"></a>2.4 交换网络</h2><h3 id="2-4-1-广播域"><a href="#2-4-1-广播域" class="headerlink" title="2.4.1 广播域"></a>2.4.1 广播域</h3><ul>
+<li><p>基于第二层，在 <strong>三层接口(Route Port)</strong> 处会被终止</p>
+</li>
+<li><p>网络中能接收任一设备发出的广播帧的所有设备的集合</p>
+</li>
+<li><p>根本就是一个网络或者一个子网中的二层区域</p>
+</li>
+<li><p>可以说路由器的每个接口都是一个广播域</p>
+</li>
+</ul>
+<h3 id="2-4-2-VLAN"><a href="#2-4-2-VLAN" class="headerlink" title="2.4.2 VLAN"></a>2.4.2 VLAN</h3><ul>
+<li><p>Virtual Local Area Network 虚拟局域网</p>
+</li>
+<li><p>逻辑上从二层进行隔离广播域</p>
+</li>
+<li><p>二层帧将添加上4字节的Tag</p>
+</li>
+</ul>
+<h4 id="2-4-2-1-Access链路端口"><a href="#2-4-2-1-Access链路端口" class="headerlink" title="2.4.2.1 Access链路端口"></a>2.4.2.1 Access链路端口</h4><ul>
+<li><p>独享链路，只允许唯一的VLAN ID帧通过</p>
+</li>
+<li><p>进入端口的帧，如果没有Tag则加上缺省VLAN Tag，若有则检查是否相同，不同则丢弃</p>
+</li>
+<li><p>出端口的帧，去掉Tag</p>
+</li>
+</ul>
+<h4 id="2-4-2-2-Trunk链路"><a href="#2-4-2-2-Trunk链路" class="headerlink" title="2.4.2.2 Trunk链路"></a>2.4.2.2 Trunk链路</h4><ul>
+<li><p>共享链路，允许多个VLAN在同一个链路中转发</p>
+</li>
+<li><p>接收帧，无Tag，若缺省VLAN在允许列表中，则加上缺省VLAN</p>
+</li>
+<li><p>有Tag，查看是否在可通过列表中，是放行，不是直接丢弃</p>
+</li>
+<li><p>发送帧，VLAN ID和缺省VLAN相同，且在允许列表中，则去掉Tag发送</p>
+</li>
+<li><p>不同且在允许列表中，则直接发送</p>
+</li>
+</ul>
+<h4 id="2-4-2-3-本征VLAN-缺省VLAN-PVID"><a href="#2-4-2-3-本征VLAN-缺省VLAN-PVID" class="headerlink" title="2.4.2.3 本征VLAN(缺省VLAN PVID)"></a>2.4.2.3 本征VLAN(缺省VLAN PVID)</h4><ul>
+<li><p>历史遗留，解决Trunk链路中Hub集线器连接的终端设备无法解析帧的问题，通过在端口设置本征vlan，帧的VLAN ID和缺省VLAN相同，且在允许通过列表中，去掉Tag，以便中间连接集线器的终端设备可以接收并解析</p>
+</li>
+<li><p>为防止在Trunk链路上，PVID(本征VLAN)引发的跨越VLAN攻击，一般采用使用一个没有业务的VLAN作为PVID</p>
+</li>
+</ul>
+<h4 id="2-4-2-4-Hybrid链路"><a href="#2-4-2-4-Hybrid链路" class="headerlink" title="2.4.2.4 Hybrid链路"></a>2.4.2.4 Hybrid链路</h4><ul>
+<li><p>入方向增加一个PVID，出方向允许多个VLAN的数据帧转发并移除PVID，前提是在允许的VLAN列表中</p>
+</li>
+<li><p>可以运用在两个同一个局域网不同VLAN的主机要访问远端一个终端，终端可以访问这两个不同的主机</p>
+</li>
+</ul>
+<h3 id="2-4-3-STP"><a href="#2-4-3-STP" class="headerlink" title="2.4.3 STP"></a>2.4.3 STP</h3><h4 id="2-4-3-1-环路引发的广播风暴"><a href="#2-4-3-1-环路引发的广播风暴" class="headerlink" title="2.4.3.1 环路引发的广播风暴"></a>2.4.3.1 环路引发的广播风暴</h4><ul>
+<li><p>形成：收到目的mac地址未知的单播帧或者广播帧，然后由泛洪的行为在环路中被无限转发</p>
+</li>
+<li><p>MAC地址表只能一个接口绑定一个MAC地址，广播风暴会引起MAC地址表震荡</p>
+</li>
+</ul>
+<h4 id="2-4-3-2-BPDU-桥协议数据单元"><a href="#2-4-3-2-BPDU-桥协议数据单元" class="headerlink" title="2.4.3.2 BPDU 桥协议数据单元"></a>2.4.3.2 BPDU 桥协议数据单元</h4><ul>
+<li><p>Bridge Protocol Data Unit</p>
+</li>
+<li><p>在桥之间交互，从而保证设备完成生成树计算过程</p>
+</li>
+<li><p>包含</p>
+</li>
+<li><p>根桥ID(RootID): 桥优先级(BridgePriority)+桥mac地址(背板mac，不是端口mac); 桥优先级小的成为根桥，也可以修改优先级来自己决定根桥</p>
+</li>
+<li><p>根路径开销(RootPathCost)</p>
+</li>
+<li><p>指定桥ID(DesignatedBridgeID)</p>
+</li>
+<li><p>指定端口ID(DesignatedPortID)</p>
+</li>
+</ul>
+<h4 id="2-4-3-3-角色"><a href="#2-4-3-3-角色" class="headerlink" title="2.4.3.3 角色"></a>2.4.3.3 角色</h4><ul>
+<li><p>根桥: 交换网络会选举一个根桥</p>
+</li>
+<li><p>根端口(RP)：每个非根交换机选举一个根端口</p>
+</li>
+<li><p>指定端口(DP)：每个条链路选举一个指定端口</p>
+</li>
+<li><p>阻塞非根、非指定端口(AP)</p>
+</li>
+</ul>
+<h4 id="2-4-2-4-五种端口状态"><a href="#2-4-2-4-五种端口状态" class="headerlink" title="2.4.2.4 五种端口状态"></a>2.4.2.4 五种端口状态</h4><ul>
+<li><p><strong>失效(disabled)</strong> ：不收发任何报文</p>
+</li>
+<li><p>**阻塞(blocking&#x2F; DISCARDING)**：不接收转发数据报文，只收BPDU却不能发,不进行地址学习</p>
+</li>
+<li><p><strong>监听(listening)</strong> ：不接收转发数据报文，不地址学习，接收和发送BPDU</p>
+</li>
+<li><p><strong>学习(learning)</strong> : 不接收转发数据报文，开始地址学习，接收处理发送BPDU</p>
+</li>
+<li><p><strong>转发(forwarding)</strong> ：接收转发数据，开始地址学习，接收并发送BPDU</p>
+</li>
+</ul>
+<p>Disabled –&gt; blocking( DISCARDING) –&gt; listening –&gt; learning –&gt; forwarding</p>
+<h4 id="2-4-3-5-工作原理"><a href="#2-4-3-5-工作原理" class="headerlink" title="2.4.3.5 工作原理"></a>2.4.3.5 工作原理</h4><ul>
+<li><p>各端口在初始都会生成自己是根桥(Root Bridge)的配置信息(BPDU)，并向外发送</p>
+</li>
+<li><p>收敛后，只有选举出来的根设备发送配置信息(BPDU)</p>
+</li>
+</ul>
+<h4 id="2-4-3-6-思科设备PVST"><a href="#2-4-3-6-思科设备PVST" class="headerlink" title="2.4.3.6 思科设备PVST"></a>2.4.3.6 思科设备PVST</h4><ul>
+<li>思科是每个vlan一棵树 ；在802.1D(初级生成树)中 PVST(CISCO特有解决方案)</li>
+</ul>
+<h4 id="2-4-3-7-根端口选举"><a href="#2-4-3-7-根端口选举" class="headerlink" title="2.4.3.7 根端口选举"></a>2.4.3.7 根端口选举</h4><p>注意：在非根交换机选，按顺序来比较，相同比较下一个，数值越小越优先</p>
+<ul>
+<li><p>根路径开销：报文所经链路开销的总和</p>
+</li>
+<li><p>对端BID(桥ID)：优先级+背板mac地址</p>
+</li>
+<li><p>对端PID(端口ID)：优先级+端口编号</p>
+</li>
+<li><p>本端PID</p>
+</li>
+</ul>
+<h4 id="2-4-3-8-指定端口选举"><a href="#2-4-3-8-指定端口选举" class="headerlink" title="2.4.3.8 指定端口选举"></a>2.4.3.8 指定端口选举</h4><p>根交换机的接口都是指定端口(DP)，非根交换机的选举根据：</p>
+<ul>
+<li><p>根路径开销</p>
+</li>
+<li><p>端口所在交换机(本端)的BID(桥ID)</p>
+</li>
+<li><p>端口所在交换机(本端)的PID(端口ID)</p>
+</li>
+</ul>
+<p>数值小的优先</p>
+<h4 id="2-4-3-9-边缘端口"><a href="#2-4-3-9-边缘端口" class="headerlink" title="2.4.3.9 边缘端口"></a>2.4.3.9 边缘端口</h4><ul>
+<li><p>原因：端口的状态切换需要时间，这种状态的改变会引起网络震荡(mac地址表不稳定)，导致用户流量中断。</p>
+</li>
+<li><p>所以需要配置边缘端口，解决端口参与生成树计算，加快网络拓扑收敛时间。</p>
+</li>
+<li><p>作用：接口依旧开启stp，但是可以实现快速的到达转发状态</p>
+</li>
+</ul>
+<h4 id="2-4-3-10-BPDU保护"><a href="#2-4-3-10-BPDU保护" class="headerlink" title="2.4.3.10 BPDU保护"></a>2.4.3.10 BPDU保护</h4><ul>
+<li><p>作用：防止边缘端口收到BPDU报文失去边缘端口的属性。</p>
+</li>
+<li><p>边缘端口收到BPDU报文会失去边缘端口的属性，为防止伪造BPDU攻击，或者保护STP的边界，可配置BPDU保护。</p>
+</li>
+<li><p>配置BPDU保护后，若是收到BPDU报文，边缘端口将会被error-down，边缘端口属性不变。</p>
+</li>
+</ul>
+<h3 id="2-4-4-以太链路聚合-Link-Aggregation"><a href="#2-4-4-以太链路聚合-Link-Aggregation" class="headerlink" title="2.4.4 以太链路聚合(Link Aggregation)"></a>2.4.4 以太链路聚合(Link Aggregation)</h3><ul>
+<li><p>作用：增加链路带宽，提高链路可靠性，在一定位置上消除STP</p>
+</li>
+<li><p>分类：</p>
+</li>
+<li><p>静态聚合(无聚合协议来协商链路信息)</p>
+</li>
+<li><p>动态聚合(LACP，链路聚合控制协议，基于IEEE802.3ad)</p>
+</li>
+<li><p>思科私有PAgP协议</p>
+</li>
+<li><p>条件：</p>
+</li>
+<li><p>接口同一类型</p>
+</li>
+<li><p>物理接口数量、速率、双工方式、流控配置必须一致</p>
+</li>
+<li><p>华为设备为缺省hybrid接口</p>
+</li>
+</ul>
+<h2 id="2-5-路由"><a href="#2-5-路由" class="headerlink" title="2.5 路由"></a>2.5 路由</h2><p>注意：两端要通信需要两端都有路由</p>
+<h3 id="2-5-1-VLAN间路由"><a href="#2-5-1-VLAN间路由" class="headerlink" title="2.5.1 VLAN间路由"></a>2.5.1 VLAN间路由</h3><ul>
+<li><p>作用：解决不同VLAN间不能通信的问题</p>
+</li>
+<li><p>方案：</p>
+</li>
+</ul>
+<ol>
+<li>路由器的单臂路由 \2. 三层交换机VLAN接口(SVI) \3. 三层路由接口(把Switch Port 转换成 Route Port, 缺点扩展性差)</li>
+</ol>
+<h3 id="2-5-2-网关"><a href="#2-5-2-网关" class="headerlink" title="2.5.2 网关"></a>2.5.2 网关</h3><p>数据要到达其他网段，需先经过网关，类似于你要出国，要经过海关检查</p>
+<h3 id="2-5-3-VRRP虚拟路由器冗余协议"><a href="#2-5-3-VRRP虚拟路由器冗余协议" class="headerlink" title="2.5.3 VRRP虚拟路由器冗余协议"></a>2.5.3 VRRP虚拟路由器冗余协议</h3><ul>
+<li><p>作用：不改变组网，将多个路由虚拟成一个，并通过配置虚拟路由的ip地址为默认网关，实现网关的备份</p>
+</li>
+<li><p>协议报文(Advertisement), 目的IP 224.0.0.18(组播地址)， 目的mac 01-00-5e-00-00-12， 协议号：112</p>
+</li>
+<li><p>Master路由器：响应arp请求，并实现转发</p>
+</li>
+<li><p>Backup路由器：备胎</p>
+</li>
+<li><p>优先级(Priority): 范围：0-255 数值越大越优先,默认值100</p>
+</li>
+</ul>
+<p>注意：<strong>VRRP的主设备&#x3D;生成树的根设备，否则会出现2层的次优转发</strong>，因为有一端链路被stp阻塞了，往没有阻塞方向走</p>
+<h3 id="2-5-4-路由种类"><a href="#2-5-4-路由种类" class="headerlink" title="2.5.4 路由种类"></a>2.5.4 路由种类</h3><ul>
+<li><p>直连路由</p>
+</li>
+<li><p>静态路由</p>
+</li>
+<li><p>动态路由</p>
+</li>
+</ul>
+<h3 id="2-5-5-路由度量值和优先级"><a href="#2-5-5-路由度量值和优先级" class="headerlink" title="2.5.5 路由度量值和优先级"></a>2.5.5 路由度量值和优先级</h3><ul>
+<li><p>度量值(Metric)：线路延迟、带宽、线路使用率、线路可信度、跳数、最大传输单元</p>
+</li>
+<li><p>有优先级(AD&#x2F;Preference): 越小优先级越高</p>
+</li>
+</ul>
+<h3 id="2-5-6-静态路由"><a href="#2-5-6-静态路由" class="headerlink" title="2.5.6 静态路由"></a>2.5.6 静态路由</h3><ul>
+<li><p>不需要报文支持，精准控制，缺点是不会自动调整。</p>
+</li>
+<li><p>目的地址、掩码、出接口+下一跳地址(对端的IP地址)</p>
+</li>
+<li><p>目的地址、掩码、出接口(以太网链路不要用，路由器会认为默认路由是直连方式，发送数据的时候会发送请求目的地址的ARP。适用于点到点链路)</p>
+</li>
+</ul>
+<h3 id="2-5-7-ARP"><a href="#2-5-7-ARP" class="headerlink" title="2.5.7 ARP"></a>2.5.7 ARP</h3><ul>
+<li><p>Address Resolution Protocol 地址解析协议</p>
+</li>
+<li><p>常规动态ARP</p>
+</li>
+<li><p>代理ARP</p>
+</li>
+<li><p>免费ARP: 检查IP地址冲突&#x2F;VRRP、HSRP主设备变化会发送</p>
+</li>
+</ul>
+<p>ARP代理：对于没有配置缺省网关的计算机要和其他网络中的计算机实现通信，网关收到源计算机的 ARP 请求会使用自己的 MAC 地址与目标计算机的 IP地址对源计算机进行应答。</p>
+<h3 id="2-5-8-浮动静态路由"><a href="#2-5-8-浮动静态路由" class="headerlink" title="2.5.8 浮动静态路由"></a>2.5.8 浮动静态路由</h3><ul>
+<li>AD&#x2F;优先级的运用，通过设置优先级实现链路冗余，即备胎休眠，主链路崩了，直接上备胎</li>
+</ul>
+<h3 id="2-5-9-OSPF-开放式最短路径优先"><a href="#2-5-9-OSPF-开放式最短路径优先" class="headerlink" title="2.5.9 OSPF 开放式最短路径优先"></a>2.5.9 OSPF 开放式最短路径优先</h3><ul>
+<li><p>链路状态路由协议，设计上保证无环(SPF算法)</p>
+</li>
+<li><p>可划分区域（减少路由器LSDB规模，减少网络流量）</p>
+</li>
+<li><p>可提供认证功能，报文认证</p>
+</li>
+<li><p>多点接入需要DR(指定路由器)和BDR(备份指定路由器)，DR和BDR他们是基于链路的，不是路由器；<strong>选举根据优先级，越大越优先</strong>；DR会有但是BDR不一定会有</p>
+</li>
+<li><p>基本过程：</p>
+</li>
+<li><p>建立OSPF邻居关系</p>
+</li>
+<li><p>自动同步LSDB(链路状态数据库)</p>
+</li>
+<li><p>通过LSDB计算全网路由</p>
+</li>
+<li><p>当一个设备拥有区域0(骨干区域)一级其他区域，那么该路由器是ABR(区域边界路由器)</p>
+</li>
+</ul>
+<h3 id="2-5-10-BGP"><a href="#2-5-10-BGP" class="headerlink" title="2.5.10 BGP"></a>2.5.10 BGP</h3><ul>
+<li><p>工作在应用层，着重于控制路由的传播和选择最优的路由</p>
+</li>
+<li><p>在AS间提供无环路的路由信息交换</p>
+</li>
+</ul>
+<h2 id="2-6-其他技术"><a href="#2-6-其他技术" class="headerlink" title="2.6 其他技术"></a>2.6 其他技术</h2><h3 id="2-6-1-GRE-通用路由封装隧道"><a href="#2-6-1-GRE-通用路由封装隧道" class="headerlink" title="2.6.1 GRE 通用路由封装隧道"></a>2.6.1 GRE 通用路由封装隧道</h3><ul>
+<li><p>众多隧道协议的一种，也是一种vpn，默认不加密（加密需要结合IPSEC）。</p>
+</li>
+<li><p>它的前提是远程的两端网络可以联通，然后此隧道会进行再封装，保留发送者的源IP和目的IP，再封装一层公网IP，变成双层IP，外层是公网IP，内层是私网IP，从而实现从私网看似是点到点的通信</p>
+</li>
+</ul>
+<h3 id="2-6-2-ACL"><a href="#2-6-2-ACL" class="headerlink" title="2.6.2 ACL"></a>2.6.2 ACL</h3><ul>
+<li><p>访问控制列表，定义报文匹配规则，应用于接口上</p>
+</li>
+<li><p>对数据进行区分的场合：接口，NAT，路由策略，qos等</p>
+</li>
+<li><p>思科设备默认拒绝所有，华为设备默认允许所有</p>
+</li>
+</ul>
+<h4 id="2-6-2-1-通配符掩码-不是反掩码"><a href="#2-6-2-1-通配符掩码-不是反掩码" class="headerlink" title="2.6.2.1 通配符掩码(不是反掩码)"></a>2.6.2.1 通配符掩码(不是反掩码)</h4><ul>
+<li><p>与子网掩码相似，含义不同</p>
+</li>
+<li><p>0 表示对应位要比较（比较时通配符和IP地址都为二进制）</p>
+</li>
+<li><p>1 表示对应位不比较（比较时通配符和IP地址都为二进制）</p>
+</li>
+<li><p>如：0.0.0.255 比较前24位</p>
+</li>
+</ul>
+<h4 id="2-6-2-2-分类"><a href="#2-6-2-2-分类" class="headerlink" title="2.6.2.2 分类"></a>2.6.2.2 分类</h4><ul>
+<li>华为</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>范围</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基本ACL</td>
+<td>2000-2999</td>
+<td>源IP地址等</td>
+</tr>
+<tr>
+<td>高级ACL</td>
+<td>3000-3999</td>
+<td>五元组等</td>
+</tr>
+<tr>
+<td>二层ACL</td>
+<td>4000-4999</td>
+<td>源MAC地址、目的MAC地址、以太帧协议类型等</td>
+</tr>
+</tbody></table>
+<p>注：五元组是源IP地址，源端口，目的IP地址，目的端口，传输层协议</p>
+<ul>
+<li>思科</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>范围</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>标准</td>
+<td>1-99&#x2F;1300-1999</td>
+<td>源IP地址等</td>
+</tr>
+<tr>
+<td>扩展</td>
+<td>100-199&#x2F;2000-2699</td>
+<td>五元组</td>
+</tr>
+<tr>
+<td>二层ACL</td>
+<td>700-799&#x2F;1100-1199</td>
+<td>源MAC地址、目的MAC地址、以太帧协议类型等</td>
+</tr>
+</tbody></table>
+<h3 id="2-6-3-NAT-网络地址转换协议"><a href="#2-6-3-NAT-网络地址转换协议" class="headerlink" title="2.6.3 NAT(网络地址转换协议)"></a>2.6.3 NAT(网络地址转换协议)</h3><ul>
+<li><p>私有地址 转换成 公有地址</p>
+</li>
+<li><p>部署于连接内网和外网的网关设备上</p>
+</li>
+<li><p>华为使用EasyIP 思科使用PAT(端口地址转换)</p>
+</li>
+<li><p>NAT服务器：将服务器暴露给公务访问，如提供web或ftp</p>
+</li>
+</ul>
+<h1 id="3-常用命令"><a href="#3-常用命令" class="headerlink" title="3.常用命令"></a>3.常用命令</h1><h2 id="3-1-VRP-华为网络操作系统"><a href="#3-1-VRP-华为网络操作系统" class="headerlink" title="3.1 VRP(华为网络操作系统)"></a>3.1 VRP(华为网络操作系统)</h2><h3 id="3-1-1-查看目录"><a href="#3-1-1-查看目录" class="headerlink" title="3.1.1 查看目录"></a>3.1.1 查看目录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;LSW1&gt;dir</span><br><span class="line">Directory of flash:/</span><br><span class="line"></span><br><span class="line">  Idx  Attr     Size(Byte)  Date        Time       FileName </span><br><span class="line">    0  drw-              -  Aug 06 2015 21:26:42   src</span><br><span class="line">    1  drw-              -  Aug 25 2020 08:14:05   compatible</span><br><span class="line">    2  -rw-            588  Aug 29 2020 16:29:09   vrpcfg.zip</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>Attr 中 d 表示目录</li>
+</ul>
+<h3 id="3-1-2-基本操作命令"><a href="#3-1-2-基本操作命令" class="headerlink" title="3.1.2 基本操作命令"></a>3.1.2 基本操作命令</h3><ul>
+<li><p>pwd 查看当前目录</p>
+</li>
+<li><p>dir 显示当前目录下文件信息</p>
+</li>
+<li><p>more 查看文本文件具体内容</p>
+</li>
+<li><p>cd .. 退出到上级目录</p>
+</li>
+<li><p>cd 修改用户当前界面的工作目录</p>
+</li>
+<li><p>mkdir 创建新的目录</p>
+</li>
+<li><p>rmdir 删除目录</p>
+</li>
+<li><p>copy 复制文件</p>
+</li>
+<li><p>move 移动文件</p>
+</li>
+<li><p>rename 重命名文件</p>
+</li>
+</ul>
+<h2 id="3-2-进入用户界面视图"><a href="#3-2-进入用户界面视图" class="headerlink" title="3.2 进入用户界面视图"></a>3.2 进入用户界面视图</h2><p>配置登陆设备的各个用户属性的视图</p>
+<ul>
+<li>华为</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[AR1]user-interface ?</span><br><span class="line">  INTEGER&lt;0,129-149&gt;   The first user terminal interface to be configured</span><br><span class="line">  console              Primary user terminal interface</span><br><span class="line">  current              The current user terminal interface</span><br><span class="line">  maximum-vty          The maximum number of VTY users, the default value is 5</span><br><span class="line">  tty                  The asynchronous serial user terminal interface </span><br><span class="line">  vty                  The virtual user terminal interface </span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>思科</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">R1(config)#line ?</span><br><span class="line">  &lt;0-6&gt;    First Line number</span><br><span class="line">  aux      Auxiliary line</span><br><span class="line">  console  Primary terminal line</span><br><span class="line">  vty      Virtual terminal</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-3-修改主机名"><a href="#3-3-修改主机名" class="headerlink" title="3.3 修改主机名"></a>3.3 修改主机名</h2><ul>
+<li>华为</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysname LS</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>思科</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname SW1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-4-设置Console认证"><a href="#3-4-设置Console认证" class="headerlink" title="3.4 设置Console认证"></a>3.4 设置Console认证</h2><ul>
+<li>华为</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">user-interface con 0	//进入Console接口</span><br><span class="line">authentication-mode password    //认证模式为密码认证</span><br><span class="line">set authentication password cipher *******  // 设置密码</span><br><span class="line"></span><br><span class="line">// 设置延长时间</span><br><span class="line">[AR1]user-interface console 0</span><br><span class="line">[AR1-ui-console0]idle-timeout 120</span><br><span class="line"></span><br><span class="line">display users  // 查看是否设置成功</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>思科</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">line console 0 //进入本地管理接口~Console</span><br><span class="line">password ****** //设置登录Console的密码</span><br><span class="line">login //开关，开启登录的认证</span><br><span class="line"></span><br><span class="line">// 设置退出时间</span><br><span class="line">R1(config-line)#exec-timeout 120</span><br><span class="line"></span><br><span class="line">// 测试</span><br><span class="line">show users</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-5-设置Telnet远程连接设备"><a href="#3-5-设置Telnet远程连接设备" class="headerlink" title="3.5 设置Telnet远程连接设备"></a>3.5 设置Telnet远程连接设备</h2><ul>
+<li>华为</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">telnet server enable  // 有些机器默认不开启，所以需要开启</span><br><span class="line">user-interface vty 0 4 //进入虚拟终端线缆</span><br><span class="line">authentication-mode password //认证模式为密码认证</span><br><span class="line">Please configure the login password (maximum length 16):****</span><br><span class="line">user privilege level 15 //给远程登录用户分配高级别权限</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>思科</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">enable password Aa111111  // //进入特权模式的密码</span><br><span class="line">line vty 0 4 //进入虚拟终端连接</span><br><span class="line">password Aa111111 //键入Telnet登录的密码</span><br><span class="line">login //开关，即开启Telnet登录   </span><br><span class="line">transport input telnet //允许Telnet登录本设备</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-6-设置ssh-TCP端口22"><a href="#3-6-设置ssh-TCP端口22" class="headerlink" title="3.6 设置ssh(TCP端口22)"></a>3.6 设置ssh(TCP端口22)</h2><ul>
+<li>华为</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[AR1]aaa   // 进入aaa认证授权审计</span><br><span class="line">[AR1-aaa]local-user kelliden password cipher Aa111111   // 本地创建用户kelliden以及对应密码</span><br><span class="line">Info: Add a new user.</span><br><span class="line">[AR1-aaa]local-user kelliden privilege level 15  // 设置用户级别15（最高级）</span><br><span class="line">[AR1-aaa]local-user kelliden service-type ssh   // 该用户服务于ssh应用 from wljsghq</span><br><span class="line">[AR1-aaa]quit    </span><br><span class="line">[AR1]ssh user kelliden authentication-type password</span><br><span class="line"> Authentication type setted, and will be in effect next time</span><br><span class="line">[AR1]stelnet server enable // 开启ssh服务</span><br><span class="line">Info: Succeeded in starting the STELNET server.</span><br><span class="line">[AR1]user-interface vty 0 4</span><br><span class="line">[AR1-ui-vty0-4]authentication-mode aaa  // 认证采用aaa，即使用本地创建的aaa账户和密码</span><br><span class="line">[AR1-ui-vty0-4]protocol inbound ssh   // vty 允许 ssh 登录</span><br><span class="line">[AR1-ui-vty0-4]quit</span><br><span class="line">[AR1]quit</span><br><span class="line">&lt;AR1&gt;terminal monitor  //使得远程连接可以显示日志</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">测试：</span><br><span class="line">[AR2]ssh client first-time enable   // 路由器ssh登录需要使用</span><br><span class="line">[AR2]stelnet 202.100.1.1</span><br><span class="line">Please input the username:kelliden</span><br><span class="line">The server is not authenticated. Continue to access it? (y/n)[n]:y  //继续登录</span><br><span class="line">Save the server&#x27;s public key? (y/n)[n]:y  //保存公钥</span><br><span class="line">Enter password: // 输入密码</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>思科</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">R1(config)#ip domain-name kelliden.com  // 配置域名</span><br><span class="line">R1(config)#crypto key generate rsa  //产生key</span><br><span class="line">The name for the keys will be: R1.kelliden.com</span><br><span class="line">...</span><br><span class="line">How many bits in the modulus [512]: 768  //ssh版本2必须768位以上秘钥</span><br><span class="line">% Generating 768 bit RSA keys, keys will be non-exportable...</span><br><span class="line">[OK] (elapsed time was 0 seconds)</span><br><span class="line">*Aug 27 13:47:10.680: %SSH-5-ENABLED: SSH 1.99 has been enabled</span><br><span class="line">R1(config)#username kelliden password Aa111111</span><br><span class="line">R1(config)#line vty 0 4</span><br><span class="line">R1(config-line)#login local   // 通过本地认证登录</span><br><span class="line">R1(config-line)#transport  input ssh  // 允许ssh登录vty</span><br><span class="line">R1(config-line)#</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">测试：</span><br><span class="line">Internet#ssh -l kelliden 202.100.1.1</span><br><span class="line">R1#show users</span><br><span class="line">    Line       User       Host(s)              Idle       Location</span><br><span class="line">   0 con 0                idle                 00:00:58   </span><br><span class="line">*  2 vty 0     kelliden   idle                 00:00:00 202.100.1.2</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-7-设置FTP"><a href="#3-7-设置FTP" class="headerlink" title="3.7 设置FTP"></a>3.7 设置FTP</h2><ul>
+<li><p>华为</p>
+<p>常用于升级和备份VRP(华为网络操作系统)</p>
+<p>端口20 用于传输数据</p>
+<p>端口21 用于传输控制协议</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 1. 开启ftp</span><br><span class="line">[LSW1]ftp server enable </span><br><span class="line"></span><br><span class="line">// 2. 创建ftp登录用户和认证密码</span><br><span class="line">[LSW1]aaa</span><br><span class="line">// privilege 设置权限等级</span><br><span class="line">// ftp-directory  指定ftp目录   flash: 为本机目录</span><br><span class="line">[LSW1-aaa]local-user kelliden password cipher Aa111111 privilege level 15 ftp-directory flash:</span><br><span class="line">[LSW1-aaa]local-user kelliden service-type ftp   // 设置服务类型</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 测试</span><br><span class="line">&lt;AR1&gt;ftp 10.1.11.2</span><br><span class="line">Trying 10.1.11.2 ...</span><br><span class="line">Connected to 10.1.11.2.</span><br><span class="line">220 FTP service ready.</span><br><span class="line">User(10.1.11.2:(none)):kelliden</span><br><span class="line">331 Password required for kelliden.</span><br><span class="line">Enter password:</span><br><span class="line">230 User logged in.</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-8-VLAN配置"><a href="#3-8-VLAN配置" class="headerlink" title="3.8 VLAN配置"></a><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzUyNTExOTY1Nw==&mid=2247508341&idx=1&sn=7510a5e6026d5a845b7fd115e7a85969&chksm=fa2018b3cd5791a5486056939a84675603aec778b43108db250d8345374652c163fdebdb82f9&scene=21#wechat_redirect">3.8 VLAN配置</a></h2><h3 id="3-8-1-创建VLAN"><a href="#3-8-1-创建VLAN" class="headerlink" title="3.8.1 创建VLAN"></a>3.8.1 创建VLAN</h3><ul>
+<li>华为</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[LSW3]vlan batch 8 to 12 99</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>思科</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SW3(config)#vlan 8,9,10,11,12,99</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-8-2-配置access接口并设置VLAN"><a href="#3-8-2-配置access接口并设置VLAN" class="headerlink" title="3.8.2 配置access接口并设置VLAN"></a>3.8.2 配置access接口并设置VLAN</h3><ul>
+<li>华为</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">interface GigabitEthernet0/0/10</span><br><span class="line"> port link-type access</span><br><span class="line"> port default vlan 10</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>思科</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int e0/0</span><br><span class="line">  switchport access vlan 10</span><br><span class="line">  switchport mode access </span><br><span class="line">  </span><br><span class="line">// 批量配置</span><br><span class="line">SW3(config)#int range e0/0 - 1</span><br><span class="line">SW3(config-if-range)# switchport access vlan 10</span><br><span class="line">SW3(config-if-range)# switchport mode access</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-8-3-查看端口VLAN"><a href="#3-8-3-查看端口VLAN" class="headerlink" title="3.8.3 查看端口VLAN"></a>3.8.3 查看端口VLAN</h3><ul>
+<li>华为</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[LSW3]display port vlan active </span><br><span class="line">T=TAG U=UNTAG</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Port                Link Type    PVID    VLAN List</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">GE0/0/1             hybrid       1       U: 1</span><br><span class="line">GE0/0/2             hybrid       1       U: 1</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>思科</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SW3#show vlan brief </span><br><span class="line"></span><br><span class="line">VLAN Name                             Status    Ports</span><br><span class="line">---- -------------------------------- --------- -------------------------------</span><br><span class="line">1    default                          active    Et0/2, Et0/3, Et1/0, Et1/1</span><br><span class="line">                                                Et1/2, Et1/3</span><br><span class="line">8    VLAN0008                         active    </span><br><span class="line">9    VLAN0009                         active    </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-8-4-配置Trunk端口"><a href="#3-8-4-配置Trunk端口" class="headerlink" title="3.8.4 配置Trunk端口"></a>3.8.4 配置Trunk端口</h3><ul>
+<li>华为</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[LSW3]int GigabitEthernet 0/0/3</span><br><span class="line">[LSW3-GigabitEthernet0/0/3]port link-type trunk </span><br><span class="line">[LSW3-GigabitEthernet0/0/3]port trunk allow-pass vlan all  // 允许所有vlan通过</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>思科</p>
+</li>
+<li><p>思科默认允许所有vlan通过</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SW1(config)#int e0/3</span><br><span class="line">SW1(config-if)#switchport trunk encapsulation dot1q   // 封装</span><br><span class="line">SW1(config-if)#switchport mode trunk </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">SW1# show int trunk </span><br><span class="line"></span><br><span class="line">Port        Mode             Encapsulation  Status        Native vlan</span><br><span class="line">Et0/3       on               802.1q         trunking      1</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-8-5-设置本征VLAN-缺省VLAN-PVID"><a href="#3-8-5-设置本征VLAN-缺省VLAN-PVID" class="headerlink" title="3.8.5 设置本征VLAN(缺省VLAN PVID)"></a>3.8.5 设置本征VLAN(缺省VLAN PVID)</h3><ul>
+<li>华为</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface GigabitEthernet0/0/3 </span><br><span class="line"> port trunk pvid vlan 99</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>思科</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface Ethernet0/3</span><br><span class="line"> switchport trunk native vlan 8 </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-8-6-Hybrid-混杂模式-配置"><a href="#3-8-6-Hybrid-混杂模式-配置" class="headerlink" title="3.8.6 Hybrid(混杂模式)配置"></a>3.8.6 Hybrid(混杂模式)配置</h3><p><code>interface GigabitEthernet0/0/1    	port hybrid untagged vlan 10 to 11  // 在发送的时候去掉tag      interface GigabitEthernet0/0/11    	port hybrid pvid vlan 11	 // 设置缺省vlan    	port hybrid tagged vlan 11   // 在发送的时候不去掉tag 来源：网络技术干货圈</code></p>
+<ul>
+<li><p>设置缺省vlan – port hybrid pvid vlan</p>
+</li>
+<li><p>接口接收到不带VLAN Tag的报文时，打上缺省的VLAN ID。当缺省VLAN ID在允许通过的VLAN ID列表里时，接收该报文并打上缺省VLAN的Tag；当缺省VLAN ID不在允许通过的VLAN ID列表里时，丢弃该报文。</p>
+</li>
+<li><p>接口接收到带VLAN Tag的报文时，当VLAN ID在接口允许通过的VLAN ID列表里时，接收该报文，当VLAN ID不在接口允许通过的VLAN ID列表里时，丢弃该报文。</p>
+</li>
+<li><p>**接口发送报文时，如果VLAN ID是该接口允许通过的VLAN ID时，发送该报文，可以配置发送报文时 是否携带Tag。**</p>
+</li>
+<li><p>设置不去掉Tag</p>
+</li>
+<li><p>配置以Tagged形式将Hybrid类型接口加入VLAN后，接口在发送帧时不将帧中的VLAN Tag去掉。</p>
+</li>
+<li><p>设置去掉Tag</p>
+</li>
+<li><p>配置以Untagged形式将Hybrid类型接口加入VLAN后，接口在发送帧时将帧中的VLAN Tag去掉。</p>
+</li>
+</ul>
+<h2 id="3-9-保存配置"><a href="#3-9-保存配置" class="headerlink" title="3.9 保存配置"></a>3.9 保存配置</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>&lt;LSW3&gt;save   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>R1# write    Building configuration...</code></p>
+<h2 id="3-10-清空端口记录"><a href="#3-10-清空端口记录" class="headerlink" title="3.10 清空端口记录"></a>3.10 清空端口记录</h2><ul>
+<li><p>华为</p>
+<p>华为有些设备不支持</p>
+</li>
+</ul>
+<p> <code>clear configuration interface g0/0/3 //清除某个接口的配置</code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>SW1(config)#default interface e1/2  // 恢复默认设置   </code></p>
+<h2 id="3-11-STP"><a href="#3-11-STP" class="headerlink" title="3.11 STP"></a>3.11 STP</h2><h3 id="3-11-1-设置主副跟设备"><a href="#3-11-1-设置主副跟设备" class="headerlink" title="3.11.1 设置主副跟设备"></a>3.11.1 设置主副跟设备</h3><ul>
+<li>思科</li>
+</ul>
+<p><code>// 思科设备一个vlan一棵生成树，所以可以使用vlan来设置，华为不行但可以用MSTP来解决      SW1(config)#spanning-tree mode pvst    SW1(config)#spanning-tree vlan 8,10,11 root primary // 设置为主   SW1(config)#spanning-tree vlan 1,9,12,99 root secondary // 设置为副</code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW1]stp mode stp  // 802.1D   [LSW1]stp priority 0 // 设置优先级，从而确定为根交换机         [LSW2]stp mode stp  // 802.1D   [LSW2]stp priority 4096 // 另一个交换机设置为副，备胎   </code></p>
+<h3 id="3-11-2-配置边缘端口"><a href="#3-11-2-配置边缘端口" class="headerlink" title="3.11.2 配置边缘端口"></a>3.11.2 配置边缘端口</h3><ul>
+<li>思科</li>
+</ul>
+<p><code>// 作用于端口的命令   SW3(config)#int e0/0   SW3(config-if)#spanning-tree portfast edge    // 作用于trunk干道，其对端不能是交换机，必须是单独PC、服务器   SW3(config-if)#spanning-tree portfast edge trunk      // 作用域全局的access端口   SW3(config)#spanning-tree portfast edge default</code> </p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>// 作用于端口的命令   [LSW3]int g0/0/10   [LSW3-GigabitEthernet0/0/10]stp edged-port enable          //全局 包括access、trunk、hybrid   [LSW3]stp edged-port default</code> </p>
+<h3 id="3-11-3-配置BPDU保护"><a href="#3-11-3-配置BPDU保护" class="headerlink" title="3.11.3 配置BPDU保护"></a>3.11.3 配置BPDU保护</h3><ul>
+<li>思科</li>
+</ul>
+<p><code>// 端口方式   SW3(config)#int e0/0    SW3(config-if)#spanning-tree bpduguard enable      // 全局   SW3(config)#spanning-tree portfast edge bpduguard [default](http://mp.weixin.qq.com/s?__biz=MzUyNTExOTY1Nw==&amp;mid=2247508245&amp;idx=1&amp;sn=e7e9f884f0909060322d21d4f111f4a2&amp;chksm=fa2018d3cd5791c5628f6535610aa31e6b4df36a1a19b430e7c3aefc6914a9fb3d9bfeb42f3c&amp;scene=21#wechat_redirect)</code> </p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>// 华为多数设备无接口直接开启，只能开启全局(仅对边缘端口生效)   [LSW3]stp bpdu-protection       // 需要在上行接口关闭边缘端口，否则会因接收到bpdu报文而自动关闭端口   [LSW3]int g0/0/3   [LSW3-GigabitEthernet0/0/3]stp edged-port disable    [LSW3-GigabitEthernet0/0/3]undo shutdown</code> </p>
+<h2 id="3-12-ping发送多个包"><a href="#3-12-ping发送多个包" class="headerlink" title="3.12 ping发送多个包"></a>3.12 ping发送多个包</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>[AR1]ping -c 1000 10.1.10.1   </code></p>
+<h2 id="3-13-配置以太链路聚合"><a href="#3-13-配置以太链路聚合" class="headerlink" title="3.13 配置以太链路聚合"></a>3.13 配置以太链路聚合</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>SW2(config)#int rang e1/2 - 3   SW2(config-if-range)#channel-group 12 mode on      // 检查   SW2(config)#do show etherchannel summary    Group  Port-channel  Protocol    Ports   ------+-------------+-----------+-----------------------------------------------   12     Po12(SU)         -        Et1/2(P)    Et1/3(P)</code>  </p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW2]int Eth-Trunk 12   [LSW2-Eth-Trunk12]trunkport GigabitEthernet 0/0/5 to 0/0/6   </code></p>
+<h2 id="3-14-配置单臂路由"><a href="#3-14-配置单臂路由" class="headerlink" title="3.14 配置单臂路由"></a>3.14 配置单臂路由</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>interface GigabitEthernet0/0/0.20    dot1q termination vid 20    ip address 10.1.20.30 255.255.255.224     arp broadcast enable // 三层隔绝广播，所以开启arp让两个不同广播域交互相应arp的广播请求   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>[interface Ethernet0](http://mp.weixin.qq.com/s?__biz=MzUyNTExOTY1Nw==&amp;mid=2247508209&amp;idx=1&amp;sn=7bf91b6c319b5ba6f30502cde83d6047&amp;chksm=fa201937cd5790212772a307627881e149320b432e1f926171c929d5e8b1f74d270a0c968169&amp;scene=21#wechat_redirect)/0.20    encapsulation dot1Q 20    ip address 10.1.20.30 255.255.255.224   </code></p>
+<h2 id="3-15-思科路由器模拟PC"><a href="#3-15-思科路由器模拟PC" class="headerlink" title="3.15 思科路由器模拟PC"></a>3.15 思科路由器模拟PC</h2><p><code>S2(config)#no ip routing // 关掉路由，不然他会查路由表，没设置路由协议，到达不了   S2(config)#ip default-gateway 10.1.30.30 // 设置默认网关</code></p>
+<h2 id="3-16-配置VLANIF"><a href="#3-16-配置VLANIF" class="headerlink" title="3.16 配置VLANIF"></a>3.16 配置VLANIF</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>interface Vlanif8    ip address 10.1.10.12 255.255.255.240   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>interface Vlan8    ip address 10.1.10.13 255.255.255.240   </code></p>
+<h2 id="3-17-配置三层路由接口"><a href="#3-17-配置三层路由接口" class="headerlink" title="3.17 配置三层路由接口"></a>3.17 配置三层路由接口</h2><ul>
+<li>华为(某些阉割版的交换机无法配置ip地址)</li>
+</ul>
+<p><code>[interface Ethernet0](http://mp.weixin.qq.com/s?__biz=MzUyNTExOTY1Nw==&amp;mid=2247508209&amp;idx=1&amp;sn=7bf91b6c319b5ba6f30502cde83d6047&amp;chksm=fa201937cd5790212772a307627881e149320b432e1f926171c929d5e8b1f74d270a0c968169&amp;scene=21#wechat_redirect)/0/1    undo portswitch    ip address 1.1.1.1 255.255.254.0   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>interface Ethernet0/1    no switchport    ip address 10.1.11.1 255.255.255.248   </code></p>
+<h2 id="3-18-配置VRRP"><a href="#3-18-配置VRRP" class="headerlink" title="3.18 配置VRRP"></a>3.18 配置VRRP</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>interface Vlan8     vrrp 8 ip 10.1.10.14     vrrp 8 priority 110        interface Vlan9     vrrp 9 ip 10.1.10.30       interface Vlan10     vrrp 10 ip 10.1.10.46     vrrp 10 priority 110             // 验证   SW2(config)#do show vrrp brief    Interface          Grp Pri Time  Own Pre State   Master addr     Group addr   Vl8                8   100 3609       Y  Backup  10.1.10.13      10.1.10.14        Vl9                9   110 3570       Y  Master  10.1.10.29      10.1.10.30        Vl10               10  100 3609       Y  Backup  10.1.10.45      10.1.10.46</code>   </p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW1]int vlan 8   [LSW1-Vlanif8]vrrp vrid 8 virtual-ip 10.1.10.14    [LSW1-Vlanif8]vrrp vrid 8 priority 110   // 追踪上行链路，当链路出现问题通过降低优先级进行主备切换   [LSW1-Vlanif8]vrrp vrid 8 track interface g0/0/1 reduced 20         // 验证   [LSW1]dis vrrp brief    VRID  State        Interface                Type     Virtual IP        [----------------------------------------------------------------](http://mp.weixin.qq.com/s?__biz=MzUyNTExOTY1Nw==&amp;mid=2247508341&amp;idx=1&amp;sn=7510a5e6026d5a845b7fd115e7a85969&amp;chksm=fa2018b3cd5791a5486056939a84675603aec778b43108db250d8345374652c163fdebdb82f9&amp;scene=21#wechat_redirect)   8     Master       Vlanif8                  Normal   10.1.10.14        9     Master       Vlanif9                  Normal   10.1.10.30        10    Master       Vlanif10                 Normal   10.1.10.46        ----------------------------------------------------------------   Total:3     Master:3     Backup:0     Non-active:0</code>     </p>
+<h2 id="3-19-配置静态路由"><a href="#3-19-配置静态路由" class="headerlink" title="3.19 配置静态路由"></a>3.19 配置静态路由</h2><ul>
+<li><p>思科</p>
+</li>
+<li><p>目的地址 掩码 下一跳地址</p>
+</li>
+</ul>
+<p><code>R1(config)#ip route 8.8.8.8 255.255.255.255 202.100.1.2</code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[AR1]ip route-static 8.8.8.8 32 202.100.1.2</code>    </p>
+<h2 id="3-20-配置浮动静态路由"><a href="#3-20-配置浮动静态路由" class="headerlink" title="3.20 配置浮动静态路由"></a>3.20 配置浮动静态路由</h2><p>修改优先级实现链路冗余</p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[AR1]ip route-static 0.0.0.0 0.0.0.0 Serial1/0/0 preference 80   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>R1(config)#ip route 0.0.0.0 0.0.0.0 serial 1/0 80   </code></p>
+<h2 id="3-21-配置OSPF"><a href="#3-21-配置OSPF" class="headerlink" title="3.21 配置OSPF"></a>3.21 配置OSPF</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>R1(config)#router ospf 100  // 启动ospf   R1(config-router)#router-id 1.1.1.1  // 标识区域内唯一身份，确保唯一      R1(config)#int lo0   R1(config-if)#ip add 11.1.1.1 255.255.255.255    R1(config-if)#ip ospf 100 area 0  // 设置进程号100，该接口启动ospf，运行在区域0中，该接口网络可以通过ospf通告给其他路由器      R1(config)#int e0/1   R1(config-if)#ip add 10.1.11.1 255.255.255.248   R1(config-if)#ip ospf 100 area  1         SW1(config-router)#passive-interface vlan 8 // 抑制接口上的路由更新，不影响路由传递</code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[AR1]ospf 110 router-id 0.0.0.2 // 标识区域内唯一身份，确保唯一   [AR1-ospf-1]area 0   // 创建区域   [AR1-ospf-1-area-0.0.0.0]area 1  // 创建区域   [AR1-ospf-1-area-0.0.0.1]int lo 0   [AR1-LoopBack0]ip add 11.1.1.1 32   [AR1-LoopBack0]ospf enable 110 area 0  // 启用区域0，进程号为110   [AR1-LoopBack0]int g0/0/1   [AR1-GigabitEthernet0/0/1]ospf enable 110 area 1         [LSW1-ospf-1]silent-interface Vlanif 9   // 抑制接口上的路由更新，不影响路由传递      // 控制默认信息的分布，可以将默认路由下发到ospf中   [AR1-ospf-1]default-route-advertise   </code></p>
+<h2 id="3-22-重置ospf进程"><a href="#3-22-重置ospf进程" class="headerlink" title="3.22 重置ospf进程"></a>3.22 重置ospf进程</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>&lt;AR1&gt;reset ospf process   </code></p>
+<h2 id="3-23-配置GRE隧道"><a href="#3-23-配置GRE隧道" class="headerlink" title="3.23 配置GRE隧道"></a>3.23 配置GRE隧道</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>interface Tunnel0/0/0    ip address 10.1.13.1 255.255.255.252     tunnel-protocol gre    source 202.100.1.1   // 本端ip    destination 202.100.1.5  // 远端ip   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>R3(config)#int tunnel 0   R3(config-if)#ip add 10.1.13.2 255.255.255.252   R3(config-if)#tunnel source 202.100.1.5   R3(config-if)#tunnel destination 202.100.1.1   </code></p>
+<h2 id="3-24-配置BGP"><a href="#3-24-配置BGP" class="headerlink" title="3.24 配置BGP"></a>3.24 配置BGP</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>R1(config)#router bgp 1  // 配置自治系统号为1    R1(config-router)#neighbor 10.1.13.2 remote-as 2  //BGP都是通过单播手工去配置邻居   R1(config-router)#redistribute ospf 100  // 重发布 ospf      R3(config-router)#network 10.1.30.0 mask 255.255.255.224 // 宣告指定网段       router ospf 100    router-id 1.1.1.1    default-information originate  // 控制默认信息的分发，分发默认路由；可以将获取到对端BGP的路由加入进ospf中</code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[AR1]bgp 1   [AR1-bgp]peer 10.1.13.2 as-number 2 // 远端邻居的端口ip，对端自治系统号2   // 引入ospf的路由进bgp，可以分发到远端，1是ospf的进程号   [AR1-bgp]import-route ospf 1           [R3-bgp]network 10.1.20.0 27 // 手动添加网段   [R3-bgp]network 10.1.30.0 27      [AR1]ospf   // 控制默认信息的分布，可以将获取到对端BGP的路由加入进ospf中   [AR1-ospf-1]default-route-advertise</code>  </p>
+<h2 id="3-25-配置基本ACL"><a href="#3-25-配置基本ACL" class="headerlink" title="3.25 配置基本ACL"></a>3.25 配置基本ACL</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>R1(config)#ip access-list standard 1   R1(config-std-nacl)#5 permit 10.1.10.0 0.0.0.15 //仅仅允许10.1.10.0/28来访问vty   R1(config)#line vty 0 4   R1(config-line)#access-class 1 in  // 绑定ACL 1         // 测试   SW1#telnet 11.1.1.1 /source-interface vlan 8   Trying 11.1.1.1 ...    % Connection refused by remote host   SW1#</code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[AR1]acl 2000   [AR1-acl-basic-2000]rule 5 deny source 10.1.10.0 0.0.0.15   [AR1-acl-basic-2000]rule 10 permit      [AR1]user-interface vty 0 4   [AR1-ui-vty0-4]acl 2000 inbound // 应用         // 测试      &lt;LSW1&gt;telnet -a 10.1.10.13 11.1.1.1   Trying 11.1.1.1 ...   Press CTRL+K to abort   Error: Failed to connect to the remote host.   &lt;LSW1&gt;   </code></p>
+<h2 id="3-26-配置扩展ACL"><a href="#3-26-配置扩展ACL" class="headerlink" title="3.26 配置扩展ACL"></a>3.26 配置扩展ACL</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>SW1(config)#ip access-list extended 100   SW1(config-ext-nacl)#deny icmp host 10.1.10.1 host 10.1.10.14  // 拒绝10.1.10.1 ping 10.1.10.14   SW1(config-ext-nacl)#permit ip any any            SW1(config)#int vlan 8   SW1(config-if)#ip access-group 100 in  // 应用</code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW1]acl 3000   [LSW1-acl-adv-3000]rule 10 deny tcp destination 10.1.10.14 0 destination-port eq telnet // 拒绝telnet到10.1.10.14   [LSW1-acl-adv-3000]rule 20 permit ip          [LSW1]user-interface vty  0 4   [LSW1-ui-vty0-4]acl 3000 inbound // 应用   [LSW1-ui-vty0-4]set authentication password simple 111111         // 测试   &lt;AR1&gt;telnet 10.1.10.14     Press CTRL_] to quit telnet mode     Trying 10.1.10.14 ...     Error: Can&#39;t connect to the remote host</code></p>
+<h2 id="3-27-配置NAT"><a href="#3-27-配置NAT" class="headerlink" title="3.27 配置NAT"></a>3.27 配置NAT</h2><ul>
+<li>华为(EasyIP)</li>
+</ul>
+<p><code>[AR1]acl name nat // 起别名 nat   [AR1-acl-adv-nat]rule 10 permit ip source 10.1.10.0 0.0.0.15   [AR1-acl-adv-nat]rule 15 permit ip source 10.1.10.16 0.0.0.15      [AR1]int g0/0/0   [AR1-GigabitEthernet0/0/0]nat outbound 3999         [AR1]ospf   [AR1-ospf-1]default-route-advertise  // 控制默认信息的分布，将默认路由加入到ospf中</code> </p>
+<ul>
+<li>思科(PAT端口地址转换)</li>
+</ul>
+<p><code>R1(config)#int range e0/1,e0/2   R1(config-if-range)#ip nat inside // 私网要进入公网入方向端口   R1(config)#int e0/0   R1(config-if)#ip nat outside // 连接公网端口      R1(config)#ip access-list standard NAT // 起别名   R1(config-std-nacl)#permit 10.1.10.0 0.0.0.15   R1(config-std-nacl)#permit 10.1.10.16 0.0.0.15      R1(config)#ip nat inside source list NAT interface e0/0 overload    --------------------------------------------   NAT 便是 起的那个别名   overload  过载</code></p>
+<h2 id="3-28-配置NAT服务器-x2F-静态端口转换"><a href="#3-28-配置NAT服务器-x2F-静态端口转换" class="headerlink" title="3.28 配置NAT服务器&#x2F;静态端口转换"></a>3.28 配置NAT服务器&#x2F;静态端口转换</h2><p>将服务器暴露给公务访问，如提供web或ftp，这时可以使用NAT服务器</p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>// 连接公网的端口，绑定10.1.10.14 23，允许外网telnet进入10.1.10.14   [AR1-GigabitEthernet0/0/0]nat server protocol tcp global current-interface 5555 inside 10.1.10.14 23   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>R1(config)#ip nat inside source static tcp  10.1.10.14 23 202.100.1.1 5555</code></p>
+<p>注意：需要先配置好NAT，上面两条命令才有</p>
+<h2 id="3-29-配置aaa认证"><a href="#3-29-配置aaa认证" class="headerlink" title="3.29 配置aaa认证"></a>3.29 配置aaa认证</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW3-aaa]   // 账号名是a  密码111111   [LSW3-aaa]local-user a password cipher 111111      // 应用   [LSW3]user-interface vty 0 4   [LSW3-ui-vty0-4]authentication-mode aaa   </code></p>
+<h2 id="3-30-配置端口安全"><a href="#3-30-配置端口安全" class="headerlink" title="3.30 配置端口安全"></a>3.30 配置端口安全</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW3]port-group port-security  // 端口批量配置的自定义名称： port-security   // 配置端口成员   [LSW3-port-group-port-security]group-member g0/0/10 to g0/0/12      // 开启端口安全   [LSW3-port-group-port-security]port-security enable    // 最多允许两台连接   [LSW3-GigabitEthernet0/0/12]port-security max-mac-num 2   // 使用粘性绑定mac地址   [LSW3-GigabitEthernet0/0/12]port-security mac-address sticky             // 验证   [LSW3]disp mac-address   MAC address table of slot 0:   -------------------------------------------------------------------------------   MAC Address    VLAN/       PEVLAN CEVLAN Port            Type      LSP/LSR-ID                    VSI/SI                                              MAC-Tunnel     -------------------------------------------------------------------------------   5489-98b1-7b52 8           -      -      GE0/0/10        sticky    -              -------------------------------------------------------------------------------      端口绑定mac地址，若是跟换直接无法通信   </code></p>
+<h2 id="3-31-多端口配置"><a href="#3-31-多端口配置" class="headerlink" title="3.31 多端口配置"></a>3.31 多端口配置</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>// 端口批量配置的自定义名称： port-security   [LSW3]port-group port-security     // 配置端口成员   [LSW3-port-group-port-security]group-member g0/0/10 to g0/0/12   // 开启端口安全   [LSW3-port-group-port-security]port-security enable    [LSW3-GigabitEthernet0/0/10]port-security enable    [LSW3-GigabitEthernet0/0/11]port-security enable    [LSW3-GigabitEthernet0/0/12]port-security enable</code> </p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>R1(config)#int range e0/1,e0/2   R1(config-if-range)#ip nat inside // 私网要进入公网入方向端口   </code></p>
+<h2 id="3-32-远程管理显示管理日志"><a href="#3-32-远程管理显示管理日志" class="headerlink" title="3.32 远程管理显示管理日志"></a>3.32 远程管理显示管理日志</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>// 远程登录后开启当前终端监视器   &lt;LSW3&gt;terminal monitor</code> </p>
+<h1 id="4-查询命令"><a href="#4-查询命令" class="headerlink" title="4.查询命令"></a>4.查询命令</h1><h2 id="4-1-查看MAC地址"><a href="#4-1-查看MAC地址" class="headerlink" title="4.1 查看MAC地址"></a>4.1 查看MAC地址</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>display mac-address   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>show mac address-table</code> </p>
+<h2 id="4-2-查看用户"><a href="#4-2-查看用户" class="headerlink" title="4.2 查看用户"></a>4.2 查看用户</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>&lt;LSW1&gt;display users     [User-Intf    Delay    Type   Network Address     AuthenStatus    AuthorcmdFlag](http://mp.weixin.qq.com/s?__biz=MzUyNTExOTY1Nw==&amp;mid=2247508209&amp;idx=1&amp;sn=7bf91b6c319b5ba6f30502cde83d6047&amp;chksm=fa201937cd5790212772a307627881e149320b432e1f926171c929d5e8b1f74d270a0c968169&amp;scene=21#wechat_redirect)   + 0   CON 0   00:00:00                                                  no        Username : Unspecified   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>SW1&gt;show users       Line       User       Host(s)              Idle       Location   *  0 con 0                idle                 00:00:00           Interface    User               Mode         Idle     Peer Address</code></p>
+<h2 id="4-3-查看相连接的设备信息"><a href="#4-3-查看相连接的设备信息" class="headerlink" title="4.3 查看相连接的设备信息"></a>4.3 查看相连接的设备信息</h2><ul>
+<li><p>华为(通过LLDP协议)</p>
+</li>
+<li><p>链路层发现协议（Link Layer Discovery Protocol，_LLDP_）</p>
+</li>
+</ul>
+<p><code>lldp enable       display lldp neighbor brief  // 简短信息   display lldp neighbor  // 详细信息</code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>lldp run   lldp enable       show lldp neighbors</code></p>
+<p>思科还有私有的发现协议CDP，可以用来查看对端的IP</p>
+<p><code>R1&gt; show cdp neighbors detail</code> </p>
+<h2 id="4-4-查看配置"><a href="#4-4-查看配置" class="headerlink" title="4.4 查看配置"></a>4.4 查看配置</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>display current-configuration  // 查看所有配置   display this  // 查看当前配置   </code></p>
+<ul>
+<li><p>思科</p>
+<p>在配置终端模式 要使用do 即 do show …</p>
+</li>
+</ul>
+<p><code>show running-config  // 查看所有配置   show running-config | section ....  //  section 过滤输出的一部分   </code></p>
+<h3 id="4-4-1-查看某个接口下的配置"><a href="#4-4-1-查看某个接口下的配置" class="headerlink" title="4.4.1 查看某个接口下的配置"></a>4.4.1 查看某个接口下的配置</h3><ul>
+<li>思科</li>
+</ul>
+<p><code>SW1# show run int e0/3   </code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW1]disp current-configuration int g0/0/1   #   interface GigabitEthernet0/0/1    port hybrid pvid vlan 8    port hybrid untagged vlan 8 10 to 11   </code></p>
+<h2 id="4-5-查看TCP"><a href="#4-5-查看TCP" class="headerlink" title="4.5 查看TCP"></a>4.5 查看TCP</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW3]disp tcp status    TCPCB    Tid/Soid Local Add:port        Foreign Add:port      VPNID  State   17075cc0 77 /1    0.0.0.0:23            0.0.0.0:0             -1     Listening   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>R1#show tcp brief    TCB       Local Address               Foreign Address             (state)   E1BAFA80  202.100.1.1.23             202.100.1.2.49356           TIMEWAIT</code></p>
+<h2 id="4-6-查看历史命令记录"><a href="#4-6-查看历史命令记录" class="headerlink" title="4.6 查看历史命令记录"></a>4.6 查看历史命令记录</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>[AR1] display history-command</code> </p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>R1# show history</code> </p>
+<h2 id="4-7-查看stp"><a href="#4-7-查看stp" class="headerlink" title="4.7 查看stp"></a>4.7 查看stp</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>&lt;LSW3&gt;disp stp brief     MSTID  Port                        Role  STP State     Protection      0    GigabitEthernet0/0/1        ROOT  FORWARDING      NONE      0    GigabitEthernet0/0/3        ALTE  DISCARDING      NONE      0    GigabitEthernet0/0/10       DESI  FORWARDING      NONE      0    GigabitEthernet0/0/11       DESI  FORWARDING      NONE      0    GigabitEthernet0/0/12       DESI  FORWARDING      NONE   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>// 注意：在思科中是一个vlan一棵树，思科通过在桥优先级处加上vlan号来区分不同的vlan   SW3#show spanning-tree vlan 10   </code></p>
+<h3 id="4-7-1-查看端口有关stp详细信息"><a href="#4-7-1-查看端口有关stp详细信息" class="headerlink" title="4.7.1 查看端口有关stp详细信息"></a>4.7.1 查看端口有关stp详细信息</h3><ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW3]disp stp  interface g0/0/3   -------[CIST Global Info][Mode MSTP]-------   CIST Bridge         :32768.4c1f-ccbd-35ba   Config Times        :Hello 2s MaxAge 20s FwDly 15s MaxHop 20   Active Times        :Hello 2s MaxAge 20s FwDly 15s MaxHop 20   ...   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>SW3#show spanning-tree int e0/3      Vlan                Role Sts Cost      Prio.Nbr Type   ------------------- ---- --- --------- -------- --------------------------------   VLAN0001            Altn BLK 100       128.4    Shr    VLAN0008            Root FWD 100       128.4    Shr    VLAN0009            Altn BLK 100       128.4    Shr    VLAN0010            Root FWD 100       128.4    Shr    VLAN0011            Root FWD 100       128.4    Shr    VLAN0012            Altn BLK 100       128.4    Shr    VLAN0099            Altn BLK 100       128.4    Shr</code></p>
+<h3 id="4-7-2-查看边缘端口"><a href="#4-7-2-查看边缘端口" class="headerlink" title="4.7.2 查看边缘端口"></a>4.7.2 查看边缘端口</h3><ul>
+<li>思科</li>
+</ul>
+<p><code>SW3(config)#do show spanning-tree vlan 10 int e0/1 detail     Port 2 (Ethernet0/1) of VLAN0010 is designated forwarding       Port path cost 100, Port priority 128, Port Identifier 128.2.      Designated root has priority 24586, address aabb.cc00.4000      Designated bridge has priority 32778, address aabb.cc00.6000      Designated port id is 128.2, designated path cost 100      Timers: message age 0, forward delay 0, hold 0      Number of transitions to forwarding state: 1      The port is in the portfast edge mode by default      Link type is shared by default      BPDU: sent 25667, received 0         // The port is in the portfast edge mode by default   </code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW3]disp stp int g0/0/10   ......   ----[Port10(GigabitEthernet0/0/10)][FORWARDING]----   ......    Port Edged          :Config=enabled / Active=enabled   </code></p>
+<h3 id="4-7-3-查看是否配置BPDU保护"><a href="#4-7-3-查看是否配置BPDU保护" class="headerlink" title="4.7.3 查看是否配置BPDU保护"></a>4.7.3 查看是否配置BPDU保护</h3><ul>
+<li><p>思科</p>
+<p>Bpdu guard is enabled guard : n. 守卫；警戒；护卫队；防护装置</p>
+</li>
+</ul>
+<p><code>W3(config)#do show spanning-tree vlan 10 int e0/0 detail     Port 1 (Ethernet0/0) of VLAN0010 is designated forwarding       Port path cost 100, Port priority 128, Port Identifier 128.1.      Designated root has priority 24586, address aabb.cc00.4000      Designated bridge has priority 32778, address aabb.cc00.6000      Designated port id is 128.1, designated path cost 100      Timers: message age 0, forward delay 0, hold 0      Number of transitions to forwarding state: 1      The port is in the portfast edge mode      Link type is shared by default      Bpdu guard is enabled      BPDU: sent 30292, received 0   </code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW3]disp stp int g0/0/10   -------[CIST Global Info][Mode STP]-------   ......   BPDU-Protection     :Enabled   </code></p>
+<h2 id="4-8-查看以太聚合链路"><a href="#4-8-查看以太聚合链路" class="headerlink" title="4.8 查看以太聚合链路"></a>4.8 查看以太聚合链路</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>show interfaces port-channel 12 // 相当于直接查看聚合端口信息   show etherchannel summary // 查看聚合端口的状态   show spanning-tree int port-channel 12 //查看stp信息   </code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW2]dis eth-trunk 12   Eth-Trunk12&#39;s state information is:   WorkingMode: NORMAL         Hash arithmetic: According to SIP-XOR-DIP            Least Active-linknumber: 1  Max Bandwidth-affected-linknumber: 8                 Operate status: up          Number Of Up Port In Trunk: 2                        --------------------------------------------------------------------------------   PortName                      Status      Weight    GigabitEthernet0/0/5          Up          1         GigabitEthernet0/0/6          Up          1</code>      </p>
+<h2 id="4-9-查接口状态"><a href="#4-9-查接口状态" class="headerlink" title="4.9 查接口状态"></a>4.9 查接口状态</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW1]disp ip int brief</code> </p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>SW2#show ip int b</code></p>
+<h2 id="4-10-查看vrrp信息"><a href="#4-10-查看vrrp信息" class="headerlink" title="4.10 查看vrrp信息"></a>4.10 查看vrrp信息</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW1]dis vrrp brief    VRID  State        Interface                Type     Virtual IP        ----------------------------------------------------------------   8     Master       Vlanif8                  Normal   10.1.10.14        9     Master       Vlanif9                  Normal   10.1.10.30        10    Master       Vlanif10                 Normal   10.1.10.46        ----------------------------------------------------------------   Total:3     Master:3     Backup:0     Non-active:0</code>     </p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>SW2(config)#do show vrrp brief    Interface          Grp Pri Time  Own Pre State   Master addr     Group addr   Vl8                8   100 3609       Y  Backup  10.1.10.13      10.1.10.14        Vl9                9   110 3570       Y  Master  10.1.10.29      10.1.10.30        Vl10               10  100 3609       Y  Backup  10.1.10.45      10.1.10.46   </code></p>
+<h2 id="4-11-查看指定路由"><a href="#4-11-查看指定路由" class="headerlink" title="4.11 查看指定路由"></a>4.11 查看指定路由</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>R1(config)#do show  ip route 8.8.8.8   Routing entry for 8.8.8.8/32     Known via &quot;static&quot;, distance 1, metric 0     Routing Descriptor Blocks:     * 202.100.1.2         Route metric is 0, traffic share count is 1   </code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[AR1]dis ip routing-table 8.8.8.8   Route Flags: R - relay, D - download to fib   ------------------------------------------------------------------------------   Routing Table : Public   Summary Count : 1   Destination/Mask    Proto   Pre  Cost      Flags NextHop         Interface              8.8.8.8/32  Static  60   0          RD   202.100.1.2     GigabitEthernet0/0/0   </code></p>
+<h2 id="4-12-根据指定协议查看路由"><a href="#4-12-根据指定协议查看路由" class="headerlink" title="4.12 根据指定协议查看路由"></a>4.12 根据指定协议查看路由</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>&lt;AR1&gt;disp ip routing-table protocol static   Route Flags: R - relay, D - download to fib   ------------------------------------------------------------------------------   Public routing table : Static            Destinations : 1        Routes : 1        Configured Routes : 1      Static routing table status : &lt;Active&gt;            Destinations : 1        Routes : 1      Destination/Mask    Proto   Pre  Cost      Flags NextHop         Interface              0.0.0.0/0   Static  60   0          RD   202.100.1.2     GigabitEthernet0/0/0   </code></p>
+<ul>
+<li>思科</li>
+</ul>
+<p><code>R1(config)#do show ip route static    ....   Gateway of last resort is 0.0.0.0 to network 0.0.0.0      S*    0.0.0.0/0 is directly connected, Serial1/0</code></p>
+<h2 id="4-13-查看ospf邻居"><a href="#4-13-查看ospf邻居" class="headerlink" title="4.13 查看ospf邻居"></a>4.13 查看ospf邻居</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>R1(config)#do show ip ospf neighbor      Neighbor ID     Pri   State           Dead Time   Address         Interface   10.1.12.2         1   FULL/BDR        00:00:36    10.1.12.2       Ethernet0/2   2.2.2.2           1   FULL/DR         00:00:33    10.1.11.2       Ethernet0/1   </code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[AR1]disp ospf peer brief   Sep  8 2020 22:14:26-08:00 AR1 %%01OSPF/4/NBR_CHANGE_E(l)[4]:Neighbor changes event: neighbor status changed. (ProcessId=256, NeighborAddress=2.12.1.10, NeighborEvent=LoadingDone, NeighborPreviousState=Loading, NeighborCurrentState=Full)    [AR1]disp ospf peer brief               OSPF Process 1 with Router ID 1.1.1.1                     Peer Statistic Information    ----------------------------------------------------------------------------    Area Id          Interface                        Neighbor id      State        0.0.0.1          GigabitEthernet0/0/1             2.2.2.2          Full            0.0.0.1          GigabitEthernet0/0/2             3.3.3.3          Full            ----------------------------------------------------------------------------   </code></p>
+<h2 id="4-14-查看ospf接口"><a href="#4-14-查看ospf接口" class="headerlink" title="4.14 查看ospf接口"></a>4.14 查看ospf接口</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>[LSW1]dis ospf interface Vlanif 8               OSPF Process 1 with Router ID 2.2.2.2                    Interfaces           Interface: 10.1.10.13 (Vlanif8)    Cost: 1       State: DR        Type: Broadcast    MTU: 1500      Priority: 1    Designated Router: 10.1.10.13    Backup Designated Router: 0.0.0.0    Timers: Hello 10 , Dead 40 , Poll  120 , Retransmit 5 , Transmit Delay 1     Silent interface, No hellos            --------------------------------------------    Type: Broadcast   网络类型是广播     State: DR    指定路由   </code></p>
+<h2 id="4-15-查看BGP邻居"><a href="#4-15-查看BGP邻居" class="headerlink" title="4.15 查看BGP邻居"></a>4.15 查看BGP邻居</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>R3#show ip bgp summary    BGP router identifier 202.100.1.5, local AS number 2   BGP table version is 1, main routing table version 1      Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd   10.1.13.1       4            1       4       4        1    0    0 00:00:48        0</code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[R3]dis bgp peer       BGP local router ID : 10.1.20.30    Local AS number : 2    Total number of peers : 1                Peers in established state : 1        Peer            V          AS  MsgRcvd  MsgSent  OutQ  Up/Down       State PrefRcv        10.1.13.1       4           1        3        3     0 00:01:20 Established       0</code></p>
+<h2 id="4-16-查看BGP路由表"><a href="#4-16-查看BGP路由表" class="headerlink" title="4.16 查看BGP路由表"></a>4.16 查看BGP路由表</h2><ul>
+<li>华为</li>
+</ul>
+<p><code>[AR1]dis bgp routing-table        BGP Local router ID is 202.100.1.1     Status codes: * - valid, &gt; - best, d - damped,                  h - history,  i - internal, s - suppressed, S - Stale                  Origin : i - IGP, e - EGP, ? - incomplete          Total Number of Routes: 11         Network            NextHop        MED        LocPrf    PrefVal Path/Ogn       *&gt;   10.1.10.0/28       0.0.0.0         2                     0      ?    *&gt;   10.1.10.14/32      0.0.0.0         2                     0      ?    *&gt;   10.1.10.16/28      0.0.0.0         2                     0      ?    *&gt;   10.1.10.30/32      0.0.0.0         2                     0      ?    *&gt;   10.1.10.32/28      0.0.0.0         2                     0      ?    *&gt;   10.1.10.46/32      0.0.0.0         2                     0      ?    *&gt;   10.1.11.0/29       0.0.0.0         0                     0      ?    *&gt;   10.1.12.0/29       0.0.0.0         0                     0      ?    *&gt;   10.1.20.0/27       10.1.13.2       0                     0      2i    *&gt;   10.1.30.0/27       10.1.13.2       0                     0      2i    *&gt;   11.1.1.1/32        0.0.0.0         0                     0      ?            ----------------------------------------    2i : i即internal，内嵌的，土著，BGP自身的，远端通过network配置       2 是 AS号码   </code></p>
+<h2 id="4-17-查看ACL"><a href="#4-17-查看ACL" class="headerlink" title="4.17 查看ACL"></a>4.17 查看ACL</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>R1#show access-lists    Standard IP access list 1       10 deny   10.1.10.0, wildcard bits 0.0.0.15 (1 match)       15 permit any (2 matches)   </code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>[AR1]disp acl all     Total quantity of nonempty ACL number is 1       Basic ACL 2000, 1 rule   Acl&#39;s step is 5    rule 5 deny source 10.1.10.0 0.0.0.15 (2 matches)   </code></p>
+<h2 id="4-18-查看NAT转换"><a href="#4-18-查看NAT转换" class="headerlink" title="4.18 查看NAT转换"></a>4.18 查看NAT转换</h2><ul>
+<li>思科</li>
+</ul>
+<p><code>R1#show ip nat translations    Pro Inside global      Inside local       Outside local      Outside global   icmp 202.100.1.1:30    10.1.10.1:30       8.8.8.8:30         8.8.8.8:30   </code></p>
+<ul>
+<li>华为</li>
+</ul>
+<p><code>&lt;AR1&gt;dis nat outbound     NAT Outbound Information:    --------------------------------------------------------------------------    Interface                     Acl     Address-group/IP/Interface      Type    --------------------------------------------------------------------------    GigabitEthernet0/0/0         3999                    202.100.1.1    easyip      --------------------------------------------------------------------------     Total : 1   </code></p>
+<h1 id="5-设备操作常用快捷键"><a href="#5-设备操作常用快捷键" class="headerlink" title="5. 设备操作常用快捷键"></a>5. 设备操作常用快捷键</h1><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl+A</td>
+<td>将光标移动到当前行的开头</td>
+</tr>
+<tr>
+<td>Ctrl+E</td>
+<td>将光标移动到当前行的末尾</td>
+</tr>
+<tr>
+<td>ESC+B</td>
+<td><strong>将光标向左移动一个字符串</strong></td>
+</tr>
+<tr>
+<td>ESC+F</td>
+<td><strong>将光标向右移动一个字符串</strong></td>
+</tr>
+<tr>
+<td>Ctrl+T</td>
+<td>键入？符号(如密码需要？)</td>
+</tr>
+<tr>
+<td>Ctrl+W</td>
+<td>删除光标左侧连续字符串内的所有字符</td>
+</tr>
+<tr>
+<td>Ctrl+U</td>
+<td>删除一整行命合</td>
+</tr>
+<tr>
+<td>Ctrl+X</td>
+<td>删除光标左侧所有的字符</td>
+</tr>
+<tr>
+<td>Ctrl+Y</td>
+<td>删除光标右侧所有的字符</td>
+</tr>
+<tr>
+<td>Ctrl+D</td>
+<td>删除当前光标所在位置的字符</td>
+</tr>
+<tr>
+<td>Ctrl+Z</td>
+<td>思科执行并退出到特权模式;华为华三退出到用户模式</td>
+</tr>
+</tbody></table>
+<h1 id="6-Windows操作"><a href="#6-Windows操作" class="headerlink" title="6. Windows操作"></a>6. Windows操作</h1><p>mstsc 打开远程桌面连接</p>
+<p>nslookup <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+<p><strong>-–END—</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io">壹拾陆</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io/posts/99081826.html">https://mo-li001.github.io/posts/99081826.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mo-li001.github.io" target="_blank">壹拾陆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%97%A0/">无</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/b0318225.html"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/1e1e5171.html" title="python之路—从入门到放弃"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">python之路—从入门到放弃</div></div></a></div><div><a href="/posts/f8ba3d81.html" title="Ansible Playbook实战"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">Ansible Playbook实战</div></div></a></div><div><a href="/posts/fdfb5b92.html" title="2022年最新整理的Linux 常用操作命令大全，强烈建议收藏备用！"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">2022年最新整理的Linux 常用操作命令大全，强烈建议收藏备用！</div></div></a></div><div><a href="/posts/6677fcfc.html" title="K8s无法删除状态为terminating的pod解决方法"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">K8s无法删除状态为terminating的pod解决方法</div></div></a></div><div><a href="/posts/6bb1eab0.html" title="Oldguo-标杆班级-MySQL-lesson11--读写分离架构-Atlas"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">Oldguo-标杆班级-MySQL-lesson11--读写分离架构-Atlas</div></div></a></div><div><a href="/posts/3c5004d8.html" title="Kubernetes学习--集群安装"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">Kubernetes学习--集群安装</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%88%E5%BC%BA%EF%BC%8C3%E4%B8%87%E5%AD%97%E6%8A%8A%E5%8D%8E%E4%B8%BAHCIA%E7%9F%A5%E8%AF%86%E7%82%B9%E5%85%A8%E9%83%A8%E6%80%BB%E7%BB%93%E4%BA%86%EF%BC%81"><span class="toc-text">很强，3万字把华为HCIA知识点全部总结了！</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%8A%9F%E8%83%BD%E8%AE%B0%E5%BD%95"><span class="toc-text">1 功能记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="toc-text">1.1 路由器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E7%BD%91%E7%BB%9C"><span class="toc-text">1.2 网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E5%B9%BF%E5%9F%9F%E7%BD%91-WAN-%E5%92%8C%E4%BA%92%E8%81%94%E7%BD%91%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">1.2.1 广域网(WAN) 和互联网的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E5%8F%97%E4%BC%A0%E8%BE%93%E8%B7%9D%E7%A6%BB%E9%99%90%E5%88%B6%E6%80%8E%E4%B9%88%E4%BC%A0%E5%88%B0%E9%82%A3%E4%B9%88%E8%BF%9C%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-text">1.2.2 受传输距离限制怎么传到那么远的地方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-%E8%A1%A1%E9%87%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E4%B8%BB%E8%A6%81%E6%8C%87%E6%A0%87"><span class="toc-text">1.2.3 衡量网络的主要指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-text">1.2.4 以太网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-5-%E4%B8%BA%E4%BD%95%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%8E%A5%E5%8F%A3%E6%97%A0%E6%B3%95%E9%85%8D%E7%BD%AEIP%E5%9C%B0%E5%9D%80"><span class="toc-text">1.2.5 为何交换机接口无法配置IP地址?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E7%89%A9%E7%90%86%E5%B1%82"><span class="toc-text">1.3 物理层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-%E5%8D%95%E6%A8%A1%E5%85%89%E7%BA%A4%E5%92%8C%E5%A4%9A%E6%A8%A1%E5%85%89%E7%BA%A4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">1.3.1 单模光纤和多模光纤的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E5%85%89%E6%A8%A1%E5%9D%97"><span class="toc-text">1.3.2 光模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-%E5%85%89%E8%A1%B0"><span class="toc-text">1.3.3 光衰</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E7%BB%8F%E9%AA%8C"><span class="toc-text">1.4 经验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-1-%E6%8E%92%E9%94%99"><span class="toc-text">1.4.1 排错</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0"><span class="toc-text">2. 网络基础笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-text">2.1 数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-text">2.1.1 OSI七层模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E4%BB%A5%E5%A4%AA2%E5%9E%8B%E5%B8%A7%E5%92%8C802-3%E5%B8%A7%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">2.1.2 以太2型帧和802.3帧的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%BD%AC%E5%8F%91%E6%9C%BA%E5%88%B6"><span class="toc-text">2.1.3 交换机转发机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-1-%E8%A1%8C%E4%B8%BA"><span class="toc-text">2.1.3.1 行为</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-MAC%E5%9C%B0%E5%9D%80%E8%A1%A8%E5%BD%A2%E6%88%90"><span class="toc-text">2.1.4 MAC地址表形成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-5-MAC%E5%9C%B0%E5%9D%80%E8%A1%A8%E9%9C%87%E8%8D%A1-%E6%BC%82%E7%A7%BB"><span class="toc-text">2.1.5 MAC地址表震荡(漂移)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-6-%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8F%91%E7%8E%B0%E5%8D%8F%E8%AE%AE"><span class="toc-text">2.1.6 链路层发现协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-7-%E5%B8%A7%E6%A0%A1%E9%AA%8C%E5%BA%8F%E5%88%97-FCS"><span class="toc-text">2.1.7 帧校验序列(FCS)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-text">2.2 网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-IP%E5%9C%B0%E5%9D%80"><span class="toc-text">2.2.1 IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-1-%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86"><span class="toc-text">2.2.1.1 子网划分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-2-ABC-%E7%B1%BB%E9%BB%98%E8%AE%A4%E6%8E%A9%E7%A0%81"><span class="toc-text">2.2.1.2 ABC 类默认掩码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-3-%E5%B8%B8%E7%94%A8%E7%89%B9%E6%AE%8Aip%E5%9C%B0%E5%9D%80"><span class="toc-text">2.2.1.3 常用特殊ip地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-4-%E5%8F%AF%E5%8F%98%E9%95%BF%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81-VLSM-Variable-Length-Subnet-Mask"><span class="toc-text">2.2.1.4 可变长子网掩码(VLSM Variable Length Subnet Mask)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-IP%E6%8A%A5%E6%96%87"><span class="toc-text">2.2.2 IP报文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-1-%E9%87%8D%E8%A6%81%E5%AD%97%E6%AE%B5"><span class="toc-text">2.2.2.1 重要字段</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-text">2.3 传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-%E5%B8%B8%E7%94%A8%E5%8D%8F%E8%AE%AE%E7%AB%AF%E5%8F%A3"><span class="toc-text">2.3.1 常用协议端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-TCP"><span class="toc-text">2.3.2 TCP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E4%BA%A4%E6%8D%A2%E7%BD%91%E7%BB%9C"><span class="toc-text">2.4 交换网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-%E5%B9%BF%E6%92%AD%E5%9F%9F"><span class="toc-text">2.4.1 广播域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-VLAN"><span class="toc-text">2.4.2 VLAN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-1-Access%E9%93%BE%E8%B7%AF%E7%AB%AF%E5%8F%A3"><span class="toc-text">2.4.2.1 Access链路端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-2-Trunk%E9%93%BE%E8%B7%AF"><span class="toc-text">2.4.2.2 Trunk链路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-3-%E6%9C%AC%E5%BE%81VLAN-%E7%BC%BA%E7%9C%81VLAN-PVID"><span class="toc-text">2.4.2.3 本征VLAN(缺省VLAN PVID)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-4-Hybrid%E9%93%BE%E8%B7%AF"><span class="toc-text">2.4.2.4 Hybrid链路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-3-STP"><span class="toc-text">2.4.3 STP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-3-1-%E7%8E%AF%E8%B7%AF%E5%BC%95%E5%8F%91%E7%9A%84%E5%B9%BF%E6%92%AD%E9%A3%8E%E6%9A%B4"><span class="toc-text">2.4.3.1 环路引发的广播风暴</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-3-2-BPDU-%E6%A1%A5%E5%8D%8F%E8%AE%AE%E6%95%B0%E6%8D%AE%E5%8D%95%E5%85%83"><span class="toc-text">2.4.3.2 BPDU 桥协议数据单元</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-3-3-%E8%A7%92%E8%89%B2"><span class="toc-text">2.4.3.3 角色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-4-%E4%BA%94%E7%A7%8D%E7%AB%AF%E5%8F%A3%E7%8A%B6%E6%80%81"><span class="toc-text">2.4.2.4 五种端口状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-3-5-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">2.4.3.5 工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-3-6-%E6%80%9D%E7%A7%91%E8%AE%BE%E5%A4%87PVST"><span class="toc-text">2.4.3.6 思科设备PVST</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-3-7-%E6%A0%B9%E7%AB%AF%E5%8F%A3%E9%80%89%E4%B8%BE"><span class="toc-text">2.4.3.7 根端口选举</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-3-8-%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3%E9%80%89%E4%B8%BE"><span class="toc-text">2.4.3.8 指定端口选举</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-3-9-%E8%BE%B9%E7%BC%98%E7%AB%AF%E5%8F%A3"><span class="toc-text">2.4.3.9 边缘端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-3-10-BPDU%E4%BF%9D%E6%8A%A4"><span class="toc-text">2.4.3.10 BPDU保护</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-4-%E4%BB%A5%E5%A4%AA%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88-Link-Aggregation"><span class="toc-text">2.4.4 以太链路聚合(Link Aggregation)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E8%B7%AF%E7%94%B1"><span class="toc-text">2.5 路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-1-VLAN%E9%97%B4%E8%B7%AF%E7%94%B1"><span class="toc-text">2.5.1 VLAN间路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-2-%E7%BD%91%E5%85%B3"><span class="toc-text">2.5.2 网关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-3-VRRP%E8%99%9A%E6%8B%9F%E8%B7%AF%E7%94%B1%E5%99%A8%E5%86%97%E4%BD%99%E5%8D%8F%E8%AE%AE"><span class="toc-text">2.5.3 VRRP虚拟路由器冗余协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-4-%E8%B7%AF%E7%94%B1%E7%A7%8D%E7%B1%BB"><span class="toc-text">2.5.4 路由种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-5-%E8%B7%AF%E7%94%B1%E5%BA%A6%E9%87%8F%E5%80%BC%E5%92%8C%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">2.5.5 路由度量值和优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-6-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">2.5.6 静态路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-7-ARP"><span class="toc-text">2.5.7 ARP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-8-%E6%B5%AE%E5%8A%A8%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">2.5.8 浮动静态路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-9-OSPF-%E5%BC%80%E6%94%BE%E5%BC%8F%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E4%BC%98%E5%85%88"><span class="toc-text">2.5.9 OSPF 开放式最短路径优先</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-10-BGP"><span class="toc-text">2.5.10 BGP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF"><span class="toc-text">2.6 其他技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-1-GRE-%E9%80%9A%E7%94%A8%E8%B7%AF%E7%94%B1%E5%B0%81%E8%A3%85%E9%9A%A7%E9%81%93"><span class="toc-text">2.6.1 GRE 通用路由封装隧道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-2-ACL"><span class="toc-text">2.6.2 ACL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-2-1-%E9%80%9A%E9%85%8D%E7%AC%A6%E6%8E%A9%E7%A0%81-%E4%B8%8D%E6%98%AF%E5%8F%8D%E6%8E%A9%E7%A0%81"><span class="toc-text">2.6.2.1 通配符掩码(不是反掩码)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-2-2-%E5%88%86%E7%B1%BB"><span class="toc-text">2.6.2.2 分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-3-NAT-%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E5%8D%8F%E8%AE%AE"><span class="toc-text">2.6.3 NAT(网络地址转换协议)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">3.常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-VRP-%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">3.1 VRP(华为网络操作系统)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95"><span class="toc-text">3.1.1 查看目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-text">3.1.2 基本操作命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E8%BF%9B%E5%85%A5%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%A7%86%E5%9B%BE"><span class="toc-text">3.2 进入用户界面视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E4%BF%AE%E6%94%B9%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="toc-text">3.3 修改主机名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E8%AE%BE%E7%BD%AEConsole%E8%AE%A4%E8%AF%81"><span class="toc-text">3.4 设置Console认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E8%AE%BE%E7%BD%AETelnet%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87"><span class="toc-text">3.5 设置Telnet远程连接设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-%E8%AE%BE%E7%BD%AEssh-TCP%E7%AB%AF%E5%8F%A322"><span class="toc-text">3.6 设置ssh(TCP端口22)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-%E8%AE%BE%E7%BD%AEFTP"><span class="toc-text">3.7 设置FTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8-VLAN%E9%85%8D%E7%BD%AE"><span class="toc-text">3.8 VLAN配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-1-%E5%88%9B%E5%BB%BAVLAN"><span class="toc-text">3.8.1 创建VLAN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-2-%E9%85%8D%E7%BD%AEaccess%E6%8E%A5%E5%8F%A3%E5%B9%B6%E8%AE%BE%E7%BD%AEVLAN"><span class="toc-text">3.8.2 配置access接口并设置VLAN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-3-%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3VLAN"><span class="toc-text">3.8.3 查看端口VLAN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-4-%E9%85%8D%E7%BD%AETrunk%E7%AB%AF%E5%8F%A3"><span class="toc-text">3.8.4 配置Trunk端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-5-%E8%AE%BE%E7%BD%AE%E6%9C%AC%E5%BE%81VLAN-%E7%BC%BA%E7%9C%81VLAN-PVID"><span class="toc-text">3.8.5 设置本征VLAN(缺省VLAN PVID)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-6-Hybrid-%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F-%E9%85%8D%E7%BD%AE"><span class="toc-text">3.8.6 Hybrid(混杂模式)配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-9-%E4%BF%9D%E5%AD%98%E9%85%8D%E7%BD%AE"><span class="toc-text">3.9 保存配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-10-%E6%B8%85%E7%A9%BA%E7%AB%AF%E5%8F%A3%E8%AE%B0%E5%BD%95"><span class="toc-text">3.10 清空端口记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-11-STP"><span class="toc-text">3.11 STP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-11-1-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E5%89%AF%E8%B7%9F%E8%AE%BE%E5%A4%87"><span class="toc-text">3.11.1 设置主副跟设备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-11-2-%E9%85%8D%E7%BD%AE%E8%BE%B9%E7%BC%98%E7%AB%AF%E5%8F%A3"><span class="toc-text">3.11.2 配置边缘端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-11-3-%E9%85%8D%E7%BD%AEBPDU%E4%BF%9D%E6%8A%A4"><span class="toc-text">3.11.3 配置BPDU保护</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-12-ping%E5%8F%91%E9%80%81%E5%A4%9A%E4%B8%AA%E5%8C%85"><span class="toc-text">3.12 ping发送多个包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-13-%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%A4%AA%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88"><span class="toc-text">3.13 配置以太链路聚合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-14-%E9%85%8D%E7%BD%AE%E5%8D%95%E8%87%82%E8%B7%AF%E7%94%B1"><span class="toc-text">3.14 配置单臂路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-15-%E6%80%9D%E7%A7%91%E8%B7%AF%E7%94%B1%E5%99%A8%E6%A8%A1%E6%8B%9FPC"><span class="toc-text">3.15 思科路由器模拟PC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-16-%E9%85%8D%E7%BD%AEVLANIF"><span class="toc-text">3.16 配置VLANIF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-17-%E9%85%8D%E7%BD%AE%E4%B8%89%E5%B1%82%E8%B7%AF%E7%94%B1%E6%8E%A5%E5%8F%A3"><span class="toc-text">3.17 配置三层路由接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-18-%E9%85%8D%E7%BD%AEVRRP"><span class="toc-text">3.18 配置VRRP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-19-%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">3.19 配置静态路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-20-%E9%85%8D%E7%BD%AE%E6%B5%AE%E5%8A%A8%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">3.20 配置浮动静态路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-21-%E9%85%8D%E7%BD%AEOSPF"><span class="toc-text">3.21 配置OSPF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-22-%E9%87%8D%E7%BD%AEospf%E8%BF%9B%E7%A8%8B"><span class="toc-text">3.22 重置ospf进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-23-%E9%85%8D%E7%BD%AEGRE%E9%9A%A7%E9%81%93"><span class="toc-text">3.23 配置GRE隧道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-24-%E9%85%8D%E7%BD%AEBGP"><span class="toc-text">3.24 配置BGP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-25-%E9%85%8D%E7%BD%AE%E5%9F%BA%E6%9C%ACACL"><span class="toc-text">3.25 配置基本ACL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-26-%E9%85%8D%E7%BD%AE%E6%89%A9%E5%B1%95ACL"><span class="toc-text">3.26 配置扩展ACL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-27-%E9%85%8D%E7%BD%AENAT"><span class="toc-text">3.27 配置NAT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-28-%E9%85%8D%E7%BD%AENAT%E6%9C%8D%E5%8A%A1%E5%99%A8-x2F-%E9%9D%99%E6%80%81%E7%AB%AF%E5%8F%A3%E8%BD%AC%E6%8D%A2"><span class="toc-text">3.28 配置NAT服务器&#x2F;静态端口转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-29-%E9%85%8D%E7%BD%AEaaa%E8%AE%A4%E8%AF%81"><span class="toc-text">3.29 配置aaa认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-30-%E9%85%8D%E7%BD%AE%E7%AB%AF%E5%8F%A3%E5%AE%89%E5%85%A8"><span class="toc-text">3.30 配置端口安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-31-%E5%A4%9A%E7%AB%AF%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="toc-text">3.31 多端口配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-32-%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86%E6%98%BE%E7%A4%BA%E7%AE%A1%E7%90%86%E6%97%A5%E5%BF%97"><span class="toc-text">3.32 远程管理显示管理日志</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E6%9F%A5%E8%AF%A2%E5%91%BD%E4%BB%A4"><span class="toc-text">4.查询命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E6%9F%A5%E7%9C%8BMAC%E5%9C%B0%E5%9D%80"><span class="toc-text">4.1 查看MAC地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7"><span class="toc-text">4.2 查看用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E6%9F%A5%E7%9C%8B%E7%9B%B8%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF"><span class="toc-text">4.3 查看相连接的设备信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E6%9F%A5%E7%9C%8B%E9%85%8D%E7%BD%AE"><span class="toc-text">4.4 查看配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-1-%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E6%8E%A5%E5%8F%A3%E4%B8%8B%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">4.4.1 查看某个接口下的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-%E6%9F%A5%E7%9C%8BTCP"><span class="toc-text">4.5 查看TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6-%E6%9F%A5%E7%9C%8B%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95"><span class="toc-text">4.6 查看历史命令记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-%E6%9F%A5%E7%9C%8Bstp"><span class="toc-text">4.7 查看stp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-1-%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E6%9C%89%E5%85%B3stp%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF"><span class="toc-text">4.7.1 查看端口有关stp详细信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-2-%E6%9F%A5%E7%9C%8B%E8%BE%B9%E7%BC%98%E7%AB%AF%E5%8F%A3"><span class="toc-text">4.7.2 查看边缘端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-3-%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E9%85%8D%E7%BD%AEBPDU%E4%BF%9D%E6%8A%A4"><span class="toc-text">4.7.3 查看是否配置BPDU保护</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-8-%E6%9F%A5%E7%9C%8B%E4%BB%A5%E5%A4%AA%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF"><span class="toc-text">4.8 查看以太聚合链路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-9-%E6%9F%A5%E6%8E%A5%E5%8F%A3%E7%8A%B6%E6%80%81"><span class="toc-text">4.9 查接口状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-10-%E6%9F%A5%E7%9C%8Bvrrp%E4%BF%A1%E6%81%AF"><span class="toc-text">4.10 查看vrrp信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-11-%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E8%B7%AF%E7%94%B1"><span class="toc-text">4.11 查看指定路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-12-%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A%E5%8D%8F%E8%AE%AE%E6%9F%A5%E7%9C%8B%E8%B7%AF%E7%94%B1"><span class="toc-text">4.12 根据指定协议查看路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-13-%E6%9F%A5%E7%9C%8Bospf%E9%82%BB%E5%B1%85"><span class="toc-text">4.13 查看ospf邻居</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-14-%E6%9F%A5%E7%9C%8Bospf%E6%8E%A5%E5%8F%A3"><span class="toc-text">4.14 查看ospf接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-15-%E6%9F%A5%E7%9C%8BBGP%E9%82%BB%E5%B1%85"><span class="toc-text">4.15 查看BGP邻居</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-16-%E6%9F%A5%E7%9C%8BBGP%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="toc-text">4.16 查看BGP路由表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-17-%E6%9F%A5%E7%9C%8BACL"><span class="toc-text">4.17 查看ACL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-18-%E6%9F%A5%E7%9C%8BNAT%E8%BD%AC%E6%8D%A2"><span class="toc-text">4.18 查看NAT转换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E8%AE%BE%E5%A4%87%E6%93%8D%E4%BD%9C%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">5. 设备操作常用快捷键</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Windows%E6%93%8D%E4%BD%9C"><span class="toc-text">6. Windows操作</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/99081826.html" title="很强，3万字把华为HCIA知识点全部总结了！">很强，3万字把华为HCIA知识点全部总结了！</a><time datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b0318225.html" title="浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f962716d.html" title="使用system-config-kickstart生成kickstart文件">使用system-config-kickstart生成kickstart文件</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/12ac960a.html" title="Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件">Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cefcf133.html" title="zabbix5.0 percona_mysql_template模板文件">zabbix5.0 percona_mysql_template模板文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

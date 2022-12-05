@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>python之路—从入门到放弃 | 壹拾陆</title><meta name="keywords" content="无"><meta name="author" content="壹拾陆"><meta name="copyright" content="壹拾陆"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="python之路—从入门到放弃python基础部分函数初识函数 函数进阶 装饰器函数 迭代器和生成器 内置函数和匿名函数 递归函数    常用模块常用模块 模块和包 面向对象初识面向对象 面向对象进阶 网络编程网络编程 并发编程操作系统介绍 进程 线程 协程 IO模型 数据库部分初识数据库 mysql表操作 mysql记录操作 mysql索引原理 python操作mysql 前端部分html cs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python之路—从入门到放弃">
+<meta property="og:url" content="https://mo-li001.github.io/posts/1e1e5171.html">
+<meta property="og:site_name" content="壹拾陆">
+<meta property="og:description" content="python之路—从入门到放弃python基础部分函数初识函数 函数进阶 装饰器函数 迭代器和生成器 内置函数和匿名函数 递归函数    常用模块常用模块 模块和包 面向对象初识面向对象 面向对象进阶 网络编程网络编程 并发编程操作系统介绍 进程 线程 协程 IO模型 数据库部分初识数据库 mysql表操作 mysql记录操作 mysql索引原理 python操作mysql 前端部分html cs">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-05T05:17:54.720Z">
+<meta property="article:modified_time" content="2022-11-17T09:42:18.635Z">
+<meta property="article:author" content="壹拾陆">
+<meta property="article:tag" content="无">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mo-li001.github.io/posts/1e1e5171"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'python之路—从入门到放弃',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-17 17:42:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">python之路—从入门到放弃</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-05T05:17:54.720Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-17T09:42:18.635Z" title="更新于 2022-11-17 17:42:18">2022-11-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/default/">default</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="python之路—从入门到放弃"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="python之路—从入门到放弃"><a href="#python之路—从入门到放弃" class="headerlink" title="python之路—从入门到放弃"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439255.html">python之路—从入门到放弃</a></h1><h1 id="python基础部分"><a href="#python基础部分" class="headerlink" title="python基础部分"></a>python基础部分</h1><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439267.html">初识函数</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439272.html">函数进阶</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439280.html">装饰器函数</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439281.html">迭代器和生成器</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439283.html">内置函数和匿名函数</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439284.html">递归函数</a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439284.html">  
+</a></p>
+<h2 id="常用模块"><a href="#常用模块" class="headerlink" title="常用模块"></a>常用模块</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11470939.html">常用模块</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11470954.html">模块和包</a></p>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439306.html">初识面向对象</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439309.html">面向对象进阶</a></p>
+<h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439314.html">网络编程</a></p>
+<h2 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439317.html">操作系统介绍</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439324.html">进程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439327.html">线程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439332.html">协程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11471116.html">IO模型</a></p>
+<h2 id="数据库部分"><a href="#数据库部分" class="headerlink" title="数据库部分"></a><strong>数据库部分</strong></h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439361.html">初识数据库</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439382.html">mysql表操作</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439402.html">mysql记录操作</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439403.html">mysql索引原理</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439407.html">python操作mysql</a></p>
+<h2 id="前端部分"><a href="#前端部分" class="headerlink" title="前端部分"></a><strong>前端部分</strong></h2><p>html</p>
+<p>css</p>
+<p>javascript</p>
+<p>jquery</p>
+<h2 id="其他相关知识点链接："><a href="#其他相关知识点链接：" class="headerlink" title="其他相关知识点链接："></a><strong>其他相关知识点链接：</strong></h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11471144.html">深浅拷贝</a></p>
+<p><strong>异常处理</strong></p>
+<p>递归——二分查找算法</p>
+<p>内置函数——eval、exec、compile</p>
+<p>内置函数——sorted </p>
+<p>内置函数——filter和map</p>
+<p>内置函数——format</p>
+<p>内置函数——eval、exec、compile</p>
+<p>各种推导式详解</p>
+<p>collections模块</p>
+<p>IO多路复用 </p>
+<p>shutil模块</p>
+<p>mysql可视化工具</p>
+<p><a href="javascript:">好文要顶</a> <a href="javascript:">关注我</a> <a href="javascript:">收藏该文</a> <a href="javascript:" title="分享至新浪微博"><img src="/assets/1652623710-3212f7b914cc9773fb30bbf4656405fc.png"></a> <a href="javascript:" title="分享至微信"><img src="/assets/1652623710-cb7153d1c13a5d9aef10ebab342f6f71.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://home.cnblogs.com/u/kermitjam/"><img src="/assets/1652623710-ac9329236f65d9d4d4ff5771c61ffd4b.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://home.cnblogs.com/u/kermitjam/">tank_jam</a><br><a target="_blank" rel="noopener" href="https://home.cnblogs.com/u/kermitjam/followees/">关注 - 1</a><br><a target="_blank" rel="noopener" href="https://home.cnblogs.com/u/kermitjam/followers/">粉丝 - 329</a></p>
+<p><a href="javascript:">+加关注</a></p>
+<p>1</p>
+<p>0</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11356270.html">«</a> 上一篇： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11356270.html" title="发布于 2019-08-15 10:10">选课系统</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439297.html">»</a> 下一篇： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/p/11439297.html" title="发布于 2019-08-31 15:48">常用模块</a></p>
+<p>posted @ 2019-08-31 15:41  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/kermitjam/">tank_jam</a>  阅读(960)  评论(0)  <a target="_blank" rel="noopener" href="https://i.cnblogs.com/EditPosts.aspx?postid=11439255">编辑</a>  <a href="javascript:">收藏</a>  <a href="javascript:">举报</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io">壹拾陆</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io/posts/1e1e5171.html">https://mo-li001.github.io/posts/1e1e5171.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mo-li001.github.io" target="_blank">壹拾陆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%97%A0/">无</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/9b5dc588.html"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">k8s devops</div></div></a></div><div class="next-post pull-right"><a href="/posts/16107.html"><img class="next-cover" src="https://tuchuangs.com/imgs/2022/09/18/074f3836d4f471b8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello World</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/f8ba3d81.html" title="Ansible Playbook实战"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">Ansible Playbook实战</div></div></a></div><div><a href="/posts/fdfb5b92.html" title="2022年最新整理的Linux 常用操作命令大全，强烈建议收藏备用！"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">2022年最新整理的Linux 常用操作命令大全，强烈建议收藏备用！</div></div></a></div><div><a href="/posts/6677fcfc.html" title="K8s无法删除状态为terminating的pod解决方法"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">K8s无法删除状态为terminating的pod解决方法</div></div></a></div><div><a href="/posts/6bb1eab0.html" title="Oldguo-标杆班级-MySQL-lesson11--读写分离架构-Atlas"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">Oldguo-标杆班级-MySQL-lesson11--读写分离架构-Atlas</div></div></a></div><div><a href="/posts/3c5004d8.html" title="Kubernetes学习--集群安装"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">Kubernetes学习--集群安装</div></div></a></div><div><a href="/posts/6f8791d2.html" title="anaconda：kickstart定制自动化安装镜像"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">anaconda：kickstart定制自动化安装镜像</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#python%E4%B9%8B%E8%B7%AF%E2%80%94%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83"><span class="toc-text">python之路—从入门到放弃</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#python%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86"><span class="toc-text">python基础部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="toc-text">常用模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="toc-text">面向对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-text">网络编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="toc-text">并发编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%83%A8%E5%88%86"><span class="toc-text">数据库部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E9%83%A8%E5%88%86"><span class="toc-text">前端部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">其他相关知识点链接：</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/99081826.html" title="很强，3万字把华为HCIA知识点全部总结了！">很强，3万字把华为HCIA知识点全部总结了！</a><time datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b0318225.html" title="浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f962716d.html" title="使用system-config-kickstart生成kickstart文件">使用system-config-kickstart生成kickstart文件</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/12ac960a.html" title="Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件">Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cefcf133.html" title="zabbix5.0 percona_mysql_template模板文件">zabbix5.0 percona_mysql_template模板文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

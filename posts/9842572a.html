@@ -1,0 +1,633 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>LVS | 壹拾陆</title><meta name="keywords" content="Linux"><meta name="author" content="壹拾陆"><meta name="copyright" content="壹拾陆"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="大型网站高并发解决方案LVS 负载均衡1.集群功能分类1.1 LBLB：Load Balancing，负载均衡（增加处理能力），有一定高可用能力，但不是高可用集群，是以提高服务的并发处理能力为根本着眼点 1.1.1 负载均衡产品分类 软件负载均衡设备 LVS LVS（四层路由设备），是由中国人章文松研发的（阿里巴巴的副总裁）根据用户请求的IP与端口号，实现将用户的请求分发至不同的主机   HApr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LVS">
+<meta property="og:url" content="https://mo-li001.github.io/posts/9842572a.html">
+<meta property="og:site_name" content="壹拾陆">
+<meta property="og:description" content="大型网站高并发解决方案LVS 负载均衡1.集群功能分类1.1 LBLB：Load Balancing，负载均衡（增加处理能力），有一定高可用能力，但不是高可用集群，是以提高服务的并发处理能力为根本着眼点 1.1.1 负载均衡产品分类 软件负载均衡设备 LVS LVS（四层路由设备），是由中国人章文松研发的（阿里巴巴的副总裁）根据用户请求的IP与端口号，实现将用户的请求分发至不同的主机   HApr">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-31T12:41:14.000Z">
+<meta property="article:modified_time" content="2022-10-23T15:27:21.000Z">
+<meta property="article:author" content="壹拾陆">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mo-li001.github.io/posts/9842572a"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LVS',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-23 23:27:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">LVS</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-23T15:27:21.000Z" title="更新于 2022-10-23 23:27:21">2022-10-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="LVS"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gz4y1y7Nx?p=1&vd_source=629395ac7befa1625191c3f496068941">大型网站高并发解决方案LVS</a></p>
+<h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><h2 id="1-集群功能分类"><a href="#1-集群功能分类" class="headerlink" title="1.集群功能分类"></a>1.集群功能分类</h2><h3 id="1-1-LB"><a href="#1-1-LB" class="headerlink" title="1.1 LB"></a>1.1 LB</h3><p>LB：Load Balancing，负载均衡（增加处理能力），有一定高可用能力，但不是高可用集群，是以提高服务的并发处理能力为根本着眼点</p>
+<h4 id="1-1-1-负载均衡产品分类"><a href="#1-1-1-负载均衡产品分类" class="headerlink" title="1.1.1 负载均衡产品分类"></a>1.1.1 负载均衡产品分类</h4><ul>
+<li>软件负载均衡设备<ul>
+<li>LVS<ul>
+<li>LVS（四层路由设备），是由中国人章文松研发的（阿里巴巴的副总裁）根据用户请求的IP与端口号，实现将用户的请求分发至不同的主机</li>
+</ul>
+</li>
+<li>HAproxy</li>
+<li>NGINX</li>
+<li>对比</li>
+</ul>
+</li>
+<li>硬件负载均衡设备<ul>
+<li>F5:BIG IP</li>
+<li>Citrix，Netscaler</li>
+<li>A10</li>
+<li>深信服</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-HA"><a href="#1-2-HA" class="headerlink" title="1.2 HA"></a>1.2 HA</h3><ul>
+<li><p>HA：High Availability，高可用集群（增加服务可用性）</p>
+<p>高可用集群，是以提升服务的始终在线能力为着眼点，不会因为宕机而导致服务不能用。</p>
+<p>衡量可用性：在线时间&#x2F;（在线时间+故障处理时间）</p>
+<p>99%：一年有三天不在线</p>
+<p>99.9%：一年有0.3天不在线</p>
+<p>99.99%：一年有0.03天不在线</p>
+<p>99.999%：一年有0.003天不在线</p>
+</li>
+<li><p>keepalived</p>
+</li>
+</ul>
+<h3 id="1-3-HPC"><a href="#1-3-HPC" class="headerlink" title="1.3 HPC"></a>1.3 HPC</h3><p>HPC：High performance，高性能计算集群，计算海量数据,解决复杂问题平时所说的超级计算机就是高性能计算集群，查看每秒钟浮点运算的能力</p>
+<p>运用到的名词：</p>
+<p>向量机：尽可能向上进行扩展，如果CPU过多，在架构上纵然会有问题的</p>
+<p>并行处理集群：包括两部分</p>
+<p>1、分布式文件系统；</p>
+<p>2、将大任务切割为小任务，分别进行处理的机制</p>
+<p>例如hadoop就是并行处理集群</p>
+<h2 id="2-负载均衡"><a href="#2-负载均衡" class="headerlink" title="2.负载均衡"></a>2.负载均衡</h2><p>（Load Balance）负载均衡，当然这是一个简单的概括，比如，我有10台机器都提供web服务，那么我如何均衡的利用这10台机器呢，让这10台机器保证高性能、高可用、高并发就是负载均衡要考虑和要做的事情。</p>
+<p>实现负载均衡一般可以使用顺序、比重、流量、服务类别等进行分配，负载均衡的部署方式也分为路由和服务直接返回模式</p>
+<h3 id="负载均衡的主要方式"><a href="#负载均衡的主要方式" class="headerlink" title="负载均衡的主要方式"></a>负载均衡的主要方式</h3><ul>
+<li><p>http重定向</p>
+<ul>
+<li><p>下载网站用的较多，其实也算一种负载均衡，工作在应用层的业务代码中</p>
+<p>原理：根据用户的http请求计算出一个真实的web服务器地址，并将该web服务器地址写入http重定向响应中返回给客户浏览器，由浏览器重新进行访问。</p>
+</li>
+<li><p>优点：比较简单</p>
+<p>缺点：客户浏览器需要多次请求服务器才能完成一次访问，性能较差。</p>
+<p>http重定向服务器自身的处理能力可能成为瓶颈。</p>
+<p>使用http302响应重定向，有可能使搜索引擎判断为SEO作弊，降低搜索排名。</p>
+</li>
+</ul>
+</li>
+<li><p>DNS负载均衡</p>
+<ul>
+<li><p>DNS负载提供域名到IP解析的过程，我们实例查看百度的域名解析其实是一对多的，这时候DNS服务器也就充当了负载均衡，很多域名运营商提供的智能dns以及多线解析都是利用了DNS负载均衡的技术，开源的BIND就可提供电信联通多线解析等强大的技术。</p>
+<p>原理：在DNS服务器上配置多个域名对应IP的记录。例如一个域名<a target="_blank" rel="noopener" href="http://www.baidu.com对应一组web服务器ip地址,域名解析时经过dns服务器的算法将一个域名请求分配到合适的真实服务器上./">www.baidu.com对应一组web服务器IP地址，域名解析时经过DNS服务器的算法将一个域名请求分配到合适的真实服务器上。</a></p>
+</li>
+<li><p>优点：将负载均衡的工作交给了DNS，省却了网站管理维护负载均衡服务器的麻烦，同时许多DNS还支持基于地理位置的域名解析，将域公解析成距离用户地理最近的一个服务器地址，加快访问速度吗，改善性能。</p>
+<p>缺点：目前的DNS解析是多级解析，每一级DNS都可能化缓存记录A，当某一<br>服务器下线后，该服务器对应的DNS记录A可能仍然存在，导致分配到该服务器的用户访问失败。</p>
+<p>DNS负载均衡的控制权在域名服务商手里，网站可能无法做出过多的改善和管理。</p>
+<p>不能够按服务器的处理能力来分配负载。DNS负载均衡采用的是简单的轮询<br>算法，不能区分服务器之间的差异，不能反映服务器当前运行状态，所以其的负载均衡效果并不是太好。</p>
+<p>可能会造成额外的网络问题。为了使本DNS服务器和其他DNS服务器及时交<br>互，保证DNS数据及时更新，使地址能随机分配，一般都要将DNS的刷新时间设置的较小，但太小将会使DNS流量大增造成额外的网络问题。</p>
+</li>
+</ul>
+</li>
+<li><p>反向代理负载均衡</p>
+<ul>
+<li>squid,nginx</li>
+<li>原理：反向代理处于web服务器这边，反向代理服务器提供负载均衡的功能，同时管理一组web服务器，它根据负载均衡算法将请求的浏览器访问转发到不同的web服务器处理，处理结果经过反向服务器返回给浏览器。<br>例如：浏览器访问请求的地址是反向代理服务器的地址114.100.80.10，反向代理服务器收到请求，经过负载均衡算法后得到一个真实物理地址10.0.0.3，并将请求结果发给真实服务器，真实服务器处理完后通过反向代理服务器返回给请求用户。</li>
+<li>优点：部署简单，处于http协议层面。<br>缺点：使用了反向代理服务器后，web服务器地址不能直接暴露在外，因此web服务器不需要使用外部IP地址，而反向代理服务作为沟通桥梁就需要配置双网卡、外部内部两套IP地址。</li>
+</ul>
+</li>
+<li><p><strong>IP网络层负载均衡</strong></p>
+<ul>
+<li><p>lvs-nat</p>
+</li>
+<li><p>工作原理：</p>
+<p>在网络层和传输层（IP和端口）通过修改目标地址进行负载均衡。<br>用户访问请求到达负载均衡服务器，负载均衡服务器在操作系统内核进程获取网络数据包，根据算法得到一台真实服务器地址，然后将用户请求的目标地址修改成该真实服务器地址，数据处理完后返回给负载均衡服务器，负载均衡服务器收到响应后将自身的地址修改成原用户访问地址后再讲数据返回回去。类似于反向服务器负载均衡。</p>
+</li>
+<li><p>优缺点：</p>
+<p>优点：在响应请求时速度较反向服务器负载均衡要快。<br>缺点：无法处理更高级的请求</p>
+</li>
+</ul>
+</li>
+<li><p><strong>数据链路层负载均衡</strong></p>
+<ul>
+<li><p>LVS-DR</p>
+</li>
+<li><p>工作原理：</p>
+<p>在数据链路层修改Mac地址进行负载均衡。<br>负载均衡服务器的IP和它所管理的web服务群的虚拟IP一致；<br>负载均衡数据分发过程中不修改访问地址的IP地址，而是修改Mac地址；<br>通过这两点达到不修改数据包的原地址和目标地址就可以进行正常的访问。</p>
+</li>
+<li><p>优缺点：</p>
+<p>优点：不需要负载均衡服务器进行IP地址的转换。<br>数据响应时，不需要经过负载均衡服务器。<br>缺点：负载均衡服务器的网卡带宽要求较高。</p>
+</li>
+</ul>
+</li>
+<li><p>F5硬件负载均衡</p>
+<ul>
+<li><p>工作原理：</p>
+<p>1、F5 BIG-IP提供12种灵活的算法将所有流量均衡的分配到各个服务器，而面对<br>用户，只是一台虚拟服务器。</p>
+<p>2、健康性检查。F5 BIG-IP 可以确认应用程序能否对请求返回对应的数据。假如F5 BIG-IP后面的某一台服务器发生服务停止、死机等故障，F5会检查出来并将该服务器标识为宕机，从而不将用户的访问请求传送到该台发生故障的服务器上。这样，只要其它的服务器正常，用户的访问就不会受到影响。宕机一旦修复，F5 BIG-IP就会自动查证应用保证对客户的请求作出正确响应并恢复向该服务器传送。</p>
+<p>3、F5 BIG-IP具有动态Session的会话保持功能，笔者也是在网站中使用的F5将用户IP与Session通过F5进行的绑定，使其Session保持一致。</p>
+<p>4、F5 BIG-IP的iRules功能可以做HTTP内容过滤，根据不同的域名、URL，将访问请求传送到不同的服务器。</p>
+</li>
+<li><p>优缺点：</p>
+<p>优点：性能好</p>
+<p>缺点：成本高，配置冗余</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="四层负载和七层负载"><a href="#四层负载和七层负载" class="headerlink" title="四层负载和七层负载"></a>四层负载和七层负载</h3><p>所谓四层就是基于IP+端口的负载均衡，主要代表有lvs。</p>
+<p>七层负载也称内容交换，就是基于URL等应用层信息的负载均衡，主要代表有nginx。</p>
+<h3 id="关于代理"><a href="#关于代理" class="headerlink" title="关于代理"></a>关于代理</h3><ul>
+<li>负载均衡&amp;代理<ul>
+<li>负载均衡也叫代理，是代理的一种。</li>
+</ul>
+</li>
+<li>代理<ul>
+<li>正向代理<ul>
+<li>只用于代理内部网络对Internet的连接请求，客户机必须指定代理服务器，并将本来要直接发送到Web服务器上的http请求发送到代理服务器中，正向代理指的是客户端代理，是由用户控制并知晓的代理方式，如我不能访问fb，然后使用了某国外服务器作为跳板机，最后成功访问了就是正向代理。</li>
+</ul>
+</li>
+<li>反向代理<ul>
+<li>指以代理务器来接受Internet上的连接请求，然后将请求转发给内部网络上的服务器；并将从服务器上得到的结果返回给Internet上请求连接的客户端，此时代理服务器对外就表现为一个服务器，反向代理指的是服务端代理，在大型网站背后并不是只有一台机器提供服务，比如我访问微博，微博的某一个反向代理服务器将我解析到内部服务器的一台机器，然后这台机器给我提供微博的消息（当然实际情况比这个复杂的多），这些对于用户都是不可见的，我们只会感觉只有一台机器与我交互。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-LVS概述"><a href="#3-LVS概述" class="headerlink" title="3. LVS概述"></a>3. LVS概述</h2><p>LVS是Linux Virtual Server,Linux虚拟服务器</p>
+<ul>
+<li>是一个虚拟的服务器集群系统。本项目在1998年5月由章文嵩博士成立，是中国国内最早出现的自由软件项目之一</li>
+</ul>
+<p>LVS工作在一台 server 上提供Directory（负载均衡器）的功能，本身并不提供服务，只是把特定的请求转发给对应的real server(真正提供服务的主机），从而实现集群环境中的负载均衡。</p>
+<p>作者</p>
+<ul>
+<li><p>章文松</p>
+<p>加入淘宝网之后，一直提倡开源，通过技术革新创造低碳网络。由于他有创业经历，对技术人才有清晰的认识，更觉得需要做的事情太多，时间不够用。</p>
+<p>他这么看待梦想：男人身上的品质就是有梦想。如果选择一种方式死去，我希望是在工作中死去。</p>
+<p>2016年5月27日，任滴滴出行高级副总裁、负责CTO线基础平台部兼工程技术委员会主席。[2]</p>
+<p>加入滴滴之前，章文意曾在阿里巴巴任职近七年，历任淘宝网资深技术总监、淘宝技术委员会主席、阿里副总裁、阿里开源委员会主席、阿里云CTO等。</p>
+</li>
+</ul>
+<p>框架</p>
+<ul>
+<li>LB-SERVER负载均衡器</li>
+<li>realy-server真实服务器</li>
+</ul>
+<h2 id="4-LVS工作模式"><a href="#4-LVS工作模式" class="headerlink" title="4. LVS工作模式"></a>4. LVS工作模式</h2><h3 id="NAT转发模式"><a href="#NAT转发模式" class="headerlink" title="NAT转发模式"></a>NAT转发模式</h3><ul>
+<li><p>NAT</p>
+<p>Network Address Translation，网络地址转换</p>
+</li>
+<li><p>工作原理：</p>
+<p>①.客户端将请求发往前端的负载均衡器，请求报文源地址是CIP（客户端IP,后面统称为CIP)，目标地址为VIP（负载均衡器前端地址，后面统称为VIP)。<br>②.负载均衡器收到报文后，发现请求的是在规则里面存在的地址，那么它将客户端请求报文的目标IP地址改为了后端服务器的RIP地址并将报文根据算法发送出去。<br>③.报文送到Real Server后，由于报文的目标地址是自己，所以会响应该请求，并将响应报文返还给LVS。<br>④.然后lVs将此报文的源地址修改为本机并发送给客户端。</p>
+<p>注意在NAT模式中，Real Server的网关必须指向LVS，否则报文无法送达客户端</p>
+</li>
+<li><p>优点：</p>
+<ul>
+<li>网络隔离更安全</li>
+<li>节约IP地址</li>
+</ul>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>director很可能成为系统性能瓶颈，所有的请求director都需要处理应答</li>
+<li>&lt;20</li>
+</ul>
+</li>
+</ul>
+<h3 id="DR直接路由模式"><a href="#DR直接路由模式" class="headerlink" title="DR直接路由模式"></a><strong>DR直接路由模式</strong></h3><ul>
+<li><p>工作原理</p>
+<ul>
+<li><p>①.客户端将请求发往前端的负载均衡器，请求报文源地址是CIP，目标地址为VIP。</p>
+<p>②.负载均衡器收到报文后，发现请求的是在规则里面存在的地址，那么它将客户端请求报文的源MAC地址改为自己DIP的MAC地址，目标MAC改为了RIP的MAC地址，并将此包发送给RS。</p>
+<p>③.RS发现请求报文中的目的MAC是自己，就会将次报文接收下来，处理完请求报文后，将响应报文通过lo接口送给eth0网卡直接发送给客户端。</p>
+</li>
+</ul>
+</li>
+<li><p>特点</p>
+<p>1.集群节点和director必须在一个物理网络内</p>
+<p>2.RIP可以使用公网地址或私有地址</p>
+<p>3.director仅处理入站请求，director服务器的压力比较小</p>
+<p>4.集群节点网关不指向director，故出站不经过director</p>
+<p>5.不支持端口映射</p>
+<p>6.大多数操作系统可以作为realserver，要支持隔离arp广播</p>
+</li>
+<li><p>ARP问题</p>
+<p>通常，DR模式需要在Real-server上配置VIP，配置的方式为：&#x2F;sbin&#x2F;ifconfig lo:0 inet VIP netmask 255.255.255.255</p>
+<p>i)原因在于，当LVS把client的包转发给Real-server时，因为包的目的IP地址是VIP，那么如果Real-server收到这个包后，发现包的目的IP不是自己的系统IP，那么就会认为这个包不是发给自己的，就会丢弃这个包，所以需要将这个IP地址绑到网卡上；当发送应答包给client时，Real-server就会把包的源和目的地址调换，直接回复给client。</p>
+<p>ii)关于ARP广播：<br>*上面绑定VIP的掩码是”255.255.255.255”，说明广播地址是其本身，那么他就不会将ARP发送到实际的自己该属于的广播域了，这样防止与LVS上VIP冲突，而导致IP冲突。<br>*另外在Linux的Real-server上，需要设置ARP的sysctl选项：</p>
+</li>
+</ul>
+<h3 id="TUN-IP隧道模式"><a href="#TUN-IP隧道模式" class="headerlink" title="TUN-IP隧道模式"></a>TUN-IP隧道模式</h3><ul>
+<li><p>工作原理</p>
+<p>①.客户端将请求发往前端的负载均衡器，请求报文源地址是CIP，目标地址为VIP。</p>
+<p>②.负载均衡器收到报文后，发现请求的是在规则里面存在的地址，那么它将在客户端请求报文的首部再封装一层IP报文，将源地址改为DIP，目标地址改为RIP，并将此包发送给RS。</p>
+<p>③.RS收到请求报文后，会首先拆开第一层封装，然后发现里面还有一层IP首部的目标地址是自己lo接口上的VIP，所以会处理次请求报文，并将响应报文通过Io接口送给eth0网卡直接发送给客户端。</p>
+</li>
+<li><p>特点</p>
+<ul>
+<li><p>优点：</p>
+<p>负载均衡器只负责将请求包分发给后端节点服务器，而RS将应答包直接发给用户。所以，减少了负载均衡器的大量数据流动，负载均衡器不再是系统的瓶颈，就能处理很巨大的请求量，这种方式，一台负载均衡器能够为很多RS进行分发。而且跑在公网上就能进行不同地域的分发。</p>
+</li>
+<li><p>缺点：</p>
+<p>隧道模式的RS节点需要合法IP，这种方式需要所有的服务器支持”IP Tunneling”(IP Encapsulation)协议，服务器可能只局限在部分Linux系统上。</p>
+</li>
+<li><p>&lt;100</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="FULL-NAT"><a href="#FULL-NAT" class="headerlink" title="FULL-NAT"></a>FULL-NAT</h3><ul>
+<li>了解</li>
+<li>Full-NAT由此而生，解决的是LVS和RS跨VLAN的问题，而跨VLAN问题解决后，LVS和RS不再存在VLAN上的从属关系，可以做到多个LVS对应多个RS，解决水平扩容的问题。</li>
+</ul>
+<h3 id="模式对比"><a href="#模式对比" class="headerlink" title="模式对比"></a>模式对比</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>VS&#x2F;NAT</th>
+<th>VS&#x2F;TUN</th>
+<th>VS&#x2F;DR</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>服务器操作系统</td>
+<td>任意</td>
+<td>支持隧道</td>
+<td>多数(支持Non-aгр)</td>
+</tr>
+<tr>
+<td>服务器网络</td>
+<td>私有网络</td>
+<td>局域网&#x2F;广域网</td>
+<td>局域网</td>
+</tr>
+<tr>
+<td>服务器数目（100M网络）</td>
+<td>10~20</td>
+<td>100</td>
+<td>大于100</td>
+</tr>
+<tr>
+<td>服务器网关</td>
+<td>负载均衡</td>
+<td>自己的路由</td>
+<td>自己的路由</td>
+</tr>
+<tr>
+<td>效率</td>
+<td>一般</td>
+<td>高</td>
+<td>最高</td>
+</tr>
+</tbody></table>
+<h3 id="轮询算法"><a href="#轮询算法" class="headerlink" title="轮询算法"></a>轮询算法</h3><ul>
+<li>1.Fixed Scheduling Method 静态调服方法<ul>
+<li><strong>(1).RR  轮询</strong><ul>
+<li>Round-Robin:调度器通过”轮叫”调度算法将外部请求按顺序轮流分配到集群中的真实服务器上，它均等地对待每一台服务器，而不管服务器上实际的连接数和系统负载。</li>
+</ul>
+</li>
+<li><strong>(2).WRR  加权轮询</strong><ul>
+<li>调度器通过”加权轮叫”调度算法，根据真实服务器的不同处理能力，来调度访问请求。这样可以保证处理能力强的服务器，处理更多的访问流量。调度器可以自动问询真实服务器的负载情况，并动态地调整其权值。</li>
+</ul>
+</li>
+<li>(3).DH  目标地址hash<ul>
+<li>“目标地址散列”调度算法根据请求的目标IP地址，作为散列键（Hash Key）从静态分配的散列表找出对应的服务器，若该服务器是可用的且未超载，将请求发送到该服务器，否则返回空。</li>
+</ul>
+</li>
+<li>(4).SH  源地址hash<ul>
+<li>“源地址散列“调度算法根据请求的源IP地址，作为散列键（Hash Key）从静态分配的散列表找出对应的服务器，若该服务器是可用的且未超载，将请求发送到该服务器，否则返回空。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.Dynamic Scheduling Method 动态调服方法<ul>
+<li><strong>(1).LC  最少连接</strong><ul>
+<li>调度器通过”最少连接“调度算法动态地将网络请求调度到已建立的链接数最少的服务器上。如果集群系统的真实服务器具有相近的系统性能，采用”最小连接”调度算法可以较好地均衡负载。</li>
+</ul>
+</li>
+<li><strong>(2).WLC  加权最少连接</strong><ul>
+<li>在集群系统中的服务器性能差异较大的情况下，调度器采用”加权最少链接”调度算法优化负载均衡性能，具有较高权值的服务器将承受较大比例的活动连接负载。调度器可以自动问询真实服务器的负载情况，并动态地调整其权值。</li>
+</ul>
+</li>
+<li>(3).LBLC  基于本地的最少连接<ul>
+<li>”基于局部性的最少链接”调度算法是针对目标IP地址的负载均衡，目前主要用于Cache集群系统。该算法根据请求的目标IP地址找出该目标IP地址最近使用的服务器，若该服务器是可用的且没有超载，将请求发送到该服务器；若服务器不存在，或者该服务器超载且有服务器处于一半的工作负载，则用”最少链接”的原则选出一个可用的服务器，将请求发送到该服务器。</li>
+</ul>
+</li>
+<li>(4).LBLCR  带复制的基于本地的最少连接<ul>
+<li>”带复制的基于局部性最少链接”调度算法也是针对目标IP地址的负载均衡，目前主要用于Cache集群系统。它与LBLC算法的不同之处是它要维护从一个目标IP地址到一组服务器的映射，而LBLC算法维护从一个目标IP地址到一台服务器的映射。该算法根据请求的目标IP地址找出该目标IP地址对应的服务器组，按”最小连接”原则从服务器组中选出一台服务器，若服务器没有超载，将请求发送到该服务器，若服务器超载；则按”最小连接”原则从这个集群中选出一台服务器，将该服务器加入到服务器组中，将请求发送到该服务器。同时，当该服务器组有一段时间没有被修改，将最忙的服务器从服务器组中删除，以降低复制的程度。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-LVS-NAT实战案例"><a href="#5-LVS-NAT实战案例" class="headerlink" title="5.LVS-NAT实战案例"></a>5.LVS-NAT实战案例</h2><ul>
+<li>环境<ul>
+<li>地址分配<ul>
+<li>client： VMNET0  10.18.41.210</li>
+<li>LVS：VMNET0  10.18.41.55  VMNET2 192.168.142.136</li>
+<li>web1：VMNET2  192.168.142.137  提前安装httpd</li>
+<li>web2：VMNET2  192.168.142.138</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>​	注意<ul>
+<li>关闭防火墙</li>
+<li>关闭SElinux</li>
+</ul>
+</li>
+</ul>
+<p>步骤</p>
+<ul>
+<li>web1配置网站和路由</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">注意网络连通性问题</span><br><span class="line">yum install -y httpd</span><br><span class="line">systemctl start httpd</span><br><span class="line">systemctl enable httpd</span><br><span class="line">echo web1 &gt; /var/www/html/index.html</span><br><span class="line">route add -net 10.18.41.0/24 gw 192.168.142.136  #配置真实服务器的网络出口</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-net 外部网络</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gw 网关，网络的唯一出口</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>web2配置网站和路由</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">注意网络连通性问题</span><br><span class="line">yum install -y httpd</span><br><span class="line">systemctl start httpd</span><br><span class="line">systemctl enable httpd</span><br><span class="line">echo web2 &gt; /var/www/html/index.html</span><br><span class="line">route add -net 10.18.41.0/24 gw 192.168.142.136  #配置真实服务器的网络出口</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-net 外部网络</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gw 网关，网络的唯一出口</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>LVS-NAT配置路由功能和负载策略</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt; /proc/sys/net/ipv4/ip_forward  #启动路由功能</span><br><span class="line">yum install -y ipvsadm  #正在安装LVS</span><br><span class="line">ipvsadm -A -t 10.18.41.55:80 -s rr</span><br><span class="line">ipvsadm -a -t 10.18.41.55:80 -r 192.168.142.137:80 -m</span><br><span class="line">ipvsadm -a -t 10.18.41.55:80 -r 192.168.142.138:80 -m</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-A 对外提供的地址</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-t 指定tcp协议</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-s rr 指定策略为轮询</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-a 对内提供的地址</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-r 真实服务器</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-m 指定为NAT模式</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>client测试</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y elinks</span><br><span class="line">elinks --dump http://10.18.41.55</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="6-LVS-DR实战案例"><a href="#6-LVS-DR实战案例" class="headerlink" title="6.LVS-DR实战案例"></a>6.LVS-DR实战案例</h2><ul>
+<li><p>DR</p>
+<ul>
+<li>direct routing</li>
+<li>直连路由</li>
+</ul>
+</li>
+<li><p>环境</p>
+<ul>
+<li>192.168.0.106  client  windown7</li>
+<li>192.168.0.124  dr1  负载均衡器<ul>
+<li>虚拟IP地址：192.168.0.123</li>
+</ul>
+</li>
+<li>192.168.0.120  rs1  web1<ul>
+<li>虚拟IP地址：192.168.0.123</li>
+</ul>
+</li>
+<li>192.168.0.121  rs2  web2<ul>
+<li>虚拟IP地址：192.168.0.123</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>步骤</p>
+<ul>
+<li><p>LVS服务器</p>
+<ul>
+<li><p>1.LVS准备VIP和路由</p>
+<ul>
+<li><p>添加VIP</p>
+<ul>
+<li>ifconfig ens32:0 192.168.0.123 broadcast 192.168.0.255 netmask 255.255.255.0 up</li>
+<li>route add -host 192.168.0.123 dev ens32:0</li>
+<li>VIP与RIP要配到同一个网卡上</li>
+</ul>
+</li>
+<li><p>设置路由转发</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">服务器不是一台路由器，那么它不会发送重定向，所以可以关闭该功能</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">vi/etc/sysctl.conf</span></span><br><span class="line">net.ipv4.ip_forward = 1  #开启路由功能</span><br><span class="line">net.ipv4.conf.all.send_redirects = 0  #禁止转发重定向报文</span><br><span class="line">net.ipv4.conf.ens32.send_redirects = 0  #禁止ens32转发重定向报</span><br><span class="line">net.ipv4.conf.default.send_redirects = 0  #禁止转发默认重定向报文</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.LVS设置负载均衡条目&#x2F;规则</p>
+<ul>
+<li>设置IPVSADM</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">yum install ipvsadm -y</span></span><br><span class="line">ipvsadm -C  # -C Clear the virtual server table.</span><br><span class="line">ipvsadm -A -t 192.168.0.123:80 -s rr 0  #添加VIP规则</span><br><span class="line">ipvsadm -a -t 192.168.0.123:80 -r 192.168.0.120:80 -g</span><br><span class="line">ipvsadm -a -t 192.168.0.123:80 -r 192.168.0.121:80 -g</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数说明<ul>
+<li>-A 添加virtualserver</li>
+<li>-t 指定使用tcp协议</li>
+<li>-s 指定调度策略&#x2F;负载算法为rr</li>
+<li>-a 添加realserver</li>
+<li>-r  指定realserver是谁</li>
+<li>-g LVS类型DR</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.LVS让配置永久生效：</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ipvsadm-save &gt; /etc/sysconfig/ipvsadm</span><br><span class="line">systemctl enable ipvsadm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>WEB集群</p>
+<ul>
+<li><p>4.两个web上部署web服务</p>
+<ul>
+<li>安装web服务</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">yum install nginx -y</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改主页内容</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/share/nginx/html/index.html</span><br><span class="line">或</span><br><span class="line">echo web &gt; /var/www/html/index.html</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动服务：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart httpd</span><br><span class="line">systemctl enable httpd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>5.给两个web服务器的lo网卡设置子网掩码为32位vip</p>
+<ul>
+<li>rs1：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig lo:0 192.168.0.123/32</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>rs2：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig lo:0 192.168.0.123/32</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>6.给两个web服务器设置内核参数</p>
+<ul>
+<li>忽略arp响应，不允许收</li>
+<li>echo 1 &gt; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;conf&#x2F;all&#x2F;arp_ignore</li>
+<li>为了让vip发包出去，但允许发</li>
+<li>echo 2 &gt; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;conf&#x2F;all&#x2F;arp_announce</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>客户端测试</p>
+<ul>
+<li><p>7.客户端测试</p>
+<ul>
+<li>不同的客户端测试</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elinks --dump http://192.168.127.123/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ipvsadm状态测试</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ipvsadm -Lnc  #查看访问连接</span><br><span class="line">ipvsadm -Ln  #检测本机的规则</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>8.命令解释大全（略）</p>
+<ul>
+<li>1.管理虚拟服务</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">添加一个虚拟服务192.168.1.100:80，使用轮询算法</span></span><br><span class="line">ipvsadm -A -t 192.168.1.100:80 -s rr</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">修改虚拟服务的算法为加权轮询</span></span><br><span class="line">ipvsadm -E -t 192.168.1.100:80 -s wrr</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">删除虚拟服务</span></span><br><span class="line">ipvsadm -D -t 192.168.1.100:80</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2.管理真实服务</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">加一个真实服务器192.168.1.123，使用DR模式，权重2</span></span><br><span class="line">ipvsadm -a -t 192.168.1.100:80 -r 192.168.1.123 -g -w 2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">增加真实服务器的权重</span></span><br><span class="line">ipvsadm -a -t 192.168.1.100:80 -r 192.168.1.123 -g -w 5</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">修改真实服务器的权重</span></span><br><span class="line">ipvsadm -e -t 192.168.1.100:80 -r 192.168.1.123 -g -w 2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">删除真实服务器</span></span><br><span class="line">ipvsadm -d -t 192.168.1.100:80 -r 192.168.1.123</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3.查看统计</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看当前配置的虚拟服务和各个RS的权重</span></span><br><span class="line">ipvsadm -Ln</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看当前ipvs模块中记录的连接（可用于观察转发情况）</span></span><br><span class="line">ipvsadm -Lnc</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看ipvs模块的转发情况统计</span></span><br><span class="line">ipvsadm -Ln --stats --rate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>9.脚本配置方法</p>
+<ul>
+<li>VS调度器配置</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Author:shuaiguoxia.com</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Date:2017-10-23</span></span><br><span class="line">vip=&#x27;172.18.0.100&#x27;</span><br><span class="line">iface=&#x27;eth0:1&#x27;</span><br><span class="line">mask=&#x27;255.255.255.255&#x27;</span><br><span class="line">port=&#x27;80&#x27;</span><br><span class="line">rs1=&#x27;10.10.0.72&#x27;</span><br><span class="line">rs2=&#x27;10.10.0.73&#x27;</span><br><span class="line">scheduler=&#x27;wrr&#x27;</span><br><span class="line">type=&#x27;-g&#x27;</span><br><span class="line">case $1 in</span><br><span class="line">start)</span><br><span class="line">  ifconfig $iface $vip netmask $mask broadcast $vip up</span><br><span class="line">  iptables -F</span><br><span class="line">  ipvsadm -A -t $&#123;vip&#125;:$&#123;port&#125; -s $scheduler</span><br><span class="line">  ipvsadm -a -t $&#123;vip&#125;:$&#123;port&#125; -r $&#123;rs1&#125; $type -w 1</span><br><span class="line">  ipvsadm -a -t $&#123;vip&#125;:$&#123;port&#125; -r $&#123;rs2&#125; $type -w 1</span><br><span class="line">  echo &quot;The VS Server is Ready!&quot;</span><br><span class="line">  ;;</span><br><span class="line">stop)</span><br><span class="line">  ipvsadm -C</span><br><span class="line">  ifconfig $iface down</span><br><span class="line">  echo &quot;The VS Server is Canceled!&quot;</span><br><span class="line">  ;;</span><br><span class="line">*）</span><br><span class="line">  echo &quot;Usage:$(basename $0) start|stop&quot;</span><br><span class="line">  exit 1</span><br><span class="line">  ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+</li>
+<li><pre><code class="shell">./dr-vs.sh start  #dr-vs.sh为脚本名字
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io">壹拾陆</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io/posts/9842572a.html">https://mo-li001.github.io/posts/9842572a.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mo-li001.github.io" target="_blank">壹拾陆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/14949ed3.html"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Kylin系统安装</div></div></a></div><div class="next-post pull-right"><a href="/posts/a1a0ca6d.html"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Linux定时任务</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/abc41134.html" title="没写好"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">没写好</div></div></a></div><div><a href="/posts/9f353bc9.html" title="Devops"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Devops</div></div></a></div><div><a href="/posts/f5f9fa9b.html" title="Docker"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Docker</div></div></a></div><div><a href="/posts/34d20e28.html" title="ELK"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK</div></div></a></div><div><a href="/posts/8005.html" title="ELK快速部署"><img class="cover" src="https://tuchuangs.com/imgs/2022/09/18/074f3836d4f471b8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK快速部署</div></div></a></div><div><a href="/posts/9bdc030a.html" title="HAproxy"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">HAproxy</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-text">负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%9B%86%E7%BE%A4%E5%8A%9F%E8%83%BD%E5%88%86%E7%B1%BB"><span class="toc-text">1.集群功能分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-LB"><span class="toc-text">1.1 LB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E4%BA%A7%E5%93%81%E5%88%86%E7%B1%BB"><span class="toc-text">1.1.1 负载均衡产品分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-HA"><span class="toc-text">1.2 HA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-HPC"><span class="toc-text">1.3 HPC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-text">2.负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%9A%84%E4%B8%BB%E8%A6%81%E6%96%B9%E5%BC%8F"><span class="toc-text">负载均衡的主要方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E5%B1%82%E8%B4%9F%E8%BD%BD%E5%92%8C%E4%B8%83%E5%B1%82%E8%B4%9F%E8%BD%BD"><span class="toc-text">四层负载和七层负载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E4%BB%A3%E7%90%86"><span class="toc-text">关于代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-LVS%E6%A6%82%E8%BF%B0"><span class="toc-text">3. LVS概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-LVS%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="toc-text">4. LVS工作模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NAT%E8%BD%AC%E5%8F%91%E6%A8%A1%E5%BC%8F"><span class="toc-text">NAT转发模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DR%E7%9B%B4%E6%8E%A5%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F"><span class="toc-text">DR直接路由模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TUN-IP%E9%9A%A7%E9%81%93%E6%A8%A1%E5%BC%8F"><span class="toc-text">TUN-IP隧道模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FULL-NAT"><span class="toc-text">FULL-NAT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E5%AF%B9%E6%AF%94"><span class="toc-text">模式对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AE%E8%AF%A2%E7%AE%97%E6%B3%95"><span class="toc-text">轮询算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-LVS-NAT%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B"><span class="toc-text">5.LVS-NAT实战案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-LVS-DR%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B"><span class="toc-text">6.LVS-DR实战案例</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/99081826.html" title="很强，3万字把华为HCIA知识点全部总结了！">很强，3万字把华为HCIA知识点全部总结了！</a><time datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b0318225.html" title="浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f962716d.html" title="使用system-config-kickstart生成kickstart文件">使用system-config-kickstart生成kickstart文件</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/12ac960a.html" title="Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件">Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cefcf133.html" title="zabbix5.0 percona_mysql_template模板文件">zabbix5.0 percona_mysql_template模板文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

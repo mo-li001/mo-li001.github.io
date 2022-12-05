@@ -1,0 +1,920 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>k8s devops | 壹拾陆</title><meta name="keywords" content="无"><meta name="author" content="壹拾陆"><meta name="copyright" content="壹拾陆"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="k8s devops本文转载自  lee_yanyi  查看原文  2022-07-23  100070    基于K8S的DevOps应用方案&#x2F;基于K8S的DevOps应用方案&#x2F; k8s devops&#x2F;k8s devops&#x2F; devops&#x2F;devops&#x2F; 运维&#x2F;运维&#x2F; java&#x2F;java&#x2F; Dev">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k8s devops">
+<meta property="og:url" content="https://mo-li001.github.io/posts/9b5dc588.html">
+<meta property="og:site_name" content="壹拾陆">
+<meta property="og:description" content="k8s devops本文转载自  lee_yanyi  查看原文  2022-07-23  100070    基于K8S的DevOps应用方案&#x2F;基于K8S的DevOps应用方案&#x2F; k8s devops&#x2F;k8s devops&#x2F; devops&#x2F;devops&#x2F; 运维&#x2F;运维&#x2F; java&#x2F;java&#x2F; Dev">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-05T05:17:54.735Z">
+<meta property="article:modified_time" content="2022-11-17T09:42:18.640Z">
+<meta property="article:author" content="壹拾陆">
+<meta property="article:tag" content="无">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mo-li001.github.io/posts/9b5dc588"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'k8s devops',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-17 17:42:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">k8s devops</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-05T05:17:54.735Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-17T09:42:18.640Z" title="更新于 2022-11-17 17:42:18">2022-11-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/default/">default</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="k8s devops"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="k8s-devops"><a href="#k8s-devops" class="headerlink" title="k8s devops"></a><a target="_blank" rel="noopener" href="https://www.itdaan.com/blog/2022/07/23/952cc84c2a42766c4296cbb6e9bed5d1.html">k8s devops</a></h3><p>本文转载自  lee_yanyi  <a target="_blank" rel="noopener" href="https://www.itdaan.com/go/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xlZV95YW55aS9hcnRpY2xlL2RldGFpbHMvMTI1OTExOTM5">查看原文</a>  2022-07-23  100070    <a target="_blank" rel="noopener" href="https://www.itdaan.com/tag/%E5%9F%BA%E4%BA%8EK8S%E7%9A%84DevOps%E5%BA%94%E7%94%A8%E6%96%B9%E6%A1%88.html">基于K8S的DevOps应用方案</a>&#x2F;<a target="_blank" rel="noopener" href="https://www.itdaan.com/keywords/%E5%9F%BA%E4%BA%8EK8S%E7%9A%84DevOps%E5%BA%94%E7%94%A8%E6%96%B9%E6%A1%88.html">基于K8S的DevOps应用方案</a>&#x2F; <a target="_blank" rel="noopener" href="https://www.itdaan.com/tag/k8s%20devops.html">k8s devops</a>&#x2F;<a target="_blank" rel="noopener" href="https://www.itdaan.com/keywords/k8s%20devops.html">k8s devops</a>&#x2F; <a target="_blank" rel="noopener" href="https://www.itdaan.com/tag/devops.html">devops</a>&#x2F;<a target="_blank" rel="noopener" href="https://www.itdaan.com/keywords/devops.html">devops</a>&#x2F; <a target="_blank" rel="noopener" href="https://www.itdaan.com/tag/%E8%BF%90%E7%BB%B4.html">运维</a>&#x2F;<a target="_blank" rel="noopener" href="https://www.itdaan.com/keywords/%E8%BF%90%E7%BB%B4.html">运维</a>&#x2F; <a target="_blank" rel="noopener" href="https://www.itdaan.com/tag/java.html">java</a>&#x2F;<a target="_blank" rel="noopener" href="https://www.itdaan.com/keywords/java.html">java</a>&#x2F; <a target="_blank" rel="noopener" href="https://www.itdaan.com/tag/DevOps.html">DevOps</a><a target="_blank" rel="noopener" href="https://www.itdaan.com/keywords/DevOps.html">DevOps</a>          <img src="/assets/1666138582-d506c157670f5e97f4dcd558c6ce4dbc.png" alt="1" title="很差 -2分"> <img src="/assets/1666138582-d506c157670f5e97f4dcd558c6ce4dbc.png" alt="2" title="较差 -1分"> <img src="/assets/1666138582-d506c157670f5e97f4dcd558c6ce4dbc.png" alt="3" title="一般 0分"> <img src="/assets/1666138582-97603db4daf7e88202295155dd130872.png" alt="4" title="还行 1分"> <img src="/assets/1666138582-97603db4daf7e88202295155dd130872.png" alt="5" title="很好 2分">     </p>
+<hr>
+<p>本文主要分享【k8s devops】，技术文章【基于K8S的DevOps应用方案】为【lee_yanyi】投稿，如果你遇到DevOps相关问题，本文相关知识或能到你。</p>
+<h2 id="k8s-devops-1"><a href="#k8s-devops-1" class="headerlink" title="k8s devops"></a><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1n541197Bs?p=3&spm_id_from=pageDriver&vd_source=629395ac7befa1625191c3f496068941">k8s devops</a></h2><p>一、DevOps介绍</p>
+<p>软件开发最开始是由两个团队组成：</p>
+<p>开发计划由开发团队从头开始设计和整体系统的构建。需要系统不停的迭代更新。运维团队将开发团队的Code进行测试后部署上线。希望系统稳定安全运行。</p>
+<p>这看似两个目标不同的团队需要协同完成一个软件的开发。</p>
+<p>在开发团队指定好计划并完成coding后，需要提供到运维团队。</p>
+<p>运维团队向开发团队反馈需要修复的BUG以及一些需要返工的任务。</p>
+<p>这时开发团队需要经常等待运维团队的反馈。这无疑延长了事件并推迟了整个软件开发的周期。</p>
+<p>会有一种方式，在开发团队等待的时候，让开发团队转移到下一个项目中。等待运维团队为之前的代码提供反馈。</p>
+<p>可是这样就意味着一个完整的项目需要一个更长的周期才可以开发出最终代码。</p>
+<hr>
+<p>基于现在的互联网现状，更推崇敏捷式开发，这样就导致项目的迭代速度更快，但是由于开发团队与运维团队的沟通问题，会导致新版本上线的时间成本很高。这又违背的敏捷式开发的最初的目的。</p>
+<p>那么如果让开发团队和运维团队整合到成一个团队，协同应对一套软件呢？这就被称为DevOps。</p>
+<p>DevOps，字面意思是Development &amp;Operations的缩写，也就是开发&amp;运维。</p>
+<p>虽然字面意思只涉及到了开发团队和运维团队，其实QA测试团队也是参与其中的。</p>
+<p>网上可以查看到DevOps的符号类似于一个无穷大的符号</p>
+<p>DevOps</p>
+<p><img src="/assets/1666138582-b2f2063507800be8cf60266001f4a437.png"></p>
+<p>这表明DevOps是一个不断提高效率并且持续不断工作的过程</p>
+<p>DevOps的方式可以让公司能够更快地应对更新和市场发展变化，开发可以快速交付，部署也更加稳定。</p>
+<p>核心就在于简化Dev和Ops团队之间的流程，使整体软件开发过程更快速。</p>
+<p>整体的软件开发流程包括：</p>
+<p>PLAN：开发团队根据客户的目标制定开发计划CODE：根据PLAN开始编码过程，需要将不同版本的代码存储在一个库中。BUILD：编码完成后，需要将代码构建并且运行。TEST：成功构建项目后，需要测试代码是否存在BUG或错误。DEPLOY：代码经过手动测试和自动化测试后，认定代码已经准备好部署并且交给运维团队。OPERATE：运维团队将代码部署到生产环境中。MONITOR：项目部署上线后，需要持续的监控产品。INTEGRATE：然后将监控阶段收到的反馈发送回PLAN阶段，整体反复的流程就是DevOps的核心，即持续集成、持续部署。</p>
+<p>为了保证整体流程可以高效的完成，各个阶段都有比较常见的工具，如下图：</p>
+<p>软件开发过程&amp;涉及工具</p>
+<p><img src="/assets/1666138582-f51382b20f7a76131e7fb9a9e8051359.png"></p>
+<p>最终可以给DevOps下一个定义：DevOps 强调的是高效组织团队之间如何通过自动化的工具协作和沟通来完成软件的生命周期管理，从而更快、更频繁地交付更稳定的软件。</p>
+<p>自动化的工具协作和沟通来完成软件的生命周期管理</p>
+<p>二、Code阶段工具</p>
+<p>在code阶段，我们需要将不同版本的代码存储到一个仓库中，常见的版本控制工具就是SVN或者Git，这里我们采用Git作为版本控制工具，GitLab作为远程仓库。</p>
+<p>2.1 Git安装</p>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/%EF%BC%88%E5%82%BB%E7%93%9C%E5%BC%8F%E5%AE%89%E8%A3%85%EF%BC%89">https://git-scm.com/（傻瓜式安装）</a></p>
+<p>2.2 GitLab安装</p>
+<p>单独准备服务器，采用Docker安装</p>
+<p>查看GitLab镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search gitlab</span><br></pre></td></tr></table></figure>
+
+<p>拉取GitLab镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull gitlab/gitlab-ce</span><br></pre></td></tr></table></figure>
+
+<p>准备docker-compose.yml文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3.1&#x27;</span><br><span class="line">services:</span><br><span class="line">  gitlab:</span><br><span class="line">    image: &#x27;gitlab/gitlab-ce:latest&#x27;</span><br><span class="line">    container_name: gitlab</span><br><span class="line">    restart: always</span><br><span class="line">    environment:</span><br><span class="line">      GITLAB_OMNIBUS_CONFIG: |</span><br><span class="line">        external_url &#x27;http://192.168.11.11:8929&#x27;</span><br><span class="line">        gitlab_rails[&#x27;gitlab_shell_ssh_port&#x27;] = 2224</span><br><span class="line">    ports:</span><br><span class="line">      - &#x27;8929:8929&#x27;</span><br><span class="line">      - &#x27;2224:2224&#x27;</span><br><span class="line">    volumes:</span><br><span class="line">      - &#x27;./config:/etc/gitlab&#x27;</span><br><span class="line">      - &#x27;./logs:/var/log/gitlab&#x27;</span><br><span class="line">      - &#x27;./data:/var/opt/gitlab&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>启动容器（需要稍等一小会……）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>访问GitLab首页</p>
+<p>首页</p>
+<p><img src="/assets/1666138582-b38d97446c93363664999a1e9b2183ed.png"></p>
+<p>查看root用户初始密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it gitlab cat /etc/gitlab/initial_root_password</span><br></pre></td></tr></table></figure>
+
+<p>初始密码</p>
+<p><img src="/assets/1666138582-3b012e97db1901efbfe1163226288585.png"></p>
+<p>登录root用户</p>
+<p>登录成功后跳转页面</p>
+<p><img src="/assets/1666138582-d8e1657a24eff02f0ecf045974a28c72.png"></p>
+<p>第一次登录后需要修改密码</p>
+<p>修改密码</p>
+<p><img src="/assets/1666138582-a9973dcc26012020e9a01cd7bce43e1f.png"></p>
+<p>搞定后，即可像Gitee、GitHub一样使用。</p>
+<p>三、Build阶段工具</p>
+<p>构建Java项目的工具一般有两种选择，一个是Maven，一个是Gradle。</p>
+<p>这里我们选择Maven作为项目的编译工具。</p>
+<p>具体安装Maven流程不做阐述，但是需要确保配置好Maven仓库私服以及JDK编译版本。</p>
+<p>四、Operate阶段工具</p>
+<p>部署过程，会采用Docker进行部署，暂时只安装Docker即可，后续还需安装Kubenetes</p>
+<p>4.1 Docker安装</p>
+<p>准备测试环境&amp;生产环境下载Docker依赖组件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
+
+<p>设置下载Docker的镜像源为阿里云</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<p>安装Docker服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce</span><br></pre></td></tr></table></figure>
+
+<p>安装成功后，启动Docker并设置开机自启</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动Docker服务</span></span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置开机自动启动</span></span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+
+<p>测试安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+
+<p>效果</p>
+<p><img src="/assets/1666138582-35889b6033eda425c9db263c71d7bc3a.png"></p>
+<p>4.2 Docker-Compose安装<br><code>https://github.com/docker/compose/releases/download/v2.2.1/docker-compose-linux-x86_64</code></p>
+<p>下载Docker&#x2F;Compose：GitHub - docker&#x2F;compose: Define and run multi-container applications with Docker将下载好的docker-compose-Linux-x86_64文件移动到Linux操作系统：……设置docker-compose-Linux-x86_64文件权限，并移动到$PATH目录中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置文件权限</span></span><br><span class="line">chmod a+x docker-compose-Linux-x86_64</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">移动到/usr/bin目录下，并重命名为docker-compose</span></span><br><span class="line">mv docker-compose-Linux-x86_64 /usr/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<p>测试安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose version</span><br></pre></td></tr></table></figure>
+
+<p>效果</p>
+<p><img src="/assets/1666138582-3cf2f4810aaf0dc68d5393a1f5e37b72.png"></p>
+<p>五、Integrate工具</p>
+<p>持续集成、持续部署的工具很多，其中Jenkins是一个开源的持续集成平台。</p>
+<p>Jenkins涉及到将编写完毕的代码发布到测试环境和生产环境的任务，并且还涉及到了构建项目等任务。</p>
+<p>Jenkins需要大量的插件保证工作，安装成本较高，下面会基于Docker搭建Jenkins。</p>
+<p>5.1 Jenkins介绍</p>
+<p>Jenkins是一个开源软件项目，是基于Java开发的一种持续集成工具</p>
+<p>Jenkins应用广泛，大多数互联网公司都采用Jenkins配合GitLab、Docker、K8s作为实现DevOps的核心工具。</p>
+<p>Jenkins最强大的就在于插件，Jenkins官方提供了大量的插件库，来自动化CI&#x2F;CD过程中的各种琐碎功能。</p>
+<p><img src="/assets/1666138582-6c5ae1dbddf3fa89baf8b7fe59171249.png"></p>
+<p><img src="/assets/1666138582-48977b25a91e02825e069b2cc28e6f4d.png"></p>
+<p>Jenkins最主要的工作就是将GitLab上可以构建的工程代码拉取并且进行构建，再根据流程可以选择发布到测试环境或是生产环境。</p>
+<p>一般是GitLab上的代码经过大量的测试后，确定发行版本，再发布到生产环境。</p>
+<p>CI&#x2F;CD可以理解为：</p>
+<p>CI过程即是通过Jenkins将代码拉取、构建、制作镜像交给测试人员测试。 持续集成：让软件代码可以持续的集成到主干上，并自动构建和测试。 CD过程即是通过Jenkins将打好标签的发行版本代码拉取、构建、制作镜像交给运维人员部署。 持续交付：让经过持续集成的代码可以进行手动部署。持续部署：让可以持续交付的代码随时随地的自动化部署。</p>
+<p>CI、CD</p>
+<p><img src="/assets/1666138582-404707dacce6ecdbf2726586fce001dd.png"></p>
+<p>5.2 Jenkins安装</p>
+<p>拉取Jenkins镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull jenkins/jenkins</span><br></pre></td></tr></table></figure>
+
+<p>编写docker-compose.yml</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.1&quot;</span><br><span class="line">services:</span><br><span class="line">  jenkins:</span><br><span class="line">    image: jenkins/jenkins</span><br><span class="line">    container_name: jenkins</span><br><span class="line">    ports:</span><br><span class="line">      - 8080:8080</span><br><span class="line">      - 50000:50000</span><br><span class="line">    volumes:</span><br><span class="line">      - ./data/:/var/jenkins_home/</span><br></pre></td></tr></table></figure>
+
+<p>首次启动会因为数据卷data目录没有权限导致启动失败，设置data目录写权限</p>
+<p>错误日志</p>
+<p><img src="/assets/1666138582-97b20ef52aa82fe58c333875284171b3.png"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R a+w data/</span><br></pre></td></tr></table></figure>
+
+<p>重新启动Jenkins容器后，由于Jenkins需要下载大量内容，但是由于默认下载地址下载速度较慢，需要重新设置下载地址为国内镜像站</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改数据卷中的hudson.model.UpdateCenter.xml文件</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">    default</span><br><span class="line">    </span><br><span class="line">   </span><br><span class="line">    https://updates.jenkins.io/update-center.json</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"> </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将下载地址替换为http://mirror.esuni.jp/jenkins/updates/update-center.json</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">    default</span><br><span class="line">    </span><br><span class="line">   </span><br><span class="line">    http://mirror.esuni.jp/jenkins/updates/update-center.json</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"> </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清华大学的插件源也可以https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json</span></span><br></pre></td></tr></table></figure>
+
+<p>再次重启Jenkins容器，访问Jenkins（需要稍微等会）</p>
+<p>Jenkins首页</p>
+<p><img src="/assets/1666138582-90bec2e0c2aeef4c620a8f7f3343c3cf.png"></p>
+<p><img src="/assets/1666138582-5f9fcd3f77b74a4416560542dfd78b3d.png"></p>
+<p>查看密码登录Jenkins，并登录下载插件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+
+<p>登录并下载插件</p>
+<p><img src="/assets/1666138582-bb8dfaf0084e83d098f20cdd481412c7.png"></p>
+<p><img src="/assets/1666138582-8bb02bf997c7dae483f1462f3d2d405b.png"></p>
+<p>选择需要安装的插件</p>
+<p>选择需要安装的插件</p>
+<p><img src="/assets/1666138582-4d22197b13cfabddb5232d63222a8573.png"></p>
+<p><img src="/assets/1666138582-208b29a484e06efa66efc08489f72428.png"></p>
+<p><img src="/assets/1666138582-18ca3982ecc7850cc070379c13e903e4.png"></p>
+<p>下载完毕设置信息进入首页（可能会出现下载失败的插件）</p>
+<p><img src="/assets/1666138582-79ae8dd2a8ccaf99ed6472fe5617630e.png"></p>
+<p><img src="/assets/1666138582-03d6ce27dc8d8a5da7102409c4e28c8a.png"></p>
+<p><img src="/assets/1666138582-d3f3cafc23d4bb6d09167ffcaa7a5431.png"></p>
+<p>5.3 Jenkins入门配置</p>
+<p>由于Jenkins需要从Git拉取代码、需要本地构建、甚至需要直接发布自定义镜像到Docker仓库，所以Jenkins需要配置大量内容。</p>
+<p>5.3.1 构建任务</p>
+<p>准备好GitLab仓库中的项目，并且通过Jenkins配置项目的实现当前项目的DevOps基本流程。</p>
+<p>构建Maven工程发布到GitLab（Gitee、Github均可）</p>
+<p>GitLab查看项目</p>
+<p><img src="/assets/1666138582-27386a199d1bfd89352120805e3f77f2.png"></p>
+<p>Jenkins点击左侧导航新建任务</p>
+<p>新建任务</p>
+<p><img src="/assets/1666138582-2e547523d81197637764fc0356f13b0d.png"></p>
+<p>选择自由风格构建任务</p>
+<p>构建任务</p>
+<p><img src="/assets/1666138582-11ef9de731c494cae904d2c44a6cf66c.png"></p>
+<p>5.3.1 配置源码拉取地址</p>
+<p>Jenkins需要将Git上存放的源码存储到Jenkins服务所在磁盘的本地</p>
+<p>配置任务源码拉取的地址</p>
+<p>源码管理</p>
+<p><img src="/assets/1666138582-936f1be153a0932744c453023de0fe36.png"></p>
+<p>Jenkins立即构建</p>
+<p>点击任务test中的立即构建</p>
+<p><img src="/assets/1666138582-daf7523de0ab14ada961fc7eb7b9b23d.png"></p>
+<p>查看构建工程的日志，点击上述③的任务条即可<br>可以看到源码已经拉取带Jenkins本地，可以根据第三行日志信息，查看Jenkins本地拉取到的源码。</p>
+<p>查看任务拉取Git源码日志</p>
+<p><img src="/assets/1666138582-ff0dd49b1a4681bc20bef18f73cb86c2.png"></p>
+<p>查看Jenkins容器中&#x2F;var&#x2F;jenkins_home&#x2F;workspace&#x2F;test的源码</p>
+<p>源码存放位置</p>
+<p><img src="/assets/1666138582-e03dc6d4a359fa9846722b4e4bb42d21.png"></p>
+<p>5.3.2 配置Maven构建代码</p>
+<p>代码拉取到Jenkins本地后，需要在Jenkins中对代码进行构建，这里需要Maven的环境，而Maven需要Java的环境，接下来需要在Jenkins中安装JDK和Maven，并且配置到Jenkins服务。</p>
+<p>准备JDK、Maven压缩包通过数据卷映射到Jenkins容器内部</p>
+<p>数据卷存放位置</p>
+<p><img src="/assets/1666138582-e8f170231f45e633b06aba0f70df5ede.png"></p>
+<p>解压压缩包，并配置Maven的settings.xml</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">alimaven</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">aliyun maven</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">http://maven.aliyun.com/nexus/content/groups/public/</span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">central</span><br><span class="line">         </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">jdk-1.8</span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> true</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> 1.8</span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> 1.8</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> 1.8</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> 1.8</span><br><span class="line"> </span><br><span class="line">       </span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>Jenkins配置JDK&amp;Maven并保存</p>
+<p><img src="/assets/1666138582-16bec2e45f1e53484ce3388c8c5e775c.png"></p>
+<p><img src="/assets/1666138582-b11648357dc98ae930d84cd83b4da3e1.png"></p>
+<p>配置Jenkins任务构建代码</p>
+<p>配置Maven构建代码</p>
+<p><img src="/assets/1666138582-9401470d651897d48a0d1f5ad7f0640b.png"></p>
+<p><img src="/assets/1666138582-347c25880ea6e3d1eb834517928f9e95.png"></p>
+<p>立即构建测试，查看target下的jar包</p>
+<p>构建源码</p>
+<p><img src="/assets/1666138582-54834af0097fba2dcb2163c8463abbd9.png"></p>
+<p><img src="/assets/1666138582-0ecc0fb41bc020fc8c3dcf395730a72a.png"></p>
+<p>5.3.3 配置Publish发布&amp;远程操作</p>
+<p>jar包构建好之后，就可以根据情况发布到测试或生产环境，这里需要用到之前下载好的插件Publish Over SSH。</p>
+<p>配置Publish Over SSH连接测试、生产环境</p>
+<p>Publish Over SSH配置</p>
+<p><img src="/assets/1666138582-711a8c43d0d03ea0b8e2043b87c3dc52.png"></p>
+<p>配置任务的构建后操作，发布jar包到目标服务</p>
+<p>配置构建后操作</p>
+<p><img src="/assets/1666138582-b7b5d23b7547c9ea009d7fbcf3357203.png"></p>
+<p><img src="/assets/1666138582-363e8c781fba491fbd21028d9eb419e4.png"></p>
+<p><img src="/assets/1666138582-f051dba7bf32a2cb8e25da2d3d3165f1.png"></p>
+<p>立即构建任务，并去目标服务查看</p>
+<p>立即构建</p>
+<p><img src="/assets/1666138582-fe3a9cfc9ec0f4e658b05a22b75e7187.png"></p>
+<p><img src="/assets/1666138582-29ce7ec25047ae82d4b5ee2ce2cee278.png"></p>
+<p>六、CI、CD入门操作</p>
+<p>基于Jenkins拉取GitLab的SpringBoot代码进行构建发布到测试环境实现持续集成</p>
+<p>基于Jenkins拉取GitLab指定发行版本的SpringBoot代码进行构建发布到生产环境实现CD实现持续部署</p>
+<p>6.1 持续集成</p>
+<p>为了让程序代码可以自动推送到测试环境基于Docker服务运行，需要添加Docker配置和脚本文件让程序可以在集成到主干的同时运行起来。</p>
+<p>添加Dockerfile文件</p>
+<p>构建自定义镜像</p>
+<p><img src="/assets/1666138582-c391c735a5611a31003caf4a72f76793.png"></p>
+<p>添加docker-compose.yml文件</p>
+<p>加载自定义镜像启动容器</p>
+<p><img src="/assets/1666138582-67e3270738210f8db2eebc85771ced83.png"></p>
+<p>追加Jenkins构建后操作脚本命令</p>
+<p>构建后发布并执行脚本命令</p>
+<p><img src="/assets/1666138582-bd28ea78e0ec7cca0fdb1945a41c9f24.png"></p>
+<p>发布到GitLab后由Jenkins立即构建并托送到目标服务器</p>
+<p>构建日志</p>
+<p><img src="/assets/1666138582-2a65730dfb69aa0d4e6545f7b7cfd130.png"></p>
+<p>测试部署到目标服务器程序</p>
+<p>查看目标服务器并测试接口</p>
+<p><img src="/assets/1666138582-77e803656077d32a28a2a18865f456b6.png"></p>
+<p><img src="/assets/1666138582-2a21b967607255193286297067020612.png"></p>
+<p>6.2 持续交付、部署</p>
+<p>程序代码在经过多次集成操作到达最终可以交付，持续交付整体流程和持续集成类似，不过需要选取指定的发行版本</p>
+<p>下载Git Parameter插件</p>
+<p>下载Git Parameter</p>
+<p><img src="/assets/1666138582-d74397a23abb6cc8d8c60efc47c5bb22.png"></p>
+<p>设置项目参数化构建</p>
+<p>基于Git标签构建</p>
+<p><img src="/assets/1666138582-53318da0110e514c8215607be984250e.png"></p>
+<p><img src="/assets/1666138582-a19733f5fe92f998088c38c2119a77f7.png"></p>
+<p>给项目添加tag版本</p>
+<p>添加tag版本</p>
+<p><img src="/assets/1666138582-a85612f102000b1ba0bdef890ba3f94b.png"></p>
+<p>任务构建时，采用Shell方式构建，拉取指定tag版本代码</p>
+<p>切换指定标签并构建项目</p>
+<p><img src="/assets/1666138582-60d2d4c2d4f55ed7b58072c5a8e1b25d.png"></p>
+<p>基于Parameter构建任务，任务发布到目标服务器</p>
+<p>构建任务</p>
+<p><img src="/assets/1666138582-da3c49020099d037b095cf15c7d8d84b.png"></p>
+<p>七、集成Sonar Qube</p>
+<p>7.1 Sonar Qube介绍</p>
+<p>Sonar Qube是一个开源的代码分析平台，支持Java、Python、PHP、JavaScript、CSS等25种以上的语言，可以检测出重复代码、代码漏洞、代码规范和安全性漏洞的问题。</p>
+<p>Sonar Qube可以与多种软件整合进行代码扫描，比如Maven，Gradle，Git，Jenkins等，并且会将代码检测结果推送回Sonar Qube并且在系统提供的UI界面上显示出来</p>
+<p>Sonar Qube的UI界面</p>
+<p><img src="/assets/1666138582-d9d3125ec0c4643e145a3e3a26d58ab3.png"></p>
+<p>7.2 Sonar Qube环境搭建</p>
+<p>7.2.1 Sonar Qube安装</p>
+<p>Sonar Qube在7.9版本中已经放弃了对MySQL的支持，并且建议在商业环境中采用PostgreSQL，那么安装Sonar Qube时需要依赖PostgreSQL。</p>
+<p>并且这里会安装Sonar Qube的长期支持版本8.9</p>
+<p>拉取镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull postgres</span><br><span class="line">docker pull sonarqube:8.9.3-community</span><br></pre></td></tr></table></figure>
+
+<p>编写docker-compoe.yml</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.1&quot;</span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: postgres</span><br><span class="line">    container_name: db</span><br><span class="line">    ports:</span><br><span class="line">      - 5432:5432</span><br><span class="line">    networks:</span><br><span class="line">      - sonarnet</span><br><span class="line">    environment:</span><br><span class="line">      POSTGRES_USER: sonar</span><br><span class="line">      POSTGRES_PASSWORD: sonar</span><br><span class="line">  sonarqube:</span><br><span class="line">    image: sonarqube:8.9.3-community</span><br><span class="line">    container_name: sonarqube</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;9000:9000&quot;</span><br><span class="line">    networks:</span><br><span class="line">      - sonarnet</span><br><span class="line">    environment:</span><br><span class="line">      SONAR_JDBC_URL: jdbc:postgresql://db:5432/sonar</span><br><span class="line">      SONAR_JDBC_USERNAME: sonar</span><br><span class="line">      SONAR_JDBC_PASSWORD: sonar</span><br><span class="line">networks:</span><br><span class="line">  sonarnet:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
+
+<p>启动容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>需要设置sysctl.conf文件信息<br>并执行命令刷新</p>
+<p>设置vm.max_map_count</p>
+<p><img src="/assets/1666138582-2ae61ee62069455b08e7512094d8cf80.png"></p>
+<p><img src="/assets/1666138582-c3f5eab3bd211d963307312d745dcdcb.png"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+
+<p>重新启动需要一定时间启动，可以可以查看容器日志，看到如下内容代表启动成功</p>
+<p>容器日志</p>
+<p><img src="/assets/1666138582-1619b35ed71e16cb017be80b532a497f.png"></p>
+<p>访问Sonar Qube首页</p>
+<p>登录</p>
+<p><img src="/assets/1666138582-f3872e167dbb8497df1a507e05ee3318.png"></p>
+<p>还需要重新设置一次密码</p>
+<p>重新设置密码</p>
+<p><img src="/assets/1666138582-d670b36b2f304d646829306df5ee46d6.png"></p>
+<p>Sonar Qube首页</p>
+<p>Sonar Qube首页</p>
+<p><img src="/assets/1666138582-a906742f888ce5047129b1b6da435402.png"></p>
+<p>7.2.2 安装中文插件</p>
+<p>安装中文插件</p>
+<p><img src="/assets/1666138582-480065be6a58eecc3e69f5f11d74090b.png"></p>
+<p>安装成功后需要重启，安装失败重新点击install重装即可。</p>
+<p>安装成功后，会查看到重启按钮，点击即可</p>
+<p>重启按钮</p>
+<p><img src="/assets/1666138582-f40fb4416cafc81445195db5e4c1a591.png"></p>
+<p>重启后查看效果</p>
+<p>首页效果</p>
+<p><img src="/assets/1666138582-f83982c7cbc24fd996fe21282eba9c98.png"></p>
+<p>7.3 Sonar Qube基本使用</p>
+<p>Sonar Qube的使用方式很多，Maven可以整合，也可以采用sonar-scanner的方式，再查看Sonar Qube的检测效果</p>
+<p>7.3.1 Maven实现代码检测</p>
+<p>修改Maven的settings.xml文件配置Sonar Qube信息</p>
+<p> sonar</p>
+<p>  true</p>
+<p>  admin</p>
+<pre><code>123456789
+
+
+http://192.168.11.11:9000
+</code></pre>
+<p>在代码位置执行命令：mvn sonar:sonar</p>
+<p>执行代码检测</p>
+<p><img src="/assets/1666138582-53086d2e8ae9278e8b1e8de3c5fa1aa4.png"></p>
+<p>查看Sonar Qube界面检测结果</p>
+<p>Sonar Qube检测结果</p>
+<p><img src="/assets/1666138582-e7079b49d5c7366a46969d93df4486b9.png"></p>
+<p>7.3.2 Sonar-scanner实现代码检测</p>
+<p>下载Sonar-scanner：<a target="_blank" rel="noopener" href="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/">https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/</a><br>下载4.6.x版本即可，要求Linux版本解压并配置sonar服务端信息 由于是zip压缩包，需要安装unzip解压插件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install unzip</span><br></pre></td></tr></table></figure>
+
+<p>解压压缩包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip sonar-scanner-cli/sonar-scanner-cli-4.6.0.2311-linux.zip</span><br></pre></td></tr></table></figure>
+
+<p>配置sonarQube服务端地址，修改conf下的sonar-scanner.properties</p>
+<p>配置服务端信息</p>
+<p><img src="/assets/1666138582-f4d6edabd2c64237673c1c4807b00e9a.png"></p>
+<p>执行命令检测代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在项目所在目录执行以下命令</span></span><br><span class="line">~/sonar-scanner/bin/sonar-scanner -Dsonar.sources=./ -Dsonar.projectname=demo -Dsonar.projectKey=java -Dsonar.java.binaries=target/</span><br></pre></td></tr></table></figure>
+
+<p>Ps：主要查看我的sonar-scanner执行命令的位置</p>
+<p>查看日志信息</p>
+<p><img src="/assets/1666138582-6ca7156159c36ea79302f9efc405d057.png"></p>
+<p>查看SonarQube界面检测结果</p>
+<p>检测结果</p>
+<p><img src="/assets/1666138582-4779b46cba83348ba66b6085c4ecb264.png"></p>
+<p>7.4 Jenkins集成Sonar Qube</p>
+<p>Jenkins继承Sonar Qube实现代码扫描需要先下载整合插件</p>
+<p>7.4.1 Jenkins安装插件</p>
+<p>下载Sonar Qube插件</p>
+<p><img src="/assets/1666138582-70d250e6be8ed13c2a9b58fbbce6ca8c.png"></p>
+<p><img src="/assets/1666138582-1ec4752c5e4f3143a548643571831638.png"></p>
+<p><img src="/assets/1666138582-439f52b1c93f480c63ded27f3f375ae4.png"></p>
+<p>7.4.2 Jenkins配置Sonar Qube</p>
+<p>开启Sonar Qube权限验证</p>
+<p>开启Sonar Qube权限校验</p>
+<p><img src="/assets/1666138582-c50ac262335cec5ec607f3a4d1cdf207.png"></p>
+<p>获取Sonar Qube的令牌</p>
+<p>获取令牌</p>
+<p><img src="/assets/1666138582-56a2bc21946c2d2a13fc4d8382d6f178.png"></p>
+<p>配置Jenkins的Sonar Qube信息</p>
+<p><img src="/assets/1666138582-204439eb8e5c09e95a3334360497cfc7.png"></p>
+<p><img src="/assets/1666138582-3fa80446d24a991027c52b26af9156a5.png"></p>
+<p><img src="/assets/1666138582-23626a05d63a172b2b4c6066f0ebe178.png"></p>
+<p>7.4.3 配置Sonar-scanner</p>
+<p>将Sonar-scaner添加到Jenkins数据卷中并配置全局配置</p>
+<p>配置Sonar-scanner</p>
+<p><img src="/assets/1666138582-4d98578bc93e56c7d1e0f6a038891861.png"></p>
+<p>配置任务的Sonar-scanner</p>
+<p>配置任务的Sonar-scanner</p>
+<p><img src="/assets/1666138582-63edc2d33819cc9ff52da2fb8a99594a.png"></p>
+<p>7.4.4 构建任务</p>
+<p>构建任务</p>
+<p><img src="/assets/1666138582-0a916889424fac11582729eeea8430ee.png"></p>
+<p><img src="/assets/1666138582-0ee61feb3ae2eeae43154038b18fe77c.png"></p>
+<p>八、集成Harbor</p>
+<p>8.1 Harbor介绍</p>
+<p>前面在部署项目时，我们主要采用Jenkins推送jar包到指定服务器，再通过脚本命令让目标服务器对当前jar进行部署，这种方式在项目较多时，每个目标服务器都需要将jar包制作成自定义镜像再通过docker进行启动，重复操作比较多，会降低项目部署时间。</p>
+<p>我们可以通过Harbor作为私有的Docker镜像仓库。让Jenkins统一将项目打包并制作成Docker镜像发布到Harbor仓库中，只需要通知目标服务，让目标服务统一去Harbor仓库上拉取镜像并在本地部署即可。</p>
+<p>Docker官方提供了Registry镜像仓库，但是Registry的功能相对简陋。Harbor是VMware公司提供的一款镜像仓库，提供了权限控制、分布式发布、强大的安全扫描与审查机制等功能</p>
+<p>8.2 Harbor安装</p>
+<p>这里采用原生的方式安装Harbor。</p>
+<p>下载Harbor安装包：<a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor/releases/download/v2.3.4/harbor-offline-installer-v2.3.4.tgz%E6%8B%96%E6%8B%BD%E5%88%B0Linux%E5%B9%B6%E8%A7%A3%E5%8E%8B%EF%BC%9A">https://github.com/goharbor/harbor/releases/download/v2.3.4/harbor-offline-installer-v2.3.4.tgz拖拽到Linux并解压：</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf harbor-offline-installer-v2.3.4.tgz -C /usr/local/</span><br></pre></td></tr></table></figure>
+
+<p>修改Harbor配置文件： 首先复制一份harbor.yml配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp harbor.yml.tmpl harbor.yml</span><br></pre></td></tr></table></figure>
+
+<p>编辑harbor.yml配置文件</p>
+<p>配置Harbor文件</p>
+<p><img src="/assets/1666138582-23428b1801f2aaf2f0dd45636f63e603.png"></p>
+<p>启动Harbor</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./install.sh</span><br></pre></td></tr></table></figure>
+
+<p>查看日志</p>
+<p><img src="/assets/1666138582-7f3ff6469f86ef81eef3b8baf8262365.png"></p>
+<p>登录Harbor</p>
+<p>登录Harbor</p>
+<p><img src="/assets/1666138582-c561ba8b1d7b9201f69625c67ff934e2.png"></p>
+<p>首页信息</p>
+<p>首页信息</p>
+<p><img src="/assets/1666138582-e34f0a83342aa3bc04ac2fcc8711c0f9.png"></p>
+<p>8.3 Harbor使用方式</p>
+<p>Harbor作为镜像仓库，主要的交互方式就是将镜像上传到Harbor上，以及从Harbor上下载指定镜像</p>
+<p>在传输镜像前，可以先使用Harbor提供的权限管理，将项目设置为私有项目，并对不同用户设置不同角色，从而更方便管理镜像。</p>
+<p>8.3.1 添加用户构建项目</p>
+<p>创建用户</p>
+<p>创建用户</p>
+<p><img src="/assets/1666138582-97b821f2898e7e84bb8827ab324c8400.png"></p>
+<p>构建项目（设置为私有）</p>
+<p>构建项目</p>
+<p><img src="/assets/1666138582-e4cb460bf8365fe39c4a398a2c3b4506.png"></p>
+<p>给项目追加用户</p>
+<p>追加用户管理</p>
+<p><img src="/assets/1666138582-f87ffa04f99ce01fef36715722fa6125.png"></p>
+<p>切换测试用户</p>
+<p>切换测试用户</p>
+<p><img src="/assets/1666138582-7d5763a07ba0be3870344999e3652575.png"></p>
+<p>8.3.2 发布镜像到Harbor</p>
+<p>修改镜像名称<br>名称要求：harbor地址&#x2F;项目名&#x2F;镜像名:版本</p>
+<p>修改镜像名称</p>
+<p><img src="/assets/1666138582-3653c92ff56c8999746b3c34b72b5c53.png"></p>
+<p>修改daemon.json，支持Docker仓库，并重启Docker</p>
+<p>修改daemon.json，支持Docker仓库</p>
+<p><img src="/assets/1666138582-115ef33ae834ec94a8c5b24953c155c7.png"></p>
+<p>设置登录仓库信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker login -u 用户名 -p 密码 Harbor地址</span><br></pre></td></tr></table></figure>
+
+<p>推送镜像到Harbor</p>
+<p>推送镜像到Harbor</p>
+<p><img src="/assets/1666138582-efa31227bfed2de8e1a890ba2f4d07fb.png"></p>
+<p><img src="/assets/1666138582-da30bbfe124f6e4180897dfaaed0aa06.png"></p>
+<p>8.3.3 从Harbor拉取镜像ls</p>
+<p>跟传统方式一样，不过需要先配置&#x2F;etc&#x2F;docker&#x2F;daemon.json文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        &quot;registry-mirrors&quot;: [&quot;https://pee6w651.mirror.aliyuncs.com&quot;],</span><br><span class="line">        &quot;insecure-registries&quot;: [&quot;192.168.11.11:80&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>拉取镜像</p>
+<p><img src="/assets/1666138582-e18468d023afd0be13a5b3605e407b8e.png"></p>
+<p>8.3.4 Jenkins容器使用宿主机Docker</p>
+<p>构建镜像和发布镜像到harbor都需要使用到docker命令。而在Jenkins容器内部安装Docker官方推荐直接采用宿主机带的Docker即可。</p>
+<p>设置Jenkins容器使用宿主机Docker</p>
+<p>设置宿主机docker.sock权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown root:root /var/run/docker.sock</span><br><span class="line">sudo chmod o+rw /var/run/docker.sock</span><br></pre></td></tr></table></figure>
+
+<p>添加数据卷</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.1&quot;</span><br><span class="line">services:</span><br><span class="line">  jenkins:</span><br><span class="line">    image: jenkins/jenkins</span><br><span class="line">    container_name: jenkins</span><br><span class="line">    ports:</span><br><span class="line">      - 8080:8080</span><br><span class="line">      - 50000:50000</span><br><span class="line">    volumes:</span><br><span class="line">      - ./data/:/var/jenkins_home/</span><br><span class="line">      - /usr/bin/docker:/usr/bin/docker</span><br><span class="line">      - /var/run/docker.sock:/var/run/docker.sock</span><br><span class="line">      - /etc/docker/daemon.json:/etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
+
+<p>8.3.5 添加构建操作</p>
+<p>制作自定义镜像</p>
+<p><img src="/assets/1666138582-617aebc234db50be95feeb8817034967.png"></p>
+<p>8.3.6 编写部署脚本</p>
+<p>部署项目需要通过Publish Over SSH插件，让目标服务器执行命令。为了方便一次性实现拉取镜像和启动的命令，推荐采用脚本文件的方式。</p>
+<p>添加脚本文件到目标服务器，再通过Publish Over SSH插件让目标服务器执行脚本即可。</p>
+<p>编写脚本文件，添加到目标服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">harbor_url=$1</span><br><span class="line">harbor_project_name=$2</span><br><span class="line">project_name=$3</span><br><span class="line">tag=$4</span><br><span class="line">port=$5</span><br><span class="line"></span><br><span class="line">imageName=$harbor_url/$harbor_project_name/$project_name:$tag</span><br><span class="line"></span><br><span class="line">containerId=`docker ps -a | grep $&#123;project_name&#125; | awk &#x27;&#123;print $1&#125;&#x27;`</span><br><span class="line">if [ &quot;$containerId&quot; != &quot;&quot; ] ; then</span><br><span class="line">    docker stop $containerId</span><br><span class="line">    docker rm $containerId</span><br><span class="line">    echo &quot;Delete Container Success&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">imageId=`docker images | grep $&#123;project_name&#125; | awk &#x27;&#123;print $3&#125;&#x27;`</span><br><span class="line"></span><br><span class="line">if [ &quot;$imageId&quot; != &quot;&quot; ] ; then</span><br><span class="line">    docker rmi -f $imageId</span><br><span class="line">    echo &quot;Delete Image Success&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">docker login -u DevOps -p P@ssw0rd $harbor_url</span><br><span class="line"></span><br><span class="line">docker pull $imageName</span><br><span class="line"></span><br><span class="line">docker run -d -p $port:$port --name $project_name $imageName</span><br><span class="line"></span><br><span class="line">echo &quot;Start Container Success&quot;</span><br><span class="line">echo $project_name</span><br></pre></td></tr></table></figure>
+
+<p>并设置权限为可执行</p>
+<p>如图</p>
+<p><img src="/assets/1666138582-29ca650f7d939b9483a3de628afe7a41.png"></p>
+<p>8.3.7 配置构建后操作</p>
+<p>执行脚本文件</p>
+<p>九、Jenkins流水线</p>
+<p>9.1 Jenkins流水线任务介绍</p>
+<p>之前采用Jenkins的自由风格构建的项目，每个步骤流程都要通过不同的方式设置，并且构建过程中整体流程是不可见的，无法确认每个流程花费的时间，并且问题不方便定位问题。</p>
+<p>Jenkins的Pipeline可以让项目的发布整体流程可视化，明确执行的阶段，可以快速的定位问题。并且整个项目的生命周期可以通过一个Jenkinsfile文件管理，而且Jenkinsfile文件是可以放在项目中维护。</p>
+<p>所以Pipeline相对自由风格或者其他的项目风格更容易操作。</p>
+<p>9.2 Jenkins流水线任务</p>
+<p>9.2.1 构建Jenkins流水线任务</p>
+<p>构建任务</p>
+<p>构建Jenkins流水线任务</p>
+<p>生成Groovy脚本</p>
+<p>Hello World脚本生成</p>
+<p>构建后查看视图</p>
+<p>构建后查看视图</p>
+<p><img src="/assets/1666138582-283e380de009aa0f6fee5a3481216266.png"></p>
+<p>9.2.2 Groovy脚本</p>
+<p>Groovy脚本基础语法</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// 所有脚本命令包含在pipeline&#123;&#125;中</span><br><span class="line">pipeline &#123;  </span><br><span class="line">	// 指定任务在哪个节点执行（Jenkins支持分布式）</span><br><span class="line">    agent any</span><br><span class="line">    </span><br><span class="line">    // 配置全局环境，指定变量名=变量值信息</span><br><span class="line">    environment&#123;</span><br><span class="line">    	host = &#x27;192.168.11.11&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 存放所有任务的合集</span><br><span class="line">    stages &#123;</span><br><span class="line">    	// 单个任务</span><br><span class="line">        stage(&#x27;任务1&#x27;) &#123;</span><br><span class="line">        	// 实现任务的具体流程</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &#x27;do something&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">		// 单个任务</span><br><span class="line">        stage(&#x27;任务2&#x27;) &#123;</span><br><span class="line">        	// 实现任务的具体流程</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &#x27;do something&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // ……</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写例子测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line"></span><br><span class="line">    // 存放所有任务的合集</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&#x27;拉取Git代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &#x27;拉取Git代码&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;检测代码质量&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &#x27;检测代码质量&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;构建代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &#x27;构建代码&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;制作自定义镜像并发布Harbor&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &#x27;制作自定义镜像并发布Harbor&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;基于Harbor部署工程&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &#x27;基于Harbor部署工程&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置Grovvy脚本</p>
+<p><img src="/assets/1666138582-3dd2854939f7686ae1f494465007ff2f.png"></p>
+<p>查看效果</p>
+<p>查看效果</p>
+<p><img src="/assets/1666138582-7f5812e59087ebda2c3077be5b2c8413.png"></p>
+<p>Ps：涉及到特定脚本，Jenkins给予了充足的提示，可以自动生成命令</p>
+<p>生成命令位置</p>
+<p><img src="/assets/1666138582-0ee8d24d88d3acd96de57f09b9cb1c37.png"></p>
+<p>9.2.3 Jenkinsfile实现</p>
+<p>Jenkinsfile方式需要将脚本内容编写到项目中的Jenkinsfile文件中，每次构建会自动拉取项目并且获取项目中Jenkinsfile文件对项目进行构建</p>
+<p>配置pipeline</p>
+<p>配置pipeline</p>
+<p><img src="/assets/1666138582-42135aaf0dd095df055c08a7845361c4.png"></p>
+<p>准备Jenkinsfile</p>
+<p>准备Jenkinsfile文件</p>
+<p><img src="/assets/1666138582-a400cb8c94ffca9aebbb01f1ac9469fa.png"></p>
+<p>测试效果</p>
+<p>测试效果</p>
+<p><img src="/assets/1666138582-5eafe1b9780820ef4e996aa3a5ed81ae.png"></p>
+<p>9.3 Jenkins流水线任务实现</p>
+<p>9.3.1 参数化构建</p>
+<p>添加参数化构建，方便选择不的项目版本</p>
+<p>Git参数化构建</p>
+<p><img src="/assets/1666138582-c23b23987debe5bc1b0184c41c8c0ab2.png"></p>
+<p>9.3.2 拉取Git代码</p>
+<p>通过流水线语法生成Checkout代码的脚本</p>
+<p>语法生成</p>
+<p><img src="/assets/1666138582-0938261ba3c59e755d16fe6b6c7681f4.png"></p>
+<p><img src="/assets/1666138582-60d36cf3d8d267e17c70e9d176dbf248.png"></p>
+<p>将*&#x2F;master更改为标签${tag}</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;拉取Git代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;$&#123;tag&#125;&#x27;]], extensions: [], userRemoteConfigs: [[url: &#x27;http://49.233.115.171:8929/root/test.git&#x27;]]])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>9.3.3 构建代码</p>
+<p>通过脚本执行mvn的构建命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;拉取Git代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;$&#123;tag&#125;&#x27;]], extensions: [], userRemoteConfigs: [[url: &#x27;http://49.233.115.171:8929/root/test.git&#x27;]]])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;构建代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;/var/jenkins_home/maven/bin/mvn clean package -DskipTests&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>9.3.4 代码质量检测</p>
+<p>通过脚本执行sonar-scanner命令即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;拉取Git代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;$&#123;tag&#125;&#x27;]], extensions: [], userRemoteConfigs: [[url: &#x27;http://49.233.115.171:8929/root/test.git&#x27;]]])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;构建代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;/var/jenkins_home/maven/bin/mvn clean package -DskipTests&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;检测代码质量&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;/var/jenkins_home/sonar-scanner/bin/sonar-scanner -Dsonar.sources=./ -Dsonar.projectname=$&#123;JOB_NAME&#125; -Dsonar.projectKey=$&#123;JOB_NAME&#125; -Dsonar.java.binaries=target/ -Dsonar.login=31388be45653876c1f51ec02f0d478e2d9d0e1fa&#x27; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>9.3.5 制作自定义镜像并发布</p>
+<p>生成自定义镜像脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    environment&#123;</span><br><span class="line">        harborHost = &#x27;192.168.11.11:80&#x27;</span><br><span class="line">        harborRepo = &#x27;repository&#x27;</span><br><span class="line">        harborUser = &#x27;DevOps&#x27;</span><br><span class="line">        harborPasswd = &#x27;P@ssw0rd&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 存放所有任务的合集</span><br><span class="line">    stages &#123;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;拉取Git代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;$&#123;tag&#125;&#x27;]], extensions: [], userRemoteConfigs: [[url: &#x27;http://49.233.115.171:8929/root/test.git&#x27;]]])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;构建代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;/var/jenkins_home/maven/bin/mvn clean package -DskipTests&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;检测代码质量&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;/var/jenkins_home/sonar-scanner/bin/sonar-scanner -Dsonar.sources=./ -Dsonar.projectname=$&#123;JOB_NAME&#125; -Dsonar.projectKey=$&#123;JOB_NAME&#125; -Dsonar.java.binaries=target/ -Dsonar.login=31388be45653876c1f51ec02f0d478e2d9d0e1fa&#x27; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;制作自定义镜像并发布Harbor&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;&#x27;&#x27;cp ./target/*.jar ./docker/</span><br><span class="line">                cd ./docker</span><br><span class="line">                docker build -t $&#123;JOB_NAME&#125;:$&#123;tag&#125; ./&#x27;&#x27;&#x27;</span><br><span class="line"></span><br><span class="line">                sh &#x27;&#x27;&#x27;docker login -u $&#123;harborUser&#125; -p $&#123;harborPasswd&#125; $&#123;harborHost&#125;</span><br><span class="line">                docker tag $&#123;JOB_NAME&#125;:$&#123;tag&#125; $&#123;harborHost&#125;/$&#123;harborRepo&#125;/$&#123;JOB_NAME&#125;:$&#123;tag&#125;</span><br><span class="line">                docker push $&#123;harborHost&#125;/$&#123;harborRepo&#125;/$&#123;JOB_NAME&#125;:$&#123;tag&#125;&#x27;&#x27;&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成Publish Over SSH脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    environment&#123;</span><br><span class="line">        harborHost = &#x27;192.168.11.11:80&#x27;</span><br><span class="line">        harborRepo = &#x27;repository&#x27;</span><br><span class="line">        harborUser = &#x27;DevOps&#x27;</span><br><span class="line">        harborPasswd = &#x27;P@ssw0rd&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 存放所有任务的合集</span><br><span class="line">    stages &#123;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;拉取Git代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;$&#123;tag&#125;&#x27;]], extensions: [], userRemoteConfigs: [[url: &#x27;http://49.233.115.171:8929/root/test.git&#x27;]]])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;构建代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;/var/jenkins_home/maven/bin/mvn clean package -DskipTests&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;docker</span><br><span class="line"></span><br><span class="line">        stage(&#x27;检测代码质量&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;/var/jenkins_home/sonar-scanner/bin/sonar-scanner -Dsonar.sources=./ -Dsonar.projectname=$&#123;JOB_NAME&#125; -Dsonar.projectKey=$&#123;JOB_NAME&#125; -Dsonar.java.binaries=target/ -Dsonar.login=7d66af4b39cfe4f52ac0a915d4c9d5c513207098&#x27; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;制作自定义镜像并发布Harbor&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;&#x27;&#x27;cp ./target/*.jar ./docker/</span><br><span class="line">                cd ./docker</span><br><span class="line">                docker build -t $&#123;JOB_NAME&#125;:$&#123;tag&#125; ./&#x27;&#x27;&#x27;</span><br><span class="line"></span><br><span class="line">                sh &#x27;&#x27;&#x27;docker login -u $&#123;harborUser&#125; -p $&#123;harborPasswd&#125; $&#123;harborHost&#125;</span><br><span class="line">                docker tag $&#123;JOB_NAME&#125;:$&#123;tag&#125; $&#123;harborHost&#125;/$&#123;harborRepo&#125;/$&#123;JOB_NAME&#125;:$&#123;tag&#125;</span><br><span class="line">                docker push $&#123;harborHost&#125;/$&#123;harborRepo&#125;/$&#123;JOB_NAME&#125;:$&#123;tag&#125;&#x27;&#x27;&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        stage(&#x27;目标服务器拉取镜像并运行&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sshPublisher(publishers: [sshPublisherDesc(configName: &#x27;testEnvironment&#x27;, transfers: [sshTransfer(cleanRemote: false, excludes: &#x27;&#x27;, execCommand: &quot;/usr/bin/deploy.sh $harborHost $harborRepo $JOB_NAME $tag $port &quot;, execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: &#x27;[, ]+&#x27;, remoteDirectory: &#x27;&#x27;, remoteDirectorySDF: false, removePrefix: &#x27;&#x27;, sourceFiles: &#x27;&#x27;)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Ps：由于采用变量，记得使用双引号</p>
+<p>9.4 Jenkins流水线整合钉钉</p>
+<p>在程序部署成功后，可以通过钉钉的机器人及时向群众发送部署的最终结果通知</p>
+<p>安装插件</p>
+<p>安装插件</p>
+<p><img src="/assets/1666138582-963d940505f4e8fa647a159972cd6ae9.png"></p>
+<p>钉钉内部创建群组并构建机器人<br>最终或获取到Webhook信息</p>
+<p>钉钉内部创建群组并构建机器人</p>
+<p><img src="/assets/1666138582-009d2f3f7a2340b35021d885b055ea83.png"></p>
+<p><img src="/assets/1666138582-c6353cb0862e34674c648a256234725e.png"></p>
+<p><img src="/assets/1666138582-bcb39d49d9489a3f084dfec687e7decd.png"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://oapi.dingtalk.com/robot/send?access_token=kej4ehkj34gjhg34jh5bh5jb34hj53b4</span><br></pre></td></tr></table></figure>
+
+<p>系统配置添加钉钉通知</p>
+<p>配置钉钉通知</p>
+<p><img src="/assets/1666138582-18c2354360056bea25f50fc48129b3ba.png"></p>
+<p>任务中追加流水线配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line"></span><br><span class="line">    environment &#123;</span><br><span class="line">        sonarLogin = &#x27;2bab7bf7d5af25e2c2ca2f178af2c3c55c64d5d8&#x27;</span><br><span class="line">        harborUser = &#x27;admin&#x27;</span><br><span class="line">        harborPassword = &#x27;Harbor12345&#x27;</span><br><span class="line">        harborHost = &#x27;192.168.11.12:8888&#x27;</span><br><span class="line">        harborRepo = &#x27;repository&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&#x27;拉取Git代码&#x27;)&#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;$tag&#x27;]], extensions: [], userRemoteConfigs: [[url: &#x27;http://49.233.115.171:8929/root/lsx.git&#x27;]]])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&#x27;Maven构建代码&#x27;)&#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;/var/jenkins_home/maven/bin/mvn clean package -DskipTests&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&#x27;SonarQube检测代码&#x27;)&#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;/var/jenkins_home/sonar-scanner/bin/sonar-scanner -Dsonar.sources=./ -Dsonar.projectname=$&#123;JOB_NAME&#125; -Dsonar.projectKey=$&#123;JOB_NAME&#125; -Dsonar.java.binaries=target/ -Dsonar.login=$&#123;sonarLogin&#125;&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&#x27;制作自定义镜像&#x27;)&#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;&#x27;&#x27;cd docker</span><br><span class="line">                mv ../target/*.jar ./</span><br><span class="line">                docker build -t $&#123;JOB_NAME&#125;:$tag .</span><br><span class="line">                &#x27;&#x27;&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;推送自定义镜像&#x27;)&#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;&#x27;&#x27;docker login -u $&#123;harborUser&#125; -p $&#123;harborPassword&#125; $&#123;harborHost&#125;</span><br><span class="line">                docker tag $&#123;JOB_NAME&#125;:$tag $&#123;harborHost&#125;/$&#123;harborRepo&#125;/$&#123;JOB_NAME&#125;:$tag</span><br><span class="line">                docker push $&#123;harborHost&#125;/$&#123;harborRepo&#125;/$&#123;JOB_NAME&#125;:$tag&#x27;&#x27;&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(&#x27;通知目标服务器&#x27;)&#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sshPublisher(publishers: [sshPublisherDesc(configName: &#x27;centos-docker&#x27;, transfers: [sshTransfer(cleanRemote: false, excludes: &#x27;&#x27;, execCommand: &quot;/usr/bin/deploy.sh $harborHost $harborRepo $JOB_NAME $tag $port&quot;, execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: &#x27;[, ]+&#x27;, remoteDirectory: &#x27;&#x27;, remoteDirectorySDF: false, removePrefix: &#x27;&#x27;, sourceFiles: &#x27;&#x27;)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])</span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    post &#123;</span><br><span class="line">        success &#123;</span><br><span class="line">            dingtalk (</span><br><span class="line">                robot: &#x27;Jenkins-DingDing&#x27;,</span><br><span class="line">                type:&#x27;MARKDOWN&#x27;,</span><br><span class="line">                title: &quot;success: $&#123;JOB_NAME&#125;&quot;,</span><br><span class="line">                text: [&quot;- 成功构建:$&#123;JOB_NAME&#125;项目!\n- 版本:$&#123;tag&#125;\n- 持续时间:$&#123;currentBuild.durationString&#125;\n- 任务:#$&#123;JOB_NAME&#125;&quot;]</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">        failure &#123;</span><br><span class="line">            dingtalk (</span><br><span class="line">                robot: &#x27;Jenkins-DingDing&#x27;,</span><br><span class="line">                type:&#x27;MARKDOWN&#x27;,</span><br><span class="line">                title: &quot;fail: $&#123;JOB_NAME&#125;&quot;,</span><br><span class="line">                text: [&quot;- 失败构建:$&#123;JOB_NAME&#125;项目!\n- 版本:$&#123;tag&#125;\n- 持续时间:$&#123;currentBuild.durationString&#125;\n- 任务:#$&#123;JOB_NAME&#125;&quot;]</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查看效果</p>
+<p>钉钉通知效果</p>
+<p><img src="/assets/1666138582-9a9aea4a986f3342c93b29f6306101bc.png"></p>
+<p>###十、Kubernetes编排工具</p>
+<p>10.1 Kubernetes介绍</p>
+<p>Kubernetes是一个开源的，用于管理云平台中多个主机上的容器化的应用，Kubernetes的目标是让部署容器化的应用简单并且高效（powerful），Kubernetes提供了应用部署，规划，更新，维护的一种机制。</p>
+<p>Kubernetes一个核心的特点就是能够自主的管理容器来保证云平台中的容器按照用户的期望状态运行着，管理员可以加载一个微型服务，让规划器来找到合适的位置，同时，Kubernetes也系统提升工具以及人性化方面，让用户能够方便的部署自己的应用。</p>
+<p>Kubernetes主要能帮助我们完成：</p>
+<p>服务发现和负载均衡<br>Kubernetes 可以使用 DNS 名称或自己的 IP 地址公开容器，如果进入容器的流量很大， Kubernetes 可以负载均衡并分配网络流量，从而使部署稳定。存储编排<br>Kubernetes 允许你自动挂载你选择的存储系统，比如本地存储，类似Docker的数据卷。自动部署和回滚<br>你可以使用 Kubernetes 描述已部署容器的所需状态，它可以以受控的速率将实际状态 更改为期望状态。Kubernetes 会自动帮你根据情况部署创建新容器，并删除现有容器给新容器提供资源。自动完成装箱计算<br>Kubernetes 允许你设置每个容器的资源，比如CPU和内存。自我修复<br>Kubernetes 重新启动失败的容器、替换容器、杀死不响应用户定义的容器，并运行状况检查的容器。秘钥与配置管理<br>Kubernetes 允许你存储和管理敏感信息，例如密码、OAuth 令牌和 ssh 密钥。你可以在不重建容器镜像的情况下部署和更新密钥和应用程序配置，也无需在堆栈配置中暴露密钥。</p>
+<p>10.2 Kubernetes架构</p>
+<p>Kubernetes 搭建需要至少两个节点，一个Master负责管理，一个Slave搭建在工作服务器上负责分配。</p>
+<p>kubernetes架构</p>
+<p><img src="/assets/1666138582-ab8e762039ef3e07dbf2ef37ff509f73.png"></p>
+<p>从图中可以看到各个组件的基本功能：</p>
+<p>API Server：作为K8s通讯的核心组件，K8s内部交互以及接收发送指令的组件。controller-manager：作为K8s的核心组件，主要做资源调度，根据集群情况分配资源etcd：一个key-value的数据库，存储存储集群的状态信息scheduler：负责调度每个工作节点cloud-controller-manager：负责调度其他云服务产品kubelet：管理Pods上面的容器。kube-proxy：负责处理其他Slave或客户端的请求。Pod：可以理解为就是运行的容器</p>
+<p>10.3 Kubernetes安装</p>
+<p>这里会采用<a target="_blank" rel="noopener" href="https://kuboard.cn/%E6%8F%90%E4%BE%9B%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85K8s%EF%BC%8C%E5%AE%89%E8%A3%85%E5%8D%95Master%E8%8A%82%E7%82%B9">https://kuboard.cn/提供的方式安装K8s，安装单Master节点</a></p>
+<p>要求使用Centos7.8版本：<a target="_blank" rel="noopener" href="https://vault.centos.org/7.8.2003/isos/x86/_64/CentOS-7-x86/_64-Minimal-2003.iso%E8%87%B3%E5%B0%912%E5%8F%B0">https://vault.centos.org/7.8.2003/isos/x86\_64/CentOS-7-x86\_64-Minimal-2003.iso至少2台</a> <strong>2核4G</strong> 的服务器</p>
+<p>安装流程</p>
+<p>安装流程</p>
+<p><img src="/assets/1666138582-d3875c633524c5b21cde813820b5ee6e.png"></p>
+<p>准备好服务器后开始安装</p>
+<p>重新设置hostname，不允许为localhost</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改 hostname，名字不允许使用下划线、小数点、大写字母，不能叫master</span></span><br><span class="line">hostnamectl set-hostname your-new-host-name</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看修改结果</span></span><br><span class="line">hostnamectl status</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置 hostname 解析</span></span><br><span class="line">echo &quot;127.0.0.1   $(hostname)&quot; &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<p>要求2台服务之间可以相互通讯安装软件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">阿里云 docker hub 镜像</span></span><br><span class="line">export REGISTRY_MIRROR=https://registry.cn-hangzhou.aliyuncs.com</span><br><span class="line">curl -sSL https://kuboard.cn/install-script/v1.19.x/install_kubelet.sh | sh -s 1.19.5</span><br></pre></td></tr></table></figure>
+
+<p>首先初始化Master节点</p>
+<p>关于初始化时用到的环境变量</p>
+<p><strong>APISERVER_NAME</strong> 不能是 master 的 hostname <strong>APISERVER_NAME</strong> 必须全为小写字母、数字、小数点，不能包含减号 <strong>POD_SUBNET</strong> 所使用的网段不能与 <em><strong>master节点&#x2F;worker节点</strong></em> 所在的网段重叠。该字段的取值为一个 CIDR 值，如果您对 CIDR 这个概念还不熟悉，请仍然执行 export POD_SUBNET&#x3D;10.100.0.0&#x2F;16 命令，不做修改</p>
+<p>设置ip，域名，网段并执行初始化操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">只在 master 节点执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">替换 x.x.x.x 为 master 节点实际 IP（请使用内网 IP）</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">export</span> 命令只在当前 shell 会话中有效，开启新的 shell 窗口后，如果要继续安装过程，请重新执行此处的 <span class="built_in">export</span> 命令</span></span><br><span class="line">export MASTER_IP=192.168.11.32</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">替换 apiserver.demo 为 您想要的 dnsName</span></span><br><span class="line">export APISERVER_NAME=apiserver.demo</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Kubernetes 容器组所在的网段，该网段安装完成后，由 kubernetes 创建，事先并不存在于您的物理网络中</span></span><br><span class="line">export POD_SUBNET=10.100.0.1/16</span><br><span class="line">echo &quot;$&#123;MASTER_IP&#125;    $&#123;APISERVER_NAME&#125;&quot; &gt;&gt; /etc/hosts</span><br><span class="line">curl -sSL https://kuboard.cn/install-script/v1.19.x/init_master.sh | sh -s 1.19.5</span><br></pre></td></tr></table></figure>
+
+<p>检查Master启动状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">只在 master 节点执行</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行如下命令，等待 3-10 分钟，直到所有的容器组处于 Running 状态</span></span><br><span class="line">watch kubectl get pod -n kube-system -o wide</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看 master 节点初始化结果</span></span><br><span class="line">kubectl get nodes -o wide</span><br></pre></td></tr></table></figure>
+
+<p><code>Ps：如果出现NotReady的情况执行（最新版本的BUG，1.19一般没有）</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">docker pull quay.io/coreos/flannel:v0.10.0-amd64 </span><br><span class="line">mkdir -p /etc/cni/net.d/</span><br><span class="line">cat &lt;</span><br><span class="line"> </span><br><span class="line">   /etc/cni/net.d/10-flannel.conf</span><br><span class="line">&#123;&quot;name&quot;:&quot;cbr0&quot;,&quot;type&quot;:&quot;flannel&quot;,&quot;delegate&quot;: &#123;&quot;isDefaultGateway&quot;: true&#125;&#125;</span><br><span class="line">EOF</span><br><span class="line">mkdir /usr/share/oci-umount/oci-umount.d -p</span><br><span class="line">mkdir /run/flannel/</span><br><span class="line">cat &lt;</span><br><span class="line">  </span><br><span class="line">    /run/flannel/subnet.env FLANNEL_NETWORK=172.100.0.0/16 FLANNEL_SUBNET=172.100.1.0/24 FLANNEL_MTU=1450 FLANNEL_IPMASQ=true EOF kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml</span><br><span class="line">  </span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>安装网络服务插件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export POD_SUBNET=10.100.0.0/16</span><br><span class="line">kubectl apply -f https://kuboard.cn/install-script/v1.22.x/calico-operator.yaml</span><br><span class="line">wget https://kuboard.cn/install-script/v1.22.x/calico-custom-resources.yaml</span><br><span class="line">sed -i &quot;s#192.168.0.0/16#$&#123;POD_SUBNET&#125;#&quot; calico-custom-resources.yaml</span><br><span class="line">kubectl apply -f calico-custom-resources.yaml</span><br></pre></td></tr></table></figure>
+
+<p>初始化worker节点</p>
+<p>获取Join命令参数，在Master节点执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">只在 master 节点执行</span></span><br><span class="line">kubeadm token create --print-join-command</span><br></pre></td></tr></table></figure>
+
+<p>获取命令</p>
+<p><img src="/assets/1666138582-9c7db89b583a7fdbbc73cd96a36d0dd4.png"></p>
+<p>在worker节点初始化</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">只在 worker 节点执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">替换 x.x.x.x 为 master 节点的内网 IP</span></span><br><span class="line">export MASTER_IP=192.168.11.32</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">替换 apiserver.demo 为初始化 master 节点时所使用的 APISERVER_NAME</span></span><br><span class="line">export APISERVER_NAME=apiserver.demo</span><br><span class="line">echo &quot;$&#123;MASTER_IP&#125;    $&#123;APISERVER_NAME&#125;&quot; &gt;&gt; /etc/hosts</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">替换为 master 节点上 kubeadm token create 命令的输出</span></span><br><span class="line">kubeadm join apiserver.demo:6443 --token vwfilu.3nhndohc5gn1jv9k     --discovery-token-ca-cert-hash sha256:22ff15cabfe87ab48a7db39b3bbf986fee92ec92eb8efc7fe9b0abe2175ff0c2</span><br></pre></td></tr></table></figure>
+
+<p>检查最终运行效果</p>
+<p>在 master 节点上执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">只在 master 节点执行</span></span><br><span class="line">kubectl get nodes -o wide</span><br></pre></td></tr></table></figure>
+
+<p><code>Ps：如果出现NotReady的情况执行（最新版本的BUG，1.19一般没有）</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">docker pull quay.io/coreos/flannel:v0.10.0-amd64 </span><br><span class="line">mkdir -p /etc/cni/net.d/</span><br><span class="line">cat &lt;</span><br><span class="line"> </span><br><span class="line">   /etc/cni/net.d/10-flannel.conf</span><br><span class="line">&#123;&quot;name&quot;:&quot;cbr0&quot;,&quot;type&quot;:&quot;flannel&quot;,&quot;delegate&quot;: &#123;&quot;isDefaultGateway&quot;: true&#125;&#125;</span><br><span class="line">EOF</span><br><span class="line">mkdir /usr/share/oci-umount/oci-umount.d -p</span><br><span class="line">mkdir /run/flannel/</span><br><span class="line">cat &lt;</span><br><span class="line">  </span><br><span class="line">    /run/flannel/subnet.env FLANNEL_NETWORK=172.100.0.0/16 FLANNEL_SUBNET=172.100.1.0/24 FLANNEL_MTU=1450 FLANNEL_IPMASQ=true EOF kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml</span><br><span class="line">  </span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8smaster ~]# kubectl get nodes</span><br></pre></td></tr></table></figure>
+
+<p>搭建成功效果</p>
+<p><img src="/assets/1666138582-e8da9991a6a8c1202ed6d00ba8f737fe.png"></p>
+<p>安装Kuboard管理K8s集群</p>
+<p>安装Kuboard</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">您也可以使用下面的指令，唯一的区别是，该指令使用华为云的镜像仓库替代 docker hub 分发 Kuboard 所需要的镜像</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">kubectl apply -f https://addons.kuboard.cn/kuboard/kuboard-v3-swr.yaml</span></span><br></pre></td></tr></table></figure>
+
+<p>查看启动情况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch kubectl get pods -n kuboard</span><br></pre></td></tr></table></figure>
+
+<p>查看效果</p>
+<p><img src="/assets/1666138582-6008379ff380448b9c3581d431da4d95.png"></p>
+<p>在浏览器中打开链接 <a target="_blank" rel="noopener" href="http://your-node-ip-address:30080/">http://your-node-ip-address:30080</a></p>
+<p>首页</p>
+<p><img src="/assets/1666138582-153747a1b1db25fb929f569f885166b8.png"></p>
+<p>输入初始用户名和密码，并登录 用户名： <code>admin</code>密码： <code>Kuboard123</code></p>
+<p>首页效果</p>
+<p><img src="/assets/1666138582-ce1ec3c6b2a4b590b513743515ef01d6.png"></p>
+<p>10.4 Kubernetes操作</p>
+<p>首先我们要了解Kubernetes在运行我们的资源时，关联到了哪些内容</p>
+<p>资源的构建方式： 采用kubectl的命令方式yaml文件方式</p>
+<p>10.4.1 Namespace</p>
+<p>命名空间：主要是为了对Kubernetes中运行的资源进行过隔离， 但是网络是互通的，类似Docker的容器，可以将多个资源配置到一个NameSpace中。而NameSpace可以对不同环境进行资源隔离，默认情况下Kubernetes提供了default命名空间，在构建资源时，如果不指定资源，默认采用default资源。<br>命令方式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看现有的全部命名空间</span></span><br><span class="line">kubectl get ns</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">构建命名空间</span></span><br><span class="line">kubectl create ns 命名空间名称</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除现有命名空间， 并且会删除空间下的全部资源</span></span><br><span class="line">kubectl delete ns 命名空间名称</span><br></pre></td></tr></table></figure>
+
+<p>yaml文件方式：（构建资源时，设置命名空间）</p>
+<p>10.4.2 Pod</p>
+<p>Pod：Kubernetes运行的一组容器，Pod是Kubernetes的最小单位，但是对于Docker而然，Pod中会运行多个Docker容器 命令方式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看所有运行的pod</span></span><br><span class="line">kubectl get pods -A</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看指定Namespace下的Pod</span></span><br><span class="line">kubectl get pod [-n 命名空间]  #（默认default）</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建Pod</span></span><br><span class="line">kubectl run pod名称 --image=镜像名称</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看Pod详细信息</span></span><br><span class="line">kubectl describe pod pod名称</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除pod</span></span><br><span class="line">kubectl delete pod pod名称 [-n 命名空间]  #（默认default）</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看pod输出的日志</span></span><br><span class="line">kubectl logs -f pod名称</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进去pod容器内部</span></span><br><span class="line">kubectl exec -it pod名称 -- bash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看kubernetes给Pod分配的ip信息，并且通过ip和容器的端口，可以直接访问</span></span><br><span class="line">kubectl get pod -owide</span><br></pre></td></tr></table></figure>
+
+<p>yaml方式（推荐）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  labels:</span><br><span class="line">    run: 运行的pod名称</span><br><span class="line">  name: pod名称</span><br><span class="line">  namespace: 命名空间</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - image: 镜像名称</span><br><span class="line">    name: 容器名称</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动Pod：kubectl apply -f yaml文件名称</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除Pod：kubectl delete -f yaml文件名称</span></span><br></pre></td></tr></table></figure>
+
+<p>Pod中运行多个容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  labels:</span><br><span class="line">    run: 运行的pod名称</span><br><span class="line">  name: pod名称</span><br><span class="line">  namespace: 命名空间</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - image: 镜像名称</span><br><span class="line">    name: 容器名称</span><br><span class="line">  - image: 镜像名称</span><br><span class="line">    name: 容器名称</span><br><span class="line">…………</span><br></pre></td></tr></table></figure>
+
+<p>启动后可以查看到</p>
+<p>Kuboard效果</p>
+<p><img src="/assets/1666138582-ebfd57e12ee637467518e12756a86240.png"></p>
+<p>10.4.3 Deployment</p>
+<p>部署时，可以通过Deployment管理和编排Pod</p>
+<p>Deployment部署实现</p>
+<p>命令方式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">基于Deployment启动容器</span></span><br><span class="line">kubectl create deployment deployment名称 --image=镜像名称</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">用deployment启动的容器会在被删除后自动再次创建，达到故障漂移的效果</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">需要使用deploy的方式删除deploy</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看现在的deployment</span></span><br><span class="line">kubectl get deployment</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除deployment</span></span><br><span class="line">kubectl delete deployment deployment名称</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">基于Deployment启动容器并设置Pod集群数</span></span><br><span class="line">kubectl create deployment deployment名称 --image=镜像名称 --replicas 集群个数</span><br></pre></td></tr></table></figure>
+
+<p>配置文件方式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx-deployment</span><br><span class="line">  labels:</span><br><span class="line">    app: nginx</span><br><span class="line">spec:</span><br><span class="line">  replicas: 3</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: nginx</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: nginx</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: nginx</span><br><span class="line">       image: nginx</span><br><span class="line">       ports:</span><br><span class="line">       - containerPort: 80</span><br></pre></td></tr></table></figure>
+
+<p>正常使用kubectl运行yaml即可</p>
+<p>弹性伸缩功能</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">基于scale实现弹性伸缩</span></span><br><span class="line">kubectl scale deploy/Deployment名称 --replicas 集群个数</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者修改yaml文件</span></span><br><span class="line">kubectl edit deploy Deployment名称</span><br></pre></td></tr></table></figure>
+
+<p>图形化页面修改</p>
+<p><img src="/assets/1666138582-b6c92c4b7f605cb49b2cd831afab35eb.png"></p>
+<p>灰度发布</p>
+<p>Deploy可以在部署新版本数据时，成功启动一个pod，才会下线一个老版本的Pod</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl set image deployment/Deployment名称 容器名=镜像:版本</span><br></pre></td></tr></table></figure>
+
+<p>10.4.4 Service</p>
+<p>可以将多个Pod对外暴露一个Service，让客户端可以通过Service访问到这一组Pod，并且可以实现负载均衡</p>
+<p>ClusterIP方式：</p>
+<p>ClusterIP是集群内部Pod之间的访问方式</p>
+<p>命令实现效果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过生成service映射一个Deployment下的所有pod中的某一个端口的容器</span></span><br><span class="line">kubectl expose deployment Deployment名称 --port=Service端口号 --target-port=Pod内容器端口</span><br></pre></td></tr></table></figure>
+
+<p>之后通过<code>kubectl get service</code>查看Service提供的ip，即可访问<br>也可以通过<code>Deployment名称.namespace名称.svc</code>作为域名访问</p>
+<p>kubectl get service</p>
+<p><img src="/assets/1666138582-16d6d2c1ec0f33457777a518a9fb1fb0.png"></p>
+<p>在服务容器内执行</p>
+<p><img src="/assets/1666138582-2d9afb7cb2f43f462df0396cf04367b6.png"></p>
+<p>NodePort方式</p>
+<p>ClusterIP的方式只能在Pod内部实现访问，但是一般需要对外暴露网关，所以需要NodePort的方式Pod外暴露访问</p>
+<p>命令实现方式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过生成service映射一个Deployment下的所有pod中的某一个端口的容器</span></span><br><span class="line">kubectl expose deployment Deployment名称 --port=Service端口号 --target-port=Pod内容器端口 --type=NodePort</span><br></pre></td></tr></table></figure>
+
+<p>查看Service效果</p>
+<p><img src="/assets/1666138582-7be33d2b3229e404873d592b5d825570.png"></p>
+<p><img src="/assets/1666138582-b87c2a39bf3f4ef5989eda860963effc.png"></p>
+<p>Service也可以通过yaml文件实现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  labels</span><br><span class="line">    app: nginx</span><br><span class="line">  name: nginx</span><br><span class="line">  spec:</span><br><span class="line">    selector:</span><br><span class="line">      app: nginx</span><br><span class="line">    ports:</span><br><span class="line">    - port: 8888</span><br><span class="line">     protocol: TCP</span><br><span class="line">     targetPort: 80</span><br></pre></td></tr></table></figure>
+
+<p>通过apply启动就也可以创建Service</p>
+<p>测试效果-Deployment部署，通过Service暴露</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx-deployment</span><br><span class="line">  labels:</span><br><span class="line">    app: nginx-deployment</span><br><span class="line">spec:</span><br><span class="line">  replicas: 2</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: nginx-deployment</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: nginx-deployment</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: nginx-deployment</span><br><span class="line">        image: nginx</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 80</span><br><span class="line">---</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  labels:</span><br><span class="line">    app: nginx-service</span><br><span class="line">  name: nginx-service</span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    app: nginx-deployment</span><br><span class="line">  ports:</span><br><span class="line">  - port: 8888</span><br><span class="line">    protocol: TCP</span><br><span class="line">    targetPort: 80</span><br><span class="line">  type: NodePort</span><br></pre></td></tr></table></figure>
+
+<p>可以查看到暴露的信息</p>
+<p>Service信息</p>
+<p><img src="/assets/1666138582-354a46efa36e42eb77da15dcf878864d.png"></p>
+<p>10.4.5 Ingress</p>
+<p>Kubernetes推荐将Ingress作为所有Service的入口，提供统一的入口，避免多个服务之间需要记录大量的IP或者域名，毕竟IP可能改变，服务太多域名记录不方便。</p>
+<p>Ingress底层其实就是一个Nginx， 可以在Kuboard上直接点击安装</p>
+<p>Kuboard安装</p>
+<p><img src="/assets/1666138582-407383cf200e9a659ccea83b0871be8e.png"></p>
+<p><img src="/assets/1666138582-7ef3f304e0a2c113b4ac152d4a165d31.png"></p>
+<p>因为副本数默认为1，但是k8s整体集群就2个节点，所以显示下面即为安装成功</p>
+<p>安装成功</p>
+<p><img src="/assets/1666138582-0cb74589f90f20445258a0b0e4177168.png"></p>
+<p>可以将Ingress接收到的请求转发到不同的Service中。</p>
+<p>推荐使用yaml文件方式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: networking.k8s.io/v1</span><br><span class="line">kind: Ingress</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx-ingress</span><br><span class="line">spec:</span><br><span class="line">  ingressClassName: ingress</span><br><span class="line">  rules:</span><br><span class="line">  - host: nginx.mashibing.com</span><br><span class="line">    http:</span><br><span class="line">      paths:</span><br><span class="line">      - path: /</span><br><span class="line">        pathType: Prefix</span><br><span class="line">        backend:</span><br><span class="line">          service:</span><br><span class="line">            name: nginx-service</span><br><span class="line">            port:</span><br><span class="line">              number: 8888</span><br></pre></td></tr></table></figure>
+
+<p>启动时问题</p>
+<p><img src="/assets/1666138582-fad04fe0ea4049ab09e91ff5dc68ec03.png"></p>
+<p>Kuboard安装的Ingress有admission的校验配置，需要先删除配置再启动</p>
+<p>找到指定的ingress的校验信息，删除即可</p>
+<p>删除信息</p>
+<p><img src="/assets/1666138582-4d8e20e6ae8774f29cce9007c2fc05b9.png"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看校验webhook的配置</span></span><br><span class="line">kubectl get -A ValidatingWebhookConfiguration</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除指定的校验</span></span><br><span class="line">kubectl delete ValidatingWebhookConfiguration ingress-nginx-admission-my-ingress-controller</span><br></pre></td></tr></table></figure>
+
+<p>配置本地hosts文件</p>
+<p>配置hosts</p>
+<p><img src="/assets/1666138582-00e0f61660db6e576848b221a48bc993.png"></p>
+<p>记下来既可以访问在Service中暴露的Nginx信息</p>
+<p>服通过Ingress访问</p>
+<p><img src="/assets/1666138582-6665bd7b6780afb1a45d5e3b029a8c82.png"></p>
+<p>10.5 Jenkins集成Kubernetes</p>
+<p>10.5.1 准备部署的yml文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  namespace: test</span><br><span class="line">  name: pipeline</span><br><span class="line">  labels:</span><br><span class="line">    app: pipeline</span><br><span class="line">spec:</span><br><span class="line">  replicas: 2</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: pipeline</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: pipeline    </span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: pipeline</span><br><span class="line">        image: 192.168.11.102:80/repo/pipeline:v4.0.0</span><br><span class="line">        imagePullPolicy: Always</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 8080</span><br><span class="line">---</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  namespace: test</span><br><span class="line">  labels:</span><br><span class="line">    app: pipeline</span><br><span class="line">  name: pipeline  </span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    app: pipeline</span><br><span class="line">  ports:</span><br><span class="line">  - port: 8081</span><br><span class="line">    targetPort: 8080</span><br><span class="line">  type: NodePort</span><br><span class="line">---</span><br><span class="line">apiVersion: networking.k8s.io/v1</span><br><span class="line">kind: Ingress</span><br><span class="line">metadata:</span><br><span class="line">  namespace: test</span><br><span class="line">  name: pipeline</span><br><span class="line">spec:</span><br><span class="line">  ingressClassName: ingress</span><br><span class="line">  rules:</span><br><span class="line">  - host: mashibing.pipeline.com</span><br><span class="line">    http:</span><br><span class="line">      paths:</span><br><span class="line">      - path: /</span><br><span class="line">        pathType: Prefix</span><br><span class="line">        backend:</span><br><span class="line">          service:</span><br><span class="line">            name: pipeline</span><br><span class="line">            port:</span><br><span class="line">              number: 8081</span><br></pre></td></tr></table></figure>
+
+<p>10.5.2 Harbor私服配置</p>
+<p>在尝试用kubernetes的yml文件启动pipeline服务时，会出现Kubernetes无法拉取镜像的问题，这里需要在kubernetes所在的Linux中配置Harbor服务信息，并且保证Kubernetes可以拉取Harbor上的镜像</p>
+<p>设置Master和Worker的私服地址信息</p>
+<p>设置Harbor私服地址</p>
+<p><img src="/assets/1666138582-0eec713865250df6519ce59415623ed9.png"></p>
+<p>在Kuboard上设置私服密文信息<br>按照复制指令的位置测试认证，效果如下</p>
+<p>设置密文并测试</p>
+<p><img src="/assets/1666138582-f5b255cc662bdb5720e7515d04f919ef.png"></p>
+<p>测试效果</p>
+<p><img src="/assets/1666138582-8be688ce2ca65bcb33786e04e6d5c5b4.png"></p>
+<p>10.5.3 测试使用效果</p>
+<p>执行kubectl命令，基于yml启动服务，并且基于部署后服务的提示信息以及Ingress的设置，直接访问</p>
+<p><img src="/assets/1666138582-4fc8dcde7b3d85629de33cd7b1381e16.png"></p>
+<p><img src="/assets/1666138582-878e107fc7c7796063b99782dba36b8b.png"></p>
+<p>10.5.3 Jenkins远程调用</p>
+<p>将pipeline.yml配置到Gitlab中</p>
+<p>配置yml文件</p>
+<p><img src="/assets/1666138582-03282d032adcd281095c60dea168a1fa.png"></p>
+<p>配置Jenkins的目标服务器，可以将yml文件传输到K8s的Master上</p>
+<p>设置目标服务器</p>
+<p><img src="/assets/1666138582-6e6a3bbe8fc24ee48c08a3d5c1d80a33.png"></p>
+<p>修改Jenkinsfile，重新设置流水线任务脚本，并测试效果</p>
+<p>传递yml文件脚本</p>
+<p><img src="/assets/1666138582-09d6af429f72b843d0c0c696acf80f23.png"></p>
+<p><img src="/assets/1666138582-d629ba3bd8a159397f9f2161b1191df0.png"></p>
+<p>设置Jenkins无密码登录k8s-master<br>将Jenkins中公钥信息复制到k8s-master的~&#x2F;.ssh&#x2F;authorized_keysz中，保证远程连接无密码</p>
+<p>远程执行命令无需密码</p>
+<p><img src="/assets/1666138582-a51adb96b8357225e5c147af2cf078f9.png"></p>
+<p>设置执行kubectl的脚本到Jenkinsfile</p>
+<p>设置Jenkinsfile</p>
+<p><img src="/assets/1666138582-06a8192a2ade79b849a406873de9a6ca.png"></p>
+<p>执行查看效果<br>可以查看到yml文件是由变化的， 这样k8s就会重新加载</p>
+<p>执行流水线</p>
+<p><img src="/assets/1666138582-d96b5f5b1b9c82207b8ddaf6b2ef3f70.png"></p>
+<p>查看效果</p>
+<p>效果</p>
+<p><img src="/assets/1666138582-f03267292a7b9ae22cda719438d2a656.png"></p>
+<p>Ps：这种方式更适应与CD操作，将项目将基于某个版本部署到指定的目标服务器</p>
+<p>10.6 基于GitLab的WebHooks</p>
+<p>这里要实现自动化的一个CI操作，也就是开发人员Push代码到Git仓库后，Jenkins会自动的构建项目，将最新的提交点代码构建并进行打包部署，这里区别去上述的CD操作，CD操作需要基于某个版本进行部署，而这里每次都是将最新的提交点集成到主干上并测试。</p>
+<p>10.6.1 WebHooks通知</p>
+<p>开启Jenkins的自动构建</p>
+<p>构建触发器</p>
+<p><img src="/assets/1666138582-a75953e7a3e07e6825f82e994a5efd5d.png"></p>
+<p>设置Gitlab的Webhooks</p>
+<p>设置Gitlab的Webhooks</p>
+<p><img src="/assets/1666138582-226995497402ac00d67492c40bd48619.png"></p>
+<p>需要关闭Jenkins的Gitlab认证</p>
+<p>关闭Jenkins的Gitlab认证</p>
+<p><img src="/assets/1666138582-9665671925f031b344aaff1d590ffc9e.png"></p>
+<p>再次测试Gitlab</p>
+<p>再次测试</p>
+<p><img src="/assets/1666138582-dc4a7221659fdc02b262c2c34dca4df5.png"></p>
+<p>10.6.2 修改配置</p>
+<p>修改Jenkinsfile实现基于最新提交点实现持续集成效果，将之前引用${tag}的全部去掉</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">// 所有的脚本命令都放在pipeline中</span><br><span class="line">pipeline&#123;</span><br><span class="line">	// 指定任务再哪个集群节点中执行</span><br><span class="line">	agent any</span><br><span class="line"></span><br><span class="line">	// 声明全局变量，方便后面使用</span><br><span class="line">	environment &#123;</span><br><span class="line">		harborUser = &#x27;admin&#x27;</span><br><span class="line">        harborPasswd = &#x27;Harbor12345&#x27;</span><br><span class="line">        harborAddress = &#x27;192.168.11.102:80&#x27;</span><br><span class="line">        harborRepo = &#x27;repo&#x27;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&#x27;拉取git仓库代码&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;*/master&#x27;]], extensions: [], userRemoteConfigs: [[url: &#x27;http://192.168.11.101:8929/root/mytest.git&#x27;]]])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&#x27;通过maven构建项目&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;/var/jenkins_home/maven/bin/mvn clean package -DskipTests&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&#x27;通过SonarQube做代码质量检测&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;/var/jenkins_home/sonar-scanner/bin/sonar-scanner -Dsonar.source=./ -Dsonar.projectname=$&#123;JOB_NAME&#125; -Dsonar.projectKey=$&#123;JOB_NAME&#125; -Dsonar.java.binaries=./target/ -Dsonar.login=40306ae8ea69a4792df2ceb4d9d25fe8a6ab1701&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&#x27;通过Docker制作自定义镜像&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;&#x27;&#x27;mv ./target/*.jar ./docker/</span><br><span class="line">                docker build -t $&#123;JOB_NAME&#125;:latest ./docker/&#x27;&#x27;&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&#x27;将自定义镜像推送到Harbor&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;&#x27;&#x27;docker login -u $&#123;harborUser&#125; -p $&#123;harborPasswd&#125; $&#123;harborAddress&#125;</span><br><span class="line">                docker tag $&#123;JOB_NAME&#125;:latest  $&#123;harborAddress&#125;/$&#123;harborRepo&#125;/$&#123;JOB_NAME&#125;:latest</span><br><span class="line">                docker push $&#123;harborAddress&#125;/$&#123;harborRepo&#125;/$&#123;JOB_NAME&#125;:latest &#x27;&#x27;&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&#x27;将yml文件传到k8s-master上&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sshPublisher(publishers: [sshPublisherDesc(configName: &#x27;k8s&#x27;, transfers: [sshTransfer(cleanRemote: false, excludes: &#x27;&#x27;, execCommand: &#x27;&#x27;, execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: &#x27;[, ]+&#x27;, remoteDirectory: &#x27;&#x27;, remoteDirectorySDF: false, removePrefix: &#x27;&#x27;, sourceFiles: &#x27;pipeline.yml&#x27;)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&#x27;远程执行k8s-master的kubectl命令&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">               sh &#x27;&#x27;&#x27;ssh root@192.168.11.201 kubectl apply -f /usr/local/k8s/pipeline.yml</span><br><span class="line">                ssh root@192.168.11.201 kubectl rollout restart deployment pipeline -n test&#x27;&#x27;&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    post &#123;</span><br><span class="line">        success &#123;</span><br><span class="line">            dingtalk(</span><br><span class="line">                robot: &#x27;Jenkins-DingDing&#x27;,</span><br><span class="line">                type: &#x27;MARKDOWN&#x27;,</span><br><span class="line">                title: &quot;success: $&#123;JOB_NAME&#125;&quot;,</span><br><span class="line">                text: [&quot;- 成功构建：$&#123;JOB_NAME&#125;! \n- 版本：latest \n- 持续时间：$&#123;currentBuild.durationString&#125;&quot; ]</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">        failure &#123;</span><br><span class="line">            dingtalk(</span><br><span class="line">                robot: &#x27;Jenkins-DingDing&#x27;,</span><br><span class="line">                type: &#x27;MARKDOWN&#x27;,</span><br><span class="line">                title: &quot;success: $&#123;JOB_NAME&#125;&quot;,</span><br><span class="line">                text: [&quot;- 构建失败：$&#123;JOB_NAME&#125;! \n- 版本：latest \n- 持续时间：$&#123;currentBuild.durationString&#125;&quot; ]</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改pipeline.yml，更改镜像版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  namespace: test</span><br><span class="line">  name: pipeline</span><br><span class="line">  labels:</span><br><span class="line">    app: pipeline</span><br><span class="line">spec:</span><br><span class="line">  replicas: 2</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: pipeline</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: pipeline    </span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: pipeline</span><br><span class="line">        image: 192.168.11.102:80/repo/pipeline:latest   # 这里</span><br><span class="line">        imagePullPolicy: Always</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 8080</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">省略其他内容…………</span></span><br></pre></td></tr></table></figure>
+
+<p>10.6.3 滚动更新</p>
+<p>因为pipeline没有改变时，每次不会重新加载，这样会导致Pod中的容器不会动态更新，这里需要使用kubectl的rollout restart命令滚动更新</p>
+<p>设置Jenkinsfle</p>
+<p><img src="/assets/1666138582-cfc64de453a86ac1301d6138ac46d45e.png"></p>
+<p><img src="/assets/1666138582-39e781afcbdfc436adca5357af6c06aa.png"></p>
+<p>本文《基于K8S的DevOps应用方案》版权归lee_yanyi所有，引用基于K8S的DevOps应用方案需遵循CC 4.0 BY-SA版权协议。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io">壹拾陆</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io/posts/9b5dc588.html">https://mo-li001.github.io/posts/9b5dc588.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mo-li001.github.io" target="_blank">壹拾陆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%97%A0/">无</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/fdfb5b92.html"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">2022年最新整理的Linux 常用操作命令大全，强烈建议收藏备用！</div></div></a></div><div class="next-post pull-right"><a href="/posts/1e1e5171.html"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">python之路—从入门到放弃</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/1e1e5171.html" title="python之路—从入门到放弃"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">python之路—从入门到放弃</div></div></a></div><div><a href="/posts/f8ba3d81.html" title="Ansible Playbook实战"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">Ansible Playbook实战</div></div></a></div><div><a href="/posts/fdfb5b92.html" title="2022年最新整理的Linux 常用操作命令大全，强烈建议收藏备用！"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">2022年最新整理的Linux 常用操作命令大全，强烈建议收藏备用！</div></div></a></div><div><a href="/posts/6677fcfc.html" title="K8s无法删除状态为terminating的pod解决方法"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">K8s无法删除状态为terminating的pod解决方法</div></div></a></div><div><a href="/posts/6bb1eab0.html" title="Oldguo-标杆班级-MySQL-lesson11--读写分离架构-Atlas"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">Oldguo-标杆班级-MySQL-lesson11--读写分离架构-Atlas</div></div></a></div><div><a href="/posts/3c5004d8.html" title="Kubernetes学习--集群安装"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-05</div><div class="title">Kubernetes学习--集群安装</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#k8s-devops"><span class="toc-text">k8s devops</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#k8s-devops-1"><span class="toc-text">k8s devops</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/99081826.html" title="很强，3万字把华为HCIA知识点全部总结了！">很强，3万字把华为HCIA知识点全部总结了！</a><time datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b0318225.html" title="浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f962716d.html" title="使用system-config-kickstart生成kickstart文件">使用system-config-kickstart生成kickstart文件</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/12ac960a.html" title="Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件">Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cefcf133.html" title="zabbix5.0 percona_mysql_template模板文件">zabbix5.0 percona_mysql_template模板文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

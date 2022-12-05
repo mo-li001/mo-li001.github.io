@@ -1,0 +1,276 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>HAproxy | 壹拾陆</title><meta name="keywords" content="Linux"><meta name="author" content="壹拾陆"><meta name="copyright" content="壹拾陆"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="七层负载均衡 HAproxy示例1环境4台linux，做好域名解析 Client  192.168.122.1&#x2F;24（真实机做客户端） HAproxy  192.168.122.254&#x2F;24 web1  192.168.122.10&#x2F;24 web2  192.168.122.20&#x2F;24 1.HTML A &amp; HTML B 创建测试页面2.安装hapr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HAproxy">
+<meta property="og:url" content="https://mo-li001.github.io/posts/9bdc030a.html">
+<meta property="og:site_name" content="壹拾陆">
+<meta property="og:description" content="七层负载均衡 HAproxy示例1环境4台linux，做好域名解析 Client  192.168.122.1&#x2F;24（真实机做客户端） HAproxy  192.168.122.254&#x2F;24 web1  192.168.122.10&#x2F;24 web2  192.168.122.20&#x2F;24 1.HTML A &amp; HTML B 创建测试页面2.安装hapr">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-31T12:41:14.000Z">
+<meta property="article:modified_time" content="2022-10-23T15:27:21.000Z">
+<meta property="article:author" content="壹拾陆">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mo-li001.github.io/posts/9bdc030a"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'HAproxy',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-23 23:27:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">HAproxy</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-23T15:27:21.000Z" title="更新于 2022-10-23 23:27:21">2022-10-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="HAproxy"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>七层负载均衡</p>
+<h1 id="HAproxy"><a href="#HAproxy" class="headerlink" title="HAproxy"></a><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gz4y1y7Nx?p=20&vd_source=629395ac7befa1625191c3f496068941">HAproxy</a></h1><h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>4台linux，做好域名解析</p>
+<p>Client  192.168.122.1&#x2F;24（真实机做客户端）</p>
+<p>HAproxy  192.168.122.254&#x2F;24</p>
+<p>web1  192.168.122.10&#x2F;24</p>
+<p>web2  192.168.122.20&#x2F;24</p>
+<h3 id="1-HTML-A-amp-HTML-B-创建测试页面"><a href="#1-HTML-A-amp-HTML-B-创建测试页面" class="headerlink" title="1.HTML A &amp; HTML B 创建测试页面"></a>1.HTML A &amp; HTML B 创建测试页面</h3><h3 id="2-安装haproxy"><a href="#2-安装haproxy" class="headerlink" title="2.安装haproxy"></a>2.安装haproxy</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release -y</span><br><span class="line">yum install haproxy -y</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-配置HAproxy"><a href="#3-配置HAproxy" class="headerlink" title="3.配置HAproxy"></a>3.配置HAproxy</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/haproxy/haproxy.cfg</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-1-haproxy配置中分成五部分内容"><a href="#3-1-haproxy配置中分成五部分内容" class="headerlink" title="3.1 haproxy配置中分成五部分内容"></a>3.1 haproxy配置中分成五部分内容</h4><ul>
+<li>global：设置全局配置参数，属于进程的配置，通常是和操作系统相关。</li>
+<li>defaults：配置默认参数，这些参数可以被用到frontend，backend，Listen组件；</li>
+<li>frontend：接收请求的前端虚拟节点，Frontend可以更加规则直接指定具体使用后端的backend；</li>
+<li>backend：后端服务集群的配置，是真实服务器，一个Backend对应一个或者多个实体服务器；</li>
+<li>Listèn：frontend和backend的组合体。</li>
+</ul>
+<h4 id="3-2-配置示例"><a href="#3-2-配置示例" class="headerlink" title="3.2 配置示例"></a>3.2 配置示例</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">global  #全局配置</span><br><span class="line">log 127.0.0.1 local3 info  #日志配置</span><br><span class="line">maxconn 4096  #最大连接限制（优先级低）</span><br><span class="line">user nobody  #用户</span><br><span class="line">group nobody  #组用户</span><br><span class="line">daemon  #守护进程运行</span><br><span class="line">nbproc 1  #haproxy进程数，该值的设置应该和服务器的cpu核心数一致，比如设置为16，即常见的2颗8核心CPU的服务器，即共有16核心，则可以将其值设置为：&lt;=16，创建多个进程数，可以减少每个进程的任务队列，但是过多的进程数也可能会导致进程的崩溃。</span><br><span class="line">pidfile /run/haproxy.pid  #haproxy进程ID存储位置</span><br><span class="line"></span><br><span class="line">defaults  #针对（listen和backend块进行设置没如果块中没设置，则使用默认设置）默认配置</span><br><span class="line">        log global  #日志使用全局配置</span><br><span class="line">        mode http  #模式7层LB</span><br><span class="line">        maxconn 2048  #最大连接数（优先级中）</span><br><span class="line">        retries 3  #健康检查。3次连接失败就认为服务不可用</span><br><span class="line">        option redispatch  #服务不可用后的操作，重定向到其他健康服务器</span><br><span class="line">        contimeout 5000  #（重传计时器）定义haproxy将客户端!!!请求!!!转发至后端服务器，所等待的超时时长</span><br><span class="line">        clitimeout 50000  #（向后长连接）haproxy作为客户，和后端服务器之间!!!空闲连接!!!的超时时间，到时候发送fin指令</span><br><span class="line">        srvtimeout 50000  #（向前长连接）haproxy作为服务器，和用户之间空闲连接的超时时间，到时候发送fin指令</span><br><span class="line">        #timeout connect 5000 = contimeout 5000  新版本写法</span><br><span class="line">        #timeout client 50000 = clitimeout 50000  新版本写法</span><br><span class="line">        #timeout server 50000 = srvtimeout 50000  新版本写法</span><br><span class="line">        </span><br><span class="line">        option abortonclose  #当服务器负载很高的时候，自动结束掉当前队列处理比较久的链接</span><br><span class="line">        </span><br><span class="line">        stats uri /admin?stats  #设置统计页面的uri为/admin?stats</span><br><span class="line">        stats realm Private lands  #设置统计页面认证时的提示内容</span><br><span class="line">        stats auth admin:password  #设置统计页面认证的用户和密码，如果要设置多个，另起一行写入即可</span><br><span class="line">        stats hide-version  #隐藏统计页面上的haproxy版本信息</span><br><span class="line"></span><br><span class="line">frontend http-in  #前端配置块。面对用户侧</span><br><span class="line">        bind 0.0.0.0:80  #面对用户监听地址和何</span><br><span class="line">        mode http  #http模式的LB</span><br><span class="line">        log global  #日志使用全局配置</span><br><span class="line">        option httplog  #默认日志格式非常简陋，仅包括源地址、目标地址和实例名称，而&quot;option httplog&quot;参数将会使得日志格式变得丰富许多，其通常包括但不限于HTTP请求、连接计时器、会话状态、连接数、捕获的首部及cookie、&quot;frontend&quot;、&quot;backend&quot;及服务器名称，当然也包括源地址和端口号等。</span><br><span class="line">        option httpclose  #每次请求完毕后，关闭http通道</span><br><span class="line"></span><br><span class="line">acl html url_reg -i \.html$  #1.访问控制列表名称html。规则要求访问以html结尾的url时</span><br><span class="line">use_backend html-server if html  #2.如果满足acl html规则,则推送给后端服务器 html-server</span><br><span class="line">default_backend html-server  #3.默认的后端服务器是 html-server</span><br><span class="line"></span><br><span class="line">backend html-server  #后端服务器名称为 html-server</span><br><span class="line">        mode http  #模式为7层代理</span><br><span class="line">        balance roundrobin  #算法为轮询</span><br><span class="line">        option httpchk GET  /index.html  #允许用http协议检查server的健康</span><br><span class="line">        cookie SERVERID  insert indirect nocache  #轮询的同时，根据插入的cookie SERVERID 的值来做会话保持，将相同的用户请求，转发给相同的真实服务器</span><br><span class="line">        server html-A web1:80 weight 1 cookie 3 check inter 2000 rise 2 fall 5  #cookie 3 服务器ID，避免rr算法将客户机请求转发给其他服务器，对后端服务器的健康状况检查间隔为2000毫秒，连续2次健康检查成功，则认为是有效的，连续5次健康检查失败，则认为服务器宕机</span><br><span class="line">        server html-B web2:80 weight 1 cookie 4 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-3-启动HAproxy"><a href="#3-3-启动HAproxy" class="headerlink" title="3.3 启动HAproxy"></a>3.3 启动HAproxy</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start haproxy.service</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看日志</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /var/log/messages</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-4-配置域名解析"><a href="#3-4-配置域名解析" class="headerlink" title="3.4 配置域名解析"></a>3.4 配置域名解析</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br><span class="line">192.168.127.128 client</span><br><span class="line">192.168.127.131 haproxy</span><br><span class="line">192.168.127.134 web1</span><br><span class="line">192.168.127.135 web2</span><br><span class="line"></span><br><span class="line">scp /etc/hosts haproxy:/etc/</span><br><span class="line">scp /etc/hosts web1:/etc/</span><br><span class="line">scp /etc/hosts web2:/etc/</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-测试结果"><a href="#4-测试结果" class="headerlink" title="4.测试结果"></a>4.测试结果</h3><p>linux客户端</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y elinks</span><br><span class="line"></span><br><span class="line">elinks --dump http://haproxy</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-测试HAproxy状态"><a href="#5-测试HAproxy状态" class="headerlink" title="5.测试HAproxy状态"></a>5.测试HAproxy状态</h3><p>客户端浏览器输入<a target="_blank" rel="noopener" href="http://haproxy地址/haproxy">http://haproxy地址/haproxy</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.127.131/admin?stats</span><br></pre></td></tr></table></figure>
+
+<p>用户名：admin  密码：password</p>
+<h2 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h2><h3 id="环境-1"><a href="#环境-1" class="headerlink" title="环境"></a>环境</h3><p>Client</p>
+<p>HAproxy  192.168.122.254&#x2F;24</p>
+<p>HTML A  192.168.122.10&#x2F;24</p>
+<p>HTML B  192.168.122.20&#x2F;24</p>
+<p>PHP A  192.168.122.30&#x2F;24</p>
+<p>PHP B  192.168.122.40&#x2F;24</p>
+<h3 id="HTML-A-amp-HTML-B"><a href="#HTML-A-amp-HTML-B" class="headerlink" title="HTML A &amp; HTML B"></a>HTML A &amp; HTML B</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y httpd</span><br></pre></td></tr></table></figure>
+
+<p>分别创建测试页面 index.html，开启服务</p>
+<h3 id="PHP-A-amp-PHP-B"><a href="#PHP-A-amp-PHP-B" class="headerlink" title="PHP A &amp; PHP B"></a>PHP A &amp; PHP B</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y httpd php</span><br></pre></td></tr></table></figure>
+
+<p>分别创建测试页面 index.html，开启服务</p>
+<h3 id="安装HAproxy"><a href="#安装HAproxy" class="headerlink" title="安装HAproxy"></a>安装HAproxy</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar xf haproxy-1.4.20.tar.gz</span><br><span class="line">cd haproxy-1.4.20</span><br><span class="line">make TARGET=linux26 PREFIX=/usr/local/haproxy install</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="生成HAproxy配置文件"><a href="#生成HAproxy配置文件" class="headerlink" title="生成HAproxy配置文件"></a>生成HAproxy配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/haproxy/</span><br><span class="line">mkdir conflogs</span><br><span class="line">cd conf/</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="修改配置文件（配置动静分离）"><a href="#修改配置文件（配置动静分离）" class="headerlink" title="修改配置文件（配置动静分离）"></a>修改配置文件（配置动静分离）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">global  #全局配置</span><br><span class="line">log 127.0.0.1 local3 info  #日志配置</span><br><span class="line">maxconn 4096  #最大连接限制（优先级低）</span><br><span class="line">user nobody  #用户</span><br><span class="line">group nobody  #组用户</span><br><span class="line">daemon  #守护进程运行</span><br><span class="line">nbproc 1  #haproxy进程数，该值的设置应该和服务器的cpu核心数一致，比如设置为16，即常见的2颗8核心CPU的服务器，即共有16核心，则可以将其值设置为：&lt;=16，创建多个进程数，可以减少每个进程的任务队列，但是过多的进程数也可能会导致进程的崩溃。</span><br><span class="line">pidfille /run/haproxy.pid  #haproxy进程ID存储位置</span><br><span class="line"></span><br><span class="line">defaults  #针对（listen和backend块进行设置没如果块中没设置，则使用默认设置）默认配置</span><br><span class="line">        log global  #日志使用全局配置</span><br><span class="line">        mode http  #模式7层LB</span><br><span class="line">        maxconn 2048  #最大连接数（优先级中）</span><br><span class="line">        retries 3  #健康检查。3次连接失败就认为服务不可用</span><br><span class="line">        option redispatch  #服务不可用后的操作，重定向到其他健康服务器</span><br><span class="line">        contimeout 5000  #（重传计时器）定义haproxy将客户端!!!请求!!!转发至后端服务器，所等待的超时时长</span><br><span class="line">        clitimeout 50000  #（向后长连接）haproxy作为客户，和后端服务器之间!!!空闲连接!!!的超时时间，到时候发送fin指令</span><br><span class="line">        srvtimeout 50000  #（向前长连接）haproxy作为服务器，和用户之间空闲连接的超时时间，到时候发送fin指令</span><br><span class="line">        #timeout connect 5000 = contimeout 5000  新版本写法</span><br><span class="line">        #timeout client 50000 = clitimeout 50000  新版本写法</span><br><span class="line">        #timeout server 50000 = srvtimeout 50000  新版本写法</span><br><span class="line">        </span><br><span class="line">        option abortonclose  #当服务器负载很高的时候，自动结束掉当前队列处理比较久的链接</span><br><span class="line">        </span><br><span class="line">        stats uri /admin?stats  #设置统计页面的uri为/admin?stats</span><br><span class="line">        stats realm Private lands  #设置统计页面认证时的提示内容</span><br><span class="line">        stats auth admin:password  #设置统计页面认证的用户和密码，如果要设置多个，另起一行写入即可</span><br><span class="line">        stats hide-version  #隐藏统计页面上的haproxy版本信息</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置动静分离</span></span><br><span class="line">frontend http-in</span><br><span class="line">        bind 0.0.0.0:80  #监听端口</span><br><span class="line">        mode http</span><br><span class="line">        log global</span><br><span class="line">        option httplog  #日志类别 http 日志格式</span><br><span class="line">        option httpclose  #打开支持主动关闭功能，每次请求完毕后主动关闭http通道，ha-proxy不支持keep-alive，只能模拟这种模式的实现</span><br><span class="line"></span><br><span class="line">acl php url_reg -i \.php$  #acl &lt;ACL名字&gt; &lt;类型&gt; &lt;大小写&gt; &lt;规则&gt;</span><br><span class="line">acl html url_reg -i \.html$  #use_backend &lt;服务器组&gt; if &lt;ACL名字&gt;</span><br><span class="line">use_backend html-server if php</span><br><span class="line">use_backend html-server if html</span><br><span class="line">default_backend html-server  #默认使用的服务器组</span><br><span class="line"></span><br><span class="line">backend php-server</span><br><span class="line">        mode http</span><br><span class="line">        balance roundrobin  #负载均衡的方式</span><br><span class="line">        option httpchk GET  /index.php  #健康检查</span><br><span class="line">        cookie SERVERID  insert indirect nocache  #客户端的 cookie 信息，允许插入serverid到cookie中，此处cookie号不同</span><br><span class="line">        server php-A 192.168.122.30:80 weight 1 cookie 1 check inter 2000 rise 2 fall 5</span><br><span class="line">        server php-B 192.168.122.40:80 weight 1 cookie 2 check inter 2000 rise 2 fall 5</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">cookie 1  标识 serverid 为 1</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">check inter 2000  检测心跳频率</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">rise 2  2次正确认为服务器可用</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">fall 5  5次失败认为服务器不可用</span></span><br><span class="line"></span><br><span class="line">backend html-server</span><br><span class="line">        mode http</span><br><span class="line">        balance roundrobin</span><br><span class="line">        option httpchk GET  /index.html</span><br><span class="line">        cookie SERVERID  insert indirect nocache</span><br><span class="line">        server html-A 192.168.122.10:80 weight 1 cookie 3 check inter 2000 rise 2 fall 5</span><br><span class="line">        server html-B 192.168.122.20:80 weight 1 cookie 4 check inter 2000 rise 2 fall 5</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动HAproxy"><a href="#启动HAproxy" class="headerlink" title="启动HAproxy"></a>启动HAproxy</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/conf/haproxy.cfg</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看HAproxy状态"><a href="#查看HAproxy状态" class="headerlink" title="查看HAproxy状态"></a>查看HAproxy状态</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firefox http://localhost/haproxy</span><br></pre></td></tr></table></figure>
+
+<h3 id="在客户端访问-HAproxy-测试"><a href="#在客户端访问-HAproxy-测试" class="headerlink" title="在客户端访问 HAproxy 测试"></a>在客户端访问 HAproxy 测试</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">elinks -dump http://192.168.122.254</span><br><span class="line">elinks -dump http://192.168.122.254/index.html</span><br><span class="line">elinks -dump http://192.168.122.254/index.php</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h1><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ol>
+<li>功能强大，性能卓越，运行稳定。</li>
+<li>配置简单灵活。</li>
+<li>能够自动剔除工作不正常的后端服务器。</li>
+<li>上传文件使用异步模式。client—nginx—web1 web2 web3  lvs 同步请求 DR client –&gt;dr—web1</li>
+<li>支持多种分配策略，可以分配权重，分配方式灵活。</li>
+</ol>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>nginx复制用户请求，在后端服务器出现问题时。nginx会再复制一份请求发给另一台后端服务器。</p>
+<p>lvs则在这种情况，只能用户重新发请求</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>流量会经过nginx，nginx成为瓶颈</p>
+<h2 id="7层负载均衡语法示例"><a href="#7层负载均衡语法示例" class="headerlink" title="7层负载均衡语法示例"></a>7层负载均衡语法示例</h2><p>通过location对不同的请求进行负载均衡，因为通过http协议，所有称作7层</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">location ~ \.html$&#123;</span><br><span class="line">    proxy_pass ...</span><br><span class="line">&#125;</span><br><span class="line">location ~ \.php$&#123;</span><br><span class="line">    proxy_pass ...</span><br><span class="line">&#125;</span><br><span class="line">location ~ \.(jpg|png|css|js)$&#123;</span><br><span class="line">    proxy_pass ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="nginx负载均衡算法"><a href="#nginx负载均衡算法" class="headerlink" title="nginx负载均衡算法"></a>nginx负载均衡算法</h2><ol>
+<li>round robin（默认）</li>
+<li>weight</li>
+<li>IP_hash</li>
+<li>url_hash（第三方）</li>
+<li>fair（第三方）</li>
+</ol>
+<p>每个设备的状态设置为：</p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>1.关闭防火墙和selinux（略）</p>
+<p>2.域名解析</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br><span class="line">192.168.127.128 client</span><br><span class="line">192.168.127.131 nginx</span><br><span class="line">192.168.127.134 web1</span><br><span class="line">192.168.127.135 web2</span><br><span class="line"></span><br><span class="line">scp /etc/hosts nginx:/etc/</span><br><span class="line">scp /etc/hosts web1:/etc/</span><br><span class="line">scp /etc/hosts web2:/etc/</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3.同步时间（实验环境略）</p>
+<p>计划任务知悉如下命令</p>
+<p>ntpdate 时间服务器地址</p>
+<p>4.准备web1页面</p>
+<p>5.配置nginx</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release</span><br><span class="line">yum install -y nginx</span><br><span class="line"></span><br><span class="line">vim /etc/nginx/nginx.conf  #注意IP地址</span><br><span class="line">http &#123;</span><br><span class="line">    upstream html &#123;</span><br><span class="line">        server web1:80;</span><br><span class="line">        server web2:80;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server&#123;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>6.测试负载均衡</p>
+<p>访问nginx服务器。能交替的看到web1和web2</p>
+<p>7.动静分离（略）</p>
+<p>1.增加一个<code>upstream php server web3</code></p>
+<p>2.增加一个<code>location ~ \.php &#123;&#125;</code></p>
+<p>3.示例</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">upstream html &#123;</span><br><span class="line">    server web1:80;</span><br><span class="line">    server web2:80;</span><br><span class="line">&#125;</span><br><span class="line">upstream php &#123;</span><br><span class="line">    server web3:80;</span><br><span class="line">    server web4:80;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://html;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        proxy_pass http://php;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.客户端测试：</p>
+<p>面试题：</p>
+<p>nginx: upstream支持的负载均衡算法</p>
+<p>rr  轮询（默认）</p>
+<p>wrr  加权公平队列</p>
+<p>ip_hash  IP摘要</p>
+<p>fair  公平</p>
+<p>url_hash  地址摘要</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io">壹拾陆</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io/posts/9bdc030a.html">https://mo-li001.github.io/posts/9bdc030a.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mo-li001.github.io" target="_blank">壹拾陆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/8005.html"><img class="prev-cover" src="https://tuchuangs.com/imgs/2022/09/18/074f3836d4f471b8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">ELK快速部署</div></div></a></div><div class="next-post pull-right"><a href="/posts/a71433d.html"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Ansible</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/abc41134.html" title="没写好"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">没写好</div></div></a></div><div><a href="/posts/9f353bc9.html" title="Devops"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Devops</div></div></a></div><div><a href="/posts/f5f9fa9b.html" title="Docker"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Docker</div></div></a></div><div><a href="/posts/34d20e28.html" title="ELK"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK</div></div></a></div><div><a href="/posts/8005.html" title="ELK快速部署"><img class="cover" src="https://tuchuangs.com/imgs/2022/09/18/074f3836d4f471b8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK快速部署</div></div></a></div><div><a href="/posts/a71433d.html" title="Ansible"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Ansible</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HAproxy"><span class="toc-text">HAproxy</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B1"><span class="toc-text">示例1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-text">环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-HTML-A-amp-HTML-B-%E5%88%9B%E5%BB%BA%E6%B5%8B%E8%AF%95%E9%A1%B5%E9%9D%A2"><span class="toc-text">1.HTML A &amp; HTML B 创建测试页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85haproxy"><span class="toc-text">2.安装haproxy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AEHAproxy"><span class="toc-text">3.配置HAproxy</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-haproxy%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%88%86%E6%88%90%E4%BA%94%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9"><span class="toc-text">3.1 haproxy配置中分成五部分内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B"><span class="toc-text">3.2 配置示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E5%90%AF%E5%8A%A8HAproxy"><span class="toc-text">3.3 启动HAproxy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90"><span class="toc-text">3.4 配置域名解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="toc-text">4.测试结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B5%8B%E8%AF%95HAproxy%E7%8A%B6%E6%80%81"><span class="toc-text">5.测试HAproxy状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B2"><span class="toc-text">示例2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83-1"><span class="toc-text">环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML-A-amp-HTML-B"><span class="toc-text">HTML A &amp; HTML B</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-A-amp-PHP-B"><span class="toc-text">PHP A &amp; PHP B</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85HAproxy"><span class="toc-text">安装HAproxy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90HAproxy%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">生成HAproxy配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%88%E9%85%8D%E7%BD%AE%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB%EF%BC%89"><span class="toc-text">修改配置文件（配置动静分离）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8HAproxy"><span class="toc-text">启动HAproxy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8BHAproxy%E7%8A%B6%E6%80%81"><span class="toc-text">查看HAproxy状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BF%E9%97%AE-HAproxy-%E6%B5%8B%E8%AF%95"><span class="toc-text">在客户端访问 HAproxy 测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx"><span class="toc-text">nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF"><span class="toc-text">优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E5%B1%82%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B"><span class="toc-text">7层负载均衡语法示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95"><span class="toc-text">nginx负载均衡算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-text">案例</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/99081826.html" title="很强，3万字把华为HCIA知识点全部总结了！">很强，3万字把华为HCIA知识点全部总结了！</a><time datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b0318225.html" title="浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f962716d.html" title="使用system-config-kickstart生成kickstart文件">使用system-config-kickstart生成kickstart文件</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/12ac960a.html" title="Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件">Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cefcf133.html" title="zabbix5.0 percona_mysql_template模板文件">zabbix5.0 percona_mysql_template模板文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

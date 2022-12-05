@@ -1,0 +1,282 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>trtd文件压缩及解压缩命令（4个）tdtd | 壹拾陆</title><meta name="keywords" content="Linux"><meta name="author" content="壹拾陆"><meta name="copyright" content="壹拾陆"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="**文件压缩及解压缩命令（4个）**  tar 打包压缩。oldboy unzip解压文件。 gzipgzip压缩工具。 zip压缩工具。 **信息显示命令（11个）** uname显示操作系统相关信息的命令。 hostname显示或者设置当前系统的主机名。 dmesg显示开机信息，用于诊断系统故障。 uptime显示系统运行时间及负载。 stat显示文件或文件系统的状态。 du计算磁盘空间使用情">
+<meta property="og:type" content="article">
+<meta property="og:title" content="trtd文件压缩及解压缩命令（4个）tdtd">
+<meta property="og:url" content="https://mo-li001.github.io/posts/180b7b06.html">
+<meta property="og:site_name" content="壹拾陆">
+<meta property="og:description" content="**文件压缩及解压缩命令（4个）**  tar 打包压缩。oldboy unzip解压文件。 gzipgzip压缩工具。 zip压缩工具。 **信息显示命令（11个）** uname显示操作系统相关信息的命令。 hostname显示或者设置当前系统的主机名。 dmesg显示开机信息，用于诊断系统故障。 uptime显示系统运行时间及负载。 stat显示文件或文件系统的状态。 du计算磁盘空间使用情">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-23T11:48:44.000Z">
+<meta property="article:modified_time" content="2022-10-23T15:27:21.000Z">
+<meta property="article:author" content="壹拾陆">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mo-li001.github.io/posts/180b7b06"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'trtd文件压缩及解压缩命令（4个）tdtd',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-10-23 23:27:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">trtd文件压缩及解压缩命令（4个）tdtd</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-23T11:48:44.000Z" title="发表于 2022-10-23 19:48:44">2022-10-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-23T15:27:21.000Z" title="更新于 2022-10-23 23:27:21">2022-10-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%94%B6%E5%BD%95/">收录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="trtd文件压缩及解压缩命令（4个）tdtd"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><tr><td>**文件压缩及解压缩命令（4个）**</td><td>
+
+<tr><td>tar<tr><td>
+</td><td>打包压缩。oldboy<tr><td>
+<tr><td>unzip</td><td>解压文件。</tr>
+<tr><td>gzip</td><td>gzip压缩工具。</tr>
+<tr><td>zip</td><td>压缩工具。</tr>
+<tr><td>**信息显示命令（11个）**</td><td>
+<tr><td>uname</td><td>显示操作系统相关信息的命令。</tr>
+<tr><td>hostname</td><td>显示或者设置当前系统的主机名。</tr>
+<tr><td>dmesg</td><td>显示开机信息，用于诊断系统故障。</tr>
+<tr><td>uptime</td><td>显示系统运行时间及负载。</tr>
+<tr><td>stat</td><td>显示文件或文件系统的状态。</tr>
+<tr><td>du</td><td>计算磁盘空间使用情况。</tr>
+<tr><td>df</td><td>报告文件系统磁盘空间的使用情况。</tr>
+<tr><td>top</td><td>实时显示系统资源使用情况。</tr>
+<tr><td>free</td><td>查看系统内存。</tr>
+<tr><td>date</td><td>显示与设置系统时间。</tr>
+<tr><td>cal</td><td>查看日历等时间信息。</tr>
+<tr><td>**搜索文件命令（4个）**</td><td>
+<tr><td>which</td><td>查找二进制命令，按环境变量PATH路径查找。</tr>
+<tr><td>find</td><td>从磁盘遍历查找文件或目录。</tr>
+<tr><td>whereis</td><td>查找二进制命令，按环境变量PATH路径查找。</tr>
+<tr><td>locate</td><td>从数据库(/var/lib/mlocate/mlocate.db)查找命令，使用updatedb更新库。</tr>
+<tr><td>**用户管理命令（10个）**</td><td>
+<tr><td>useradd</td><td>添加用户。</tr>
+<tr><td>usermod</td><td>修改系统已经存在的用户属性。</tr>
+<tr><td>userdel</td><td>删除用户。</tr>
+<tr><td>groupadd</td><td>添加用户组。</tr>
+<tr><td>passwd</td><td>修改用户密码。</tr>
+<tr><td>chage</td><td>修改用户密码有效期限。</tr>
+<tr><td>id</td><td>查看用户的uid,gid及归属的用户组。</tr>
+<tr><td>su</td><td>切换用户身份。</tr>
+<tr><td>visudo</td><td>编辑/etc/sudoers文件的专属命令。</tr>
+<tr><td>sudo</td><td>以另外一个用户身份（默认root用户）执行事先在sudoers文件允许的命令。</tr>
+<tr><td>**基础网络操作命令（11个）**</td><td>
+<tr><td>telnet</td><td>使用TELNET协议远程登录。</tr>
+<tr><td>ssh</td><td>使用SSH加密协议远程登录。</tr>
+<tr><td>scp</td><td>全拼securecopy，用于不同主机之间复制文件。</tr>
+<tr><td>wget</td><td>命令行下载文件。</tr>
+<tr><td>ping</td><td>测试主机之间网络的连通性。</tr>
+<tr><td>route</td><td>显示和设置linux系统的路由表。</tr>
+<tr><td>ifconfig</td><td>查看、配置、启用或禁用网络接口的命令。</tr>
+<tr><td>ifup</td><td>启动网卡。</tr>
+<tr><td>ifdown</td><td>关闭网卡。</tr>
+<tr><td>netstat</td><td>查看网络状态。</tr>
+<tr><td>ss</td><td>查看网络状态。</tr>
+<tr><td>**深入网络操作命令（9个）**</td><td>
+<tr><td>nmap</td><td>网络扫描命令。</tr>
+<tr><td>lsof</td><td>全名listopenfiles，也就是列举系统中已经被打开的文件。</tr>
+<tr><td>mail</td><td>发送和接收邮件。</tr>
+<tr><td>mutt</td><td>邮件管理命令。</tr>
+<tr><td>nslookup</td><td>交互式查询互联网DNS服务器的命令。</tr>
+<tr><td>dig</td><td>查找DNS解析过程。</tr>
+<tr><td>host</td><td>查询DNS的命令。</tr>
+<tr><td>traceroute</td><td>追踪数据传输路由状况。</tr>
+<tr><td>tcpdump</td><td>命令行的抓包工具。</tr>
+<tr><td>**有关磁盘与文件系统的命令（16个）**</td><td>
+<tr><td>mount</td><td>挂载文件系统。</tr>
+<tr><td>umount</td><td>卸载文件系统。</tr>
+<tr><td>fsck</td><td>检查并修复Linux文件系统。</tr>
+<tr><td>dd</td><td>转换或复制文件。</tr>
+<tr><td>dumpe2fs</td><td>导出ext2/ext3/ext4文件系统信息。</tr>
+<tr><td>dump</td><td>ext2/3/4文件系统备份工具。</tr>
+<tr><td>fdisk</td><td>磁盘分区命令，适用于2TB以下磁盘分区。</tr>
+<tr><td>parted</td><td>磁盘分区命令，没有磁盘大小限制，常用于2TB以下磁盘分区。</tr>
+<tr><td>mkfs</td><td>格式化创建Linux文件系统。</tr>
+<tr><td>partprobe</td><td>更新内核的硬盘分区表信息。</tr>
+<tr><td>e2fsck</td><td>检查ext2/ext3/ext4类型文件系统。</tr>
+<tr><td>mkswap</td><td>创建Linux交换分区。</tr>
+<tr><td>swapon</td><td>启用交换分区。</tr>
+<tr><td>swapoff</td><td>关闭交换分区。</tr>
+<tr><td>sync</td><td>将内存缓冲区内的数据写入磁盘。</tr>
+<tr><td>resize2fs</td><td>调整ext2/ext3/ext4文件系统大小。</tr>
+<tr><td>**系统权限及用户授权相关命令（4个）**</td><td>
+<tr><td>chmod</td><td>改变文件或目录权限。</tr>
+<tr><td>chown</td><td>改变文件或目录的属主和属组。</tr>
+<tr><td>chgrp</td><td>更改文件用户组。</tr>
+<tr><td>umask</td><td>显示或设置权限掩码。</tr>
+<tr><td>**查看系统用户登陆信息的命令（7个）**</td><td>
+<tr><td>whoami</td><td>显示当前有效的用户名称，相当于执行id-un命令。</tr>
+<tr><td>who</td><td>显示目前登录系统的用户信息。</tr>
+<tr><td>w</td><td>显示已经登陆系统的用户列表，并显示用户正在执行的指令。</tr>
+<tr><td>last</td><td>显示登入系统的用户。</tr>
+<tr><td>lastlog</td><td>显示系统中所有用户最近一次登录信息。</tr>
+<tr><td>users</td><td>显示当前登录系统的所有用户的用户列表。</tr>
+<tr><td>finger</td><td>查找并显示用户信息。</tr>
+<tr><td>**内置命令及其它（19个）**</td><td>
+<tr><td>echo</td><td>打印变量，或直接输出指定的字符串<tr><td>
+<tr><td>printf</td><td>将结果格式化输出到标准输出。</tr>
+<tr><td>rpm</td><td>管理rpm包的命令。</tr>
+<tr><td>yum</td><td>自动化简单化地管理rpm包的命令。</tr>
+<tr><td>watch</td><td>周期性的执行给定的命令，并将命令的输出以全屏方式显示。</tr>
+<tr><td>alias</td><td>设置系统别名。</tr>
+<tr><td>unalias</td><td>取消系统别名。</tr>
+<tr><td>date</td><td>查看或设置系统时间。</tr>
+<tr><td>clear</td><td>清除屏幕，简称清屏。</tr>
+<tr><td>history</td><td>查看命令执行的历史纪录。</tr>
+<tr><td>eject</td><td>弹出光驱。</tr>
+<tr><td>time</td><td>计算命令执行时间。</tr>
+<tr><td>nc</td><td>功能强大的网络工具。</tr>
+<tr><td>xargs</td><td>将标准输入转换成命令行参数。</tr>
+<tr><td>exec</td><td>调用并执行指令的命令。</tr>
+<tr><td>export</td><td>设置或者显示环境变量。</tr>
+<tr><td>unset</td><td>删除变量或函数。</tr>
+<tr><td>type</td><td>用于判断另外一个命令是否是内置命令。</tr>
+<tr><td>bc</td><td>命令行科学计算器<tr><td>
+<tr><td>**系统管理与性能监视命令(9个)**</td><td>
+<tr><td>chkconfig</td><td>管理Linux系统开机启动项。</tr>
+<tr><td>vmstat</td><td>虚拟内存统计。</tr>
+<tr><td>mpstat</td><td>显示各个可用CPU的状态统计。</tr>
+<tr><td>iostat</td><td>统计系统IO。</tr>
+<tr><td>sar</td><td>全面地获取系统的CPU、运行队列、磁盘I/O、分页（交换区）、内存、CPU中断和网络等性能数据。</tr>
+<tr><td>ipcs</td><td>用于报告Linux中进程间通信设施的状态，显示的信息包括消息列表、共享内存和信号量的信息。</tr>
+<tr><td>ipcrm</td><td>用来删除一个或更多的消息队列、信号量集或者共享内存标识。</tr>
+<tr><td>strace</td><td>用于诊断、调试Linux用户空间跟踪器。我们用它来监控用户空间进程和内核的交互，比如系统调用、信号传递、进程状态变更等。</tr>
+<tr><td>ltrace</td><td>命令会跟踪进程的库函数调用,它会显现出哪个库函数被调用。</tr>
+<tr><td>**关机/重启/注销和查看系统信息的命令（6个）**</td><td>
+<tr><td>shutdown</td><td>关机。</tr>
+<tr><td>halt</td><td>关机。</tr>
+<tr><td>poweroff</td><td>关闭电源。</tr>
+<tr><td>logout</td><td>退出当前登录的Shell。</tr>
+<tr><td>exit</td><td>退出当前登录的Shell。</tr>
+<tr><td>Ctrl+d</td><td>退出当前登录的Shell的快捷键。</tr>
+<tr><td>**进程管理相关命令（15个）**</td><td>
+<tr><td>bg</td><td>将一个在后台暂停的命令，变成继续执行（在后台执行）。</tr>
+<tr><td>fg</td><td>将后台中的命令调至前台继续运行。</tr>
+<tr><td>jobs</td><td>查看当前有多少在后台运行的命令。</tr>
+<tr><td>kill</td><td>终止进程。</tr>
+<tr><td>killall</td><td>通过进程名终止进程。</tr>
+<tr><td>pkill</td><td>通过进程名终止进程。</tr>
+<tr><td>crontab</td><td>定时任务命令。</tr>
+<tr><td>ps</td><td>显示进程的快照。</tr>
+<tr><td>pstree</td><td>树形显示进程。</tr>
+<tr><td>nice/renice</td><td>调整程序运行的优先级。</tr>
+<tr><td>nohup</td><td>忽略挂起信号运行指定的命令。</tr>
+<tr><td>pgrep</td><td>查找匹配条件的进程。</tr>
+<tr><td>runlevel</td><td>查看系统当前运行级别。</tr>
+<tr><td>init</td><td>切换运行级别。</tr>
+<tr><td>service</td><td>启动、停止、重新启动和关闭系统服务，还可以显示所有系统服务的当前状态。</tr></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io">壹拾陆</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mo-li001.github.io/posts/180b7b06.html">https://mo-li001.github.io/posts/180b7b06.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mo-li001.github.io" target="_blank">壹拾陆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/4f0a83bd.html"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">rsync+nginx实现公网yum源</div></div></a></div><div class="next-post pull-right"><a href="/posts/bb0ccf93.html"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">nginx.conf配置文件详解</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/abc41134.html" title="没写好"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">没写好</div></div></a></div><div><a href="/posts/9f353bc9.html" title="Devops"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Devops</div></div></a></div><div><a href="/posts/f5f9fa9b.html" title="Docker"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">Docker</div></div></a></div><div><a href="/posts/34d20e28.html" title="ELK"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK</div></div></a></div><div><a href="/posts/8005.html" title="ELK快速部署"><img class="cover" src="https://tuchuangs.com/imgs/2022/09/18/074f3836d4f471b8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">ELK快速部署</div></div></a></div><div><a href="/posts/9bdc030a.html" title="HAproxy"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">HAproxy</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/99081826.html" title="很强，3万字把华为HCIA知识点全部总结了！">很强，3万字把华为HCIA知识点全部总结了！</a><time datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b0318225.html" title="浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f962716d.html" title="使用system-config-kickstart生成kickstart文件">使用system-config-kickstart生成kickstart文件</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/12ac960a.html" title="Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件">Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cefcf133.html" title="zabbix5.0 percona_mysql_template模板文件">zabbix5.0 percona_mysql_template模板文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
