@@ -48,7 +48,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2022-12-05 13:33:18'
+  postUpdate: '2023-02-18 22:52:36'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -137,258 +137,216 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">壹拾陆</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/c04fbc7b.html" title="Mysql 高可用架构">Mysql 高可用架构</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">Mysql 高可用架构MHA高可用架构介绍及搭建过程规划
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">68</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">壹拾陆</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">壹拾陆</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/8d5a6382.html" title="基于Docker容器DevOps应用方案企业业务代码发布系统">基于Docker容器DevOps应用方案企业业务代码发布系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">一、企业业务代码发布方式1.1传统方式
+以物理机或虚拟机为颗粒度部署
+部署环境比较复杂，需要有先进的自动化运维手
+出现问题后重新部署成本大，一般采用集群方式部署
+部署后以静态方式展现
+
+1.2容器化方式
+以容器为颗粒度部署
+部署方式简单，启动速度快
+一次构建可到处运行
+出现故障后，可随时恢复
+可同时部署多套环境（测试、预发布、生产环境等）
+
+二、企业业务代码发布逻辑图
+三、企业业务代码发布工具及流程图3.1 工具
 
 
-角色
-IP
-节点
-
-
-
-主库 db01
-10.0.0.111
-node
-
-
-从库 db02
-10.0.0.112
-node
-
-
-从库 db03
-10.0.0.113
-node、manager
-
-
-脚本
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210310410510610710810911011111211311411511611711811912012112212312412512612712812913013113213313413513613713813914014114214314414514614714814915015115215315415515615715815 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/391bfe8d.html" title="Linux运维-MySQL">Linux运维-MySQL</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">Linux运维-MySQL什么是SQL语句，Structured Query Language，结构化查询语言
-
-DQL，全称为Data Query Language，其语句也称为“数据检索语句”，作用是从表中获取数据，确定数据应怎样在应用程序中给出。
-select  是SQL查询语言的关键字
-
-
-DML,全称为Data Manipulation Language,中文为数据操作语言，其语句的关键字为INSERT、UPDATE和DELETE。它们分别用于添加、修改和删除表中的行（数据）
-insert  插入一条数据
-
-
-DCL授权控制，全称为Data Control Language,这类语句通过GRANT或REVOKE授权用户许可，确定单个用户和用户组对数据库对象的访问。
-是运维同学对数据库的用户权限进行管理、例如给某个账号，如yuchao，允许该用户，有哪些权限
-远程连接
-只读，select
-只写，insert
+序号
+工具
+工具用途
 
 
 
+1
+git
+用于提交业务代码或克隆业务代码仓库
 
-DDL数据定义，全称为Data Definition Language,其语句包括动词CREATE、DROP和ALTER。可使用该语言在数据库中创建新库表或删除库表 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/95ff0803.html" title="OS下故障诊断-系统日志">OS下故障诊断-系统日志</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">网卡-接口网卡的物理接口主要有两种：电口和光口
-电口：即普通的RJ45接口，连接网线
-光口：根据接口封装形式，可以分为SFP+、SFP28、QSFP+。
 
-SFP+：支持GE&#x2F;10GE速率，只有一个10G通道，传输速率达10Gbps
-SFP28：支持GE&#x2F;10GE&#x2F;25GE速率，主要用于25G以太网
-QSFP+：支持40GE&#x2F;100GE速率，具备四个10G通道，传输速率可专达40Gbps
+2
+gitlab
+用于存储业务代码
 
-网卡-命令
+
+3
+jenkins
+用于利用插件完成业务代码编译、构建、推送至Harbor容器镜像仓库及项目部署
+
+
+4
+tomcat
+用于运行JAVA业务代码
+
+
+5
+maven
+用于编译业务代码
+
+
+6
+harbor
+用于存储业务代码构建的容器镜像存储
+
+
+7
+docker
+用于构建容器镜像，部署项目
+
+
+3.2 流程图
+本次部署Java代码包
+
+  
+四、企业业务代码发布系统环境部署4.1主机规划
+
+
+序号
+主机名
+主机IP
+主机功能
+软件
+
+
+
+1
+dev
+10 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/d3b0ff52.html" title="数据库事务的四种隔离级别">数据库事务的四种隔离级别</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">数据库事务的四种隔离级别数据库事务的隔离级别有4种，由低到高分别为Read uncommitted 、Read committed 、Repeatable read 、Serializable 。而且，在事务的并发操作中可能会出现脏读，不可重复读，幻读。下面通过事例一一阐述它们的概念与联系。
+Read uncommitted
+读未提交，顾名思义，就是一个事务可以读取另一个未提交事务的数据。
+事例：老板要给程序员发工资，程序员的工资是3.6万&#x2F;月。但是发工资时老板不小心按错了数字，按成3.9万&#x2F;月，该钱已经打到程序员的户口，但是事务还没有提交，就在这时，程序员去查看自己这个月的工资，发现比往常多了3千元，以为涨工资了非常高兴。但是老板及时发现了不对，马上回滚差点就提交了的事务，将数字改成3.6万再提交。
+分析：实际程序员这个月的工资还是3.6万，但是程序员看到的是3.9万。他看到的是老板还没提交事务时的数据。这就是脏读。
+Read committed
+读提交，顾名思义，就是&#x3D;&#x3D;一个事务要等另一个事务提交后才能读取数据&#x3D;&#x3D;。
+事例 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/12728704.html" title="本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！">本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%94%B6%E5%BD%95/">收录</a></span></div><div class="content">本文为Linux命令大全，从A到Z都有总结，建议大家收藏以便查用，或者查漏补缺！
+A
+
 
 
 命令
-使用场景
+描述
 
 
 
-lspci
-查询系统PCI总线设备或连接到该总线上的所有设备，可确认网卡硬件是否可被识别到
+access
+用于检查调用程序是否可以访问指定的文件，用于检查文件是否存在
 
 
-ifconfig
-查询网口ip、掩码、丢包、错包的命令
+accton
+用于打开或关闭记帐进程或更改信息进程记帐文件
 
 
-netstat -tln
-查询网络连接、路由表和网络接口信息
+aclocal
+用于从configure.in文件自动生成aclocal.m4文件
 
 
-route
-查询、添加、修改路由表信息
+acpi
+用于显示电池状态和其他 ACPI 信息
 
 
-sar
-Linux性能分析工具，sar -n DEV 1 10可以用来监控网口收发流量
+acpi_available
+测试 ACPI（高级配置和电源接口）子系统是否可用
 
 
-ethtool
-查询及设置网卡参数的命令，如设置网卡buffer、TSO、GSO，查询具体丢包类型
+acpid
+提供智能电源管理，用于通知用户空间程序有关 ACPI 事件的信息
 
 
-tcpdump
-对网络上的数据包进行截获的包分析工具
+addr2line
+用于将地址转换为文件名和行号
 
 
-Wire ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/2788c8f7.html" title="Openstack">Openstack</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">OpenStack自动部署学习目标能够了解OpenStack是什么
-能够掌握OpenStack核心组件
-能够掌握OpenStack组件项目及其功能
-能够掌握OpenStack自动部署方法
-能够掌握OpenStack基本应用
-OpenStack是什么OpenStack是由美国国家航空航天局（NASA）与Rackspace公司合作研发并发起的，以Apache许可证授权的自由软件和开放源代码的云计算技术解决方案，其是一个项目也是一个软件，主要用于实现云项目，以云项目操作系统而存在。
-作用：用于部署公有云、私有云，并实现对云项目管理。
-开发语言：Python
-网址：http://www.openstack.org
-总结：
-
-是一款软件
-是一款开源软件
-是一个项目
-是一款云操作系统
-
-OpenStack核心组件
-核心组件
-
-Compute
-Networking
-Storage
+agetty
+Linux 版本的 getty，是一个运行在主机上的 Unix 程序，用于管理物理或虚拟终端以允许多用户访问
 
 
-组件项目
-为基础组件具体提供可行性操作的项目
-
-Compute  计算服务
-Networking  网络服务
-Object Storage  对象存储服务
-Block Storage  块存储服务
-Identity   ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/cf315399.html" title="Nginx详解教学">Nginx详解教学</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">Nginx详解教学单体架构的优点
-小团队成型即可完成开发-测试-上线
-迭代周期短，速度快
-打包方便，运维省事
-
-单体架构面临的挑战
-单节点宕机造成所有服务不可用
-耦合度太高（迭代，测试，部署）
-单节点并发能力有限
-
-集群概念
-计算机’群体‘构成整个系统
-这个’群体‘构成一个整体，不能独立存在
-‘人多力量大’，群体提升并发与可用性
-
-使用集群的优势
-提高系统性能
-提高系统可用性
-可扩展性高
-
-使用集群的注意点
-用户会话
-
-定时任务
-
-内网互通
+alias
+指示 shell 在执行命令时将一个字符串替换为另一个字符串
 
 
-什么是Nginx
-Nginx（engine x）是一个高性能的HTTP和反向代理web服务器，同时也提供IMAP&#x2F;POP3&#x2F;SMTP服务.
-主要功能反向代理
-通过配置文件可以实现集群和负载均衡
-静态资源虚拟化
+amixer
+ALSA(Advanced Linux Sound Architecture) 声卡驱动程序的命令行混音器
 
-常见的服务器
-MS IIS							    asp.net
-Weblogic、Jboss			 传统行业ERP&#x2F;物流&#x2F;电信&#x2F;金融
-Tomcat、Jetty				  J2EE
-Apache、Nginx			   静态服务，反向代理
-Netty								 高性能服务器编程
 
-什么 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/64f8eb0f.html" title="Mongo数据库">Mongo数据库</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">MongoDB第1章NoSQL介绍1.1 NoSQL简介NoSQL(NoSQL&#x3D;Not Only SQL),意即”不仅仅是SQL。在现代的计算系统上每太网络上都会产生庞大的数据量。
-这些数据有很大一部分是由关系数据库管理系统（RDMBSs）来处理。1970年E.F.Cadd’提出的关系模型的论文“Arelational model of data for large shared data banks”，这使得数据建模和应用程序编程更加简单。
-通过应用实践证明，关系模型是非常适合于客户服务器编程，远远超出预期的利益，今天它是结构化数据存储在网络和商务应用的主导技术。
-NoSQL是一项全新的数据库革命性运动，早期就有人提出，发展至2009年趋势越发高涨。NoSQL的拥护者们提倡运用非关系型的数据存储，相对于铺天盖地的关系型数据库运用，这一概念无疑是一种全新的思维的注入。
-1.2什么是NoSQLNoSQL，指的是非关系型的数据库。NoSQL有时也称作Not Only SQL的缩写，是对不同于传统的关系型数据库的数据库管理系统的统称。
-对NoSQL最普遍的解释是”非关联型的”，强调 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/e2a4903b.html" title="Openstack部署">Openstack部署</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">Openstack部署 M版
-安装文档
-7.虚拟机规划
+aplay
+用于 ALSA（高级 Linux 声音 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/5d473c35.html" title="第二章· Redis管理实战">第二章· Redis管理实战</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%94%B6%E5%BD%95/">收录</a></span></div><div class="content">第二章· Redis管理实战  
+曾老湿·2018-10-27·167 次阅读  
+数据类型管理实战  
+曾志高翔, 江湖人称曾老大。多年互联网运维工作经验，曾负责过大规模集群架构自动化运维管理工作。擅长Web集群架构与自动化运维，曾负责国内某大型金融公司运维工作。个人博客:”DBA老司机带你删库跑路”笔者QQ:133411023、253097001笔者交流群：198571640笔者微信：z133411023  
+数据类型  
+String： 字符串类型Hash： 哈希类型List： 列表类型Set： 集合类型Sorted set： 顺序集合类型  
+管理实战通用操作  
+#查看所有的key127.0.0.1:6379&gt; KEYS *  
+
+“age”  
+“name”
+
+#判断key是否存在127.0.0.1:6379&gt; EXISTS name(integer) 1#变更key名127.0.0.1:6379&gt; RENAME age nianling#查看key的类型127.0.0.1:6379&gt; type namestring#删除key127.0.0.1:6 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/e029aafa.html" title="二进制安装k8s">二进制安装k8s</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">二进制安装k8s配置hosts
+12345678cat &gt;&gt;/etc/hosts&lt;&lt;&#x27;EOF&#x27;192.168.0.107 k8s-master01192.168.0.108 k8s-master02192.168.0.109 k8s-master03192.168.0.236 k8s-master-lb  # 如果不是高可用集群，该IP为Master01的IP192.168.0.110 k8s-node01192.168.0.111 k8s-node02EOF
+
+配置yum源，安装基本工具
+1234curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repoyum install -y yum-utils device-mapper-persistent-data lvm2yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/69f6e396.html" title="第1天-分布式版本控制系统(1)">第1天-分布式版本控制系统(1)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%94%B6%E5%BD%95/">收录</a></span></div><div class="content">第1天-分布式版本控制系统一、Git、Github、Gitlab 的区别Git是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。
+是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。
+Github是在线的基于Git的代码托管服务。 GitHub是2008年由Ruby on Rails编写而成。GitHub同时提供付费账户和免费账户。这两种账户都可以创建公开的代码仓库，只有付费账户可以创建私有的代码仓库。 Gitlab解决了这个问题, 可以在上面创建免费的私人repo。 
+git            是一套软件 可以做本地私有仓库
+github   本身是一个代码托管网站   公有和私有仓库(收费)   不能做本地私有仓库
+gitlab     本身也是一个代码托管的网站 功能上和github没有区别   公有和私有仓库（免费）  可以部署本地私有仓库
+二、Git 与 SVN 区别GIT不仅仅是个版本控制系统，它也是个内容管理系统(CMS),工作管理系统等。
+如果你是一个具有使用SVN背景的人，你需要做一定的思想转 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/bb0dfe6.html" title="高可用服务">高可用服务</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">高可用服务
+1.概述HA(High Available)高可用（一直都可用）
+Keepalived(keep alived保持活着)-开源高可用软件
+Heart.Beat (heart beat 心脏跳动)
+keepalived原理
+
+2台机器做主备高可用环境
+主（MASTER)备（BACKUP)
+keepalived基于VRRP协议（虚拟路由冗余协议：最开始给企业级路由器使用，）
+原理01：主节点不断向备发送消息（我还活呢），备节点接收数据能够收到数据认为主活着.
+原理02：备节点一但收不到数据包，则认为主挂了，成为主，接管对应的资源
+
+2.脑裂（裂脑）原因：互相认为对方挂了 现象主备节点都有VIP（虚拟ip)
+检查：
+
+书写脚本在被节点，检查是否有vip
+
+解决：
+
+防火墙问题
+配置不当
+物理服务器-网线问题
+只要发生脑裂，就让主真的挂了（智能断电）
+
+3.Keepalived 极速使用
+
+
+角色
 
 
 
-内存
-CPU
-磁盘
-IP
+lb01
 
 
-
-controller
-4G
-1（CPU开启虚拟化）
-50G
-10.0.0.11
-
-
-compute1
-1G
-1（CPU开启虚拟化，必开）
-50G
-10.0.0.31
-
-
-修改主机名，ip地址网关，host解析，测试ping百度
-8.配置yum源12mount /dev/cdrom /mntrz  上传openstack_rpm.tar.gz到/opt，并解压
-
-生成repo配置文件
-12345678910111213vim /etc/yum.repos.d/local.repoecho &#x27;[local]name=localbaseurl=file:///mntgpgcheck=0[openstack]name=openstackbaseurl=file:///opt/repogpgcheck=0&#x27; &gt;/etc/yum.repos.d/local.repoecho &#x27;mount /dev/cdrom /mnt&#x27; &gt;&gt;/etc/rc.loc ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/518e617c.html" title="git">git</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">git
-12345678yum install -y gitiptables -Fuseradd gitpasswd gitsu - gitmkdir reposmkdir app.gitgit --bare init
-
+lb02
 
 
 web01
-12345678910111213141516yum install -y gitmkdir testcd test/git clone git@10.0.0.112:/home/git/app.gitecho &quot;123&quot; &gt; index.htmlgit add .git statusgit commit -m &quot;123&quot;git config --global user.name &quot;Your Name&quot;git config --global user.email &quot;you@example.com&quot;git push origin masterssh-keygen  #一直回车cat ~/.ssh/id_rsa.pub ssh-rsa AAAAB3NzaC1yc2EAAA ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/55c27d12.html" title="jenkins">jenkins</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">Jenkins1.部署git安装依赖包
-1yum install -y curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMake -y
-
-下载安装包
-1wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.9.5.tar.gz
-
-解压
-1tar xf git-2.9.5.tar.gz
-
-cd到解压目录
-1cd git-2.9.5/
-
-编译源码包
-1make prefix=/usr/local/git all
-
-源码安装
-1make prefix=/usr/local/git install
-
-配置环境变量
-123# vim /etc/bashrcPATH=$PATH:$HOME/bin:/usr/local/git/bin  # 添加# source /etc/bashrc
-
-测试安装成功：
-1git --version
 
 
-
-2.jdk环境部署下载软件
-1jdk-8u151-linux-x64 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/f5c94817.html" title="java-tomcat">java-tomcat</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">java-tomcat
-综合架构-web访问-Tomcat概述jvm jre jdkjava语言-1次编译，处处使用.java代码可以在多个平台运行.（可移植性，跨平台）
-win qq.exe  — Linux 无法运行
-jm：java virtual machine java虚拟机：运行java代码，处处运行java代码，只要当前环境有java虚拟机
-jre：java runtime enviroment java运行环境 可以有jvm和相关库文件(依赖）
-jklk：java development kit  java开发环境(jire+额外工具）
-jdk，tomcat版本选择
-jdk的版本
-jdk(oracle)(下载软件包，解压使用，二进制包）
-openjdk(yum安装)
+web02
 
 
-jdk版本（具体使用根据代码要求）
-jdk8  jdk11  jdk …
-
-
-tomcat 8.5 9.0 可能还会用7.x旧版本
-
-部署与使用jdk12345678910111213141516171819#jdk 二进制包 yum则 yum instal1 java(1.8) java-11 (jdk ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#content-inner">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#content-inner">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#content-inner">10</a><a class="extend next" rel="next" href="/page/8/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">96</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/99081826.html" title="很强，3万字把华为HCIA知识点全部总结了！">很强，3万字把华为HCIA知识点全部总结了！</a><time datetime="2022-12-05T05:17:54.876Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b0318225.html" title="浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能">浪潮服务器通过DHCP获取地址进入IPMI，BMC管理后台的方法，可实现远程安装系统、温度运行状态监测、风扇转速调整、远程开关机、KVM控制台显示器等功能</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f962716d.html" title="使用system-config-kickstart生成kickstart文件">使用system-config-kickstart生成kickstart文件</a><time datetime="2022-12-05T05:17:54.860Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/12ac960a.html" title="Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件">Linux高级篇--使用system-config-kickstart工具制作kickstart应答文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cefcf133.html" title="zabbix5.0 percona_mysql_template模板文件">zabbix5.0 percona_mysql_template模板文件</a><time datetime="2022-12-05T05:17:54.845Z" title="发表于 2022-12-05 13:17:54">2022-12-05</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+123456789101112131415#web01 web02[root@web02 /etc/nginx/conf ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/2b73bc61.html" title="Nginx资源消耗低">Nginx资源消耗低</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-31T12:41:14.000Z" title="发表于 2022-08-31 20:41:14">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">Nginx
+66 Nginx发展_哔哩哔哩_bilibili
+Nginx资源消耗低&#x2F;性能强官方提供的测试数据，Nginx能支持5W的并发连接，在实际生产环境下可支撑2~4W的并发连接数。
+Apache使用的网络I&#x2F;O模型是传统的select模型，以Prefork多进程模式运转，需要经常派生子进程，消耗系统资源要比Nginx高得多。且一个进程在同一时间只会处理一个请求。
+如Apache Web Server支撑这日均千万PV的网站，服务器平均负载在5060,CPU消耗在70%90%,而整体迁移到Nginx后，系统平均负载降低至14，CPU使用率在20%40%，效果可见。
+常见LNMP（linux、Nginx、Mysql、PHP)服务器在3万并发连接下，开启10个Nginx进程消耗不过（15MB*10=150MB）内存。就算开启64个php-cgi进程，也就消耗 20MB*64=1280MB，总共后台进程使用不到2GB内存，且服务器如果内存较小，开启php-cgi进程数量可以再少点。
+在压力测试，3W的并发连接下，Nginx+PHP的程序任然能够飞速运转，从Nginx的 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#content-inner">6</a><span class="page-number current">7</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://images-1258700836.cos.ap-guangzhou.myqcloud.com/images/202209182232723.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">壹拾陆</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">68</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mo-li001/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人笔记</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/90f47a19.html" title="自动化装机">自动化装机</a><time datetime="2023-02-02T12:41:14.000Z" title="发表于 2023-02-02 20:41:14">2023-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/64202.html" title="linux">linux</a><time datetime="2023-02-02T12:41:14.000Z" title="发表于 2023-02-02 20:41:14">2023-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/8fb4d8df.html" title="zabbix">zabbix</a><time datetime="2023-02-02T01:43:57.000Z" title="发表于 2023-02-02 09:43:57">2023-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/8d6735b8.html" title="超经典SQL练习题，做完这些你的ＳＱＬ就过关了">超经典SQL练习题，做完这些你的ＳＱＬ就过关了</a><time datetime="2023-02-02T01:43:57.000Z" title="发表于 2023-02-02 09:43:57">2023-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/39d18a59.html" title="Mermaid绘图">Mermaid绘图</a><time datetime="2023-01-11T12:41:14.000Z" title="发表于 2023-01-11 20:41:14">2023-01-11</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
             
             </div>
             <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/default/"><span class="card-category-list-name">default</span><span class="card-category-list-count">18</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%BD%92%E6%A1%A3/"><span class="card-category-list-name">归档</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/"><span class="card-category-list-name">报错记录</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%94%B6%E5%BD%95/"><span class="card-category-list-name">收录</span><span class="card-category-list-count">13</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%AD%A3%E6%96%87/"><span class="card-category-list-name">正文</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">笔记</span><span class="card-category-list-count">51</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Hexo/" style="font-size: 1.2em; color: #999da3">Hexo</a> <a href="/tags/Linux/" style="font-size: 1.5em; color: #99a9bf">Linux</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/%E6%97%A0/" style="font-size: 1.4em; color: #99a5b6">无</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1.3em; color: #99a1ac">服务器</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 1.1em; color: #999">笔记</a> <a href="/tags/%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6/" style="font-size: 1.1em; color: #999">笔记软件</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 1.1em; color: #999">网络</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><span class="card-archive-list-count">19</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/10/"><span class="card-archive-list-date">十月 2022</span><span class="card-archive-list-count">17</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><span class="card-archive-list-count">56</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">96</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-12-05T05:33:16.652Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%BD%92%E6%A1%A3/"><span class="card-category-list-name">归档</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/"><span class="card-category-list-name">报错记录</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%94%B6%E5%BD%95/"><span class="card-category-list-name">收录</span><span class="card-category-list-count">11</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%AD%A3%E6%96%87/"><span class="card-category-list-name">正文</span><span class="card-category-list-count">8</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">笔记</span><span class="card-category-list-count">46</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Hexo/" style="font-size: 1.3em; color: #99a1ac">Hexo</a> <a href="/tags/Linux/" style="font-size: 1.5em; color: #99a9bf">Linux</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6/" style="font-size: 1.1em; color: #999">笔记软件</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/01/"><span class="card-archive-list-date">一月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/10/"><span class="card-archive-list-date">十月 2022</span><span class="card-archive-list-count">16</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><span class="card-archive-list-count">44</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">68</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-02-18T14:52:35.148Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 壹拾陆</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
